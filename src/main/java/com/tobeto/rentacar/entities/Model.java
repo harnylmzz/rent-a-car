@@ -18,6 +18,10 @@ public class Model {
     @Column(name = "id")
     private int id;
 
-    @Column(name = "brand_id")
+    @Column(name = "name")
     private String name;
+
+    
+
+
 }
