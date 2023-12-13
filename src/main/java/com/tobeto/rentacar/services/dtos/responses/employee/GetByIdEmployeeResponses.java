@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class GetByIdEmployeeRequests {
+public class GetByIdEmployeeResponses {
 
     private double salary;
 
