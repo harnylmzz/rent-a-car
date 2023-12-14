@@ -18,4 +18,6 @@ public class UpdateCarRequests {
     private double price;
 
     private String plate;
+
+
 }
