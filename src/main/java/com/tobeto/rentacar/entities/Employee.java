@@ -20,7 +20,7 @@ public class Employee {
     private int id;
 
     @Column(name = "salary")
-    private float salary;
+    private double salary;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
