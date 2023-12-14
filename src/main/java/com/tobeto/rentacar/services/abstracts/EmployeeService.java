@@ -1,5 +1,6 @@
 package com.tobeto.rentacar.services.abstracts;
 
+import com.tobeto.rentacar.entities.Employee;
 import com.tobeto.rentacar.services.dtos.requests.employee.CreateEmployeeRequests;
 import com.tobeto.rentacar.services.dtos.requests.employee.DeleteEmployeeRequests;
 import com.tobeto.rentacar.services.dtos.requests.employee.UpdateEmployeeRequests;
