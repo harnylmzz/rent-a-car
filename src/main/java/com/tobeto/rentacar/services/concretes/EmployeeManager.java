@@ -57,7 +57,7 @@ public class EmployeeManager implements EmployeeService {
         Employee employee =this.modelMapperService.forRequest()
                 .map(updateEmployeeRequests, Employee.class);
         employee.setId(updateEmployeeRequests.getId());
-        employee.setSalary((float) updateEmployeeRequests.getSalary());
+        employee.setSalary(updateEmployeeRequests.getSalary());
 
         this.employeeRepository.save(employee);
 
