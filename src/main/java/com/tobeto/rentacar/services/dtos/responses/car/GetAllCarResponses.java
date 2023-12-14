@@ -9,7 +9,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class GetAllCarResponses {
 
+    private int id;
+
     private double price;
 
     private String plate;
+
+    private int kilometer;
+
+    private int year;
 }
