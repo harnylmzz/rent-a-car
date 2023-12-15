@@ -59,6 +59,7 @@
             <artifactId>springfox-swagger-ui</artifactId>
             <version>3.0.0</version>
         </dependency>
+
         <!-- modelmapper -->
         <dependency>
             <groupId>org.modelmapper</groupId>
