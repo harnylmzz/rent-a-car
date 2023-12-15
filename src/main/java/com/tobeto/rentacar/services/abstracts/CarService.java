@@ -10,9 +10,14 @@ import java.util.List;
 
 public interface CarService {
     List<GetAllCarResponses> getAll();
+
     GetByIdCarResponses getById(int id);
-    void add(CreateCarRequests createBrandRequests);
+
+    void add(CreateCarRequests createCarRequests);
+
     void update(UpdateCarRequests updateCarRequests);
+
     void delete(DeleteCarRequests deleteCarRequests);
+
 
 }
