@@ -65,7 +65,7 @@
 
 ##### To start the Spring Boot application, follow this step:
 
-■ Using IDE (Integrated Development Environment)
+Using IDE (Integrated Development Environment)
 
 Once the application is running, you can access it by navigating to http://localhost:8080 in your web browser (assuming the default Spring Boot configuration). Adjust the port number if your application uses a different port.
 
