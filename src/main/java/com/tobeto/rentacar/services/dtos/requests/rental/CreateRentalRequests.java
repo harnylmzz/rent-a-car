@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
 @Data
 @AllArgsConstructor
@@ -19,22 +20,16 @@ public class CreateRentalRequests {
     @NotNull(message = "End date is mandatory")
     private LocalDate endDate;
 
-    @NotNull(message = "Return date is mandatory")
     private LocalDate returnDate;
 
     @NotNull(message = "Start kilometer is mandatory")
-    @NotBlank(message = "Start kilometer is mandatory")
     private int startKilometer;
 
-    @NotNull(message = "End kilometer is mandatory")
-    @NotBlank(message = "End kilometer is mandatory")
     private int endKilometer;
 
     @NotNull(message = "Total price is mandatory")
-    @NotBlank(message = "Total price is mandatory")
     private double totalPrice;
 
     @NotNull(message = "Discount is mandatory")
-    @NotBlank(message = "Discount is mandatory")
     private double discount;
 }
