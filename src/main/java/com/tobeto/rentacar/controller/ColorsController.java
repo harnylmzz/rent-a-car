@@ -1,15 +1,9 @@
 package com.tobeto.rentacar.controller;
 
-import com.tobeto.rentacar.services.abstracts.CarService;
 import com.tobeto.rentacar.services.abstracts.ColorService;
-import com.tobeto.rentacar.services.dtos.requests.car.CreateCarRequests;
-import com.tobeto.rentacar.services.dtos.requests.car.DeleteCarRequests;
-import com.tobeto.rentacar.services.dtos.requests.car.UpdateCarRequests;
 import com.tobeto.rentacar.services.dtos.requests.color.CreateColorRequests;
 import com.tobeto.rentacar.services.dtos.requests.color.DeleteColorRequests;
 import com.tobeto.rentacar.services.dtos.requests.color.UpdateColorRequests;
-import com.tobeto.rentacar.services.dtos.responses.car.GetAllCarResponses;
-import com.tobeto.rentacar.services.dtos.responses.car.GetByIdCarResponses;
 import com.tobeto.rentacar.services.dtos.responses.color.GetAllColorResponses;
 import com.tobeto.rentacar.services.dtos.responses.color.GetByIdColorResponses;
 import lombok.AllArgsConstructor;
