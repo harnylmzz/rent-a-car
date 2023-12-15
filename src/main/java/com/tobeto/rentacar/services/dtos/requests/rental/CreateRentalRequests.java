@@ -14,10 +14,10 @@ import java.time.LocalDate;
 public class CreateRentalRequests {
 
     @NotNull(message = "Start date is mandatory")
-    private LocalDate startDate;
+    private LocalDate e;
 
     @NotNull(message = "End date is mandatory")
-    private LocalDate endDate;
+    private LocalDate endDatstartDate;
 
     @NotNull(message = "Return date is mandatory")
     private LocalDate returnDate;
