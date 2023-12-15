@@ -23,6 +23,7 @@ import java.util.stream.Collectors;
 public class ColorManager implements ColorService {
     private ColorRepository colorRepository;
     private ModelMapperService modelMapperService;
+
     @Override
     public List<GetAllColorResponses> getAll() {
         List<Color> colors = colorRepository.findAll();
@@ -44,6 +45,10 @@ public class ColorManager implements ColorService {
 
     @Override
     public void add(CreateColorRequests createColorRequests) {
+
+        if (this.colorRepository.existsByName(createColorRequests.getName())) {
+            throw new RuntimeException("Color with this name already exists!");
+        }
         Color color = this.modelMapperService.forRequest()
                 .map(createColorRequests, Color.class);
         this.colorRepository.save(color);
@@ -53,7 +58,7 @@ public class ColorManager implements ColorService {
     @Override
     public void update(UpdateColorRequests updateColorRequests) {
         Color color = this.modelMapperService.forRequest()
-                .map(updateColorRequests , Color.class);
+                .map(updateColorRequests, Color.class);
         color.setId(updateColorRequests.getId());
         color.setName(updateColorRequests.getName());
 

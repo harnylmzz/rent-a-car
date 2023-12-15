@@ -9,5 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class GetAllColorResponses {
 
+    private int id;
+
     private String name;
 }
