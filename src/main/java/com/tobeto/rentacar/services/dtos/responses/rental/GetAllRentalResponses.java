@@ -16,4 +16,5 @@ public class GetAllRentalResponses {
     private LocalDate endDate;
 
     private LocalDate returnDate;
+
 }
