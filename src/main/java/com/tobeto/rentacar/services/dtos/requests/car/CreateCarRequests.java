@@ -25,4 +25,8 @@ public class CreateCarRequests {
     @NotNull(message = "Plate is required")
     @NotBlank(message = "Plate is required")
     private String plate;
+
+    private int modelId;
+
+    private int colorId;
 }

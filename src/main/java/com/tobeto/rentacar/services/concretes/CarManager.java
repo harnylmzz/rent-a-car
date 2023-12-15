@@ -2,8 +2,14 @@ package com.tobeto.rentacar.services.concretes;
 
 import com.tobeto.rentacar.config.modelmapper.ModelMapperService;
 import com.tobeto.rentacar.entities.Car;
+import com.tobeto.rentacar.entities.Color;
+import com.tobeto.rentacar.entities.Model;
 import com.tobeto.rentacar.repository.CarRepository;
+import com.tobeto.rentacar.repository.ColorRepository;
+import com.tobeto.rentacar.repository.ModelRepository;
 import com.tobeto.rentacar.services.abstracts.CarService;
+import com.tobeto.rentacar.services.abstracts.ColorService;
+import com.tobeto.rentacar.services.abstracts.ModelService;
 import com.tobeto.rentacar.services.dtos.requests.car.CreateCarRequests;
 import com.tobeto.rentacar.services.dtos.requests.car.DeleteCarRequests;
 import com.tobeto.rentacar.services.dtos.requests.car.UpdateCarRequests;
@@ -20,6 +26,8 @@ import java.util.stream.Collectors;
 public class CarManager implements CarService {
     private CarRepository carRepository;
     private ModelMapperService modelMapperService;
+    private ColorRepository colorRepository;
+    private ModelRepository modelRepository;
 
     @Override
     public List<GetAllCarResponses> getAll() {
@@ -43,6 +51,7 @@ public class CarManager implements CarService {
 
     @Override
     public void add(CreateCarRequests createCarRequests) {
+        Car addCar = new Car();
         String plate = createCarRequests.getPlate().replace(" ", ""); // Boşlukları kaldır
 
         if (this.carRepository.existsByPlate(plate)) {
@@ -67,8 +76,20 @@ public class CarManager implements CarService {
             throw new RuntimeException("DailyPrice cannot be less than 0.");
         }
 
+        // Veritabanından model ve renk nesnelerini al
+        Model model = modelRepository.findById(createCarRequests.getModelId())
+                .orElseThrow(() -> new RuntimeException("Model not found"));
+
+        Color color = colorRepository.findById(createCarRequests.getColorId())
+                .orElseThrow(() -> new RuntimeException("Color not found"));
+
+        // Arabaya model ve renk nesnelerini ata
+        car.setModel(model);
+        car.setColor(color);
+
         this.carRepository.save(car);
     }
+
 
 
     @Override
