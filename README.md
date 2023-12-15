@@ -45,13 +45,13 @@
 
 ## Installation Steps
 
-### ■ PostgreSQL Installation:
+#### ■ PostgreSQL Installation:
 
 1. PostgreSQL Database Setup
 2. Creating a Database
 3. Configuring Connection Information
 
-### ■ Cloning the Project:
+#### ■ Cloning the Project:
 
 1. Use the following command in the terminal or command prompt to clone the project:
    git clone https://github.com/harnylmzz/rent-a-car.git
@@ -59,7 +59,7 @@
    cd rent-a-car
    mvn clean install
 
-### ■ Running the Application
+#### ■ Running the Application
 
 ##### To start the Spring Boot application, follow this step:
 
@@ -71,7 +71,7 @@ Once the application is running, you can access it by navigating to http://local
 ---
 
 ## MIT License 
-##### Copyright (c) [2023] [[Harun Yılmaz](https://github.com/harnylmzz), [Şehmus Ekin](https://github.com/sehmusekin), [Taner Dökmetaş](https://github.com/t4ner)]
+#### Copyright (c) [2023] [[Harun Yılmaz](https://github.com/harnylmzz), [Şehmus Ekin](https://github.com/sehmusekin), [Taner Dökmetaş](https://github.com/t4ner)]
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
