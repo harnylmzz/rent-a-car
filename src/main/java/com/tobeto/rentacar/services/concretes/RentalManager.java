@@ -1,7 +1,6 @@
 package com.tobeto.rentacar.services.concretes;
 
 import com.tobeto.rentacar.config.modelmapper.ModelMapperService;
-import com.tobeto.rentacar.entities.Car;
 import com.tobeto.rentacar.entities.Rental;
 import com.tobeto.rentacar.repository.CarRepository;
 import com.tobeto.rentacar.repository.RentalRepository;
@@ -29,7 +28,8 @@ public class RentalManager implements RentalService {
     public List<GetAllRentalResponses> getAll() {
         List<Rental> rentals = rentalRepository.findAll();
         List<GetAllRentalResponses> getAllRentalResponses = rentals.stream()
-                .map(rental -> this.modelMapperService.forResponse().map(rental, GetAllRentalResponses.class)).collect(Collectors.toList());
+                .map(rental -> this.modelMapperService.forResponse()
+                        .map(rental, GetAllRentalResponses.class)).collect(Collectors.toList());
         return getAllRentalResponses;
     }
 
@@ -48,15 +48,15 @@ public class RentalManager implements RentalService {
 
         LocalDate today = LocalDate.now();
         if (rental.getStartDate().isBefore(today)) {
-            throw new RuntimeException("Başlangıç tarihi bugünden daha eski olamaz.");
+            throw new RuntimeException("Start date cannot be before today.");
         }
 
         if (rental.getEndDate().isBefore(rental.getStartDate())) {
-            throw new RuntimeException("Bitiş tarihi başlangıç tarihinden daha eski olamaz.");
+            throw new RuntimeException("End date cannot be before the start date.");
         }
 
         if (rental.getReturnDate().isBefore(rental.getStartDate())) {
-            throw new RuntimeException("Bitiş tarihi başlangıç tarihinden daha eski olamaz.");
+            throw new RuntimeException("Return date cannot be before the start date.");
         }
 
         // StartKilometer kiralanmak istenen aracın Kilometer alanından alınmalıdır.
