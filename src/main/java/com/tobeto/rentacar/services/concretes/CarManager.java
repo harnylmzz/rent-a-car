@@ -12,9 +12,6 @@ import com.tobeto.rentacar.services.dtos.responses.car.GetByIdCarResponses;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
-
-
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -45,24 +42,29 @@ public class CarManager implements CarService {
     }
 
     @Override
-    public void add(CreateCarRequests createBrandRequests) {
-        Car car = this.modelMapperService.forRequest()
-                .map(createBrandRequests, Car.class);
+    public void add(CreateCarRequests createCarRequests) {
+        String plate = createCarRequests.getPlate().replace(" ", ""); // Boşlukları kaldır
 
-        if (car.getKilometer() < 0) {
-            throw new IllegalArgumentException("Kilometer field cannot be less than 0!");
+        if (this.carRepository.existsByPlate(plate)) {
+            throw new RuntimeException("Car with this plate already exists!");
         }
 
-        String plate = createBrandRequests.getPlate().replaceAll("\\s+", "");
-        car.setPlate(plate);
+        Car car = this.modelMapperService.forRequest()
+                .map(createCarRequests, Car.class);
+
+        car.setPlate(plate); // Düzenlenmiş plakayı araca ata
+
+        if (car.getKilometer() < 0) {
+            throw new RuntimeException("Kilometer field cannot be less than 0!");
+        }
 
         int year = car.getYear();
         if (year < 2005 || year > 2024) {
-            throw new IllegalArgumentException("Year information should be between 2005 and 2024.");
+            throw new RuntimeException("Year information should be between 2005 and 2024.");
         }
 
         if (car.getPrice() < 0) {
-            throw new IllegalArgumentException("DailyPrice cannot be less than 0.");
+            throw new RuntimeException("DailyPrice cannot be less than 0.");
         }
 
         this.carRepository.save(car);
@@ -89,4 +91,6 @@ public class CarManager implements CarService {
         this.carRepository.delete(car);
 
     }
+
+
 }
