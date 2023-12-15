@@ -38,6 +38,10 @@ public class ModelManager implements ModelService {
 
     @Override
     public void add(CreateModelRequests createModelRequests) {
+
+        if (this.modelRepository.existsByName(createModelRequests.getName())) {
+            throw new RuntimeException("Model with this name already exists!");
+        }
         Model model = this.modelMapperService.forRequest()
                 .map(createModelRequests , Model.class);
         this.modelRepository.save(model);
