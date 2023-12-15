@@ -54,16 +54,16 @@
 #### ■ Cloning the Project:
 
 1. Use the following command in the terminal or command prompt to clone the project:
-   git clone https://github.com/harnylmzz/rent-a-car.git
+ ##### ■ git clone https://github.com/harnylmzz/rent-a-car.git
 2. Installing Dependencies:
-   cd rent-a-car
-   mvn clean install
+ ##### ■  cd rent-a-car
+ ##### ■   mvn clean install
 
 #### ■ Running the Application
 
 ##### To start the Spring Boot application, follow this step:
 
-Using IDE (Integrated Development Environment)
+■ Using IDE (Integrated Development Environment)
 
 Once the application is running, you can access it by navigating to http://localhost:8080 in your web browser (assuming the default Spring Boot configuration). Adjust the port number if your application uses a different port.
 
