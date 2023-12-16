@@ -2,8 +2,7 @@ package com.tobeto.rentacar.services.concretes;
 
 import com.tobeto.rentacar.config.modelmapper.ModelMapperService;
 import com.tobeto.rentacar.entities.Brand;
-import com.tobeto.rentacar.entities.Car;
-import com.tobeto.rentacar.entities.Employee;
+
 import com.tobeto.rentacar.repository.BrandRepository;
 import com.tobeto.rentacar.services.abstracts.BrandService;
 import com.tobeto.rentacar.services.dtos.requests.brand.CreateBrandRequests;
@@ -11,8 +10,7 @@ import com.tobeto.rentacar.services.dtos.requests.brand.DeleteBrandRequests;
 import com.tobeto.rentacar.services.dtos.requests.brand.UpdateBrandRequests;
 import com.tobeto.rentacar.services.dtos.responses.brand.GetAllBrandResponses;
 import com.tobeto.rentacar.services.dtos.responses.brand.GetByIdBrandResponses;
-import com.tobeto.rentacar.services.dtos.responses.car.GetAllCarResponses;
-import com.tobeto.rentacar.services.dtos.responses.car.GetByIdCarResponses;
+
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

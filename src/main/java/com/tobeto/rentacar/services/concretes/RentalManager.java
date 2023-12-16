@@ -1,8 +1,8 @@
 package com.tobeto.rentacar.services.concretes;
 
 import com.tobeto.rentacar.config.modelmapper.ModelMapperService;
-import com.tobeto.rentacar.entities.Rental;
-import com.tobeto.rentacar.repository.RentalRepository;
+import com.tobeto.rentacar.entities.*;
+import com.tobeto.rentacar.repository.*;
 import com.tobeto.rentacar.services.abstracts.RentalService;
 import com.tobeto.rentacar.services.dtos.requests.rental.CreateRentalRequests;
 import com.tobeto.rentacar.services.dtos.requests.rental.DeleteRentalRequests;
@@ -20,6 +20,8 @@ import java.util.stream.Collectors;
 public class RentalManager implements RentalService {
     private RentalRepository rentalRepository;
     private ModelMapperService modelMapperService;
+    private CarRepository carRepository;
+    private UserRepository userRepository;
 
     @Override
     public List<GetAllRentalResponses> getAll() {
@@ -33,6 +35,7 @@ public class RentalManager implements RentalService {
 
     @Override
     public GetByIdRentalResponses getById(int id) {
+
         Rental rental = rentalRepository.findById(id).orElseThrow();
         GetByIdRentalResponses getByIdRentalResponses = this.modelMapperService.forResponse()
                 .map(rental , GetByIdRentalResponses.class);
@@ -42,9 +45,23 @@ public class RentalManager implements RentalService {
 
     @Override
     public void add(CreateRentalRequests createRentalRequests) {
+
         Rental rental = this.modelMapperService.forRequest()
                 .map(createRentalRequests, Rental.class);
+
+        Car car = carRepository.findById(createRentalRequests.getCarId())
+                .orElseThrow(() -> new RuntimeException("Model not found"));
+
+       //User user = userRepository.findById(createRentalRequests.getUserId())
+               //.orElseThrow(() -> new RuntimeException("Model not found"));
+
+
+        rental.setCar(car);
+        //rental.setUser(user);
+
+
         this.rentalRepository.save(rental);
+
 
     }
 

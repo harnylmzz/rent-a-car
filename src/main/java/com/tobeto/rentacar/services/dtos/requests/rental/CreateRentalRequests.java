@@ -37,4 +37,9 @@ public class CreateRentalRequests {
     @NotNull(message = "Discount is mandatory")
     @NotBlank(message = "Discount is mandatory")
     private double discount;
+
+    private int carId;
+
+    private int userId;
+
 }

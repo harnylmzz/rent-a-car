@@ -2,16 +2,13 @@ package com.tobeto.rentacar.services.concretes;
 
 import com.tobeto.rentacar.config.modelmapper.ModelMapperService;
 import com.tobeto.rentacar.entities.Color;
-import com.tobeto.rentacar.entities.Employee;
 import com.tobeto.rentacar.repository.ColorRepository;
 import com.tobeto.rentacar.services.abstracts.ColorService;
 import com.tobeto.rentacar.services.dtos.requests.color.CreateColorRequests;
 import com.tobeto.rentacar.services.dtos.requests.color.DeleteColorRequests;
 import com.tobeto.rentacar.services.dtos.requests.color.UpdateColorRequests;
-import com.tobeto.rentacar.services.dtos.responses.car.GetByIdCarResponses;
 import com.tobeto.rentacar.services.dtos.responses.color.GetAllColorResponses;
 import com.tobeto.rentacar.services.dtos.responses.color.GetByIdColorResponses;
-import com.tobeto.rentacar.services.dtos.responses.employee.GetByIdEmployeeResponses;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
