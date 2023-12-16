@@ -8,8 +8,6 @@ import com.tobeto.rentacar.repository.CarRepository;
 import com.tobeto.rentacar.repository.ColorRepository;
 import com.tobeto.rentacar.repository.ModelRepository;
 import com.tobeto.rentacar.services.abstracts.CarService;
-import com.tobeto.rentacar.services.abstracts.ColorService;
-import com.tobeto.rentacar.services.abstracts.ModelService;
 import com.tobeto.rentacar.services.dtos.requests.car.CreateCarRequests;
 import com.tobeto.rentacar.services.dtos.requests.car.DeleteCarRequests;
 import com.tobeto.rentacar.services.dtos.requests.car.UpdateCarRequests;
