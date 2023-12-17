@@ -71,6 +71,8 @@ Once the application is running, you can access it by navigating to http://local
 
 ---
 
+![rent-a-car](https://github.com/harnylmzz/rent-a-car/commit/7f17cb7b2147c286da8daf237ff5d3006b0b2dae)
+
 ## MIT License 
 #### Copyright (c) [2023] [[Harun Yılmaz](https://github.com/harnylmzz), [Şehmus Ekin](https://github.com/sehmusekin), [Taner Dökmetaş](https://github.com/t4ner)]
 
