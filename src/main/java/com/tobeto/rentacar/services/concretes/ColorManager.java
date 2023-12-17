@@ -9,6 +9,7 @@ import com.tobeto.rentacar.services.dtos.requests.color.DeleteColorRequests;
 import com.tobeto.rentacar.services.dtos.requests.color.UpdateColorRequests;
 import com.tobeto.rentacar.services.dtos.responses.color.GetAllColorResponses;
 import com.tobeto.rentacar.services.dtos.responses.color.GetByIdColorResponses;
+import com.tobeto.rentacar.services.rules.ColorBusinessRules;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +21,7 @@ import java.util.stream.Collectors;
 public class ColorManager implements ColorService {
     private ColorRepository colorRepository;
     private ModelMapperService modelMapperService;
+    private ColorBusinessRules colorBusinessRules;
 
     @Override
     public List<GetAllColorResponses> getAll() {
@@ -43,9 +45,8 @@ public class ColorManager implements ColorService {
     @Override
     public void add(CreateColorRequests createColorRequests) {
 
-        if (this.colorRepository.existsByName(createColorRequests.getName())) {
-            throw new RuntimeException("Color with this name already exists!");
-        }
+        this.colorBusinessRules.checkIfName(createColorRequests.getName());
+
         Color color = this.modelMapperService.forRequest()
                 .map(createColorRequests, Color.class);
         this.colorRepository.save(color);

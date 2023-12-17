@@ -11,6 +11,7 @@ import com.tobeto.rentacar.services.dtos.requests.brand.UpdateBrandRequests;
 import com.tobeto.rentacar.services.dtos.responses.brand.GetAllBrandResponses;
 import com.tobeto.rentacar.services.dtos.responses.brand.GetByIdBrandResponses;
 
+import com.tobeto.rentacar.services.rules.BrandBusinessRules;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +23,7 @@ import java.util.stream.Collectors;
 public class BrandManager implements BrandService {
     private BrandRepository brandRepository;
     private ModelMapperService modelMapperService;
+    private BrandBusinessRules brandBusinessRules;
 
     @Override
     public List<GetAllBrandResponses> getAll() {
@@ -45,11 +47,10 @@ public class BrandManager implements BrandService {
 
     @Override
     public void add(CreateBrandRequests createBrandRequests) {
-        String name = createBrandRequests.getName().replace(" ", ""); // Boşlukları kaldır
+        String name = createBrandRequests.getName().replace(" ", "");
 
-        if (this.brandRepository.existsByName(name)) {
-            throw new RuntimeException("Car with this plate already exists!");
-        }
+        this.brandBusinessRules.checkIfName(createBrandRequests.getName());
+
         Brand brand = this.modelMapperService.forRequest()
                 .map(createBrandRequests, Brand.class);
         this.brandRepository.save(brand);
@@ -57,7 +58,7 @@ public class BrandManager implements BrandService {
 
     @Override
     public void update(UpdateBrandRequests updateBrandRequests) {
-        Brand brand =this.modelMapperService.forRequest()
+        Brand brand = this.modelMapperService.forRequest()
                 .map(updateBrandRequests, Brand.class);
         brand.setId(updateBrandRequests.getId());
         brand.setName(updateBrandRequests.getName());
@@ -67,7 +68,7 @@ public class BrandManager implements BrandService {
     @Override
     public void delete(DeleteBrandRequests deleteBrandRequests) {
         Brand brand = this.modelMapperService.forRequest()
-                .map(deleteBrandRequests , Brand.class);
+                .map(deleteBrandRequests, Brand.class);
         this.brandRepository.delete(brand);
     }
 }
