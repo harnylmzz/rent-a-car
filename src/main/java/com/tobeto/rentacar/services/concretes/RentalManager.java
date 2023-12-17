@@ -2,7 +2,6 @@ package com.tobeto.rentacar.services.concretes;
 
 import com.tobeto.rentacar.config.modelmapper.ModelMapperService;
 import com.tobeto.rentacar.entities.*;
-import com.tobeto.rentacar.repository.*;
 
 import com.tobeto.rentacar.entities.Rental;
 import com.tobeto.rentacar.repository.CarRepository;
@@ -18,7 +17,6 @@ import com.tobeto.rentacar.services.rules.RentalBusinessRules;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -29,6 +27,7 @@ public class RentalManager implements RentalService {
     private ModelMapperService modelMapperService;
     private CarRepository carRepository;
     private RentalBusinessRules rentalBusinessRules;
+
 
     @Override
     public List<GetAllRentalResponses> getAll() {
@@ -66,6 +65,9 @@ public class RentalManager implements RentalService {
         rental.setCar(car);
         rental.setReturnDate(null);
         // rental.setEndKilometer(null);
+
+        int rentalLimit = rental.getStartDate().until(rental.getEndDate()).getDays() + 1;
+        rental.setTotalPrice(car.getPrice() * rentalLimit);
 
         this.rentalRepository.save(rental);
     }
