@@ -13,6 +13,7 @@ import com.tobeto.rentacar.services.dtos.requests.car.DeleteCarRequests;
 import com.tobeto.rentacar.services.dtos.requests.car.UpdateCarRequests;
 import com.tobeto.rentacar.services.dtos.responses.car.GetAllCarResponses;
 import com.tobeto.rentacar.services.dtos.responses.car.GetByIdCarResponses;
+import com.tobeto.rentacar.services.rules.CarBusinessRules;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +27,7 @@ public class CarManager implements CarService {
     private ModelMapperService modelMapperService;
     private ColorRepository colorRepository;
     private ModelRepository modelRepository;
+    private CarBusinessRules carBusinessRules;
 
     @Override
     public List<GetAllCarResponses> getAll() {
@@ -49,45 +51,33 @@ public class CarManager implements CarService {
 
     @Override
     public void add(CreateCarRequests createCarRequests) {
-        Car addCar = new Car();
-        String plate = createCarRequests.getPlate().replace(" ", ""); // Boşlukları kaldır
 
-        if (this.carRepository.existsByPlate(plate)) {
-            throw new RuntimeException("Car with this plate already exists!");
-        }
+        String plate = createCarRequests.getPlate().replace(" ", "");
+
+        this.carBusinessRules.checkIfPlate(createCarRequests.getPlate());
+
+        this.carBusinessRules.checkIfKilometer(createCarRequests);
+
+        this.carBusinessRules.checkIfYear(createCarRequests);
+
+        this.carBusinessRules.checkIfPrice(createCarRequests);
 
         Car car = this.modelMapperService.forRequest()
                 .map(createCarRequests, Car.class);
 
-        car.setPlate(plate); // Düzenlenmiş plakayı araca ata
 
-        if (car.getKilometer() < 0) {
-            throw new RuntimeException("Kilometer field cannot be less than 0!");
-        }
-
-        int year = car.getYear();
-        if (year < 2005 || year > 2024) {
-            throw new RuntimeException("Year information should be between 2005 and 2024.");
-        }
-
-        if (car.getPrice() < 0) {
-            throw new RuntimeException("DailyPrice cannot be less than 0.");
-        }
-
-        // Veritabanından model ve renk nesnelerini al
         Model model = modelRepository.findById(createCarRequests.getModelId())
                 .orElseThrow(() -> new RuntimeException("Model not found"));
 
         Color color = colorRepository.findById(createCarRequests.getColorId())
                 .orElseThrow(() -> new RuntimeException("Color not found"));
 
-        // Arabaya model ve renk nesnelerini ata
         car.setModel(model);
         car.setColor(color);
+        car.setPlate(plate);
 
         this.carRepository.save(car);
     }
-
 
 
     @Override

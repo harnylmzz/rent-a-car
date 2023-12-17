@@ -9,6 +9,7 @@ import com.tobeto.rentacar.services.dtos.requests.model.DeleteModelRequests;
 import com.tobeto.rentacar.services.dtos.requests.model.UpdateModelRequests;
 import com.tobeto.rentacar.services.dtos.responses.model.GetAllModelResponses;
 import com.tobeto.rentacar.services.dtos.responses.model.GetByIdModelResponses;
+import com.tobeto.rentacar.services.rules.ModelBusinessRules;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -20,11 +21,14 @@ import java.util.stream.Collectors;
 public class ModelManager implements ModelService {
     private ModelRepository modelRepository;
     private ModelMapperService modelMapperService;
+    private ModelBusinessRules modelBusinessRules;
+
     @Override
     public List<GetAllModelResponses> getAll() {
         List<Model> models = modelRepository.findAll();
         List<GetAllModelResponses> getAllModelResponses = models.stream()
-                .map(model -> this.modelMapperService.forResponse().map(model, GetAllModelResponses.class))
+                .map(model -> this.modelMapperService.forResponse()
+                        .map(model, GetAllModelResponses.class))
                 .collect(Collectors.toList());
         return getAllModelResponses;
     }
@@ -32,18 +36,18 @@ public class ModelManager implements ModelService {
     @Override
     public GetByIdModelResponses getById(int id) {
         Model model = modelRepository.findById(id).orElseThrow();
-        GetByIdModelResponses getByIdModelResponses = this.modelMapperService.forResponse().map(model, GetByIdModelResponses.class);
+        GetByIdModelResponses getByIdModelResponses = this.modelMapperService.forResponse()
+                .map(model, GetByIdModelResponses.class);
         return getByIdModelResponses;
     }
 
     @Override
     public void add(CreateModelRequests createModelRequests) {
 
-        if (this.modelRepository.existsByName(createModelRequests.getName())) {
-            throw new RuntimeException("Model with this name already exists!");
-        }
+        this.modelBusinessRules.checkIfName(createModelRequests.getName());
+
         Model model = this.modelMapperService.forRequest()
-                .map(createModelRequests , Model.class);
+                .map(createModelRequests, Model.class);
         this.modelRepository.save(model);
 
     }
@@ -51,7 +55,7 @@ public class ModelManager implements ModelService {
     @Override
     public void update(UpdateModelRequests updateModelRequests) {
         Model model = this.modelMapperService.forRequest()
-                .map(updateModelRequests , Model.class);
+                .map(updateModelRequests, Model.class);
         model.setId(updateModelRequests.getId());
         model.setName(updateModelRequests.getName());
         this.modelRepository.save(model);
@@ -60,7 +64,7 @@ public class ModelManager implements ModelService {
     @Override
     public void delete(DeleteModelRequests deleteModelRequests) {
         Model model = this.modelMapperService.forRequest()
-                .map(deleteModelRequests , Model.class);
+                .map(deleteModelRequests, Model.class);
         this.modelRepository.delete(model);
     }
 }

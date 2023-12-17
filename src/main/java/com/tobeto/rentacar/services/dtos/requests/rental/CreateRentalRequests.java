@@ -35,6 +35,4 @@ public class CreateRentalRequests {
 
     private int carId;
 
-    private int userId;
-
 }

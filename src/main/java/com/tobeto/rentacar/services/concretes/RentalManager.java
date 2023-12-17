@@ -14,6 +14,7 @@ import com.tobeto.rentacar.services.dtos.requests.rental.DeleteRentalRequests;
 import com.tobeto.rentacar.services.dtos.requests.rental.UpdateRentalRequests;
 import com.tobeto.rentacar.services.dtos.responses.rental.GetAllRentalResponses;
 import com.tobeto.rentacar.services.dtos.responses.rental.GetByIdRentalResponses;
+import com.tobeto.rentacar.services.rules.RentalBusinessRules;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -27,8 +28,7 @@ public class RentalManager implements RentalService {
     private RentalRepository rentalRepository;
     private ModelMapperService modelMapperService;
     private CarRepository carRepository;
-
-    private UserRepository userRepository;
+    private RentalBusinessRules rentalBusinessRules;
 
     @Override
     public List<GetAllRentalResponses> getAll() {
@@ -52,46 +52,22 @@ public class RentalManager implements RentalService {
     @Override
     public void add(CreateRentalRequests createRentalRequests) {
 
+        this.rentalBusinessRules.checkIfDate(createRentalRequests);
 
         Rental rental = this.modelMapperService.forRequest()
                 .map(createRentalRequests, Rental.class);
 
-        Car car = carRepository.findById(createRentalRequests.getCarId())
-                .orElseThrow(() -> new RuntimeException("Model not found"));
+        Car car = this.carRepository.findById(createRentalRequests.getCarId())
+                .orElseThrow(() -> new RuntimeException("Car not found"));
 
-        //User user = userRepository.findById(createRentalRequests.getUserId())
-        //.orElseThrow(() -> new RuntimeException("Model not found"));
-
+        int startKilometer = car.getKilometer();
+        rental.setStartKilometer(startKilometer);
 
         rental.setCar(car);
-        //rental.setUser(user);
-
-
-        LocalDate today = LocalDate.now();
-        if (rental.getStartDate().isBefore(today)) {
-            throw new RuntimeException("Start date cannot be before today.");
-        }
-
-        if (rental.getEndDate().isBefore(rental.getStartDate())) {
-            throw new RuntimeException("End date cannot be before the start date.");
-        }
-
-        if (rental.getReturnDate().isBefore(rental.getStartDate())) {
-            throw new RuntimeException("Return date cannot be before the start date.");
-        }
-
-        // StartKilometer kiralanmak istenen aracın Kilometer alanından alınmalıdır.
-        //  Car car = this.carRepository.findById(rental.getCar().getId()).get();
-        //  rental.setStartKilometer(car.getKilometer());
-
-        // ReturnDate null bırakılabilir
-
         rental.setReturnDate(null);
-
+        // rental.setEndKilometer(null);
 
         this.rentalRepository.save(rental);
-
-
     }
 
     @Override
