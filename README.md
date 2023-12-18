@@ -71,6 +71,8 @@ Once the application is running, you can access it by navigating to http://local
 
 ---
 
+##### ER DIAGRAM:
+
 ## MIT License 
 #### Copyright (c) [2023] [[Harun Yılmaz](https://github.com/harnylmzz), [Şehmus Ekin](https://github.com/sehmusekin), [Taner Dökmetaş](https://github.com/t4ner)]
 
