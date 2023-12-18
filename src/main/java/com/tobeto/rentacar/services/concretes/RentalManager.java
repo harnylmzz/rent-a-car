@@ -63,11 +63,9 @@ public class RentalManager implements RentalService {
         Car car = this.carRepository.findById(createRentalRequests.getCarId())
                 .orElseThrow(() -> new RuntimeException("Car not found"));
 
-        Customer customer = this.customerRepository.findById(createRentalRequests.getCustomerId())
-                .orElseThrow(() -> new RuntimeException("Customer not found"));
+        Customer customer = this.customerRepository.findById(createRentalRequests.getCustomerId()).orElse(null);
 
-        Employee employee = this.employeeRepository.findById(createRentalRequests.getEmployeeId())
-                .orElseThrow(() -> new RuntimeException("Employee not found"));
+        Employee employee = this.employeeRepository.findById(createRentalRequests.getEmployeeId()).orElse(null);
 
         int startKilometer = car.getKilometer();
         rental.setStartKilometer(startKilometer);
@@ -76,7 +74,7 @@ public class RentalManager implements RentalService {
         rental.setCustomer(customer);
         rental.setEmployee(employee);
         rental.setReturnDate(null);
-        // rental.setEndKilometer(null);
+        rental.setEndKilometer(null);
 
         int rentalLimit = rental.getStartDate().until(rental.getEndDate()).getDays() + 1;
         rental.setTotalPrice(car.getPrice() * rentalLimit);

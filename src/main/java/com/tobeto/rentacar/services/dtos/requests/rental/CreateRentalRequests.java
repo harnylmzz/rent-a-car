@@ -25,7 +25,7 @@ public class CreateRentalRequests {
     @NotNull(message = "Start kilometer is mandatory")
     private int startKilometer;
 
-    private int endKilometer;
+    private Integer endKilometer;
 
     @NotNull(message = "Total price is mandatory")
     private double totalPrice;
