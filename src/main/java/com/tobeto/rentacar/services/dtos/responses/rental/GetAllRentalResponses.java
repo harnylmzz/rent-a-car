@@ -27,4 +27,8 @@ public class GetAllRentalResponses {
 
     private int carId;
 
+    private int customerId;
+
+    private int employeeId;
+
 }

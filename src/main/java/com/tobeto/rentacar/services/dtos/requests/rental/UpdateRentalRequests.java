@@ -22,7 +22,7 @@ public class UpdateRentalRequests {
 
     private int startKilometer;
 
-    private int endKilometer;
+    private Integer endKilometer;
 
     private double totalPrice;
 
