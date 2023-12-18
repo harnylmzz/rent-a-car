@@ -22,7 +22,6 @@ public class Customer {
     @Column(name = "nationality_id")
     private String nationalityId;
 
-
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;

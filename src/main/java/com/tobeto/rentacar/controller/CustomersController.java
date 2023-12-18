@@ -16,6 +16,7 @@ import java.util.List;
 @AllArgsConstructor
 public class CustomersController {
     private CustomerService customerService;
+
     @GetMapping("/getAll")
     public List<GetAllCustomerResponses> getAll() {
         return this.customerService.getAll();
@@ -27,8 +28,8 @@ public class CustomersController {
     }
 
     @PostMapping("/add")
-    public void add(@RequestBody CreateCustomerRequests createBrandRequests) {
-        this.customerService.add(createBrandRequests);
+    public void add(@RequestBody CreateCustomerRequests createCustomerRequests) {
+        customerService.add(createCustomerRequests);
     }
 
     @PutMapping("/update")

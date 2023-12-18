@@ -12,8 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CreateCustomerRequests {
 
-    @NotNull(message = "Name is mandatory")
-    @NotBlank(message = "Name is mandatory")
-    @Size(min = 11, max = 11, message = "Name must be 11 characters")
+    @NotNull(message = "Nationality ID is mandatory")
+    @NotBlank(message = "Nationality ID is mandatory")
     private String nationalityId;
 }

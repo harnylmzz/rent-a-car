@@ -13,7 +13,10 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class RentalBusinessRules {
 
+    private static final int MAXIMUM_RENTAL_DAYS = 25;
+
     public void checkIfDate(CreateRentalRequests createRentalRequests) {
+
         LocalDate today = LocalDate.now();
 
         if (createRentalRequests.getStartDate().isBefore(today)) {
@@ -27,6 +30,14 @@ public class RentalBusinessRules {
         if (createRentalRequests.getReturnDate().isBefore(createRentalRequests.getStartDate())) {
             throw new BusinessException("Return date cannot be before the start date.");
         }
+
+        LocalDate startDate = createRentalRequests.getStartDate();
+        LocalDate endDate = createRentalRequests.getEndDate();
+
+        if (startDate.plusDays(MAXIMUM_RENTAL_DAYS).isBefore(endDate)) {
+            throw new BusinessException("The rental duration cannot exceed 25 days.");
+        }
     }
 }
+
 
