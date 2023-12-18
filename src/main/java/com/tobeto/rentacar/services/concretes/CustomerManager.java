@@ -20,6 +20,7 @@ import java.util.stream.Collectors;
 public class CustomerManager implements CustomerService {
     private CustomerRepository customerRepository;
     private ModelMapperService modelMapperService;
+
     @Override
     public List<GetAllCustomerResponses> getAll() {
         List<Customer> customers = customerRepository.findAll();
@@ -49,7 +50,7 @@ public class CustomerManager implements CustomerService {
 
     @Override
     public void update(UpdateCustomerRequests updateCustomerRequests) {
-        Customer customer =this.modelMapperService.forRequest()
+        Customer customer = this.modelMapperService.forRequest()
                 .map(updateCustomerRequests, Customer.class);
         customer.setId(updateCustomerRequests.getId());
         customer.setNationalityId(updateCustomerRequests.getNationalityId());
@@ -59,7 +60,7 @@ public class CustomerManager implements CustomerService {
     @Override
     public void delete(DeleteCustomerRequests deleteCustomerRequests) {
         Customer customer = this.modelMapperService.forRequest()
-                .map(deleteCustomerRequests , Customer.class);
+                .map(deleteCustomerRequests, Customer.class);
         this.customerRepository.delete(customer);
     }
 }
