@@ -100,6 +100,4 @@ public class CarManager implements CarService {
         this.carRepository.delete(car);
 
     }
-
-
 }
