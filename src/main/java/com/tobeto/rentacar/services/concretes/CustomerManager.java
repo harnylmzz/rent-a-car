@@ -3,6 +3,7 @@ package com.tobeto.rentacar.services.concretes;
 import com.tobeto.rentacar.config.modelmapper.ModelMapperService;
 import com.tobeto.rentacar.core.result.DataResult;
 import com.tobeto.rentacar.core.result.Result;
+import com.tobeto.rentacar.core.result.SuccessResult;
 import com.tobeto.rentacar.entities.Customer;
 import com.tobeto.rentacar.repository.CustomerRepository;
 import com.tobeto.rentacar.services.abstracts.CustomerService;
@@ -55,7 +56,7 @@ public class CustomerManager implements CustomerService {
 
         this.customerRepository.save(customer);
 
-        return new Result(true, "Customer added");
+        return new SuccessResult("Customer added");
     }
 
     @Override

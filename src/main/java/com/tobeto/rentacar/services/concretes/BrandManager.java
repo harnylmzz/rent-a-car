@@ -58,7 +58,7 @@ public class BrandManager implements BrandService {
                 .map(createBrandRequests, Brand.class);
         this.brandRepository.save(brand);
 
-        return new Result(true, "Brand added.");
+        return new SuccessResult("Brand added.");
     }
 
     @Override

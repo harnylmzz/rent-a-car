@@ -3,6 +3,7 @@ package com.tobeto.rentacar.services.concretes;
 import com.tobeto.rentacar.config.modelmapper.ModelMapperService;
 import com.tobeto.rentacar.core.result.DataResult;
 import com.tobeto.rentacar.core.result.Result;
+import com.tobeto.rentacar.core.result.SuccessResult;
 import com.tobeto.rentacar.entities.Employee;
 import com.tobeto.rentacar.repository.EmployeeRepository;
 import com.tobeto.rentacar.services.abstracts.EmployeeService;
@@ -57,7 +58,7 @@ public class EmployeeManager implements EmployeeService {
         this.employeeRepository.save(employee);
 
 
-        return new Result(true, "Employee added");
+        return new SuccessResult("Employee added");
     }
 
     @Override
@@ -69,7 +70,7 @@ public class EmployeeManager implements EmployeeService {
 
         this.employeeRepository.save(employee);
 
-        return new Result(true, "Employee updated");
+        return new SuccessResult("Employee updated");
     }
 
     @Override
@@ -78,6 +79,6 @@ public class EmployeeManager implements EmployeeService {
                 .map(deleteEmployeeRequests, Employee.class);
         this.employeeRepository.delete(employee);
 
-        return new Result(true, "Employee deleted");
+        return new SuccessResult("Employee deleted");
     }
 }

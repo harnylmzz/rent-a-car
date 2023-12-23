@@ -4,6 +4,7 @@ import com.tobeto.rentacar.config.modelmapper.ModelMapperService;
 
 import com.tobeto.rentacar.core.result.DataResult;
 import com.tobeto.rentacar.core.result.Result;
+import com.tobeto.rentacar.core.result.SuccessResult;
 import com.tobeto.rentacar.entities.User;
 import com.tobeto.rentacar.repository.UserRepository;
 import com.tobeto.rentacar.services.abstracts.UserService;
@@ -51,7 +52,7 @@ public class UserManager implements UserService {
                 .map(createUserRequests, User.class);
         this.userRepository.save(user);
 
-        return new Result(true, "User added");
+        return new SuccessResult("User added");
     }
 
     @Override
@@ -65,7 +66,7 @@ public class UserManager implements UserService {
         user.setGsm(updateUserRequests.getGsm());
         this.userRepository.save(user);
 
-        return new Result(true, "User updated");
+        return new SuccessResult("User updated");
     }
 
     @Override
@@ -74,6 +75,6 @@ public class UserManager implements UserService {
                 .map(deleteUserRequests, User.class);
         this.userRepository.delete(user);
 
-        return new Result(true, "User deleted");
+        return new SuccessResult("User deleted");
     }
 }

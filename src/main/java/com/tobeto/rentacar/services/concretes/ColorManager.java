@@ -3,6 +3,7 @@ package com.tobeto.rentacar.services.concretes;
 import com.tobeto.rentacar.config.modelmapper.ModelMapperService;
 import com.tobeto.rentacar.core.result.DataResult;
 import com.tobeto.rentacar.core.result.Result;
+import com.tobeto.rentacar.core.result.SuccessResult;
 import com.tobeto.rentacar.entities.Color;
 import com.tobeto.rentacar.repository.ColorRepository;
 import com.tobeto.rentacar.services.abstracts.ColorService;
@@ -53,7 +54,7 @@ public class ColorManager implements ColorService {
                 .map(createColorRequests, Color.class);
         this.colorRepository.save(color);
 
-        return new Result(true, "Color added");
+        return new SuccessResult("Color added");
 
     }
 
@@ -66,7 +67,7 @@ public class ColorManager implements ColorService {
 
         this.colorRepository.save(color);
 
-        return new Result(true, "Color updated");
+        return new SuccessResult("Color updated");
     }
 
     @Override
@@ -75,6 +76,6 @@ public class ColorManager implements ColorService {
                 .map(deleteColorRequests, Color.class);
         this.colorRepository.delete(color);
 
-        return new Result(true, "Color deleted");
+        return new SuccessResult("Color deleted");
     }
 }

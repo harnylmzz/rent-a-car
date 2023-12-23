@@ -3,6 +3,7 @@ package com.tobeto.rentacar.services.concretes;
 import com.tobeto.rentacar.config.modelmapper.ModelMapperService;
 import com.tobeto.rentacar.core.result.DataResult;
 import com.tobeto.rentacar.core.result.Result;
+import com.tobeto.rentacar.core.result.SuccessResult;
 import com.tobeto.rentacar.entities.Model;
 import com.tobeto.rentacar.repository.ModelRepository;
 import com.tobeto.rentacar.services.abstracts.ModelService;
@@ -52,7 +53,7 @@ public class ModelManager implements ModelService {
                 .map(createModelRequests, Model.class);
         this.modelRepository.save(model);
 
-        return new Result(true, "Model added");
+        return new SuccessResult("Model added");
     }
 
     @Override
@@ -63,7 +64,7 @@ public class ModelManager implements ModelService {
         model.setName(updateModelRequests.getName());
         this.modelRepository.save(model);
 
-        return new Result(true, "Model updated");
+        return new SuccessResult("Model updated");
     }
 
     @Override
@@ -72,6 +73,6 @@ public class ModelManager implements ModelService {
                 .map(deleteModelRequests, Model.class);
         this.modelRepository.delete(model);
 
-        return new Result(true, "Model deleted");
+        return new SuccessResult("Model deleted");
     }
 }
