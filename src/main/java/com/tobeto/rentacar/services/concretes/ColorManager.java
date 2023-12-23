@@ -1,6 +1,7 @@
 package com.tobeto.rentacar.services.concretes;
 
 import com.tobeto.rentacar.config.modelmapper.ModelMapperService;
+import com.tobeto.rentacar.core.exceptions.DataNotFoundException;
 import com.tobeto.rentacar.core.result.DataResult;
 import com.tobeto.rentacar.core.result.Result;
 import com.tobeto.rentacar.core.result.SuccessResult;
@@ -38,7 +39,8 @@ public class ColorManager implements ColorService {
 
     @Override
     public DataResult<GetByIdColorResponses> getById(int id) {
-        Color color = colorRepository.findById(id).orElseThrow();
+        Color color = colorRepository.findById(id).orElseThrow(() -> new DataNotFoundException("Data not found.") {
+        });
         GetByIdColorResponses getByIdColorResponses = this.modelMapperService.forResponse()
                 .map(color, GetByIdColorResponses.class);
 
