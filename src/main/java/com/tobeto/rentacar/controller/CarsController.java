@@ -1,5 +1,7 @@
 package com.tobeto.rentacar.controller;
 
+import com.tobeto.rentacar.core.result.DataResult;
+import com.tobeto.rentacar.core.result.Result;
 import com.tobeto.rentacar.services.abstracts.CarService;
 import com.tobeto.rentacar.services.dtos.requests.car.CreateCarRequests;
 import com.tobeto.rentacar.services.dtos.requests.car.DeleteCarRequests;
@@ -20,29 +22,29 @@ public class CarsController {
     private CarService carService;
 
     @GetMapping("/getAll")
-    public List<GetAllCarResponses> getAll() {
+    public DataResult<List<GetAllCarResponses>> getAll() {
 
         return this.carService.getAll();
     }
 
     @GetMapping("/getById")
-    public GetByIdCarResponses getById(int id) {
+    public DataResult<GetByIdCarResponses> getById(int id) {
         return carService.getById(id);
     }
 
     @PostMapping("/add")
-    public void add(@RequestBody @Valid CreateCarRequests createCarRequests) {
-        this.carService.add(createCarRequests);
+    public Result add(@RequestBody @Valid CreateCarRequests createCarRequests) {
+        return  this.carService.add(createCarRequests);
     }
 
     @PutMapping("/update")
-    public void update(@RequestBody UpdateCarRequests updateCarRequest) {
-        this.carService.update(updateCarRequest);
+    public Result update(@RequestBody UpdateCarRequests updateCarRequest) {
+        return this.carService.update(updateCarRequest);
     }
 
     @DeleteMapping("/delete")
-    public void delete(@RequestBody DeleteCarRequests deleteCarRequests) {
-        this.carService.delete(deleteCarRequests);
+    public Result delete(DeleteCarRequests deleteCarRequests) {
+        return this.carService.delete(deleteCarRequests);
     }
 
 

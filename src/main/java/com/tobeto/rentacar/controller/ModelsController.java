@@ -1,5 +1,7 @@
 package com.tobeto.rentacar.controller;
 
+import com.tobeto.rentacar.core.result.DataResult;
+import com.tobeto.rentacar.core.result.Result;
 import com.tobeto.rentacar.services.abstracts.ModelService;
 import com.tobeto.rentacar.services.dtos.requests.model.CreateModelRequests;
 import com.tobeto.rentacar.services.dtos.requests.model.DeleteModelRequests;
@@ -16,24 +18,29 @@ import java.util.List;
 @AllArgsConstructor
 public class ModelsController {
     private ModelService modelService;
+
     @GetMapping("/getAll")
-    public List<GetAllModelResponses> getAll() {
+    public DataResult<List<GetAllModelResponses>> getAll() {
         return this.modelService.getAll();
     }
+
     @GetMapping("/getById")
-    public GetByIdModelResponses getById(@PathVariable int id) {
+    public DataResult<GetByIdModelResponses> getById(@PathVariable int id) {
         return modelService.getById(id);
     }
+
     @PostMapping("/add")
-    public void add(@RequestBody CreateModelRequests createModelRequests) {
-        this.modelService.add(createModelRequests);
+    public Result add(@RequestBody CreateModelRequests createModelRequests) {
+        return this.modelService.add(createModelRequests);
     }
+
     @PutMapping("/update")
-    public void update(@RequestBody UpdateModelRequests updateCarRequest) {
-        this.modelService.update(updateCarRequest);
+    public Result update(@RequestBody UpdateModelRequests updateCarRequest) {
+        return this.modelService.update(updateCarRequest);
     }
+
     @DeleteMapping("/delete")
-    public void delete(@RequestBody DeleteModelRequests deleteCarRequests) {
-        this.modelService.delete(deleteCarRequests);
+    public Result delete(@RequestBody DeleteModelRequests deleteCarRequests) {
+        return this.modelService.delete(deleteCarRequests);
     }
 }

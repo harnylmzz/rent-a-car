@@ -1,5 +1,7 @@
 package com.tobeto.rentacar.controller;
 
+import com.tobeto.rentacar.core.result.DataResult;
+import com.tobeto.rentacar.core.result.Result;
 import com.tobeto.rentacar.services.abstracts.ColorService;
 import com.tobeto.rentacar.services.dtos.requests.color.CreateColorRequests;
 import com.tobeto.rentacar.services.dtos.requests.color.DeleteColorRequests;
@@ -19,30 +21,29 @@ public class ColorsController {
 
 
     @GetMapping("/getAll")
-    public List<GetAllColorResponses> getAll() {
+    public DataResult<List<GetAllColorResponses>> getAll() {
 
         return this.colorService.getAll();
     }
 
     @GetMapping("/getById")
-    public GetByIdColorResponses getById(
-            @PathVariable int id) {
+    public DataResult<GetByIdColorResponses> getById(int id) {
         return colorService.getById(id);
     }
 
     @PostMapping("/add")
-    public void add(@RequestBody CreateColorRequests createColorRequests) {
-        this.colorService.add(createColorRequests);
+    public Result add(@RequestBody CreateColorRequests createColorRequests) {
+        return this.colorService.add(createColorRequests);
     }
 
     @PutMapping("/update")
-    public void update(@RequestBody UpdateColorRequests updateColorRequests) {
-        this.colorService.update(updateColorRequests);
+    public Result update(@RequestBody UpdateColorRequests updateColorRequests) {
+        return this.colorService.update(updateColorRequests);
     }
 
     @DeleteMapping("/delete")
-    public void delete(@RequestBody DeleteColorRequests deleteColorRequests) {
-        this.colorService.delete(deleteColorRequests);
+    public Result delete(DeleteColorRequests deleteColorRequests) {
+        return this.colorService.delete(deleteColorRequests);
     }
 
 }
