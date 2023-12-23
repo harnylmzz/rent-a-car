@@ -11,4 +11,7 @@ public class GetAllCustomerResponses {
 
     private String nationalityId;
 
+    private String firstName;
+
+    private String lastName;
 }

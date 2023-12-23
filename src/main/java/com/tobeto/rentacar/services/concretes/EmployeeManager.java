@@ -45,9 +45,17 @@ public class EmployeeManager implements EmployeeService {
 
     @Override
     public Result add(CreateEmployeeRequests createEmployeeRequests) {
+
         Employee employee = this.modelMapperService.forRequest()
                 .map(createEmployeeRequests, Employee.class);
+
+        employee.setFirstName(createEmployeeRequests.getFirstName());
+        employee.setLastName(createEmployeeRequests.getLastName());
+        employee.setEmail(createEmployeeRequests.getEmail());
+        employee.setGsm(createEmployeeRequests.getGsm());
+
         this.employeeRepository.save(employee);
+
 
         return new Result(true, "Employee added");
     }

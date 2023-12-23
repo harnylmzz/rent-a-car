@@ -46,8 +46,13 @@ public class CustomerManager implements CustomerService {
     @Override
     public Result add(CreateCustomerRequests createCustomerRequests) {
 
-        Customer customer = this.modelMapperService.forRequest()
-                .map(createCustomerRequests, Customer.class);
+        Customer customer = new Customer();
+        customer.setNationalityId(createCustomerRequests.getNationalityId());
+        customer.setFirstName(createCustomerRequests.getFirstName());
+        customer.setLastName(createCustomerRequests.getLastName());
+        customer.setEmail(createCustomerRequests.getEmail());
+        customer.setGsm(createCustomerRequests.getGsm());
+
         this.customerRepository.save(customer);
 
         return new Result(true, "Customer added");
@@ -55,7 +60,9 @@ public class CustomerManager implements CustomerService {
 
     @Override
     public Result update(UpdateCustomerRequests updateCustomerRequests) {
-        Customer customer = new Customer();
+
+        Customer customer = this.modelMapperService.forRequest()
+                .map(updateCustomerRequests, Customer.class);
         customer.setNationalityId(updateCustomerRequests.getNationalityId());
 
         this.customerRepository.save(customer);

@@ -14,4 +14,11 @@ public class CreateEmployeeRequests {
     @NotNull(message = "Name is mandatory")
     @NotBlank(message = "Name is mandatory")
     private double salary;
-}
+
+    private String firstName;
+
+    private String lastName;
+
+    private String email;
+
+    private String gsm;}

@@ -9,6 +9,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class GetAllEmployeeResponses {
 
+    private String firstName;
+
+    private String lastName;
+
     private double salary;
 
 }
