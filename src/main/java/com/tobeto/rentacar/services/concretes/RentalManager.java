@@ -3,13 +3,11 @@ package com.tobeto.rentacar.services.concretes;
 import com.tobeto.rentacar.config.modelmapper.ModelMapperService;
 import com.tobeto.rentacar.core.result.DataResult;
 import com.tobeto.rentacar.core.result.Result;
+import com.tobeto.rentacar.core.result.SuccessResult;
 import com.tobeto.rentacar.entities.*;
 
 import com.tobeto.rentacar.entities.Rental;
-import com.tobeto.rentacar.repository.CarRepository;
-import com.tobeto.rentacar.repository.CustomerRepository;
-import com.tobeto.rentacar.repository.EmployeeRepository;
-import com.tobeto.rentacar.repository.RentalRepository;
+import com.tobeto.rentacar.repository.*;
 
 import com.tobeto.rentacar.services.abstracts.RentalService;
 import com.tobeto.rentacar.services.dtos.requests.rental.CreateRentalRequests;
@@ -31,9 +29,6 @@ public class RentalManager implements RentalService {
     private ModelMapperService modelMapperService;
     private CarRepository carRepository;
     private RentalBusinessRules rentalBusinessRules;
-    private CustomerRepository customerRepository;
-    private EmployeeRepository employeeRepository;
-
 
     @Override
     public DataResult<List<GetAllRentalResponses>> getAll() {
@@ -65,16 +60,11 @@ public class RentalManager implements RentalService {
         Car car = this.carRepository.findById(createRentalRequests.getCarId())
                 .orElseThrow(() -> new RuntimeException("Car not found"));
 
-        Customer customer = this.customerRepository.findById(createRentalRequests.getCustomerId()).orElse(null);
-
-        Employee employee = this.employeeRepository.findById(createRentalRequests.getEmployeeId()).orElse(null);
-
         int startKilometer = car.getKilometer();
         rental.setStartKilometer(startKilometer);
 
         rental.setCar(car);
-        rental.setCustomer(customer);
-        rental.setEmployee(employee);
+
         rental.setReturnDate(null);
         rental.setEndKilometer(null);
 
@@ -83,7 +73,7 @@ public class RentalManager implements RentalService {
 
         this.rentalRepository.save(rental);
 
-        return new Result(true, "Rental added");
+        return new SuccessResult("Rental added");
     }
 
     @Override
@@ -100,7 +90,7 @@ public class RentalManager implements RentalService {
 
         this.rentalRepository.save(rental);
 
-        return new Result(true, "Rental updated");
+        return new SuccessResult("Rental updated");
     }
 
     @Override
@@ -108,6 +98,6 @@ public class RentalManager implements RentalService {
         Rental rental = this.modelMapperService.forRequest().map(deleteRentalRequests, Rental.class);
         this.rentalRepository.delete(rental);
 
-        return new Result(true, "Rental deleted");
+        return new SuccessResult("Rental deleted");
     }
 }

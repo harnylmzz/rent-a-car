@@ -3,6 +3,7 @@ package com.tobeto.rentacar.services.concretes;
 import com.tobeto.rentacar.config.modelmapper.ModelMapperService;
 import com.tobeto.rentacar.core.result.DataResult;
 import com.tobeto.rentacar.core.result.Result;
+import com.tobeto.rentacar.core.result.SuccessResult;
 import com.tobeto.rentacar.entities.Car;
 import com.tobeto.rentacar.entities.Color;
 import com.tobeto.rentacar.entities.Model;
@@ -27,8 +28,6 @@ import java.util.stream.Collectors;
 public class CarManager implements CarService {
     private CarRepository carRepository;
     private ModelMapperService modelMapperService;
-   // private ColorRepository colorRepository;
-   // private ModelRepository modelRepository;
     private CarBusinessRules carBusinessRules;
 
     @Override
@@ -71,7 +70,7 @@ public class CarManager implements CarService {
 
         this.carRepository.save(car);
 
-        return new Result(true, "Car added");
+        return new SuccessResult("Car added");
     }
 
 
@@ -86,7 +85,7 @@ public class CarManager implements CarService {
         car.setPrice(updateCarRequests.getPrice());
         this.carRepository.save(car);
 
-        return new Result(true, "Car updated");
+        return new SuccessResult("Car updated");
 
     }
 
@@ -96,7 +95,7 @@ public class CarManager implements CarService {
                 .map(deleteCarRequests, Car.class);
         this.carRepository.delete(car);
 
-        return new Result(true, "Car deleted");
+        return new SuccessResult("Car deleted");
 
     }
 }

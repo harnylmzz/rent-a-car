@@ -35,8 +35,6 @@ public class CreateRentalRequests {
 
     private int carId;
 
-    private int customerId;
-
-    private int employeeId;
+    private int userId;
 
 }

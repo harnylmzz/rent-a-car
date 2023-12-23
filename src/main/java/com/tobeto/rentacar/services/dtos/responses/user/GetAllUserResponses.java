@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class GetAllUserResponses {
 
+    private int id;
+
     private String firstName;
 
     private String lastName;
