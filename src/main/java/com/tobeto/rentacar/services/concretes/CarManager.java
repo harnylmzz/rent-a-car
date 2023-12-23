@@ -68,14 +68,14 @@ public class CarManager implements CarService {
                 .map(createCarRequests, Car.class);
 
 
-        Model model = modelRepository.findById(createCarRequests.getModelId())
-                .orElseThrow(() -> new RuntimeException("Model not found"));
-
-        Color color = colorRepository.findById(createCarRequests.getColorId())
-                .orElseThrow(() -> new RuntimeException("Color not found"));
-
-        car.setModel(model);
-        car.setColor(color);
+//        Model model = modelRepository.findById(createCarRequests.getModelId())
+//                .orElseThrow(() -> new RuntimeException("Model not found"));
+//
+//        Color color = colorRepository.findById(createCarRequests.getColorId())
+//                .orElseThrow(() -> new RuntimeException("Color not found"));
+//
+//        car.setModel(model);
+//        car.setColor(color);
         car.setPlate(plate);
 
         this.carRepository.save(car);

@@ -1,5 +1,7 @@
 package com.tobeto.rentacar.controller;
 
+import com.tobeto.rentacar.core.result.DataResult;
+import com.tobeto.rentacar.core.result.Result;
 import com.tobeto.rentacar.services.abstracts.BrandService;
 import com.tobeto.rentacar.services.dtos.requests.brand.CreateBrandRequests;
 import com.tobeto.rentacar.services.dtos.requests.brand.DeleteBrandRequests;
@@ -13,6 +15,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
 @RestController
 @RequestMapping("/api/brands")
 @AllArgsConstructor
@@ -20,30 +23,29 @@ public class BrandsController {
     private BrandService brandService;
 
     @GetMapping("/getAll")
-    public List<GetAllBrandResponses> getAll() {
+    public DataResult<List<GetAllBrandResponses>> getAll() {
         return this.brandService.getAll();
     }
 
     @GetMapping("/getById")
-    public GetByIdBrandResponses getById(int id) {
+    public DataResult<GetByIdBrandResponses> getById(int id) {
         return brandService.getById(id);
     }
 
     @PostMapping("/add")
-    public void add(@RequestBody @Valid CreateBrandRequests createBrandRequests) {
-        this.brandService.add(createBrandRequests);
+    public Result add(@RequestBody @Valid CreateBrandRequests createBrandRequests) {
+       return this.brandService.add(createBrandRequests);
     }
 
     @PutMapping("/update")
-    public void update(@RequestBody UpdateBrandRequests updateBrandRequest) {
-        this.brandService.update(updateBrandRequest);
+    public Result update(@RequestBody UpdateBrandRequests updateBrandRequest) {
+        return this.brandService.update(updateBrandRequest);
     }
 
     @DeleteMapping("/delete")
-    public void delete(@RequestBody DeleteBrandRequests deleteBrandRequests) {
-        this.brandService.delete(deleteBrandRequests);
+    public Result delete(DeleteBrandRequests deleteBrandRequests) {
+        return  this.brandService.delete(deleteBrandRequests);
     }
-
 
 
 }

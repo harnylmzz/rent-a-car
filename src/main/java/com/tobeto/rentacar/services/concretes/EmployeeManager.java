@@ -40,7 +40,7 @@ public class EmployeeManager implements EmployeeService {
         GetByIdEmployeeResponses getByIdEmployeeResponses = this.modelMapperService.forResponse()
                 .map(employee, GetByIdEmployeeResponses.class);
 
-        return new DataResult<>(getByIdEmployeeResponses, true, "Employee listed"));
+        return new DataResult<>(getByIdEmployeeResponses, true, "Employee listed");
     }
 
     @Override

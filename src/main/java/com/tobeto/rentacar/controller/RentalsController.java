@@ -1,5 +1,7 @@
 package com.tobeto.rentacar.controller;
 
+import com.tobeto.rentacar.core.result.DataResult;
+import com.tobeto.rentacar.core.result.Result;
 import com.tobeto.rentacar.services.abstracts.RentalService;
 import com.tobeto.rentacar.services.dtos.requests.rental.CreateRentalRequests;
 import com.tobeto.rentacar.services.dtos.requests.rental.DeleteRentalRequests;
@@ -18,30 +20,28 @@ public class RentalsController {
     private RentalService rentalService;
 
     @GetMapping("/getAll")
-    public List<GetAllRentalResponses> getAll() {
+    public DataResult<List<GetAllRentalResponses>> getAll() {
 
         return this.rentalService.getAll();
     }
 
     @GetMapping("/getById")
-    public GetByIdRentalResponses getById(
-            int id) {
+    public DataResult<GetByIdRentalResponses> getById(int id) {
         return rentalService.getById(id);
     }
 
     @PostMapping("/add")
-    public void add(@RequestBody CreateRentalRequests createRentalRequests) {
-        this.rentalService.add(createRentalRequests);
+    public Result add(@RequestBody CreateRentalRequests createRentalRequests) {
+        return this.rentalService.add(createRentalRequests);
     }
 
     @PutMapping("/update")
-    public void update(@RequestBody UpdateRentalRequests updateRentalRequests) {
-        this.rentalService.update(updateRentalRequests);
+    public Result update(@RequestBody UpdateRentalRequests updateRentalRequests) {
+        return this.rentalService.update(updateRentalRequests);
     }
 
     @DeleteMapping("/delete")
-    public void delete(@RequestBody DeleteRentalRequests deleteRentalRequests) {
-        this.rentalService.delete(deleteRentalRequests);
+    public Result delete(DeleteRentalRequests deleteRentalRequests) {
+        return this.rentalService.delete(deleteRentalRequests);
     }
-
 }

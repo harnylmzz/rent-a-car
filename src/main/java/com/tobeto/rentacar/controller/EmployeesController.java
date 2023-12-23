@@ -1,5 +1,7 @@
 package com.tobeto.rentacar.controller;
 
+import com.tobeto.rentacar.core.result.DataResult;
+import com.tobeto.rentacar.core.result.Result;
 import com.tobeto.rentacar.services.abstracts.EmployeeService;
 import com.tobeto.rentacar.services.dtos.requests.employee.CreateEmployeeRequests;
 import com.tobeto.rentacar.services.dtos.requests.employee.DeleteEmployeeRequests;
@@ -18,27 +20,27 @@ public class EmployeesController {
     private EmployeeService employeeService;
 
     @GetMapping("/getAll")
-    public List<GetAllEmployeeResponses> getAll() {
+    public DataResult<List<GetAllEmployeeResponses>> getAll() {
         return this.employeeService.getAll();
     }
 
     @GetMapping("/getById")
-    public GetByIdEmployeeResponses getById(int id) {
+    public DataResult<GetByIdEmployeeResponses> getById(int id) {
         return employeeService.getById(id);
     }
 
     @PostMapping("/add")
-    public void add(@RequestBody CreateEmployeeRequests createEmployeeRequests) {
-        this.employeeService.add(createEmployeeRequests);
+    public Result add(@RequestBody CreateEmployeeRequests createEmployeeRequests) {
+        return this.employeeService.add(createEmployeeRequests);
     }
 
     @PutMapping("/update")
-    public void update(@RequestBody UpdateEmployeeRequests updateEmployeeRequest) {
-        this.employeeService.update(updateEmployeeRequest);
+    public Result update(@RequestBody UpdateEmployeeRequests updateEmployeeRequest) {
+        return this.employeeService.update(updateEmployeeRequest);
     }
 
     @DeleteMapping("/delete")
-    public void delete(@RequestBody DeleteEmployeeRequests deleteEmployeeRequests) {
-        this.employeeService.delete(deleteEmployeeRequests);
+    public Result delete(DeleteEmployeeRequests deleteEmployeeRequests) {
+        return this.employeeService.delete(deleteEmployeeRequests);
     }
 }
