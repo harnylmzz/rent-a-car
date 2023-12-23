@@ -29,6 +29,8 @@ public class RentalManager implements RentalService {
     private ModelMapperService modelMapperService;
     private CarRepository carRepository;
     private RentalBusinessRules rentalBusinessRules;
+    private CustomerRepository customerRepository;
+    private EmployeeRepository employeeRepository;
 
     @Override
     public DataResult<List<GetAllRentalResponses>> getAll() {
@@ -60,13 +62,21 @@ public class RentalManager implements RentalService {
         Car car = this.carRepository.findById(createRentalRequests.getCarId())
                 .orElseThrow(() -> new RuntimeException("Car not found"));
 
+        Customer customer = this.customerRepository.findById(createRentalRequests.getCustomerId())
+                .orElse(null);
+
+        Employee employee = this.employeeRepository.findById(createRentalRequests.getEmployeeId())
+                .orElse(null);
+
         int startKilometer = car.getKilometer();
         rental.setStartKilometer(startKilometer);
 
         rental.setCar(car);
+        rental.setCustomer(customer);
+        rental.setEmployee(employee);
 
-        rental.setReturnDate(null);
-        rental.setEndKilometer(null);
+//        rental.setReturnDate(null);
+//        rental.setEndKilometer(null);
 
         int rentalLimit = rental.getStartDate().until(rental.getEndDate()).getDays() + 1;
         rental.setTotalPrice(car.getPrice() * rentalLimit);
