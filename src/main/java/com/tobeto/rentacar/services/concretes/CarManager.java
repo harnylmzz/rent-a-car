@@ -27,8 +27,8 @@ import java.util.stream.Collectors;
 public class CarManager implements CarService {
     private CarRepository carRepository;
     private ModelMapperService modelMapperService;
-    private ColorRepository colorRepository;
-    private ModelRepository modelRepository;
+   // private ColorRepository colorRepository;
+   // private ModelRepository modelRepository;
     private CarBusinessRules carBusinessRules;
 
     @Override
@@ -67,15 +67,6 @@ public class CarManager implements CarService {
         Car car = this.modelMapperService.forRequest()
                 .map(createCarRequests, Car.class);
 
-
-//        Model model = modelRepository.findById(createCarRequests.getModelId())
-//                .orElseThrow(() -> new RuntimeException("Model not found"));
-//
-//        Color color = colorRepository.findById(createCarRequests.getColorId())
-//                .orElseThrow(() -> new RuntimeException("Color not found"));
-//
-//        car.setModel(model);
-//        car.setColor(color);
         car.setPlate(plate);
 
         this.carRepository.save(car);
