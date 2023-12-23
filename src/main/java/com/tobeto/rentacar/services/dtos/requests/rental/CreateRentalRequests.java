@@ -20,13 +20,14 @@ public class CreateRentalRequests {
     @NotNull(message = "End date is mandatory")
     private LocalDate endDate;
 
-    private LocalDate returnDate;
+    @Nullable
+    private LocalDate returnDate = null;
 
     @NotNull(message = "Start kilometer is mandatory")
     private int startKilometer;
 
-    @Nullable()
-    private Integer endKilometer;
+    @Nullable
+    private Integer endKilometer = null;
 
     @NotNull(message = "Total price is mandatory")
     private double totalPrice;

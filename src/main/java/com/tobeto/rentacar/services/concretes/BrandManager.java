@@ -1,6 +1,7 @@
 package com.tobeto.rentacar.services.concretes;
 
 import com.tobeto.rentacar.config.modelmapper.ModelMapperService;
+import com.tobeto.rentacar.core.exceptions.DataNotFoundException;
 import com.tobeto.rentacar.core.result.DataResult;
 import com.tobeto.rentacar.core.result.Result;
 import com.tobeto.rentacar.core.result.SuccessResult;
@@ -41,7 +42,8 @@ public class BrandManager implements BrandService {
 
     @Override
     public DataResult<GetByIdBrandResponses> getById(int id) {
-        Brand brand = brandRepository.findById(id).orElseThrow();
+        Brand brand = brandRepository.findById(id).orElseThrow(() ->  new DataNotFoundException("Data not found.") {
+        });
         GetByIdBrandResponses getByIdBrandResponses = this.modelMapperService.forResponse()
                 .map(brand, GetByIdBrandResponses.class);
 
