@@ -1,6 +1,8 @@
 package com.tobeto.rentacar.services.concretes;
 
 import com.tobeto.rentacar.config.modelmapper.ModelMapperService;
+import com.tobeto.rentacar.core.result.DataResult;
+import com.tobeto.rentacar.core.result.Result;
 import com.tobeto.rentacar.entities.Car;
 import com.tobeto.rentacar.entities.Color;
 import com.tobeto.rentacar.entities.Model;
@@ -30,27 +32,27 @@ public class CarManager implements CarService {
     private CarBusinessRules carBusinessRules;
 
     @Override
-    public List<GetAllCarResponses> getAll() {
+    public DataResult<List<GetAllCarResponses>> getAll() {
         List<Car> cars = carRepository.findAll();
         List<GetAllCarResponses> getAllCarResponses = cars.stream()
                 .map(car -> this.modelMapperService.forResponse()
                         .map(car, GetAllCarResponses.class))
                 .collect(Collectors.toList());
 
-        return getAllCarResponses;
+        return new DataResult<>(getAllCarResponses, true, "Cars listed");
     }
 
     @Override
-    public GetByIdCarResponses getById(int id) {
+    public DataResult<GetByIdCarResponses> getById(int id) {
         Car car = carRepository.findById(id).orElseThrow();
         GetByIdCarResponses getByIdCarResponses = this.modelMapperService.forResponse()
                 .map(car, GetByIdCarResponses.class);
 
-        return getByIdCarResponses;
+        return new DataResult<>(getByIdCarResponses, true, "Car listed");
     }
 
     @Override
-    public void add(CreateCarRequests createCarRequests) {
+    public Result add(CreateCarRequests createCarRequests) {
 
         String plate = createCarRequests.getPlate().replace(" ", "");
 
@@ -77,11 +79,13 @@ public class CarManager implements CarService {
         car.setPlate(plate);
 
         this.carRepository.save(car);
+
+        return new Result(true, "Car added");
     }
 
 
     @Override
-    public void update(UpdateCarRequests updateCarRequests) {
+    public Result update(UpdateCarRequests updateCarRequests) {
         Car car = this.modelMapperService.forRequest()
                 .map(updateCarRequests, Car.class);
         car.setId(updateCarRequests.getId());
@@ -91,13 +95,17 @@ public class CarManager implements CarService {
         car.setPrice(updateCarRequests.getPrice());
         this.carRepository.save(car);
 
+        return new Result(true, "Car updated");
+
     }
 
     @Override
-    public void delete(DeleteCarRequests deleteCarRequests) {
+    public Result delete(DeleteCarRequests deleteCarRequests) {
         Car car = this.modelMapperService.forRequest()
                 .map(deleteCarRequests, Car.class);
         this.carRepository.delete(car);
+
+        return new Result(true, "Car deleted");
 
     }
 }

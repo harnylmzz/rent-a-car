@@ -12,8 +12,12 @@ import java.util.List;
 
 public interface BrandService {
     DataResult<List<GetAllBrandResponses>> getAll();
+
     DataResult<GetByIdBrandResponses> getById(int id);
+
     Result add(CreateBrandRequests createBrandRequests);
+
     Result update(UpdateBrandRequests updateBrandRequests);
+
     Result delete(DeleteBrandRequests deleteBrandRequests);
 }

@@ -1,5 +1,7 @@
 package com.tobeto.rentacar.services.abstracts;
 
+import com.tobeto.rentacar.core.result.DataResult;
+import com.tobeto.rentacar.core.result.Result;
 import com.tobeto.rentacar.services.dtos.requests.customer.CreateCustomerRequests;
 import com.tobeto.rentacar.services.dtos.requests.customer.DeleteCustomerRequests;
 import com.tobeto.rentacar.services.dtos.requests.customer.UpdateCustomerRequests;
@@ -9,9 +11,13 @@ import com.tobeto.rentacar.services.dtos.responses.customer.GetByIdCustomerRespo
 import java.util.List;
 
 public interface CustomerService {
-    List<GetAllCustomerResponses> getAll();
-    GetByIdCustomerResponses getById(int id);
-    void add(CreateCustomerRequests createCustomerRequests);
-    void update(UpdateCustomerRequests updateCustomerRequests);
-    void delete(DeleteCustomerRequests deleteCustomerRequests);
+    DataResult<List<GetAllCustomerResponses>> getAll();
+
+    DataResult<GetByIdCustomerResponses> getById(int id);
+
+    Result add(CreateCustomerRequests createCustomerRequests);
+
+    Result update(UpdateCustomerRequests updateCustomerRequests);
+
+    Result delete(DeleteCustomerRequests deleteCustomerRequests);
 }

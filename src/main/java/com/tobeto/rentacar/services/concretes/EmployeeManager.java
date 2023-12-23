@@ -1,6 +1,8 @@
 package com.tobeto.rentacar.services.concretes;
 
 import com.tobeto.rentacar.config.modelmapper.ModelMapperService;
+import com.tobeto.rentacar.core.result.DataResult;
+import com.tobeto.rentacar.core.result.Result;
 import com.tobeto.rentacar.entities.Employee;
 import com.tobeto.rentacar.repository.EmployeeRepository;
 import com.tobeto.rentacar.services.abstracts.EmployeeService;
@@ -20,56 +22,54 @@ import java.util.stream.Collectors;
 public class EmployeeManager implements EmployeeService {
     private EmployeeRepository employeeRepository;
     private ModelMapperService modelMapperService;
+
     @Override
-    public List<GetAllEmployeeResponses> getAll() {
+    public DataResult<List<GetAllEmployeeResponses>> getAll() {
         List<Employee> employees = employeeRepository.findAll();
         List<GetAllEmployeeResponses> getAllEmployeeResponses = employees.stream()
                 .map(employee -> this.modelMapperService.forResponse()
                         .map(employee, GetAllEmployeeResponses.class))
                 .collect(Collectors.toList());
 
-
-        return getAllEmployeeResponses;
-
+        return new DataResult<>(getAllEmployeeResponses, true, "Employees listed");
     }
 
     @Override
-    public GetByIdEmployeeResponses getById(int id) {
-        Employee employee =employeeRepository.findById(id).orElseThrow();
+    public DataResult<GetByIdEmployeeResponses> getById(int id) {
+        Employee employee = employeeRepository.findById(id).orElseThrow();
         GetByIdEmployeeResponses getByIdEmployeeResponses = this.modelMapperService.forResponse()
-                .map(employee , GetByIdEmployeeResponses.class);
+                .map(employee, GetByIdEmployeeResponses.class);
 
-
-        return getByIdEmployeeResponses;
+        return new DataResult<>(getByIdEmployeeResponses, true, "Employee listed"));
     }
 
     @Override
-    public void add(CreateEmployeeRequests createEmployeeRequests) {
+    public Result add(CreateEmployeeRequests createEmployeeRequests) {
         Employee employee = this.modelMapperService.forRequest()
                 .map(createEmployeeRequests, Employee.class);
         this.employeeRepository.save(employee);
 
-
+        return new Result(true, "Employee added");
     }
 
     @Override
-    public void update(UpdateEmployeeRequests updateEmployeeRequests) {
-        Employee employee =this.modelMapperService.forRequest()
+    public Result update(UpdateEmployeeRequests updateEmployeeRequests) {
+        Employee employee = this.modelMapperService.forRequest()
                 .map(updateEmployeeRequests, Employee.class);
         employee.setId(updateEmployeeRequests.getId());
         employee.setSalary(updateEmployeeRequests.getSalary());
 
         this.employeeRepository.save(employee);
 
-
-
+        return new Result(true, "Employee updated");
     }
 
     @Override
-    public void delete(DeleteEmployeeRequests deleteEmployeeRequests) {
+    public Result delete(DeleteEmployeeRequests deleteEmployeeRequests) {
         Employee employee = this.modelMapperService.forRequest()
-                .map(deleteEmployeeRequests , Employee.class);
+                .map(deleteEmployeeRequests, Employee.class);
         this.employeeRepository.delete(employee);
 
+        return new Result(true, "Employee deleted");
     }
 }
