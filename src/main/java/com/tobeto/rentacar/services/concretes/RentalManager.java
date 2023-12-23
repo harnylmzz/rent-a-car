@@ -1,6 +1,8 @@
 package com.tobeto.rentacar.services.concretes;
 
 import com.tobeto.rentacar.config.modelmapper.ModelMapperService;
+import com.tobeto.rentacar.core.result.DataResult;
+import com.tobeto.rentacar.core.result.Result;
 import com.tobeto.rentacar.entities.*;
 
 import com.tobeto.rentacar.entities.Rental;
@@ -34,26 +36,26 @@ public class RentalManager implements RentalService {
 
 
     @Override
-    public List<GetAllRentalResponses> getAll() {
+    public DataResult<List<GetAllRentalResponses>> getAll() {
         List<Rental> rentals = rentalRepository.findAll();
         List<GetAllRentalResponses> getAllRentalResponses = rentals.stream()
                 .map(rental -> this.modelMapperService.forResponse()
                         .map(rental, GetAllRentalResponses.class)).collect(Collectors.toList());
-        return getAllRentalResponses;
+        return new DataResult<>(getAllRentalResponses, true, "Rentals listed");
     }
 
     @Override
-    public GetByIdRentalResponses getById(int id) {
+    public DataResult<GetByIdRentalResponses> getById(int id) {
 
         Rental rental = rentalRepository.findById(id).orElseThrow();
         GetByIdRentalResponses getByIdRentalResponses = this.modelMapperService.forResponse()
                 .map(rental, GetByIdRentalResponses.class);
 
-        return getByIdRentalResponses;
+        return new DataResult<>(getByIdRentalResponses, true, "Rental listed");
     }
 
     @Override
-    public void add(CreateRentalRequests createRentalRequests) {
+    public Result add(CreateRentalRequests createRentalRequests) {
 
         this.rentalBusinessRules.checkIfDate(createRentalRequests);
 
@@ -80,10 +82,12 @@ public class RentalManager implements RentalService {
         rental.setTotalPrice(car.getPrice() * rentalLimit);
 
         this.rentalRepository.save(rental);
+
+        return new Result(true, "Rental added");
     }
 
     @Override
-    public void update(UpdateRentalRequests updateRentalRequests) {
+    public Result update(UpdateRentalRequests updateRentalRequests) {
         Rental rental = this.modelMapperService.forRequest().map(updateRentalRequests, Rental.class);
         rental.setId(updateRentalRequests.getId());
         rental.setDiscount(updateRentalRequests.getDiscount());
@@ -95,12 +99,15 @@ public class RentalManager implements RentalService {
         rental.setTotalPrice(updateRentalRequests.getTotalPrice());
 
         this.rentalRepository.save(rental);
+
+        return new Result(true, "Rental updated");
     }
 
     @Override
-    public void delete(DeleteRentalRequests deleteRentalRequests) {
+    public Result delete(DeleteRentalRequests deleteRentalRequests) {
         Rental rental = this.modelMapperService.forRequest().map(deleteRentalRequests, Rental.class);
         this.rentalRepository.delete(rental);
 
+        return new Result(true, "Rental deleted");
     }
 }

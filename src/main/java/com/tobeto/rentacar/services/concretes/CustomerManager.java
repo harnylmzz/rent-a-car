@@ -1,6 +1,8 @@
 package com.tobeto.rentacar.services.concretes;
 
 import com.tobeto.rentacar.config.modelmapper.ModelMapperService;
+import com.tobeto.rentacar.core.result.DataResult;
+import com.tobeto.rentacar.core.result.Result;
 import com.tobeto.rentacar.entities.Customer;
 import com.tobeto.rentacar.repository.CustomerRepository;
 import com.tobeto.rentacar.services.abstracts.CustomerService;
@@ -22,42 +24,51 @@ public class CustomerManager implements CustomerService {
     private ModelMapperService modelMapperService;
 
     @Override
-    public List<GetAllCustomerResponses> getAll() {
+    public DataResult<List<GetAllCustomerResponses>> getAll() {
         List<Customer> customers = customerRepository.findAll();
         List<GetAllCustomerResponses> getAllCustomerResponses = customers.stream()
                 .map(customer -> this.modelMapperService.forResponse()
                         .map(customer, GetAllCustomerResponses.class))
                 .collect(Collectors.toList());
 
-        return getAllCustomerResponses;
+        return new DataResult<>(getAllCustomerResponses, true, "Customers listed");
     }
 
     @Override
-    public GetByIdCustomerResponses getById(int id) {
+    public DataResult<GetByIdCustomerResponses> getById(int id) {
         Customer customers = customerRepository.findById(id).orElseThrow();
         GetByIdCustomerResponses getByIdCustomerResponses = this.modelMapperService.forResponse()
                 .map(customers, GetByIdCustomerResponses.class);
 
-        return getByIdCustomerResponses;
+        return new DataResult<>(getByIdCustomerResponses, true, "Customer listed");
     }
 
     @Override
-    public void add(CreateCustomerRequests createCustomerRequests) {
+    public Result add(CreateCustomerRequests createCustomerRequests) {
 
+        Customer customer = this.modelMapperService.forRequest()
+                .map(createCustomerRequests, Customer.class);
+        this.customerRepository.save(customer);
+
+        return new Result(true, "Customer added");
     }
 
     @Override
-    public void update(UpdateCustomerRequests updateCustomerRequests) {
+    public Result update(UpdateCustomerRequests updateCustomerRequests) {
         Customer customer = new Customer();
         customer.setNationalityId(updateCustomerRequests.getNationalityId());
 
         this.customerRepository.save(customer);
+
+        return new Result(true, "Customer updated");
     }
 
     @Override
-    public void delete(DeleteCustomerRequests deleteCustomerRequests) {
+    public Result delete(DeleteCustomerRequests deleteCustomerRequests) {
         Customer customer = this.modelMapperService.forRequest()
                 .map(deleteCustomerRequests, Customer.class);
         this.customerRepository.delete(customer);
+
+        return new Result(true, "Customer deleted");
     }
 }
