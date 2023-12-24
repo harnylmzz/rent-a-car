@@ -13,6 +13,7 @@ import com.tobeto.rentacar.services.dtos.requests.customer.DeleteCustomerRequest
 import com.tobeto.rentacar.services.dtos.requests.customer.UpdateCustomerRequests;
 import com.tobeto.rentacar.services.dtos.responses.customer.GetAllCustomerResponses;
 import com.tobeto.rentacar.services.dtos.responses.customer.GetByIdCustomerResponses;
+import com.tobeto.rentacar.services.rules.CustomerBusinessRules;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +25,7 @@ import java.util.stream.Collectors;
 public class CustomerManager implements CustomerService {
     private CustomerRepository customerRepository;
     private ModelMapperService modelMapperService;
+    private CustomerBusinessRules customerBusinessRules;
 
     @Override
     public DataResult<List<GetAllCustomerResponses>> getAll() {
@@ -48,6 +50,8 @@ public class CustomerManager implements CustomerService {
 
     @Override
     public Result add(CreateCustomerRequests createCustomerRequests) {
+
+        this.customerBusinessRules.checkIfCustomerExists(createCustomerRequests.getNationalityId());
 
         Customer customer = new Customer();
         customer.setNationalityId(createCustomerRequests.getNationalityId());
