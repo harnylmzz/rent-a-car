@@ -15,6 +15,7 @@ import com.tobeto.rentacar.services.dtos.requests.user.UpdateUserRequests;
 
 import com.tobeto.rentacar.services.dtos.responses.user.GetAllUserResponses;
 import com.tobeto.rentacar.services.dtos.responses.user.GetByIdUserResponses;
+import com.tobeto.rentacar.services.rules.UserBusinessRules;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +28,7 @@ import java.util.stream.Collectors;
 public class UserManager implements UserService {
     private UserRepository userRepository;
     private ModelMapperService modelMapperService;
+    private UserBusinessRules userBusinessRules;
 
     @Override
     public DataResult<List<GetAllUserResponses>> getAll() {
@@ -50,6 +52,9 @@ public class UserManager implements UserService {
 
     @Override
     public Result add(CreateUserRequests createUserRequests) {
+
+        this.userBusinessRules.checkIfUserExists(createUserRequests.getEmail(), createUserRequests.getGsm());
+
         User user = this.modelMapperService.forRequest()
                 .map(createUserRequests, User.class);
         this.userRepository.save(user);
