@@ -5,7 +5,7 @@ import com.tobeto.rentacar.core.exceptions.DataNotFoundException;
 import com.tobeto.rentacar.core.result.DataResult;
 import com.tobeto.rentacar.core.result.Result;
 import com.tobeto.rentacar.core.result.SuccessResult;
-import com.tobeto.rentacar.entities.Employee;
+import com.tobeto.rentacar.entities.concretes.Employee;
 import com.tobeto.rentacar.repository.EmployeeRepository;
 import com.tobeto.rentacar.services.abstracts.EmployeeService;
 import com.tobeto.rentacar.services.dtos.requests.employee.CreateEmployeeRequests;
@@ -39,7 +39,7 @@ public class EmployeeManager implements EmployeeService {
     @Override
     public DataResult<GetByIdEmployeeResponses> getById(int id) {
         Employee employee = employeeRepository.findById(id).orElseThrow(() -> new DataNotFoundException("Data not found.") {
-        }));
+        });
         GetByIdEmployeeResponses getByIdEmployeeResponses = this.modelMapperService.forResponse()
                 .map(employee, GetByIdEmployeeResponses.class);
 
@@ -51,11 +51,6 @@ public class EmployeeManager implements EmployeeService {
 
         Employee employee = this.modelMapperService.forRequest()
                 .map(createEmployeeRequests, Employee.class);
-
-        employee.setFirstName(createEmployeeRequests.getFirstName());
-        employee.setLastName(createEmployeeRequests.getLastName());
-        employee.setEmail(createEmployeeRequests.getEmail());
-        employee.setGsm(createEmployeeRequests.getGsm());
 
         this.employeeRepository.save(employee);
 

@@ -5,7 +5,7 @@ import com.tobeto.rentacar.core.exceptions.DataNotFoundException;
 import com.tobeto.rentacar.core.result.DataResult;
 import com.tobeto.rentacar.core.result.Result;
 import com.tobeto.rentacar.core.result.SuccessResult;
-import com.tobeto.rentacar.entities.Color;
+import com.tobeto.rentacar.entities.concretes.Color;
 import com.tobeto.rentacar.repository.ColorRepository;
 import com.tobeto.rentacar.services.abstracts.ColorService;
 import com.tobeto.rentacar.services.dtos.requests.color.CreateColorRequests;

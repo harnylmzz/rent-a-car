@@ -5,7 +5,7 @@ import com.tobeto.rentacar.core.exceptions.DataNotFoundException;
 import com.tobeto.rentacar.core.result.DataResult;
 import com.tobeto.rentacar.core.result.Result;
 import com.tobeto.rentacar.core.result.SuccessResult;
-import com.tobeto.rentacar.entities.Brand;
+import com.tobeto.rentacar.entities.concretes.Brand;
 
 import com.tobeto.rentacar.repository.BrandRepository;
 import com.tobeto.rentacar.services.abstracts.BrandService;

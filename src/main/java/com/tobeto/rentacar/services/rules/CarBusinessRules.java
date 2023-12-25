@@ -1,7 +1,6 @@
 package com.tobeto.rentacar.services.rules;
 
 import com.tobeto.rentacar.core.exceptions.BusinessException;
-import com.tobeto.rentacar.entities.Car;
 import com.tobeto.rentacar.repository.CarRepository;
 import com.tobeto.rentacar.services.dtos.requests.car.CreateCarRequests;
 import lombok.AllArgsConstructor;

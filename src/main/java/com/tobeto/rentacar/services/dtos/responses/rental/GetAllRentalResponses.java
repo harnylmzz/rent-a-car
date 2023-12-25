@@ -11,6 +11,8 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class GetAllRentalResponses {
 
+    private int id;
+
     private LocalDate startDate;
 
     private LocalDate endDate;
@@ -27,6 +29,8 @@ public class GetAllRentalResponses {
 
     private int carId;
 
-    private int userId;
+    private int employeeId;
+
+    private int customerId;
 
 }

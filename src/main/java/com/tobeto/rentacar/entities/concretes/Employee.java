@@ -1,5 +1,6 @@
-package com.tobeto.rentacar.entities;
+package com.tobeto.rentacar.entities.concretes;
 
+import com.tobeto.rentacar.entities.abstracts.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -11,7 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "employees")
-public class Employee extends User {
+public class Employee extends BaseEntity {
 
     @Column(name = "salary")
     private double salary;
