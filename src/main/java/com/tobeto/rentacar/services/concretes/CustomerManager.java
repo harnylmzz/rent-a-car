@@ -5,7 +5,7 @@ import com.tobeto.rentacar.core.exceptions.DataNotFoundException;
 import com.tobeto.rentacar.core.result.DataResult;
 import com.tobeto.rentacar.core.result.Result;
 import com.tobeto.rentacar.core.result.SuccessResult;
-import com.tobeto.rentacar.entities.Customer;
+import com.tobeto.rentacar.entities.concretes.Customer;
 import com.tobeto.rentacar.repository.CustomerRepository;
 import com.tobeto.rentacar.services.abstracts.CustomerService;
 import com.tobeto.rentacar.services.dtos.requests.customer.CreateCustomerRequests;
@@ -55,10 +55,6 @@ public class CustomerManager implements CustomerService {
 
         Customer customer = new Customer();
         customer.setNationalityId(createCustomerRequests.getNationalityId());
-        customer.setFirstName(createCustomerRequests.getFirstName());
-        customer.setLastName(createCustomerRequests.getLastName());
-        customer.setEmail(createCustomerRequests.getEmail());
-        customer.setGsm(createCustomerRequests.getGsm());
 
         this.customerRepository.save(customer);
 

@@ -5,7 +5,7 @@ import com.tobeto.rentacar.core.exceptions.DataNotFoundException;
 import com.tobeto.rentacar.core.result.DataResult;
 import com.tobeto.rentacar.core.result.Result;
 import com.tobeto.rentacar.core.result.SuccessResult;
-import com.tobeto.rentacar.entities.Model;
+import com.tobeto.rentacar.entities.concretes.Model;
 import com.tobeto.rentacar.repository.ModelRepository;
 import com.tobeto.rentacar.services.abstracts.ModelService;
 import com.tobeto.rentacar.services.dtos.requests.model.CreateModelRequests;

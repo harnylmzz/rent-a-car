@@ -1,8 +1,6 @@
 package com.tobeto.rentacar.services.rules;
 
 import com.tobeto.rentacar.core.exceptions.BusinessException;
-import com.tobeto.rentacar.entities.Car;
-import com.tobeto.rentacar.entities.Rental;
 import com.tobeto.rentacar.services.dtos.requests.rental.CreateRentalRequests;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;

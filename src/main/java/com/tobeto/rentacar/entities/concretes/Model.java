@@ -1,10 +1,12 @@
-package com.tobeto.rentacar.entities;
+package com.tobeto.rentacar.entities.concretes;
 
+import com.tobeto.rentacar.entities.abstracts.BaseEntity;
+import com.tobeto.rentacar.entities.concretes.Brand;
+import com.tobeto.rentacar.entities.concretes.Car;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.Cascade;
 
 import java.util.List;
 
@@ -13,12 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "models")
-public class Model {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private int id;
+public class Model extends BaseEntity {
 
     @Column(name = "name")
     private String name;
