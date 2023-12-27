@@ -38,4 +38,7 @@ public class Car extends BaseEntity {
     @OneToMany(mappedBy = "car")
     private List<Rental> rentals;
 
+    @OneToMany(mappedBy = "car")
+    private List<Image> images;
+
 }
