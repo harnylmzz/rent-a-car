@@ -81,4 +81,6 @@ public class CustomerManager implements CustomerService {
 
         return new Result(true, "Customer deleted");
     }
+
+
 }

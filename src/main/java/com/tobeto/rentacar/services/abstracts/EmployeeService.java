@@ -20,4 +20,5 @@ public interface EmployeeService {
     Result update(UpdateEmployeeRequests updateEmployeeRequests);
 
     Result delete(DeleteEmployeeRequests deleteEmployeeRequests);
+
 }

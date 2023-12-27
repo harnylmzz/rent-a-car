@@ -1,6 +1,14 @@
 package com.tobeto.rentacar.services.rules;
 
 import com.tobeto.rentacar.core.exceptions.BusinessException;
+import com.tobeto.rentacar.core.exceptions.DataNotFoundException;
+import com.tobeto.rentacar.entities.concretes.Customer;
+import com.tobeto.rentacar.entities.concretes.Employee;
+import com.tobeto.rentacar.repository.CustomerRepository;
+import com.tobeto.rentacar.repository.EmployeeRepository;
+import com.tobeto.rentacar.services.abstracts.CarService;
+import com.tobeto.rentacar.services.abstracts.CustomerService;
+import com.tobeto.rentacar.services.abstracts.EmployeeService;
 import com.tobeto.rentacar.services.dtos.requests.rental.CreateRentalRequests;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -11,7 +19,14 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class RentalBusinessRules {
 
+    private CarService carService;
+    private EmployeeService employeeService;
+    private CustomerService customerService;
+    private CustomerRepository customerRepository;
+    private EmployeeRepository employeeRepository;
+
     private static final int MAXIMUM_RENTAL_DAYS = 25;
+
 
     public void checkIfDate(CreateRentalRequests createRentalRequests) {
 
