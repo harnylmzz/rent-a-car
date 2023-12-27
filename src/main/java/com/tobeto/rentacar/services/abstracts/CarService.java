@@ -21,5 +21,8 @@ public interface CarService {
 
     Result delete(DeleteCarRequests deleteCarRequests);
 
+    boolean existsById(int id);
+
+
 
 }

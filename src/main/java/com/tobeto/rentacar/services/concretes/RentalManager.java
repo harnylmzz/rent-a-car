@@ -6,6 +6,8 @@ import com.tobeto.rentacar.core.result.DataResult;
 import com.tobeto.rentacar.core.result.Result;
 import com.tobeto.rentacar.core.result.SuccessResult;
 
+import com.tobeto.rentacar.entities.concretes.Customer;
+import com.tobeto.rentacar.entities.concretes.Employee;
 import com.tobeto.rentacar.entities.concretes.Rental;
 import com.tobeto.rentacar.entities.concretes.Car;
 
@@ -31,6 +33,8 @@ public class RentalManager implements RentalService {
     private ModelMapperService modelMapperService;
     private CarRepository carRepository;
     private RentalBusinessRules rentalBusinessRules;
+    private CustomerRepository customerRepository;
+    private EmployeeRepository employeeRepository;
 
     @Override
     public DataResult<List<GetAllRentalResponses>> getAll() {
@@ -62,6 +66,16 @@ public class RentalManager implements RentalService {
 
         Car car = this.carRepository.findById(createRentalRequests.getCarId())
                 .orElseThrow(() -> new RuntimeException("Car not found"));
+
+        Employee employee = this.employeeRepository.findById(createRentalRequests.getEmployeeId())
+                .orElse(null);
+
+        Customer customer = this.customerRepository.findById(createRentalRequests.getCustomerId())
+                .orElse(null);
+
+        rental.setCar(car);
+        rental.setEmployee(employee);
+        rental.setCustomer(customer);
 
         int rentalLimit = rental.getStartDate().until(rental.getEndDate()).getDays() + 1;
         rental.setTotalPrice(car.getPrice() * rentalLimit);

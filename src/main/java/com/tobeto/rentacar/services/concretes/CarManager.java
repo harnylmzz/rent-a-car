@@ -96,4 +96,9 @@ public class CarManager implements CarService {
         return new SuccessResult("Car deleted");
 
     }
+
+    @Override
+    public boolean existsById(int id) {
+        return this.carRepository.existsById(id);
+    }
 }

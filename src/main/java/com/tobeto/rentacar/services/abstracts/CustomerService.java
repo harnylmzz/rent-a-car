@@ -20,4 +20,6 @@ public interface CustomerService {
     Result update(UpdateCustomerRequests updateCustomerRequests);
 
     Result delete(DeleteCustomerRequests deleteCustomerRequests);
+
+
 }
