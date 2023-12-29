@@ -20,4 +20,13 @@ public interface BrandService {
     Result update(UpdateBrandRequests updateBrandRequests);
 
     Result delete(DeleteBrandRequests deleteBrandRequests);
+
+    List<GetAllBrandResponses> findByName(String name);
+
+    List<GetAllBrandResponses> findByNameStartingWith(String name);
+
+    List<GetAllBrandResponses> findByNameEndingWith(String name);
+    List<GetAllBrandResponses> findByNameContaining(String name);
+
+
 }

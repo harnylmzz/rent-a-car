@@ -24,4 +24,13 @@ public class GetAllCarResponses {
     private int modelId;
 
     private int colorId;
+
+
+    public GetAllCarResponses(int id, double price, String plate, int kilometer, int year) {
+        this.id = id;
+        this.price= price;
+        this.plate= plate;
+        this.kilometer=kilometer;
+        this.year=year;
+    }
 }
