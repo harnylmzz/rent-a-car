@@ -47,5 +47,22 @@ public class CarsController {
         return this.carService.delete(deleteCarRequests);
     }
 
+    @GetMapping("/findbyyear")
+    public List<GetAllCarResponses> findByYear(int year) {
+        return this.carService.findByYear(year);
+    }
+
+    @GetMapping("/findbykilometer")
+    public List<GetAllCarResponses> findByKilometer(int kilometer) {
+        return this.carService.findByKilometer(kilometer);
+    }
+
+    @GetMapping("/findbyprice")
+    public List<GetAllCarResponses> findByPrice(int price) {
+        return this.carService.findByPrice(price);
+    }
+
+
+
 
 }

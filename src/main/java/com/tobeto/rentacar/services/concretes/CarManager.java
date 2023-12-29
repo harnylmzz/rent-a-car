@@ -5,6 +5,7 @@ import com.tobeto.rentacar.core.exceptions.DataNotFoundException;
 import com.tobeto.rentacar.core.result.DataResult;
 import com.tobeto.rentacar.core.result.Result;
 import com.tobeto.rentacar.core.result.SuccessResult;
+import com.tobeto.rentacar.entities.concretes.Brand;
 import com.tobeto.rentacar.entities.concretes.Car;
 import com.tobeto.rentacar.repository.CarRepository;
 import com.tobeto.rentacar.services.abstracts.CarService;
@@ -15,8 +16,10 @@ import com.tobeto.rentacar.services.dtos.responses.car.GetAllCarResponses;
 import com.tobeto.rentacar.services.dtos.responses.car.GetByIdCarResponses;
 import com.tobeto.rentacar.services.rules.CarBusinessRules;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -101,4 +104,41 @@ public class CarManager implements CarService {
     public boolean existsById(int id) {
         return this.carRepository.existsById(id);
     }
+
+    @Override
+    public List<GetAllCarResponses> findByYear(int year) {
+        List<Car> cars = carRepository.findByYear(year);
+        List<GetAllCarResponses> responseList = new ArrayList<>();
+
+        for (Car car : cars) {
+            responseList.add(new GetAllCarResponses(car.getId(), car.getPrice(), car.getPlate(),
+                    car.getKilometer(), car.getYear()));
+        }
+        return responseList;
+    }
+
+    @Override
+    public List<GetAllCarResponses> findByKilometer(int kilometer) {
+        List<Car> cars = carRepository.findByKilometer(kilometer);
+        List<GetAllCarResponses> responseList = new ArrayList<>();
+
+        for (Car car : cars) {
+            responseList.add(new GetAllCarResponses(car.getId(), car.getPrice(), car.getPlate(),
+                    car.getKilometer(), car.getYear()));
+        }
+        return responseList;
+    }
+    @Override
+    public List<GetAllCarResponses> findByPrice(int price) {
+        List<Car> cars = carRepository.findByPrice(price);
+        List<GetAllCarResponses> responseList = new ArrayList<>();
+
+        for (Car car : cars) {
+            responseList.add(new GetAllCarResponses(car.getId(), car.getPrice(), car.getPlate(),
+                    car.getKilometer(), car.getYear()));
+        }
+        return responseList;
+    }
+
+
 }

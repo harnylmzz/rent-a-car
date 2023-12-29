@@ -2,6 +2,7 @@ package com.tobeto.rentacar.services.abstracts;
 
 import com.tobeto.rentacar.core.result.DataResult;
 import com.tobeto.rentacar.core.result.Result;
+import com.tobeto.rentacar.entities.concretes.Car;
 import com.tobeto.rentacar.services.dtos.requests.car.CreateCarRequests;
 import com.tobeto.rentacar.services.dtos.requests.car.DeleteCarRequests;
 import com.tobeto.rentacar.services.dtos.requests.car.UpdateCarRequests;
@@ -22,6 +23,12 @@ public interface CarService {
     Result delete(DeleteCarRequests deleteCarRequests);
 
     boolean existsById(int id);
+
+    List<GetAllCarResponses> findByYear(int year);
+
+    List<GetAllCarResponses> findByKilometer(int kilometer);
+
+    List<GetAllCarResponses> findByPrice(int price);
 
 
 

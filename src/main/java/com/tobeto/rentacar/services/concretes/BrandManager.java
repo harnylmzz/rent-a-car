@@ -19,6 +19,7 @@ import com.tobeto.rentacar.services.rules.BrandBusinessRules;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -82,4 +83,51 @@ public class BrandManager implements BrandService {
 
         return new SuccessResult("Brand deleted.");
     }
+
+    @Override
+    public List<GetAllBrandResponses> findByName(String name) {
+        List<Brand> brands = brandRepository.findByName(name);
+        List<GetAllBrandResponses> responseList = new ArrayList<>();
+
+        for (Brand brand : brands) {
+            responseList.add(new GetAllBrandResponses(brand.getName()));
+        }
+        return responseList;
+    }
+
+    @Override
+    public List<GetAllBrandResponses> findByNameStartingWith(String name) {
+        List<Brand> brands = brandRepository.findByNameStartingWith(name);
+        List<GetAllBrandResponses> responseList = new ArrayList<>();
+
+        for (Brand brand : brands
+        ) {
+            responseList.add(new GetAllBrandResponses(brand.getName()));
+
+        }
+        return responseList;
+    }
+
+    @Override
+    public List<GetAllBrandResponses> findByNameEndingWith(String name) {
+        List<Brand> brands = brandRepository.findByNameEndingWith(name);
+        List<GetAllBrandResponses> responseList = new ArrayList<>();
+
+        for (Brand brand : brands) {
+            responseList.add(new GetAllBrandResponses(brand.getName()));
+        }
+        return responseList;
+    }
+
+    @Override
+    public List<GetAllBrandResponses> findByNameContaining(String name) {
+        List<Brand> brands = brandRepository.findByNameContaining(name);
+        List<GetAllBrandResponses> responseList = new ArrayList<>();
+
+        for (Brand brand : brands) {
+            responseList.add(new GetAllBrandResponses(brand.getName()));
+        }
+        return responseList;
+    }
 }
+
