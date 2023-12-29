@@ -14,4 +14,8 @@ public class GetAllCustomerResponses {
     private String firstName;
 
     private String lastName;
+
+    public GetAllCustomerResponses(String nationalityId) {
+        this.nationalityId=nationalityId;
+    }
 }

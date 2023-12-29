@@ -6,6 +6,7 @@ import com.tobeto.rentacar.services.abstracts.CustomerService;
 import com.tobeto.rentacar.services.dtos.requests.customer.CreateCustomerRequests;
 import com.tobeto.rentacar.services.dtos.requests.customer.DeleteCustomerRequests;
 import com.tobeto.rentacar.services.dtos.requests.customer.UpdateCustomerRequests;
+import com.tobeto.rentacar.services.dtos.responses.brand.GetAllBrandResponses;
 import com.tobeto.rentacar.services.dtos.responses.customer.GetAllCustomerResponses;
 import com.tobeto.rentacar.services.dtos.responses.customer.GetByIdCustomerResponses;
 import lombok.AllArgsConstructor;
@@ -42,5 +43,24 @@ public class CustomersController {
     @DeleteMapping("/delete")
     public Result delete(DeleteCustomerRequests deleteCustomerRequests) {
         return this.customerService.delete(deleteCustomerRequests);
+    }
+    @GetMapping("/findbynationalityid")
+    public List<GetAllCustomerResponses> findByNationalityId(@RequestParam String nationalityId) {
+        return this.customerService.findByNationalityId(nationalityId);
+    }
+
+    @GetMapping("/findbynationalityidstartingwith")
+    public List<GetAllCustomerResponses> findByNationalityIdStartingWith(@RequestParam String nationalityId) {
+        return this.customerService.findByNationalityIdStartingWith(nationalityId);
+    }
+
+    @GetMapping("/findbynationalityidendingwith")
+    public List<GetAllCustomerResponses> findByNationalityIdEndingWith(@RequestParam String nationalityId) {
+        return this.customerService.findByNationalityIdEndingWith(nationalityId);
+    }
+
+    @GetMapping("/findbynationalityidcontaining")
+    public List<GetAllCustomerResponses> findByNationalityIdContaining(@RequestParam String nationalityId) {
+        return this.customerService.findByNationalityIdContaining(nationalityId);
     }
 }

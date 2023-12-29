@@ -5,6 +5,7 @@ import com.tobeto.rentacar.core.result.Result;
 import com.tobeto.rentacar.services.dtos.requests.customer.CreateCustomerRequests;
 import com.tobeto.rentacar.services.dtos.requests.customer.DeleteCustomerRequests;
 import com.tobeto.rentacar.services.dtos.requests.customer.UpdateCustomerRequests;
+import com.tobeto.rentacar.services.dtos.responses.brand.GetAllBrandResponses;
 import com.tobeto.rentacar.services.dtos.responses.customer.GetAllCustomerResponses;
 import com.tobeto.rentacar.services.dtos.responses.customer.GetByIdCustomerResponses;
 
@@ -20,6 +21,13 @@ public interface CustomerService {
     Result update(UpdateCustomerRequests updateCustomerRequests);
 
     Result delete(DeleteCustomerRequests deleteCustomerRequests);
+
+    List<GetAllCustomerResponses> findByNationalityId(String nationalityId);
+
+    List<GetAllCustomerResponses> findByNationalityIdStartingWith(String nationalityId);
+
+    List<GetAllCustomerResponses> findByNationalityIdEndingWith(String nationalityId);
+    List<GetAllCustomerResponses> findByNationalityIdContaining(String nationalityId);
 
 
 }

@@ -5,18 +5,21 @@ import com.tobeto.rentacar.core.exceptions.DataNotFoundException;
 import com.tobeto.rentacar.core.result.DataResult;
 import com.tobeto.rentacar.core.result.Result;
 import com.tobeto.rentacar.core.result.SuccessResult;
+import com.tobeto.rentacar.entities.concretes.Brand;
 import com.tobeto.rentacar.entities.concretes.Customer;
 import com.tobeto.rentacar.repository.CustomerRepository;
 import com.tobeto.rentacar.services.abstracts.CustomerService;
 import com.tobeto.rentacar.services.dtos.requests.customer.CreateCustomerRequests;
 import com.tobeto.rentacar.services.dtos.requests.customer.DeleteCustomerRequests;
 import com.tobeto.rentacar.services.dtos.requests.customer.UpdateCustomerRequests;
+import com.tobeto.rentacar.services.dtos.responses.brand.GetAllBrandResponses;
 import com.tobeto.rentacar.services.dtos.responses.customer.GetAllCustomerResponses;
 import com.tobeto.rentacar.services.dtos.responses.customer.GetByIdCustomerResponses;
 import com.tobeto.rentacar.services.rules.CustomerBusinessRules;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -80,6 +83,52 @@ public class CustomerManager implements CustomerService {
         this.customerRepository.delete(customer);
 
         return new Result(true, "Customer deleted");
+    }
+
+    @Override
+    public List<GetAllCustomerResponses> findByNationalityId(String nationalityId) {
+        List<Customer> customers = customerRepository.findByNationalityId(nationalityId);
+        List<GetAllCustomerResponses> responseList = new ArrayList<>();
+
+        for (Customer customer : customers) {
+            responseList.add(new GetAllCustomerResponses(customer.getNationalityId()));
+        }
+        return responseList;
+    }
+
+    @Override
+    public List<GetAllCustomerResponses> findByNationalityIdStartingWith(String nationalityId) {
+        List<Customer> customers = customerRepository.findByNationalityIdStartingWith(nationalityId);
+        List<GetAllCustomerResponses> responseList = new ArrayList<>();
+
+        for (Customer customer : customers
+        ) {
+            responseList.add(new GetAllCustomerResponses(customer.getNationalityId()));
+
+        }
+        return responseList;
+    }
+
+    @Override
+    public List<GetAllCustomerResponses> findByNationalityIdEndingWith(String nationalityId) {
+        List<Customer> customers = customerRepository.findByNationalityIdEndingWith(nationalityId);
+        List<GetAllCustomerResponses> responseList = new ArrayList<>();
+
+        for (Customer customer : customers) {
+            responseList.add(new GetAllCustomerResponses(customer.getNationalityId()));
+        }
+        return responseList;
+    }
+
+    @Override
+    public List<GetAllCustomerResponses> findByNationalityIdContaining(String nationalityId) {
+        List<Customer> customers = customerRepository.findByNationalityIdContaining(nationalityId);
+        List<GetAllCustomerResponses> responseList = new ArrayList<>();
+
+        for (Customer customer : customers) {
+            responseList.add(new GetAllCustomerResponses(customer.getNationalityId()));
+        }
+        return responseList;
     }
 
 
