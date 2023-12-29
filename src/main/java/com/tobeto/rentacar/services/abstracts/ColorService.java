@@ -20,4 +20,10 @@ public interface ColorService {
     Result update(UpdateColorRequests updateColorRequests);
 
     Result delete(DeleteColorRequests deleteColorRequests);
+
+    List<GetAllColorResponses> findByName(String name);
+
+    List<GetAllColorResponses> findByNameStartingWith(String name);
+
+    List<GetAllColorResponses> findByNameContaining(String name);
 }

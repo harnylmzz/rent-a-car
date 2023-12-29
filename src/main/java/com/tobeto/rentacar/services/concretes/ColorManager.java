@@ -17,6 +17,7 @@ import com.tobeto.rentacar.services.rules.ColorBusinessRules;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -79,5 +80,40 @@ public class ColorManager implements ColorService {
         this.colorRepository.delete(color);
 
         return new SuccessResult("Color deleted");
+    }
+
+    @Override
+    public List<GetAllColorResponses> findByName(String name) {
+        List<Color> colors = colorRepository.findByName(name);
+        List<GetAllColorResponses> responseList = new ArrayList<>();
+
+        for (Color color : colors) {
+            responseList.add(new GetAllColorResponses(color.getName()));
+        }
+        return responseList;
+    }
+
+    @Override
+    public List<GetAllColorResponses> findByNameStartingWith(String name) {
+        List<Color> colors = colorRepository.findByNameStartingWith(name);
+        List<GetAllColorResponses> responseList = new ArrayList<>();
+
+        for (Color color : colors
+        ) {
+            responseList.add(new GetAllColorResponses(color.getName()));
+
+        }
+        return responseList;
+    }
+
+    @Override
+    public List<GetAllColorResponses> findByNameContaining(String name) {
+        List<Color> colors = colorRepository.findByNameContaining(name);
+        List<GetAllColorResponses> responseList = new ArrayList<>();
+
+        for (Color color : colors) {
+            responseList.add(new GetAllColorResponses(color.getName()));
+        }
+        return responseList;
     }
 }
