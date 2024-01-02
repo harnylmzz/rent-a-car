@@ -9,9 +9,4 @@ import java.util.List;
 public interface CustomerRepository extends JpaRepository<Customer, Integer> {
 
     boolean existsByNationalityId(String nationalityId);
-    List<Customer> findByNationalityId(String nationalityId);
-    List<Customer> findByNationalityIdContaining(String nationalityId);
-    List<Customer> findByNationalityIdStartingWith(String nationalityId);
-    List<Customer> findByNationalityIdEndingWith(String nationalityId);
-   
 }

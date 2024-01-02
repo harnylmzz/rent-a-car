@@ -101,44 +101,26 @@ public class CarManager implements CarService {
     }
 
     @Override
-    public boolean existsById(int id) {
-        return this.carRepository.existsById(id);
-    }
-
-    @Override
     public List<GetAllCarResponses> findByYear(int year) {
+
         List<Car> cars = carRepository.findByYear(year);
-        List<GetAllCarResponses> responseList = new ArrayList<>();
+        List<GetAllCarResponses> findByYearCarResponses = cars.stream()
+                .map(car -> this.modelMapperService.forResponse()
+                        .map(car, GetAllCarResponses.class))
+                .collect(Collectors.toList());
 
-        for (Car car : cars) {
-            responseList.add(new GetAllCarResponses(car.getId(), car.getPrice(), car.getPlate(),
-                    car.getKilometer(), car.getYear()));
-        }
-        return responseList;
+        return findByYearCarResponses;
     }
 
     @Override
-    public List<GetAllCarResponses> findByKilometer(int kilometer) {
-        List<Car> cars = carRepository.findByKilometer(kilometer);
-        List<GetAllCarResponses> responseList = new ArrayList<>();
+    public List<GetAllCarResponses> findByPlate(String plate) {
 
-        for (Car car : cars) {
-            responseList.add(new GetAllCarResponses(car.getId(), car.getPrice(), car.getPlate(),
-                    car.getKilometer(), car.getYear()));
-        }
-        return responseList;
+        List<Car> cars = carRepository.findByPlate(plate);
+        List<GetAllCarResponses> findByPlateCarResponses = cars.stream()
+                .map(car -> this.modelMapperService.forResponse()
+                        .map(car, GetAllCarResponses.class))
+                .collect(Collectors.toList());
+
+        return findByPlateCarResponses;
     }
-    @Override
-    public List<GetAllCarResponses> findByPrice(int price) {
-        List<Car> cars = carRepository.findByPrice(price);
-        List<GetAllCarResponses> responseList = new ArrayList<>();
-
-        for (Car car : cars) {
-            responseList.add(new GetAllCarResponses(car.getId(), car.getPrice(), car.getPlate(),
-                    car.getKilometer(), car.getYear()));
-        }
-        return responseList;
-    }
-
-
 }

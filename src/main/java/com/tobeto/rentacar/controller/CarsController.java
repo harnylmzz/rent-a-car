@@ -34,7 +34,7 @@ public class CarsController {
 
     @PostMapping("/add")
     public Result add(@RequestBody @Valid CreateCarRequests createCarRequests) {
-        return  this.carService.add(createCarRequests);
+        return this.carService.add(createCarRequests);
     }
 
     @PutMapping("/update")
@@ -47,22 +47,13 @@ public class CarsController {
         return this.carService.delete(deleteCarRequests);
     }
 
-    @GetMapping("/findbyyear")
+    @GetMapping("/findByYear")
     public List<GetAllCarResponses> findByYear(int year) {
         return this.carService.findByYear(year);
     }
 
-    @GetMapping("/findbykilometer")
-    public List<GetAllCarResponses> findByKilometer(int kilometer) {
-        return this.carService.findByKilometer(kilometer);
+    @GetMapping("/findByPlate")
+    public List<GetAllCarResponses> findByPlate(String plate) {
+        return this.carService.findByPlate(plate);
     }
-
-    @GetMapping("/findbyprice")
-    public List<GetAllCarResponses> findByPrice(int price) {
-        return this.carService.findByPrice(price);
-    }
-
-
-
-
 }

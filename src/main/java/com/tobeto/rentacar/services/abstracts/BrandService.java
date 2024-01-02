@@ -26,6 +26,7 @@ public interface BrandService {
     List<GetAllBrandResponses> findByNameStartingWith(String name);
 
     List<GetAllBrandResponses> findByNameEndingWith(String name);
+
     List<GetAllBrandResponses> findByNameContaining(String name);
 
 

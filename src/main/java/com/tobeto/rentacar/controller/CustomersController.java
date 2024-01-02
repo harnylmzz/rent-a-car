@@ -44,23 +44,5 @@ public class CustomersController {
     public Result delete(DeleteCustomerRequests deleteCustomerRequests) {
         return this.customerService.delete(deleteCustomerRequests);
     }
-    @GetMapping("/findbynationalityid")
-    public List<GetAllCustomerResponses> findByNationalityId(@RequestParam String nationalityId) {
-        return this.customerService.findByNationalityId(nationalityId);
-    }
 
-    @GetMapping("/findbynationalityidstartingwith")
-    public List<GetAllCustomerResponses> findByNationalityIdStartingWith(@RequestParam String nationalityId) {
-        return this.customerService.findByNationalityIdStartingWith(nationalityId);
-    }
-
-    @GetMapping("/findbynationalityidendingwith")
-    public List<GetAllCustomerResponses> findByNationalityIdEndingWith(@RequestParam String nationalityId) {
-        return this.customerService.findByNationalityIdEndingWith(nationalityId);
-    }
-
-    @GetMapping("/findbynationalityidcontaining")
-    public List<GetAllCustomerResponses> findByNationalityIdContaining(@RequestParam String nationalityId) {
-        return this.customerService.findByNationalityIdContaining(nationalityId);
-    }
 }

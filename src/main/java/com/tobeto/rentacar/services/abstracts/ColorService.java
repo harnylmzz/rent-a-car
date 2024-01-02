@@ -21,9 +21,4 @@ public interface ColorService {
 
     Result delete(DeleteColorRequests deleteColorRequests);
 
-    List<GetAllColorResponses> findByName(String name);
-
-    List<GetAllColorResponses> findByNameStartingWith(String name);
-
-    List<GetAllColorResponses> findByNameContaining(String name);
 }

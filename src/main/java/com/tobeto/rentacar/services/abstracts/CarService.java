@@ -22,14 +22,8 @@ public interface CarService {
 
     Result delete(DeleteCarRequests deleteCarRequests);
 
-    boolean existsById(int id);
-
     List<GetAllCarResponses> findByYear(int year);
 
-    List<GetAllCarResponses> findByKilometer(int kilometer);
-
-    List<GetAllCarResponses> findByPrice(int price);
-
-
+    List<GetAllCarResponses> findByPlate(String plate);
 
 }
