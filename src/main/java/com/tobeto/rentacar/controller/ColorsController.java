@@ -46,19 +46,4 @@ public class ColorsController {
         return this.colorService.delete(deleteColorRequests);
     }
 
-    @GetMapping("/findbyname")
-    public List<GetAllColorResponses> findByName(@RequestParam String name) {
-        return this.colorService.findByName(name);
-    }
-
-    @GetMapping("/findbynamestartingwith")
-    public List<GetAllColorResponses> findByNameStartingWith(@RequestParam String name) {
-        return this.colorService.findByNameStartingWith(name);
-    }
-
-    @GetMapping("/findbynamecontaining")
-    public List<GetAllColorResponses> findByNameContaining(@RequestParam String name) {
-        return this.colorService.findByNameContaining(name);
-    }
-
 }

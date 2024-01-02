@@ -15,7 +15,4 @@ public class GetAllCustomerResponses {
 
     private String lastName;
 
-    public GetAllCustomerResponses(String nationalityId) {
-        this.nationalityId=nationalityId;
-    }
 }

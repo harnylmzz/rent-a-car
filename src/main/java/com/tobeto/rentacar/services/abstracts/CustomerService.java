@@ -22,12 +22,4 @@ public interface CustomerService {
 
     Result delete(DeleteCustomerRequests deleteCustomerRequests);
 
-    List<GetAllCustomerResponses> findByNationalityId(String nationalityId);
-
-    List<GetAllCustomerResponses> findByNationalityIdStartingWith(String nationalityId);
-
-    List<GetAllCustomerResponses> findByNationalityIdEndingWith(String nationalityId);
-    List<GetAllCustomerResponses> findByNationalityIdContaining(String nationalityId);
-
-
 }
