@@ -20,6 +20,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -83,5 +84,51 @@ public class UserManager implements UserService {
         this.userRepository.delete(user);
 
         return new SuccessResult("User deleted");
+    }
+
+    @Override
+    public List<GetAllUserResponses> findByFirstName(String firstName) {
+        List<User> users = userRepository.findByFirstName(firstName);
+        List<GetAllUserResponses> responsesList = new ArrayList<>();
+
+        for (User user : users ) {
+            responsesList.add(new GetAllUserResponses(user.getFirstName()));
+        }
+        return responsesList;
+
+
+    }
+
+    @Override
+    public List<GetAllUserResponses> findByLastName(String lastName) {
+        List<User> users = userRepository.findByFirstName(lastName);
+        List<GetAllUserResponses> responsesList = new ArrayList<>();
+
+        for (User user : users ) {
+            responsesList.add(new GetAllUserResponses(user.getLastName()));
+        }
+        return responsesList;
+    }
+
+    @Override
+    public List<GetAllUserResponses> findByEmail(String email) {
+        List<User> users = userRepository.findByFirstName(email);
+        List<GetAllUserResponses> responsesList = new ArrayList<>();
+
+        for (User user : users ) {
+            responsesList.add(new GetAllUserResponses(user.getEmail()));
+        }
+        return responsesList;
+    }
+
+    @Override
+    public List<GetAllUserResponses> findByGsm(String gsm) {
+        List<User> users = userRepository.findByFirstName(gsm);
+        List<GetAllUserResponses> responsesList = new ArrayList<>();
+
+        for (User user : users ) {
+            responsesList.add(new GetAllUserResponses(user.getGsm()));
+        }
+        return responsesList;
     }
 }

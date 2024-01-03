@@ -17,6 +17,7 @@ import com.tobeto.rentacar.services.dtos.responses.image.GetByIdImageResponses;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -79,5 +80,16 @@ public class ImageManager implements ImageService {
 
         this.imageRepository.delete(image);
         return new SuccessResult("Image deleted");
+    }
+
+    @Override
+    public List<GetAllImageResponses> findByUrl(String url) {
+        List<Image> images = imageRepository.findByUrl(url);
+        List<GetAllImageResponses> responsesList = new ArrayList<>();
+
+        for (Image image : images) {
+            responsesList.add(new GetAllImageResponses(image.getUrl()));
+        }
+        return responsesList;
     }
 }

@@ -14,4 +14,8 @@ public class GetAllImageResponses {
     private String url;
 
     private int carId;
+
+    public GetAllImageResponses(String url) {
+
+    }
 }

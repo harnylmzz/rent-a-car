@@ -16,4 +16,8 @@ public interface ModelService {
     Result add(CreateModelRequests createModelRequests);
     Result update(UpdateModelRequests updateModelRequests);
     Result delete(DeleteModelRequests deleteModelRequests);
+
+    List<GetAllModelResponses> findByName(String name);
+
+
 }

@@ -2,6 +2,7 @@ package com.tobeto.rentacar.services.abstracts;
 
 import com.tobeto.rentacar.core.result.DataResult;
 import com.tobeto.rentacar.core.result.Result;
+import com.tobeto.rentacar.entities.concretes.Image;
 import com.tobeto.rentacar.services.dtos.requests.image.CreateImageRequests;
 import com.tobeto.rentacar.services.dtos.requests.image.DeleteImageRequests;
 import com.tobeto.rentacar.services.dtos.requests.image.UpdateImageRequests;
@@ -20,6 +21,8 @@ public interface ImageService {
 
     Result update(UpdateImageRequests updateImageRequests);
     Result delete(DeleteImageRequests deleteImageRequests);
+
+    List<GetAllImageResponses> findByUrl(String url);
 
 
 

@@ -44,5 +44,24 @@ public class UsersController {
     public Result delete(DeleteUserRequests deleteUserRequests) {
         return this.userService.delete(deleteUserRequests);
     }
+    @GetMapping("/findbyfirstname")
+    public List<GetAllUserResponses> findByFirstName( @RequestParam String firstName){
+        return this.userService.findByFirstName(firstName);
+    }
+
+    @GetMapping("/findbylastname")
+    public List<GetAllUserResponses> findByLastName(@RequestParam String lastName){
+        return this.userService.findByLastName(lastName);
+    }
+
+    @GetMapping("/findbyemail")
+    public List<GetAllUserResponses> findByEmail(@RequestParam String email){
+        return this.userService.findByEmail(email);
+    }
+
+    @GetMapping("/findbygsm")
+    public List<GetAllUserResponses> findByGsm(@RequestParam String gsm){
+        return this.userService.findByGsm(gsm);
+    }
 
 }
