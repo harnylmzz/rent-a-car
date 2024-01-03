@@ -14,4 +14,8 @@ public class GetAllUserResponses {
     private String firstName;
 
     private String lastName;
+
+    public GetAllUserResponses(String firstName) {
+
+    }
 }

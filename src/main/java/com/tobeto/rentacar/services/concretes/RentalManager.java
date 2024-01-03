@@ -6,10 +6,7 @@ import com.tobeto.rentacar.core.result.DataResult;
 import com.tobeto.rentacar.core.result.Result;
 import com.tobeto.rentacar.core.result.SuccessResult;
 
-import com.tobeto.rentacar.entities.concretes.Customer;
-import com.tobeto.rentacar.entities.concretes.Employee;
-import com.tobeto.rentacar.entities.concretes.Rental;
-import com.tobeto.rentacar.entities.concretes.Car;
+import com.tobeto.rentacar.entities.concretes.*;
 
 import com.tobeto.rentacar.repository.*;
 
@@ -23,6 +20,9 @@ import com.tobeto.rentacar.services.rules.RentalBusinessRules;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.sql.ClientInfoStatus;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -108,5 +108,82 @@ public class RentalManager implements RentalService {
         this.rentalRepository.delete(rental);
 
         return new SuccessResult("Rental deleted");
+    }
+
+    @Override
+    public List<GetAllRentalResponses> findByStartDate(LocalDate startDate) {
+        List<Rental> rentals = rentalRepository.findByStartDate(startDate);
+        List<GetAllRentalResponses> responsesList = new ArrayList<>();
+
+        for (Rental rental : rentals ) {
+            responsesList.add(new GetAllRentalResponses(rental.getStartDate()));
+        }
+        return responsesList;
+    }
+
+    @Override
+    public List<GetAllRentalResponses> findByEndDate(LocalDate endDate) {
+        List<Rental> rentals = rentalRepository.findByEndDate(endDate);
+        List<GetAllRentalResponses> responsesList = new ArrayList<>();
+
+        for (Rental rental : rentals ) {
+            responsesList.add(new GetAllRentalResponses(rental.getEndDate()));
+        }
+        return responsesList;
+    }
+
+    @Override
+    public List<GetAllRentalResponses> findByReturnDate(LocalDate returnDate) {
+        List<Rental> rentals = rentalRepository.findByReturnDate(returnDate);
+        List<GetAllRentalResponses> responsesList = new ArrayList<>();
+
+        for (Rental rental : rentals ) {
+            responsesList.add(new GetAllRentalResponses(rental.getReturnDate()));
+        }
+        return responsesList;
+    }
+
+    @Override
+    public List<GetAllRentalResponses> findByStartKilometer(int startKilometer) {
+        List<Rental> rentals = rentalRepository.findByStartKilometer(startKilometer);
+        List<GetAllRentalResponses> responsesList = new ArrayList<>();
+
+        for (Rental rental : rentals ) {
+            responsesList.add(new GetAllRentalResponses(rental.getStartKilometer()));
+        }
+        return responsesList;
+    }
+
+    @Override
+    public List<GetAllRentalResponses> findByEndKilometer(int endKilometer) {
+        List<Rental> rentals = rentalRepository.findByEndKilometer(endKilometer);
+        List<GetAllRentalResponses> responsesList = new ArrayList<>();
+
+        for (Rental rental : rentals ) {
+            responsesList.add(new GetAllRentalResponses(rental.getEndKilometer()));
+        }
+        return responsesList;
+    }
+
+    @Override
+    public List<GetAllRentalResponses> findByTotalPrice(double totalPrice) {
+        List<Rental> rentals = rentalRepository.findByTotalPrice(totalPrice);
+        List<GetAllRentalResponses> responsesList = new ArrayList<>();
+
+        for (Rental rental : rentals ) {
+            responsesList.add(new GetAllRentalResponses(rental.getTotalPrice()));
+        }
+        return responsesList;
+    }
+
+    @Override
+    public List<GetAllRentalResponses> findByDiscount(double discount) {
+       List<Rental> rentals = rentalRepository.findByDiscount(discount);
+       List<GetAllRentalResponses> responsesList = new ArrayList<>();
+
+       for(Rental rental : rentals ) {
+           responsesList.add(new GetAllRentalResponses(rental.getDiscount()));
+       }
+       return responsesList;
     }
 }

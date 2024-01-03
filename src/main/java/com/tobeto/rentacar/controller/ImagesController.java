@@ -44,4 +44,10 @@ public class ImagesController {
     public Result delete(DeleteImageRequests deleteImageRequests) {
         return this.imageService.delete(deleteImageRequests);
     }
+    @GetMapping("/findbyurl")
+    public List<GetAllImageResponses> findByUrl(@RequestParam String url){
+        return this.imageService.findByUrl(url);
+    }
+
+
 }

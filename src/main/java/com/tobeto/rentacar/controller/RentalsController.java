@@ -8,9 +8,11 @@ import com.tobeto.rentacar.services.dtos.requests.rental.DeleteRentalRequests;
 import com.tobeto.rentacar.services.dtos.requests.rental.UpdateRentalRequests;
 import com.tobeto.rentacar.services.dtos.responses.rental.GetAllRentalResponses;
 import com.tobeto.rentacar.services.dtos.responses.rental.GetByIdRentalResponses;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -43,5 +45,41 @@ public class RentalsController {
     @DeleteMapping("/delete")
     public Result delete(DeleteRentalRequests deleteRentalRequests) {
         return this.rentalService.delete(deleteRentalRequests);
+    }
+
+    @GetMapping("/findbystartdate")
+    public List<GetAllRentalResponses> findByStartDAte(@RequestParam LocalDate startDate){
+        return this.rentalService.findByStartDate(startDate);
+    }
+
+    @GetMapping("/findbyenddate")
+    public List<GetAllRentalResponses> findByEndDate(@RequestParam LocalDate endDate){
+        return this.rentalService.findByEndDate(endDate);
+    }
+
+    @GetMapping("/findbyreturndate")
+    public List<GetAllRentalResponses> findByReturnDate(@RequestParam LocalDate returnDate){
+        return this.rentalService.findByReturnDate(returnDate);
+    }
+
+    @GetMapping("/findbystartkilometer")
+    public List<GetAllRentalResponses> findByStartKilometer(@RequestParam int startKilometer){
+        return this.rentalService.findByStartKilometer(startKilometer);
+
+    }
+
+    @GetMapping("/findbyendkilometer")
+    public List<GetAllRentalResponses> findByEndKilometer(@RequestParam int endKilometer){
+        return this.rentalService.findByEndKilometer(endKilometer);
+    }
+
+    @GetMapping("/findbytotalprice")
+    public List<GetAllRentalResponses> findByTotalPrice(@RequestParam double totalPrice){
+        return this.rentalService.findByTotalPrice(totalPrice);
+    }
+
+    @GetMapping("/findbydiscount")
+    public List<GetAllRentalResponses> findByDiscount(@RequestParam double discount){
+        return this.rentalService.findByDiscount(discount);
     }
 }

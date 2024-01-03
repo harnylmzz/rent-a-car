@@ -2,6 +2,7 @@ package com.tobeto.rentacar.services.abstracts;
 
 import com.tobeto.rentacar.core.result.DataResult;
 import com.tobeto.rentacar.core.result.Result;
+import com.tobeto.rentacar.entities.concretes.User;
 import com.tobeto.rentacar.services.dtos.requests.user.CreateUserRequests;
 import com.tobeto.rentacar.services.dtos.requests.user.DeleteUserRequests;
 import com.tobeto.rentacar.services.dtos.requests.user.UpdateUserRequests;
@@ -20,4 +21,12 @@ public interface UserService {
     Result update(UpdateUserRequests updateUserRequests);
 
     Result delete(DeleteUserRequests deleteUserRequests);
+
+    List<GetAllUserResponses> findByFirstName(String firstName);
+
+    List<GetAllUserResponses> findByLastName( String lastName);
+
+    List<GetAllUserResponses> findByEmail(String email);
+
+    List<GetAllUserResponses> findByGsm(String gsm);
 }
