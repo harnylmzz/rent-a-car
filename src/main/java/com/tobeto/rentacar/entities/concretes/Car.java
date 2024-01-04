@@ -15,6 +15,9 @@ import java.util.List;
 @Table(name = "cars")
 public class Car extends BaseEntity {
 
+    @Column(name = "gear_type")
+    private String gearType;
+
     @Column(name = "kilometer")
     private int kilometer;
 

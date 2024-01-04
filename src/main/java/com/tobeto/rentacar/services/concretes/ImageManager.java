@@ -85,11 +85,11 @@ public class ImageManager implements ImageService {
     @Override
     public List<GetAllImageResponses> findByUrl(String url) {
         List<Image> images = imageRepository.findByUrl(url);
-        List<GetAllImageResponses> responsesList = new ArrayList<>();
+        List<GetAllImageResponses> findByUrlResponses = images.stream()
+                .map(image -> this.modelMapperService.forResponse()
+                        .map(image, GetAllImageResponses.class))
+                .collect(Collectors.toList());
 
-        for (Image image : images) {
-            responsesList.add(new GetAllImageResponses(image.getUrl()));
-        }
-        return responsesList;
+        return findByUrlResponses;
     }
 }

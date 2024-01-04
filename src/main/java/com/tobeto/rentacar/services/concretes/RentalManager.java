@@ -113,77 +113,77 @@ public class RentalManager implements RentalService {
     @Override
     public List<GetAllRentalResponses> findByStartDate(LocalDate startDate) {
         List<Rental> rentals = rentalRepository.findByStartDate(startDate);
-        List<GetAllRentalResponses> responsesList = new ArrayList<>();
+        List<GetAllRentalResponses> findByStartDateResponses = rentals.stream()
+                .map(rental -> this.modelMapperService.forResponse()
+                        .map(rental, GetAllRentalResponses.class))
+                .collect(Collectors.toList());
 
-        for (Rental rental : rentals ) {
-            responsesList.add(new GetAllRentalResponses(rental.getStartDate()));
-        }
-        return responsesList;
+        return findByStartDateResponses;
     }
 
     @Override
     public List<GetAllRentalResponses> findByEndDate(LocalDate endDate) {
         List<Rental> rentals = rentalRepository.findByEndDate(endDate);
-        List<GetAllRentalResponses> responsesList = new ArrayList<>();
+        List<GetAllRentalResponses> findByEndDateResponses = rentals.stream()
+                .map(rental -> this.modelMapperService.forResponse()
+                        .map(rental, GetAllRentalResponses.class))
+                .collect(Collectors.toList());
 
-        for (Rental rental : rentals ) {
-            responsesList.add(new GetAllRentalResponses(rental.getEndDate()));
-        }
-        return responsesList;
+        return findByEndDateResponses;
     }
 
     @Override
     public List<GetAllRentalResponses> findByReturnDate(LocalDate returnDate) {
         List<Rental> rentals = rentalRepository.findByReturnDate(returnDate);
-        List<GetAllRentalResponses> responsesList = new ArrayList<>();
+        List<GetAllRentalResponses> findByReturnDateResponses = rentals.stream()
+                .map(rental -> this.modelMapperService.forResponse()
+                        .map(rental, GetAllRentalResponses.class))
+                .collect(Collectors.toList());
 
-        for (Rental rental : rentals ) {
-            responsesList.add(new GetAllRentalResponses(rental.getReturnDate()));
-        }
-        return responsesList;
+        return findByReturnDateResponses;
     }
 
     @Override
     public List<GetAllRentalResponses> findByStartKilometer(int startKilometer) {
         List<Rental> rentals = rentalRepository.findByStartKilometer(startKilometer);
-        List<GetAllRentalResponses> responsesList = new ArrayList<>();
+        List<GetAllRentalResponses> findByStartKilometerResponses = rentals.stream()
+                .map(rental -> this.modelMapperService.forResponse()
+                        .map(rental, GetAllRentalResponses.class))
+                .collect(Collectors.toList());
 
-        for (Rental rental : rentals ) {
-            responsesList.add(new GetAllRentalResponses(rental.getStartKilometer()));
-        }
-        return responsesList;
+        return findByStartKilometerResponses;
     }
 
     @Override
     public List<GetAllRentalResponses> findByEndKilometer(int endKilometer) {
         List<Rental> rentals = rentalRepository.findByEndKilometer(endKilometer);
-        List<GetAllRentalResponses> responsesList = new ArrayList<>();
+        List<GetAllRentalResponses> findByEndKilometerResponses = rentals.stream()
+                .map(rental -> this.modelMapperService.forResponse()
+                        .map(rental, GetAllRentalResponses.class))
+                .collect(Collectors.toList());
 
-        for (Rental rental : rentals ) {
-            responsesList.add(new GetAllRentalResponses(rental.getEndKilometer()));
-        }
-        return responsesList;
+        return findByEndKilometerResponses;
     }
 
     @Override
     public List<GetAllRentalResponses> findByTotalPrice(double totalPrice) {
         List<Rental> rentals = rentalRepository.findByTotalPrice(totalPrice);
-        List<GetAllRentalResponses> responsesList = new ArrayList<>();
+        List<GetAllRentalResponses> findByTotalPriceResponses = rentals.stream()
+                .map(rental -> this.modelMapperService.forResponse()
+                        .map(rental, GetAllRentalResponses.class))
+                .collect(Collectors.toList());
 
-        for (Rental rental : rentals ) {
-            responsesList.add(new GetAllRentalResponses(rental.getTotalPrice()));
-        }
-        return responsesList;
+        return findByTotalPriceResponses;
     }
 
     @Override
     public List<GetAllRentalResponses> findByDiscount(double discount) {
-       List<Rental> rentals = rentalRepository.findByDiscount(discount);
-       List<GetAllRentalResponses> responsesList = new ArrayList<>();
+        List<Rental> rentals = rentalRepository.findByDiscount(discount);
+        List<GetAllRentalResponses> findByDiscountResponses = rentals.stream()
+                .map(rental -> this.modelMapperService.forResponse()
+                        .map(rental, GetAllRentalResponses.class))
+                .collect(Collectors.toList());
 
-       for(Rental rental : rentals ) {
-           responsesList.add(new GetAllRentalResponses(rental.getDiscount()));
-       }
-       return responsesList;
+        return findByDiscountResponses;
     }
 }
