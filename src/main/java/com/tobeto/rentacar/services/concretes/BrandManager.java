@@ -43,7 +43,7 @@ public class BrandManager implements BrandService {
 
     @Override
     public DataResult<GetByIdBrandResponses> getById(int id) {
-        Brand brand = brandRepository.findById(id).orElseThrow(() ->  new DataNotFoundException("Data not found.") {
+        Brand brand = brandRepository.findById(id).orElseThrow(() -> new DataNotFoundException("Data not found.") {
         });
         GetByIdBrandResponses getByIdBrandResponses = this.modelMapperService.forResponse()
                 .map(brand, GetByIdBrandResponses.class);
@@ -87,47 +87,45 @@ public class BrandManager implements BrandService {
     @Override
     public List<GetAllBrandResponses> findByName(String name) {
         List<Brand> brands = brandRepository.findByName(name);
-        List<GetAllBrandResponses> responseList = new ArrayList<>();
+        List<GetAllBrandResponses> findByNameResponses = brands.stream()
+                .map(brand -> this.modelMapperService.forResponse()
+                        .map(brand, GetAllBrandResponses.class))
+                .collect(Collectors.toList());
 
-        for (Brand brand : brands) {
-            responseList.add(new GetAllBrandResponses(brand.getName()));
-        }
-        return responseList;
+        return findByNameResponses;
     }
 
     @Override
     public List<GetAllBrandResponses> findByNameStartingWith(String name) {
         List<Brand> brands = brandRepository.findByNameStartingWith(name);
-        List<GetAllBrandResponses> responseList = new ArrayList<>();
+        List<GetAllBrandResponses> findByNameStartingWithResponses = brands.stream()
+                .map(brand -> this.modelMapperService.forResponse()
+                        .map(brand, GetAllBrandResponses.class))
+                .collect(Collectors.toList());
 
-        for (Brand brand : brands
-        ) {
-            responseList.add(new GetAllBrandResponses(brand.getName()));
-
-        }
-        return responseList;
+        return findByNameStartingWithResponses;
     }
 
     @Override
     public List<GetAllBrandResponses> findByNameEndingWith(String name) {
         List<Brand> brands = brandRepository.findByNameEndingWith(name);
-        List<GetAllBrandResponses> responseList = new ArrayList<>();
+        List<GetAllBrandResponses> findByNameEndingWithResponses = brands.stream()
+                .map(brand -> this.modelMapperService.forResponse()
+                        .map(brand, GetAllBrandResponses.class))
+                .collect(Collectors.toList());
 
-        for (Brand brand : brands) {
-            responseList.add(new GetAllBrandResponses(brand.getName()));
-        }
-        return responseList;
+        return findByNameEndingWithResponses;
     }
 
     @Override
     public List<GetAllBrandResponses> findByNameContaining(String name) {
         List<Brand> brands = brandRepository.findByNameContaining(name);
-        List<GetAllBrandResponses> responseList = new ArrayList<>();
+        List<GetAllBrandResponses> findByNameContainingResponses = brands.stream()
+                .map(brand -> this.modelMapperService.forResponse()
+                        .map(brand, GetAllBrandResponses.class))
+                .collect(Collectors.toList());
 
-        for (Brand brand : brands) {
-            responseList.add(new GetAllBrandResponses(brand.getName()));
-        }
-        return responseList;
+        return findByNameContainingResponses;
     }
 }
 

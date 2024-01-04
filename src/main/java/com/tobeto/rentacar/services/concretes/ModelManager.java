@@ -84,11 +84,11 @@ public class ModelManager implements ModelService {
     @Override
     public List<GetAllModelResponses> findByName(String name) {
         List<Model> models = modelRepository.findByName(name);
-        List<GetAllModelResponses> responsesList = new ArrayList<>();
+        List<GetAllModelResponses> getAllModelResponses = models.stream()
+                .map(model -> this.modelMapperService.forResponse()
+                        .map(model, GetAllModelResponses.class))
+                .collect(Collectors.toList());
 
-        for(Model model : models){
-            responsesList.add(new GetAllModelResponses(model.getName()));
-        }
-        return responsesList;
+        return getAllModelResponses;
     }
 }

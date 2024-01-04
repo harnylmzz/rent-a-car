@@ -89,46 +89,44 @@ public class UserManager implements UserService {
     @Override
     public List<GetAllUserResponses> findByFirstName(String firstName) {
         List<User> users = userRepository.findByFirstName(firstName);
-        List<GetAllUserResponses> responsesList = new ArrayList<>();
+        List<GetAllUserResponses> findByFirstNameResponses = users.stream()
+                .map(user -> this.modelMapperService.forResponse()
+                        .map(user, GetAllUserResponses.class))
+                .collect(Collectors.toList());
 
-        for (User user : users ) {
-            responsesList.add(new GetAllUserResponses(user.getFirstName()));
-        }
-        return responsesList;
-
-
+        return findByFirstNameResponses;
     }
 
     @Override
     public List<GetAllUserResponses> findByLastName(String lastName) {
         List<User> users = userRepository.findByFirstName(lastName);
-        List<GetAllUserResponses> responsesList = new ArrayList<>();
+        List<GetAllUserResponses> findByLastNameResponses = users.stream()
+                .map(user -> this.modelMapperService.forResponse()
+                        .map(user, GetAllUserResponses.class))
+                .collect(Collectors.toList());
 
-        for (User user : users ) {
-            responsesList.add(new GetAllUserResponses(user.getLastName()));
-        }
-        return responsesList;
+        return findByLastNameResponses;
     }
 
     @Override
     public List<GetAllUserResponses> findByEmail(String email) {
         List<User> users = userRepository.findByFirstName(email);
-        List<GetAllUserResponses> responsesList = new ArrayList<>();
+        List<GetAllUserResponses> findByEmailResponses = users.stream()
+                .map(user -> this.modelMapperService.forResponse()
+                        .map(user, GetAllUserResponses.class))
+                .collect(Collectors.toList());
 
-        for (User user : users ) {
-            responsesList.add(new GetAllUserResponses(user.getEmail()));
-        }
-        return responsesList;
+        return findByEmailResponses;
     }
 
     @Override
     public List<GetAllUserResponses> findByGsm(String gsm) {
         List<User> users = userRepository.findByFirstName(gsm);
-        List<GetAllUserResponses> responsesList = new ArrayList<>();
+        List<GetAllUserResponses> findByGsmResponses = users.stream()
+                .map(user -> this.modelMapperService.forResponse()
+                        .map(user, GetAllUserResponses.class))
+                .collect(Collectors.toList());
 
-        for (User user : users ) {
-            responsesList.add(new GetAllUserResponses(user.getGsm()));
-        }
-        return responsesList;
+        return findByGsmResponses;
     }
 }
