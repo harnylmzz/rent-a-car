@@ -19,8 +19,12 @@ public class GetAllCarResponses {
 
     private int year;
 
-    private int modelId;
+    private String modelName;
 
-    private int colorId;
+    private String colorName;
+
+    private String imageUrl;
+
+    private String fuelTypeType;
 
 }
