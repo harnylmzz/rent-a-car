@@ -1,6 +1,7 @@
 package com.tobeto.rentacar.entities.concretes;
 
 import com.tobeto.rentacar.entities.abstracts.BaseEntity;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -13,10 +14,9 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "insurances")
+@Table(name = "comprehensive_insurances")
 public class ComprehensiveInsurance extends Insurance {
 
-    private String coverageDetails;
-
+    @Column(name = "deductible_amount")
     private int deductibleAmount;
 }
