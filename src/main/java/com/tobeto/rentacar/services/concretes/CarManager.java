@@ -5,9 +5,10 @@ import com.tobeto.rentacar.core.exceptions.DataNotFoundException;
 import com.tobeto.rentacar.core.result.DataResult;
 import com.tobeto.rentacar.core.result.Result;
 import com.tobeto.rentacar.core.result.SuccessResult;
-import com.tobeto.rentacar.entities.concretes.Brand;
-import com.tobeto.rentacar.entities.concretes.Car;
+import com.tobeto.rentacar.entities.concretes.*;
 import com.tobeto.rentacar.repository.CarRepository;
+import com.tobeto.rentacar.repository.FuelTypeRepository;
+import com.tobeto.rentacar.repository.ImageRepository;
 import com.tobeto.rentacar.services.abstracts.CarService;
 import com.tobeto.rentacar.services.dtos.requests.car.CreateCarRequests;
 import com.tobeto.rentacar.services.dtos.requests.car.DeleteCarRequests;
@@ -16,10 +17,8 @@ import com.tobeto.rentacar.services.dtos.responses.car.GetAllCarResponses;
 import com.tobeto.rentacar.services.dtos.responses.car.GetByIdCarResponses;
 import com.tobeto.rentacar.services.rules.CarBusinessRules;
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -29,6 +28,8 @@ public class CarManager implements CarService {
     private CarRepository carRepository;
     private ModelMapperService modelMapperService;
     private CarBusinessRules carBusinessRules;
+    private ImageRepository imageRepository;
+    private FuelTypeRepository fuelTypeRepository;
 
     @Override
     public DataResult<List<GetAllCarResponses>> getAll() {
@@ -67,7 +68,14 @@ public class CarManager implements CarService {
         Car car = this.modelMapperService.forRequest()
                 .map(createCarRequests, Car.class);
 
+        FuelType fuelType = this.fuelTypeRepository.findById(createCarRequests.getFuelTypeId())
+                .orElse(null);
+
+        Image image = this.imageRepository.findById(createCarRequests.getImageId())
+                .orElse(null);
+
         car.setPlate(plate);
+
 
         this.carRepository.save(car);
 
