@@ -27,4 +27,8 @@ public class Reservation {
 
     @Column(name = "additional_services")
     private String additionalServices;
+
+    @OneToOne
+    @JoinColumn(name = "car_id")
+    private Car car;
 }

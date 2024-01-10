@@ -28,4 +28,8 @@ public class Insurance extends BaseEntity {
 
     @Column(name = "details")
     private String details;
+
+    @OneToOne
+    @JoinColumn(name = "car_id")
+    private Car car;
 }
