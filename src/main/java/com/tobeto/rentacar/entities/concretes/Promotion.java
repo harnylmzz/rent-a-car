@@ -26,4 +26,6 @@ public class Promotion extends BaseEntity {
 
     @Column(name = "description")
     private String description;
+
+
 }
