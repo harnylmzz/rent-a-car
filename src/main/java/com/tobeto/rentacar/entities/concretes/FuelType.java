@@ -18,7 +18,7 @@ public class FuelType extends BaseEntity {
     @Column(name = "type")
     private String type;
 
-    @ManyToOne
-    @JoinColumn(name = "car_id")
+    @OneToOne(mappedBy = "fuelType", fetch = FetchType.LAZY)
     private Car car;
+
 }

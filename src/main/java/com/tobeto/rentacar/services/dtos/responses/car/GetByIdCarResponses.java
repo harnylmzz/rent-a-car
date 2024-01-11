@@ -9,7 +9,19 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class GetByIdCarResponses {
 
+    private int id;
+
     private double price;
 
     private String plate;
+
+    private int kilometer;
+
+    private int year;
+
+    private String modelName;
+
+    private String colorName;
+
+    private String fuelType;
 }
