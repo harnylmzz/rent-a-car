@@ -23,8 +23,6 @@ public class GetAllCarResponses {
 
     private String colorName;
 
-    private String imageUrl;
-
-    private String fuelTypeType;
+    private String fuelType;
 
 }

@@ -44,12 +44,6 @@ public class Car extends BaseEntity {
     private List<Rental> rentals;
 
     @OneToMany(mappedBy = "car")
-    private List<Image> images;
-
-    @OneToMany(mappedBy = "car")
-    private List<FuelType> fuelTypes;
-
-    @OneToMany(mappedBy = "car")
     private List<Maintenance> maintenances;
 
     @OneToOne(mappedBy = "car")
@@ -57,5 +51,12 @@ public class Car extends BaseEntity {
 
     @OneToOne(mappedBy = "car")
     private Insurance insurance;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "fuel_type_id")
+    private FuelType fuelType;
+
+    @OneToMany(mappedBy = "car")
+    private List<Image> images;
 
 }
