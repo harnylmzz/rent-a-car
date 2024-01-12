@@ -21,4 +21,8 @@ public class Review extends BaseEntity {
     @Column(name = "rating")
     private int rating;
 
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
+
 }
