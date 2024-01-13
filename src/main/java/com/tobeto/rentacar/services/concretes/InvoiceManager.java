@@ -13,9 +13,13 @@ import com.tobeto.rentacar.services.dtos.requests.invoice.DeleteInvoiceRequests;
 import com.tobeto.rentacar.services.dtos.requests.invoice.UpdateInvoiceRequests;
 import com.tobeto.rentacar.services.dtos.responses.invoice.GetAllInvoiceResponses;
 import com.tobeto.rentacar.services.dtos.responses.invoice.GetByIdInvoiceResponses;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
+@AllArgsConstructor
 public class InvoiceManager implements InvoiceService {
 
     private InvoiceRepository invoiceRepository;
