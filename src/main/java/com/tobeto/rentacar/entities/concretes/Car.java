@@ -52,11 +52,17 @@ public class Car extends BaseEntity {
     @OneToOne(mappedBy = "car")
     private Insurance insurance;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "fuel_type_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="fuel_types_id", referencedColumnName="id")
     private FuelType fuelType;
 
     @OneToMany(mappedBy = "car")
     private List<Image> images;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="category_id", referencedColumnName="id")
+    private Category category;
+
+
 
 }
