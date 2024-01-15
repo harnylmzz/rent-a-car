@@ -32,5 +32,6 @@ public class CreateCarRequests {
     private int colorId;
 
     private int fuelTypeId;
+    private int categoryId;
 
 }

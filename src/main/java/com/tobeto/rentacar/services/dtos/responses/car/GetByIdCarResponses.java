@@ -24,4 +24,5 @@ public class GetByIdCarResponses {
     private String colorName;
 
     private String fuelType;
+    private String categoryName;
 }

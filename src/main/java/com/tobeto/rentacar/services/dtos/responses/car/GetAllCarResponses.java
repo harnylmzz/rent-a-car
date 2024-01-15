@@ -24,5 +24,6 @@ public class GetAllCarResponses {
     private String colorName;
 
     private String fuelType;
+    private String categoryName;
 
 }
