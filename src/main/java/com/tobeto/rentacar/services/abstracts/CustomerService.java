@@ -11,6 +11,16 @@ import com.tobeto.rentacar.services.dtos.responses.customer.GetByIdCustomerRespo
 
 import java.util.List;
 
+/**
+ * Service interface for managing customer-related operations.
+ * Defines methods for retrieving, adding, updating, and deleting customers.
+ * Uses Data Transfer Objects (DTOs) for requests and responses.
+ * Provides both individual and list-based retrieval of customer information.
+ * Supports CRUD (Create, Read, Update, Delete) operations for customers.
+ *
+ * @author [Harun Yılmaz]
+ */
+
 public interface CustomerService {
     DataResult<List<GetAllCustomerResponses>> getAll();
 

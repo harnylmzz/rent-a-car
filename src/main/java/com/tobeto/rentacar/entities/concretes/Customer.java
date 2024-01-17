@@ -6,6 +6,16 @@ import lombok.*;
 
 import java.util.List;
 
+/**
+ * This class represents a customer in the Rent a Car system.
+ * Each customer has a unique identifier, a nationality ID, and is associated with a user account.
+ *
+ * It extends the base BaseEntity class.
+ *
+ * @author [Harun Yılmaz]
+ */
+
+@EqualsAndHashCode(callSuper = true)
 @Getter
 @Setter
 @Entity

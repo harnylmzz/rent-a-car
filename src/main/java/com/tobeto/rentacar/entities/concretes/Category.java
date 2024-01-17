@@ -8,10 +8,21 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+/**
+ * This class represents a category in the Rent a Car system.
+ * Each category has a unique identifier, a name, and is associated with a list of cars.
+ *
+ * It extends the base BaseEntity class.
+ *
+ * @author [Harun Yılmaz]
+ */
+
+@EqualsAndHashCode(callSuper = true)
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

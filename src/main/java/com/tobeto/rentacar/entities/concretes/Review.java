@@ -7,6 +7,15 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+/**
+ * This class represents a review in the Rent a Car system.
+ * Each review includes a comment, a rating, and is associated with a user.
+ *
+ * It extends the base BaseEntity class.
+ *
+ * @author [Harun Yılmaz]
+ */
+
 @EqualsAndHashCode(callSuper = true)
 @Data
 @AllArgsConstructor

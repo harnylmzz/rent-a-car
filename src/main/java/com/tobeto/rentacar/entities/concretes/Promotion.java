@@ -7,6 +7,15 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+/**
+ * This class represents a promotion in the Rent a Car system.
+ * Each promotion has a code, discount amount, type, and a description.
+ *
+ * It extends the base BaseEntity class.
+ *
+ * @author [Harun Yılmaz]
+ */
+
 @EqualsAndHashCode(callSuper = true)
 @Data
 @AllArgsConstructor
@@ -26,6 +35,5 @@ public class Promotion extends BaseEntity {
 
     @Column(name = "description")
     private String description;
-
 
 }

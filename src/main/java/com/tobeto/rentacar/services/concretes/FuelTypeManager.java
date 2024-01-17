@@ -1,6 +1,9 @@
 package com.tobeto.rentacar.services.concretes;
 
 import com.tobeto.rentacar.config.modelmapper.ModelMapperService;
+import com.tobeto.rentacar.core.result.DataResult;
+import com.tobeto.rentacar.core.result.Result;
+import com.tobeto.rentacar.core.result.SuccessResult;
 import com.tobeto.rentacar.entities.concretes.FuelType;
 import com.tobeto.rentacar.repository.FuelTypeRepository;
 import com.tobeto.rentacar.services.abstracts.FuelTypeService;
@@ -20,45 +23,53 @@ import java.util.stream.Collectors;
 public class FuelTypeManager implements FuelTypeService {
     private FuelTypeRepository fuelTypeRepository;
     private ModelMapperService modelMapperService;
+
     @Override
-    public List<GetAllFuelTypeResponses> getAll() {
+    public DataResult<List<GetAllFuelTypeResponses>> getAll() {
         List<FuelType> fuelTypes = fuelTypeRepository.findAll();
         List<GetAllFuelTypeResponses> getAllFuelTypeResponses = fuelTypes.stream()
                 .map(fuelType -> this.modelMapperService.forResponse()
                         .map(fuelType, GetAllFuelTypeResponses.class))
                 .collect(Collectors.toList());
 
-        return getAllFuelTypeResponses;
+        return new DataResult<>(getAllFuelTypeResponses, true, "Fuel types listed");
     }
+
     @Override
-    public GetByIdFuelTypeResponses getById(int id) {
+    public DataResult<GetByIdFuelTypeResponses> getById(int id) {
         FuelType fuelType = fuelTypeRepository.findById(id).orElseThrow();
         GetByIdFuelTypeResponses getByIdFuelTypeResponses = this.modelMapperService.forResponse()
                 .map(fuelType, GetByIdFuelTypeResponses.class);
 
-        return getByIdFuelTypeResponses;
+        return new DataResult<>(getByIdFuelTypeResponses, true, "Fuel type listed");
     }
 
     @Override
-    public void add(CreateFuelTypeRequests createFuelTypeRequests) {
+    public Result add(CreateFuelTypeRequests createFuelTypeRequests) {
         FuelType fuelType = this.modelMapperService.forRequest()
                 .map(createFuelTypeRequests, FuelType.class);
         this.fuelTypeRepository.save(fuelType);
+
+        return new SuccessResult("Fuel type added");
     }
 
     @Override
-    public void update(UpdateFuelTypeRequests updateFuelTypeRequests) {
+    public Result update(UpdateFuelTypeRequests updateFuelTypeRequests) {
         FuelType fuelType = this.modelMapperService.forRequest()
                 .map(updateFuelTypeRequests, FuelType.class);
         this.fuelTypeRepository.save(fuelType);
 
+        return new SuccessResult("Fuel type updated");
+
     }
 
     @Override
-    public void delete(DeleteFuelTypeRequests deleteFuelTypeRequests) {
+    public Result delete(DeleteFuelTypeRequests deleteFuelTypeRequests) {
         FuelType fuelType = this.modelMapperService.forRequest()
                 .map(deleteFuelTypeRequests, FuelType.class);
         this.fuelTypeRepository.delete(fuelType);
+
+        return new SuccessResult("Fuel type deleted");
 
     }
 }

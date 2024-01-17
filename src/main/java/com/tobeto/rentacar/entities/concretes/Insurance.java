@@ -9,6 +9,15 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
+/**
+ * This class represents an insurance record in the Rent a Car system.
+ * Each insurance record has a unique identifier, a policy number, start and end dates,
+ * additional details, and is associated with a specific car.
+ * It extends the base BaseEntity class.
+ *
+ * @author [Harun Yılmaz]
+ */
+
 @EqualsAndHashCode(callSuper = true)
 @Data
 @AllArgsConstructor

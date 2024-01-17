@@ -10,6 +10,16 @@ import com.tobeto.rentacar.services.dtos.responses.employee.GetByIdEmployeeRespo
 
 import java.util.List;
 
+/**
+ * Service interface for managing employee-related operations.
+ * Defines methods for retrieving, adding, updating, and deleting employees.
+ * Uses Data Transfer Objects (DTOs) for requests and responses.
+ * Provides both individual and list-based retrieval of employee information.
+ * Supports CRUD (Create, Read, Update, Delete) operations for employees.
+ *
+ * @author [Harun Yılmaz]
+ */
+
 public interface EmployeeService {
     DataResult<List<GetAllEmployeeResponses>> getAll();
 

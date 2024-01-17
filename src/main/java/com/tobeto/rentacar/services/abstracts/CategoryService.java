@@ -15,6 +15,16 @@ import com.tobeto.rentacar.services.dtos.responses.category.GetByIdCategoryRespo
 
 import java.util.List;
 
+/**
+ * Service interface for managing category-related operations.
+ * Defines methods for retrieving, adding, updating, and deleting categories.
+ * Uses Data Transfer Objects (DTOs) for requests and responses.
+ * Provides both individual and list-based retrieval of category information.
+ * Supports CRUD (Create, Read, Update, Delete) operations for categories.
+ *
+ * @author [Harun Yılmaz]
+ */
+
 public interface CategoryService {
     DataResult<List<GetAllCategoryResponse>> getAll();
 

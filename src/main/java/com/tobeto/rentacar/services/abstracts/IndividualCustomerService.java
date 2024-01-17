@@ -10,6 +10,16 @@ import com.tobeto.rentacar.services.dtos.responses.individualCustomer.GetByIdInd
 
 import java.util.List;
 
+/**
+ * Service interface for managing individual customer-related operations.
+ * Defines methods for retrieving, adding, updating, and deleting individual customers.
+ * Uses Data Transfer Objects (DTOs) for requests and responses.
+ * Provides both individual and list-based retrieval of individual customer information.
+ * Supports CRUD (Create, Read, Update, Delete) operations for individual customers.
+ *
+ * @author [Harun Yılmaz]
+ */
+
 public interface IndividualCustomerService {
 
     DataResult<List<GetAllIndividualCustomerResponses>> getAll();

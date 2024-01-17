@@ -10,6 +10,16 @@ import com.tobeto.rentacar.services.dtos.responses.comprehensiveInsurance.GetByI
 
 import java.util.List;
 
+/**
+ * Service interface for managing comprehensive insurance-related operations.
+ * Defines methods for retrieving, adding, updating, and deleting comprehensive insurance.
+ * Uses Data Transfer Objects (DTOs) for requests and responses.
+ * Provides both individual and list-based retrieval of comprehensive insurance information.
+ * Supports CRUD (Create, Read, Update, Delete) operations for comprehensive insurance.
+ *
+ * @author [Harun Yılmaz]
+ */
+
 public interface ComprehensiveInsuranceService {
 
     DataResult<List<GetAllComprehensiveInsurance>> getAll();

@@ -12,6 +12,16 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
+/**
+ * This class represents a rental in the Rent a Car system.
+ * Each rental has a start date, end date, return date, start and end kilometers,
+ * total price, discount, and is associated with a specific car, customer, and employee.
+ *
+ * It extends the base BaseEntity class.
+ *
+ * @author [Harun Yılmaz]
+ */
+
 @EqualsAndHashCode(callSuper = true)
 @Data
 @Entity

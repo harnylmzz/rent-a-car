@@ -1,11 +1,11 @@
 package com.tobeto.rentacar.services.concretes.stripe;
 
 import com.stripe.Stripe;
+import com.stripe.exception.StripeException;
+import com.stripe.model.Charge;
 import com.stripe.model.Token;
 import com.tobeto.rentacar.services.dtos.stripe.StripeChargeDto;
 import com.tobeto.rentacar.services.dtos.stripe.StripeTokenDto;
-import com.stripe.exception.StripeException;
-import com.stripe.model.Charge;
 import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -14,20 +14,38 @@ import org.springframework.stereotype.Service;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Service class for handling Stripe-related operations.
+ * Manages the creation of card tokens and charging payments using the Stripe API.
+ * Requires initialization of the Stripe API key using the application properties.
+ *
+ * @author [Harun Yılmaz]
+ */
 @Service
 @Slf4j
 public class StripeManager {
 
+    /**
+     * The secret key for authenticating with the Stripe API.
+     */
     @Value("${api.stripe.secret-key}")
     private String stripeApiKey;
 
+    /**
+     * Initializes the Stripe API key during bean creation.
+     */
     @PostConstruct
     public void init() {
         Stripe.apiKey = stripeApiKey;
     }
 
+    /**
+     * Creates a Stripe card token based on the provided card information.
+     *
+     * @param stripeTokenDto The data transfer object containing card information.
+     * @return The updated StripeTokenDto with the generated token and success status.
+     */
     public StripeTokenDto createCardToken(StripeTokenDto stripeTokenDto) {
-
         try {
             Map<String, Object> card = new HashMap<>();
             card.put("number", stripeTokenDto.getCardNumber());
@@ -43,14 +61,18 @@ public class StripeManager {
             }
             return stripeTokenDto;
         } catch (StripeException e) {
-            log.error("StripeService (createCardToken)", e);
+            log.error("StripeManager (createCardToken)", e);
             throw new RuntimeException(e.getMessage());
         }
     }
 
+    /**
+     * Charges the payment using the provided Stripe charge request information.
+     *
+     * @param chargeRequest The data transfer object containing charge information.
+     * @return The updated StripeChargeDto with the charge ID, success status, and payment outcome message.
+     */
     public StripeChargeDto charge(StripeChargeDto chargeRequest) {
-
-
         try {
             chargeRequest.setSuccess(false);
             Map<String, Object> chargeParams = new HashMap<>();
@@ -69,11 +91,10 @@ public class StripeManager {
             if (charge.getPaid()) {
                 chargeRequest.setChargeId(charge.getId());
                 chargeRequest.setSuccess(true);
-
             }
             return chargeRequest;
         } catch (StripeException e) {
-            log.error("StripeService (charge)", e);
+            log.error("StripeManager (charge)", e);
             throw new RuntimeException(e.getMessage());
         }
     }

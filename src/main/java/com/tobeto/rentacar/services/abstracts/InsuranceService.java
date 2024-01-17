@@ -10,6 +10,16 @@ import com.tobeto.rentacar.services.dtos.responses.insurance.GetByIdInsuranceRes
 
 import java.util.List;
 
+/**
+ * Service interface for managing insurance-related operations.
+ * Defines methods for retrieving, adding, updating, and deleting insurances.
+ * Uses Data Transfer Objects (DTOs) for requests and responses.
+ * Provides both individual and list-based retrieval of insurance information.
+ * Supports CRUD (Create, Read, Update, Delete) operations for insurances.
+ *
+ * @author [Harun Yılmaz]
+ */
+
 public interface InsuranceService {
 
     DataResult<List<GetAllInsuranceResponses>> getAll();
