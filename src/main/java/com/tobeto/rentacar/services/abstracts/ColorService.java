@@ -10,6 +10,16 @@ import com.tobeto.rentacar.services.dtos.responses.color.GetByIdColorResponses;
 
 import java.util.List;
 
+/**
+ * Service interface for managing color-related operations.
+ * Defines methods for retrieving, adding, updating, and deleting colors.
+ * Uses Data Transfer Objects (DTOs) for requests and responses.
+ * Provides both individual and list-based retrieval of color information.
+ * Supports CRUD (Create, Read, Update, Delete) operations for colors.
+ *
+ * @author [Harun Yılmaz]
+ */
+
 public interface ColorService {
     DataResult<List<GetAllColorResponses>> getAll();
 

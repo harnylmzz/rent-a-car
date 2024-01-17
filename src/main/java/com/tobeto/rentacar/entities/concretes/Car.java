@@ -9,7 +9,17 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+/**
+ * This class represents a car in the Rent a Car system.
+ * Each car has a unique identifier, gear type, kilometer, manufacturing year,
+ * price, plate number, and is associated with various related entities.
+ *
+ * It extends the base BaseEntity class.
+ *
+ * @author [Harun Yılmaz]
+ */
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 @Entity
 @AllArgsConstructor
@@ -62,7 +72,5 @@ public class Car extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="category_id", referencedColumnName="id")
     private Category category;
-
-
 
 }

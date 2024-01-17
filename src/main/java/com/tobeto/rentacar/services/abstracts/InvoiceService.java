@@ -10,6 +10,16 @@ import com.tobeto.rentacar.services.dtos.responses.invoice.GetByIdInvoiceRespons
 
 import java.util.List;
 
+/**
+ * Service interface for managing invoice-related operations.
+ * Defines methods for retrieving, adding, updating, and deleting invoices.
+ * Uses Data Transfer Objects (DTOs) for requests and responses.
+ * Provides both individual and list-based retrieval of invoice information.
+ * Supports CRUD (Create, Read, Update, Delete) operations for invoices.
+ *
+ * @author [Harun Yılmaz]
+ */
+
 public interface InvoiceService {
 
     DataResult<List<GetAllInvoiceResponses>> getAll();

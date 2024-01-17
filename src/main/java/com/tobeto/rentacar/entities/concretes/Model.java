@@ -11,6 +11,14 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+/**
+ * This class represents a car model in the Rent a Car system.
+ * Each model has a name, is associated with a brand, and may have multiple cars of that model.
+ *
+ * It extends the base BaseEntity class.
+ * @author [Harun Yılmaz]
+ */
+
 @EqualsAndHashCode(callSuper = true)
 @Data
 @Entity

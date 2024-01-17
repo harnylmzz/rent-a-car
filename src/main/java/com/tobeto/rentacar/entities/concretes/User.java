@@ -1,8 +1,6 @@
 package com.tobeto.rentacar.entities.concretes;
 
 import com.tobeto.rentacar.entities.abstracts.BaseEntity;
-import com.tobeto.rentacar.entities.concretes.Customer;
-import com.tobeto.rentacar.entities.concretes.Employee;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,6 +8,16 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
+
+/**
+ * This class represents users registered in the Rent a Car system.
+ * Each user can play a role in the system as a customer or an employee.
+ *
+ * It extends the base BaseEntity class.
+ *
+ * @author Harun Yılmaz
+ */
+
 
 @EqualsAndHashCode(callSuper = true)
 @Data

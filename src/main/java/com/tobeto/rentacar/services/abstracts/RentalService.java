@@ -12,6 +12,16 @@ import com.tobeto.rentacar.services.dtos.responses.rental.GetByIdRentalResponses
 import java.time.LocalDate;
 import java.util.List;
 
+/**
+ * Service interface for managing rental-related operations.
+ * Defines methods for retrieving, adding, updating, and deleting rentals.
+ * Uses Data Transfer Objects (DTOs) for requests and responses.
+ * Provides both individual and list-based retrieval of rental information.
+ * Supports CRUD (Create, Read, Update, Delete) operations for rentals.
+ *
+ * @author [Harun Yılmaz]
+ */
+
 public interface RentalService {
     DataResult<List<GetAllRentalResponses>> getAll();
     DataResult<GetByIdRentalResponses> getById(int id);
@@ -32,6 +42,5 @@ public interface RentalService {
     List<GetAllRentalResponses> findByTotalPrice(double totalPrice);
 
     List<GetAllRentalResponses> findByDiscount(double discount);
-
 
 }

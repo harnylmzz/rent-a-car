@@ -11,6 +11,16 @@ import com.tobeto.rentacar.services.dtos.responses.review.GetByIdReviewResponses
 
 import java.util.List;
 
+/**
+ * Service interface for managing review-related operations.
+ * Defines methods for retrieving, adding, updating, and deleting reviews.
+ * Uses Data Transfer Objects (DTOs) for requests and responses.
+ * Provides both individual and list-based retrieval of review information.
+ * Supports CRUD (Create, Read, Update, Delete) operations for reviews.
+ *
+ * @author [Harun Yılmaz]
+ */
+
 public interface ReviewService {
     DataResult<List<GetAllReviewResponses>> getAll();
 

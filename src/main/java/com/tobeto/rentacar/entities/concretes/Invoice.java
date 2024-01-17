@@ -7,6 +7,14 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+/**
+ * This class represents an invoice in the Rent a Car system.
+ * Each invoice has a unique identifier, a number, an amount, and a VAT (Value Added Tax) value.
+ * It extends the base BaseEntity class.
+ *
+ * @author [Harun Yılmaz]
+ */
+
 @EqualsAndHashCode(callSuper = true)
 @Data
 @AllArgsConstructor
@@ -23,5 +31,4 @@ public class Invoice extends BaseEntity {
 
     @Column(name = "vat")
     private String vat;
-
 }

@@ -10,14 +10,26 @@ import com.tobeto.rentacar.services.dtos.responses.model.GetByIdModelResponses;
 
 import java.util.List;
 
+/**
+ * Service interface for managing model-related operations.
+ * Defines methods for retrieving, adding, updating, and deleting models.
+ * Uses Data Transfer Objects (DTOs) for requests and responses.
+ * Provides both individual and list-based retrieval of model information.
+ * Supports CRUD (Create, Read, Update, Delete) operations for models.
+ *
+ * @author [Harun Yılmaz]
+ */
+
 public interface ModelService {
     DataResult<List<GetAllModelResponses>> getAll();
+
     DataResult<GetByIdModelResponses> getById(int id);
+
     Result add(CreateModelRequests createModelRequests);
+
     Result update(UpdateModelRequests updateModelRequests);
+
     Result delete(DeleteModelRequests deleteModelRequests);
 
     List<GetAllModelResponses> findByName(String name);
-
-
 }

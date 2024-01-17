@@ -5,6 +5,16 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import lombok.*;
 
+/**
+ * This class represents a corporate customer in the Rent a Car system.
+ * Each corporate customer has a unique identifier, a company name, and a tax number.
+ *
+ * It extends the base Customer class.
+ *
+ * @author [Harun Yılmaz]
+ */
+
+@EqualsAndHashCode(callSuper = true)
 @Getter
 @Setter
 @AllArgsConstructor

@@ -11,6 +11,17 @@ import com.tobeto.rentacar.services.dtos.responses.car.GetByIdCarResponses;
 
 import java.util.List;
 
+/**
+ * Service interface for managing car-related operations.
+ * Defines methods for retrieving, adding, updating, and deleting cars.
+ * Also includes methods for finding cars by year or plate.
+ * Uses Data Transfer Objects (DTOs) for requests and responses.
+ * Provides both individual and list-based retrieval of car information.
+ * Supports CRUD (Create, Read, Update, Delete) operations for cars.
+ *
+ * @author [Harun Yılmaz]
+ */
+
 public interface CarService {
     DataResult<List<GetAllCarResponses>> getAll();
 

@@ -10,6 +10,16 @@ import com.tobeto.rentacar.services.dtos.responses.corporateCustomer.GetByIdCorp
 
 import java.util.List;
 
+/**
+ * Service interface for managing corporate customer-related operations.
+ * Defines methods for retrieving, adding, updating, and deleting corporate customers.
+ * Uses Data Transfer Objects (DTOs) for requests and responses.
+ * Provides both individual and list-based retrieval of corporate customer information.
+ * Supports CRUD (Create, Read, Update, Delete) operations for corporate customers.
+ *
+ * @author [Harun Yılmaz]
+ */
+
 public interface CorporateCustomerService {
 
     DataResult<List<GetAllCorporateCustomer>> getAll();
