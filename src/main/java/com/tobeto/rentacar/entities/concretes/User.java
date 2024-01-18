@@ -1,31 +1,26 @@
 package com.tobeto.rentacar.entities.concretes;
 
-import com.tobeto.rentacar.entities.abstracts.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.List;
+import java.util.Set;
 
-/**
- * This class represents users registered in the Rent a Car system.
- * Each user can play a role in the system as a customer or an employee.
- *
- * It extends the base BaseEntity class.
- *
- * @author Harun Yılmaz
- */
-
-
-@EqualsAndHashCode(callSuper = true)
 @Data
-@Entity
 @AllArgsConstructor
 @NoArgsConstructor
+@Entity
+@Builder
 @Table(name = "users")
-public class User extends BaseEntity {
+public class User implements UserDetails {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private int id;
 
     @Column(name = "first_name")
     private String firstName;
@@ -39,13 +34,20 @@ public class User extends BaseEntity {
     @Column(name = "gsm")
     private String gsm;
 
-    @OneToMany(mappedBy = "user")
-    private List<Customer> customers;
+    @Column(name = "username")
+    private String username;
 
-    @OneToMany(mappedBy = "user")
-    private List<Employee> employees;
+    @Column(name = "password")
+    private String password;
 
-    @OneToMany(mappedBy = "user" )
-    private  List<Review> reviews;
+    private boolean accountNonExpired;
+    private boolean isEnabled;
+    private boolean accountNonLocked;
+    private boolean credentialsNonExpired;
 
+    @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
+    @JoinTable(name = "authorities", joinColumns = @JoinColumn(name = "user_id"))
+    @Column(name = "role", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Set<Role> authorities;
 }

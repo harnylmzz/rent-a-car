@@ -1,11 +1,8 @@
 package com.tobeto.rentacar.controller;
 
-
 import com.tobeto.rentacar.core.result.DataResult;
 import com.tobeto.rentacar.core.result.Result;
 import com.tobeto.rentacar.services.abstracts.ReviewService;
-
-
 import com.tobeto.rentacar.services.dtos.requests.review.CreateReviewRequests;
 import com.tobeto.rentacar.services.dtos.requests.review.DeleteReviewRequests;
 import com.tobeto.rentacar.services.dtos.requests.review.UpdateReviewRequests;
@@ -13,8 +10,6 @@ import com.tobeto.rentacar.services.dtos.responses.review.GetAllReviewResponses;
 import com.tobeto.rentacar.services.dtos.responses.review.GetByIdReviewResponses;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-
-import java.sql.PreparedStatement;
 import java.util.List;
 
 @RestController

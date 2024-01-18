@@ -1,67 +1,51 @@
 package com.tobeto.rentacar.controller;
 
-import com.tobeto.rentacar.core.result.DataResult;
-import com.tobeto.rentacar.core.result.Result;
-import com.tobeto.rentacar.services.abstracts.UserService;
-import com.tobeto.rentacar.services.dtos.requests.user.CreateUserRequests;
-import com.tobeto.rentacar.services.dtos.requests.user.DeleteUserRequests;
-import com.tobeto.rentacar.services.dtos.requests.user.UpdateUserRequests;
-import com.tobeto.rentacar.services.dtos.responses.user.GetAllUserResponses;
-import com.tobeto.rentacar.services.dtos.responses.user.GetByIdUserResponses;
-
+import com.tobeto.rentacar.entities.concretes.User;
+import com.tobeto.rentacar.services.dtos.auth.AuthRequest;
+import com.tobeto.rentacar.services.dtos.auth.CreateUserRequest;
+import com.tobeto.rentacar.services.jwt.JwtService;
+import com.tobeto.rentacar.services.jwt.UserService;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/api/v1/users")
+@Slf4j
 @AllArgsConstructor
 public class UsersController {
+
     private UserService userService;
+    private JwtService jwtService;
+    private AuthenticationManager authenticationManager;
 
-    @GetMapping("/getAll")
-    public DataResult<List<GetAllUserResponses>> getAll() {
-        return this.userService.getAll();
+    @PostMapping("/addUser")
+    public User addUser(@RequestBody CreateUserRequest createUserRequest) {
+        return userService.createUser(createUserRequest);
     }
 
-    @GetMapping("/getById")
-    public DataResult<GetByIdUserResponses> getById(int id) {
-        return userService.getById(id);
+    @PostMapping("/generateToken")
+    public String generateToken(@RequestBody AuthRequest authRequest) {
+        Authentication authentication = authenticationManager.authenticate
+                (new UsernamePasswordAuthenticationToken(authRequest.username(), authRequest.password()));
+        if (authentication.isAuthenticated()) {
+            return jwtService.generateToken(authRequest.username());
+        }
+        log.info("invalid username " + authRequest.username());
+        throw new UsernameNotFoundException("invalid username {} " + authRequest.username());
     }
 
-    @PostMapping("/add")
-    public Result add(@RequestBody CreateUserRequests createUserRequests) {
-        return this.userService.add(createUserRequests);
+    @GetMapping("/user")
+    public String getUserString() {
+        return "This is USER!";
     }
 
-    @PutMapping("/update")
-    public Result update(@RequestBody UpdateUserRequests updateUserRequest) {
-        return this.userService.update(updateUserRequest);
+    @GetMapping("/admin")
+    public String getAdminString() {
+        return "This is ADMIN!";
     }
-
-    @DeleteMapping("/delete")
-    public Result delete(DeleteUserRequests deleteUserRequests) {
-        return this.userService.delete(deleteUserRequests);
-    }
-    @GetMapping("/findbyfirstname")
-    public List<GetAllUserResponses> findByFirstName( @RequestParam String firstName){
-        return this.userService.findByFirstName(firstName);
-    }
-
-    @GetMapping("/findbylastname")
-    public List<GetAllUserResponses> findByLastName(@RequestParam String lastName){
-        return this.userService.findByLastName(lastName);
-    }
-
-    @GetMapping("/findbyemail")
-    public List<GetAllUserResponses> findByEmail(@RequestParam String email){
-        return this.userService.findByEmail(email);
-    }
-
-    @GetMapping("/findbygsm")
-    public List<GetAllUserResponses> findByGsm(@RequestParam String gsm){
-        return this.userService.findByGsm(gsm);
-    }
-
 }
