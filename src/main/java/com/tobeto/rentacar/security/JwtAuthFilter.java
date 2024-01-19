@@ -1,4 +1,4 @@
-package com.tobeto.rentacar.filter;
+package com.tobeto.rentacar.security;
 
 import com.tobeto.rentacar.services.jwt.JwtService;
 import com.tobeto.rentacar.services.jwt.UserService;
