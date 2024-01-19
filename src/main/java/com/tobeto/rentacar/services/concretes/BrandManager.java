@@ -43,7 +43,8 @@ public class BrandManager implements BrandService {
 
     @Override
     public DataResult<GetByIdBrandResponses> getById(int id) {
-        Brand brand = brandRepository.findById(id).orElseThrow(() -> new DataNotFoundException("Data not found.") {
+        Brand brand = brandRepository.findById(id)
+                .orElseThrow(() -> new DataNotFoundException("Data not found.") {
         });
         GetByIdBrandResponses getByIdBrandResponses = this.modelMapperService.forResponse()
                 .map(brand, GetByIdBrandResponses.class);
@@ -70,6 +71,7 @@ public class BrandManager implements BrandService {
                 .map(updateBrandRequests, Brand.class);
         brand.setId(updateBrandRequests.getId());
         brand.setName(updateBrandRequests.getName());
+
         this.brandRepository.save(brand);
 
         return new SuccessResult("Brand updated.");

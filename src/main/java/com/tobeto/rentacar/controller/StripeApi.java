@@ -1,6 +1,6 @@
-package com.tobeto.rentacar.controller.stripe;
+package com.tobeto.rentacar.controller;
 
-import com.tobeto.rentacar.services.concretes.stripe.StripeManager;
+import com.tobeto.rentacar.services.stripe.StripeManager;
 import com.tobeto.rentacar.services.dtos.stripe.StripeChargeDto;
 import com.tobeto.rentacar.services.dtos.stripe.StripeTokenDto;
 import lombok.AllArgsConstructor;
@@ -20,18 +20,7 @@ import org.springframework.web.bind.annotation.*;
 @AllArgsConstructor
 public class StripeApi {
 
-    /**
-     * The StripeManager instance for handling Stripe operations.
-     */
-
     private final StripeManager stripeManager;
-
-    /**
-     * Endpoint for creating a card token.
-     *
-     * @param stripeTokenDto The data transfer object containing card information.
-     * @return The created StripeTokenDto.
-     */
 
     @PostMapping("/card/token")
     @ResponseBody
@@ -40,13 +29,6 @@ public class StripeApi {
 
         return stripeManager.createCardToken(stripeTokenDto);
     }
-
-    /**
-     * Endpoint for charging payments.
-     *
-     * @param stripeChargeDto The data transfer object containing charge information.
-     * @return The created StripeChargeDto.
-     */
 
     @PostMapping("/charge")
     @ResponseBody

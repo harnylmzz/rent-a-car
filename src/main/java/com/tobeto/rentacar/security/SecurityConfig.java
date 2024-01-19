@@ -1,4 +1,4 @@
-package com.tobeto.rentacar.filter;
+package com.tobeto.rentacar.security;
 
 import com.tobeto.rentacar.services.jwt.UserService;
 import lombok.AllArgsConstructor;
@@ -36,7 +36,11 @@ public class SecurityConfig {
                 .authorizeHttpRequests(x ->
                         x.requestMatchers(
                                 "/api/v1/users/addUser/**",
-                                "/api/v1/users/generateToken/**",
+                                "/api/v1/users/login/**",
+                                "/api/v1/users/getUserById/**",
+                                "/api/v1/users/getAllUser/**",
+                                "/api/v1/users/updateUser/**",
+                                "/api/v1/users/deleteUser//**",
                                 "/swagger-ui/**",
                                 "/swagger-ui",
                                 "/swagger-resources/**",

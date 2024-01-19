@@ -1,4 +1,4 @@
-package com.tobeto.rentacar.services.dtos.auth;
+package com.tobeto.rentacar.services.dtos.requests.user;
 
 import com.tobeto.rentacar.entities.concretes.Role;
 import lombok.Builder;
@@ -6,7 +6,7 @@ import lombok.Builder;
 import java.util.Set;
 
 @Builder
-public record CreateUserRequest(
+public record CreateUserRequests (
         String firstName,
         String lastName,
         String email,
