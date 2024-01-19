@@ -13,6 +13,11 @@
    + ##### ■ Spring Boot 3.1.5
    + ##### ■ Spring Web
    + ##### ■ Sprin Boot Dev Tools
+   + ##### ■ Spring Security
+     
++ #### Payment
+  
+   + ##### ■ Stripe API 
 
 + #### Spring Data
   
@@ -39,7 +44,6 @@
    + ##### ■ GitHub
      
 + #### APIs Interaction Platform
-   + #### ■ Postman
    + #### ■ Swagger-ui 
 ---
 
