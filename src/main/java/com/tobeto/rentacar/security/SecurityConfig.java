@@ -35,12 +35,17 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(x ->
                         x.requestMatchers(
+                                //user
                                 "/api/v1/users/addUser/**",
                                 "/api/v1/users/login/**",
                                 "/api/v1/users/getUserById/**",
                                 "/api/v1/users/getAllUser/**",
                                 "/api/v1/users/updateUser/**",
                                 "/api/v1/users/deleteUser//**",
+                                //review
+                                "/api/review/add/**",
+                                "/api/review/getAll/**",
+                                //swagger
                                 "/swagger-ui/**",
                                 "/swagger-ui",
                                 "/swagger-resources/**",
