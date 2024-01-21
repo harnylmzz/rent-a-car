@@ -41,8 +41,7 @@ public class ModelManager implements ModelService {
 
     @Override
     public DataResult<GetByIdModelResponses> getById(int id) {
-        Model model = modelRepository.findById(id).orElseThrow(() -> new DataNotFoundException("Data not found.") {
-        });
+        Model model = modelRepository.findById(id).orElseThrow(() -> new DataNotFoundException("Data not found."));
         GetByIdModelResponses getByIdModelResponses = this.modelMapperService.forResponse()
                 .map(model, GetByIdModelResponses.class);
         return new DataResult<>(getByIdModelResponses, true, "Model listed");

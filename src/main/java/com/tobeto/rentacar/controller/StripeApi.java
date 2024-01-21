@@ -3,7 +3,7 @@ package com.tobeto.rentacar.controller;
 import com.tobeto.rentacar.services.stripe.StripeManager;
 import com.tobeto.rentacar.services.dtos.stripe.StripeChargeDto;
 import com.tobeto.rentacar.services.dtos.stripe.StripeTokenDto;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/public/stripe")
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class StripeApi {
 
     private final StripeManager stripeManager;

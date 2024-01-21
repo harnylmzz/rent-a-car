@@ -17,6 +17,7 @@ import com.tobeto.rentacar.services.dtos.responses.customer.GetAllCustomerRespon
 import com.tobeto.rentacar.services.dtos.responses.customer.GetByIdCustomerResponses;
 import com.tobeto.rentacar.services.rules.CustomerBusinessRules;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -24,11 +25,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class CustomerManager implements CustomerService {
-    private CustomerRepository customerRepository;
-    private ModelMapperService modelMapperService;
-    private CustomerBusinessRules customerBusinessRules;
+    private final CustomerRepository customerRepository;
+    private final ModelMapperService modelMapperService;
+    private final CustomerBusinessRules customerBusinessRules;
 
     @Override
     public DataResult<List<GetAllCustomerResponses>> getAll() {

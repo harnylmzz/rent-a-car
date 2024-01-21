@@ -8,18 +8,17 @@ import com.tobeto.rentacar.services.dtos.requests.rental.DeleteRentalRequests;
 import com.tobeto.rentacar.services.dtos.requests.rental.UpdateRentalRequests;
 import com.tobeto.rentacar.services.dtos.responses.rental.GetAllRentalResponses;
 import com.tobeto.rentacar.services.dtos.responses.rental.GetByIdRentalResponses;
-import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.List;
 
 @RestController
-@AllArgsConstructor
+@RequiredArgsConstructor
 @RequestMapping("/api/rentals")
 public class RentalsController {
-    private RentalService rentalService;
+    private final RentalService rentalService;
 
     @GetMapping("/getAll")
     public DataResult<List<GetAllRentalResponses>> getAll() {

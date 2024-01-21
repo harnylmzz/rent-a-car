@@ -15,6 +15,7 @@ import com.tobeto.rentacar.services.dtos.responses.color.GetAllColorResponses;
 import com.tobeto.rentacar.services.dtos.responses.color.GetByIdColorResponses;
 import com.tobeto.rentacar.services.rules.ColorBusinessRules;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -22,11 +23,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class ColorManager implements ColorService {
-    private ColorRepository colorRepository;
-    private ModelMapperService modelMapperService;
-    private ColorBusinessRules colorBusinessRules;
+    private final ColorRepository colorRepository;
+    private final ModelMapperService modelMapperService;
+    private final ColorBusinessRules colorBusinessRules;
 
     @Override
     public DataResult<List<GetAllColorResponses>> getAll() {

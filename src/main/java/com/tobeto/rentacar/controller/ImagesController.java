@@ -8,17 +8,18 @@ import com.tobeto.rentacar.services.dtos.requests.image.DeleteImageRequests;
 import com.tobeto.rentacar.services.dtos.requests.image.UpdateImageRequests;
 import com.tobeto.rentacar.services.dtos.responses.image.GetAllImageResponses;
 import com.tobeto.rentacar.services.dtos.responses.image.GetByIdImageResponses;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/images")
-@AllArgsConstructor
+@RequiredArgsConstructor
+@CrossOrigin
 public class ImagesController {
 
-    private ImageService imageService;
+    private final ImageService imageService;
 
     @GetMapping("/getAll")
     public DataResult<List<GetAllImageResponses>> getAll() {

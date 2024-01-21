@@ -9,17 +9,17 @@ import com.tobeto.rentacar.services.dtos.requests.invoice.UpdateInvoiceRequests;
 import com.tobeto.rentacar.services.dtos.responses.invoice.GetAllInvoiceResponses;
 import com.tobeto.rentacar.services.dtos.responses.invoice.GetByIdInvoiceResponses;
 import jakarta.validation.Valid;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/invoices")
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class InvoicesController {
 
-    private InvoiceService invoiceService;
+    private final InvoiceService invoiceService;
 
     @GetMapping("/getall")
     public DataResult<List<GetAllInvoiceResponses>> getAll() {

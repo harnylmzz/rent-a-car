@@ -14,17 +14,18 @@ import com.tobeto.rentacar.services.dtos.requests.individualCustomer.UpdateIndiv
 import com.tobeto.rentacar.services.dtos.responses.individualCustomer.GetAllIndividualCustomerResponses;
 import com.tobeto.rentacar.services.dtos.responses.individualCustomer.GetByIdIndividualCustomerResponses;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class IndividualCustomerManager implements IndividualCustomerService {
 
-    private IndividualCustomerRepository individualCustomerRepository;
-    private ModelMapperService modelMapperService;
+    private final IndividualCustomerRepository individualCustomerRepository;
+    private final ModelMapperService modelMapperService;
 
     @Override
     public DataResult<List<GetAllIndividualCustomerResponses>> getAll() {

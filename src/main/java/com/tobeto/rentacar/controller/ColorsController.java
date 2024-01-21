@@ -8,16 +8,17 @@ import com.tobeto.rentacar.services.dtos.requests.color.DeleteColorRequests;
 import com.tobeto.rentacar.services.dtos.requests.color.UpdateColorRequests;
 import com.tobeto.rentacar.services.dtos.responses.color.GetAllColorResponses;
 import com.tobeto.rentacar.services.dtos.responses.color.GetByIdColorResponses;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@AllArgsConstructor
+@CrossOrigin
+@RequiredArgsConstructor
 @RequestMapping("/api/colors")
 public class ColorsController {
-    private ColorService colorService;
+    private final ColorService colorService;
 
 
     @GetMapping("/getAll")

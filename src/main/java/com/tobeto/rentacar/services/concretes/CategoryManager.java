@@ -14,15 +14,17 @@ import com.tobeto.rentacar.services.dtos.requests.category.UpdateCategoryRequest
 import com.tobeto.rentacar.services.dtos.responses.category.GetAllCategoryResponse;
 import com.tobeto.rentacar.services.dtos.responses.category.GetByIdCategoryResponse;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
-@AllArgsConstructor
+
 @Service
+@RequiredArgsConstructor
 public class CategoryManager implements CategoryService {
-    private CategoryRepository categoryRepository;
-    private ModelMapperService modelMapperService;
+    private final CategoryRepository categoryRepository;
+    private final ModelMapperService modelMapperService;
     @Override
     public DataResult<List<GetAllCategoryResponse>> getAll() {
         List<Category> categories = categoryRepository.findAll();

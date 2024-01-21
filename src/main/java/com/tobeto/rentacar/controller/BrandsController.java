@@ -6,22 +6,20 @@ import com.tobeto.rentacar.services.abstracts.BrandService;
 import com.tobeto.rentacar.services.dtos.requests.brand.CreateBrandRequests;
 import com.tobeto.rentacar.services.dtos.requests.brand.DeleteBrandRequests;
 import com.tobeto.rentacar.services.dtos.requests.brand.UpdateBrandRequests;
-
 import com.tobeto.rentacar.services.dtos.responses.brand.GetAllBrandResponses;
 import com.tobeto.rentacar.services.dtos.responses.brand.GetByIdBrandResponses;
-
 import jakarta.validation.Valid;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/brands")
-@AllArgsConstructor
+@RequiredArgsConstructor
 @CrossOrigin
 public class BrandsController {
-    private BrandService brandService;
+    private final BrandService brandService;
 
     @GetMapping("/getAll")
     public DataResult<List<GetAllBrandResponses>> getAll() {

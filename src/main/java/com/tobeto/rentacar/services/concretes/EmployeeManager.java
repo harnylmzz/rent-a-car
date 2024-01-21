@@ -14,16 +14,17 @@ import com.tobeto.rentacar.services.dtos.requests.employee.UpdateEmployeeRequest
 import com.tobeto.rentacar.services.dtos.responses.employee.GetAllEmployeeResponses;
 import com.tobeto.rentacar.services.dtos.responses.employee.GetByIdEmployeeResponses;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class EmployeeManager implements EmployeeService {
-    private EmployeeRepository employeeRepository;
-    private ModelMapperService modelMapperService;
+    private final EmployeeRepository employeeRepository;
+    private final ModelMapperService modelMapperService;
 
     @Override
     public DataResult<List<GetAllEmployeeResponses>> getAll() {

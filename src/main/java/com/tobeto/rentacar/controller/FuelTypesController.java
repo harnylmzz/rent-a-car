@@ -7,23 +7,23 @@ import com.tobeto.rentacar.services.dtos.requests.fuelType.DeleteFuelTypeRequest
 import com.tobeto.rentacar.services.dtos.requests.fuelType.UpdateFuelTypeRequests;
 import com.tobeto.rentacar.services.dtos.responses.fuelType.GetAllFuelTypeResponses;
 import com.tobeto.rentacar.services.dtos.responses.fuelType.GetByIdFuelTypeResponses;
-import com.tobeto.rentacar.services.dtos.responses.image.GetAllImageResponses;
-import com.tobeto.rentacar.services.dtos.responses.image.GetByIdImageResponses;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/fuelTypes")
-@AllArgsConstructor
+@RequiredArgsConstructor
+@CrossOrigin
 public class FuelTypesController {
-    private FuelTypeService fuelTypeService;
+    private final FuelTypeService fuelTypeService;
 
     @GetMapping("/getAll")
     public DataResult<List<GetAllFuelTypeResponses>> getAll() {
         return this.fuelTypeService.getAll();
     }
+
     @GetMapping("/getById")
     public DataResult<GetByIdFuelTypeResponses> getById(int id) {
         return this.fuelTypeService.getById(id);

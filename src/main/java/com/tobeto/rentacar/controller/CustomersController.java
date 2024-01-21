@@ -10,15 +10,17 @@ import com.tobeto.rentacar.services.dtos.responses.brand.GetAllBrandResponses;
 import com.tobeto.rentacar.services.dtos.responses.customer.GetAllCustomerResponses;
 import com.tobeto.rentacar.services.dtos.responses.customer.GetByIdCustomerResponses;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/customers")
-@AllArgsConstructor
+@RequiredArgsConstructor
+@CrossOrigin
 public class CustomersController {
-    private CustomerService customerService;
+    private final CustomerService customerService;
 
     @GetMapping("/getAll")
     public DataResult<List<GetAllCustomerResponses>> getAll() {

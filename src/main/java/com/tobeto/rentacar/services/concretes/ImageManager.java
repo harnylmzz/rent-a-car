@@ -15,6 +15,7 @@ import com.tobeto.rentacar.services.dtos.requests.image.UpdateImageRequests;
 import com.tobeto.rentacar.services.dtos.responses.image.GetAllImageResponses;
 import com.tobeto.rentacar.services.dtos.responses.image.GetByIdImageResponses;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -22,11 +23,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class ImageManager implements ImageService {
 
-    private ImageRepository imageRepository;
-    private ModelMapperService modelMapperService;
+    private final ImageRepository imageRepository;
+    private final ModelMapperService modelMapperService;
 
     @Override
     public DataResult<List<GetAllImageResponses>> getAll() {
@@ -41,8 +42,7 @@ public class ImageManager implements ImageService {
     @Override
     public DataResult<GetByIdImageResponses> getById(int id) {
 
-        Image image = imageRepository.findById(id).orElseThrow(() -> new DataNotFoundException("Data not found.") {
-        });
+        Image image = imageRepository.findById(id).orElseThrow(() -> new DataNotFoundException("Data not found."));
         GetByIdImageResponses getByIdImageResponses = this.modelMapperService.forResponse()
                 .map(image, GetByIdImageResponses.class);
 

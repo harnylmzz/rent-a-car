@@ -13,16 +13,18 @@ import com.tobeto.rentacar.services.dtos.requests.fuelType.UpdateFuelTypeRequest
 import com.tobeto.rentacar.services.dtos.responses.fuelType.GetAllFuelTypeResponses;
 import com.tobeto.rentacar.services.dtos.responses.fuelType.GetByIdFuelTypeResponses;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-@AllArgsConstructor
+
 @Service
+@RequiredArgsConstructor
 public class FuelTypeManager implements FuelTypeService {
-    private FuelTypeRepository fuelTypeRepository;
-    private ModelMapperService modelMapperService;
+    private final FuelTypeRepository fuelTypeRepository;
+    private final ModelMapperService modelMapperService;
 
     @Override
     public DataResult<List<GetAllFuelTypeResponses>> getAll() {
