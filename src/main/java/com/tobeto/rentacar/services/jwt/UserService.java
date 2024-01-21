@@ -20,7 +20,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 import java.util.Optional;
@@ -40,8 +39,11 @@ public class UserService implements UserDetailsService {
         return user.orElseThrow(EntityNotFoundException::new);
     }
 
-    public Optional<User> findByUsername(String username) {
-        return userRepository.findByUsername(username);
+    public Optional<GetByIdUserResponses> findByUsername(String username) {
+        return userRepository.findByUsername(username)
+                .map(user -> this.modelMapperService.forResponse()
+                        .map(user, GetByIdUserResponses.class));
+
     }
 
     public User createUser(CreateUserRequests createUserRequest) {
