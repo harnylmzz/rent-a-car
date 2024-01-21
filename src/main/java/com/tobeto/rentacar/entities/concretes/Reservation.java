@@ -39,4 +39,5 @@ public class Reservation extends BaseEntity {
     @OneToOne
     @JoinColumn(name = "car_id")
     private Car car;
+
 }

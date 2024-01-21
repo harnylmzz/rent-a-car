@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RequiredArgsConstructor
-@RequestMapping("/api/comprehensiveInsurances")
+@RequestMapping("/api/v1/comprehensiveInsurances")
 @RestController
 public class ComprehensiveInsurancesController {
 

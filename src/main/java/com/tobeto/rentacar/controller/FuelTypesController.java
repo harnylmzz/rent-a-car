@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/fuelTypes")
+@RequestMapping("/api/v1/fuelTypes")
 @RequiredArgsConstructor
 @CrossOrigin
 public class FuelTypesController {
