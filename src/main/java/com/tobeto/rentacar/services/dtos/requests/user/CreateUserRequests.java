@@ -1,6 +1,6 @@
 package com.tobeto.rentacar.services.dtos.requests.user;
 
-import com.tobeto.rentacar.entities.concretes.Role;
+import com.tobeto.rentacar.entities.concretes.enums.Role;
 import lombok.Builder;
 
 import java.util.Set;

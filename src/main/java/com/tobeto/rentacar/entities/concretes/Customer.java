@@ -1,16 +1,17 @@
 package com.tobeto.rentacar.entities.concretes;
 
-import com.tobeto.rentacar.entities.abstracts.BaseEntity;
+import com.tobeto.rentacar.entities.concretes.enums.CustomerType;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * This class represents a customer in the Rent a Car system.
  * Each customer has a unique identifier, a nationality ID, and is associated with a user account.
- *
- * It extends the base BaseEntity class.
+ * <p>
+ * It extends the base User class.
  *
  * @author [Harun Yılmaz]
  */
@@ -22,15 +23,16 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "customers")
-public class Customer extends BaseEntity {
+public class Customer extends User {
 
-    @Column(name = "nationality_id")
-    private String nationalityId;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private User user;
+    @Column(name = "customer_number")
+    private String customerNumber;
 
     @OneToMany(mappedBy = "customer")
     private List<Rental> rentals;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "customer_type")
+   private CustomerType customerType;
+
 }

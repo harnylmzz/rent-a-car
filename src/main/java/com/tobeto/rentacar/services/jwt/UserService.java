@@ -58,10 +58,7 @@ public class UserService implements UserDetailsService {
                 .username(createUserRequest.username())
                 .password(bCryptPasswordEncoder.encode(createUserRequest.password()))
                 .authorities(createUserRequest.authorities())
-                .accountNonExpired(true)
-                .credentialsNonExpired(true)
-                .isEnabled(true)
-                .accountNonLocked(true)
+
                 .build();
 
         return userRepository.save(user);

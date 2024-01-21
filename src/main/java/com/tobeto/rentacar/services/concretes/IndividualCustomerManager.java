@@ -15,6 +15,7 @@ import com.tobeto.rentacar.services.dtos.responses.individualCustomer.GetAllIndi
 import com.tobeto.rentacar.services.dtos.responses.individualCustomer.GetByIdIndividualCustomerResponses;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -26,6 +27,7 @@ public class IndividualCustomerManager implements IndividualCustomerService {
 
     private final IndividualCustomerRepository individualCustomerRepository;
     private final ModelMapperService modelMapperService;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public DataResult<List<GetAllIndividualCustomerResponses>> getAll() {
@@ -54,10 +56,10 @@ public class IndividualCustomerManager implements IndividualCustomerService {
     @Override
     public Result add(CreateIndividualCustomerRequests createIndividualCustomerRequests) {
 
-        IndividualCustomer individualCustomer = this.modelMapperService.forRequest()
-                .map(createIndividualCustomerRequests, IndividualCustomer.class);
+        createIndividualCustomerRequests.setPassword(passwordEncoder.encode(createIndividualCustomerRequests.getPassword()));
 
-        this.individualCustomerRepository.save(individualCustomer);
+        this.individualCustomerRepository.save(this.modelMapperService.forRequest()
+                .map(createIndividualCustomerRequests, IndividualCustomer.class));
 
         return new SuccessResult("Individual Customer added");
     }

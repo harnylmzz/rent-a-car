@@ -10,9 +10,4 @@ public class CustomerBusinessRules {
 
     private CustomerRepository customerRepository;
 
-    public void checkIfCustomerExists(String nationalityId) {
-        if (this.customerRepository.existsByNationalityId(nationalityId)) {
-            throw new RuntimeException("Customer already exists.");
-        }
-    }
 }

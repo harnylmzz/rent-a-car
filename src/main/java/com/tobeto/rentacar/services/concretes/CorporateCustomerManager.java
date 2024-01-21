@@ -15,6 +15,7 @@ import com.tobeto.rentacar.services.dtos.responses.corporateCustomer.GetAllCorpo
 import com.tobeto.rentacar.services.dtos.responses.corporateCustomer.GetByIdCorporateCustomer;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -26,6 +27,7 @@ public class CorporateCustomerManager implements CorporateCustomerService {
 
     private final CorporateCustomerRepository corporateCustomerRepository;
     private final ModelMapperService modelMapperService;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public DataResult<List<GetAllCorporateCustomer>> getAll() {
@@ -54,10 +56,10 @@ public class CorporateCustomerManager implements CorporateCustomerService {
     @Override
     public Result add(CreateCorporateCustomerRequests createCorporateCustomerRequests) {
 
-        CorporateCustomer corporateCustomer = this.modelMapperService.forRequest()
-                .map(createCorporateCustomerRequests, CorporateCustomer.class);
+        createCorporateCustomerRequests.setPassword(passwordEncoder.encode(createCorporateCustomerRequests.getPassword()));
 
-        this.corporateCustomerRepository.save(corporateCustomer);
+        this.corporateCustomerRepository.save(this.modelMapperService.forRequest()
+                .map(createCorporateCustomerRequests, CorporateCustomer.class));
 
         return new SuccessResult("Corporate Customer added");
     }

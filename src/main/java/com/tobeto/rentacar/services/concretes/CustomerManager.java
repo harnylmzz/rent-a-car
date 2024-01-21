@@ -55,10 +55,8 @@ public class CustomerManager implements CustomerService {
     @Override
     public Result add(CreateCustomerRequests createCustomerRequests) {
 
-        this.customerBusinessRules.checkIfCustomerExists(createCustomerRequests.getNationalityId());
-
-        Customer customer = new Customer();
-        customer.setNationalityId(createCustomerRequests.getNationalityId());
+        Customer customer = this.modelMapperService.forRequest()
+                .map(createCustomerRequests, Customer.class);
 
         this.customerRepository.save(customer);
 
@@ -70,7 +68,6 @@ public class CustomerManager implements CustomerService {
 
         Customer customer = this.modelMapperService.forRequest()
                 .map(updateCustomerRequests, Customer.class);
-        customer.setNationalityId(updateCustomerRequests.getNationalityId());
 
         this.customerRepository.save(customer);
 

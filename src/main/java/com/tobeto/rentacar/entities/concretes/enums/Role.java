@@ -1,15 +1,13 @@
-package com.tobeto.rentacar.entities.concretes;
+package com.tobeto.rentacar.entities.concretes.enums;
 
 import org.springframework.security.core.GrantedAuthority;
 
 public enum Role implements GrantedAuthority {
 
     ROLE_ADMIN("ROLE_ADMIN"),
-    ROLE_USER("ROLE_USER"),
-    ROLE_MODERATOR("ROLE_MODERATOR"),
-    ROLE_CORPORATE("ROLE_CORPORATE"),
-    ROLE_INDIVIDUAL("ROLE_INDIVIDUAL"),
-    ROLE_EMPLOYEE("ROLE_EMPLOYEE");
+    ROLE_EMPLOYEE("ROLE_EMPLOYEE"),
+
+    ROLE_CUSTOMER("ROLE_CUSTOMER");
 
     private String value;
 
