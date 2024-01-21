@@ -48,7 +48,7 @@ public class CreateCorporateCustomerRequests {
     @NotNull(message = "Tax number is required")
     private String taxNumber;
 
-    private Set<Role> authorities = Set.of(Role.ROLE_ADMIN);
+    private Set<Role> authorities = Set.of(Role.ROLE_CUSTOMER);
 
     private CustomerType customerType = CustomerType.ROLE_CORPORATE;
 

@@ -48,7 +48,7 @@ public class CreateIndividualCustomerRequests {
     @NotNull(message = "Customer number is required")
     private String customerNumber;
 
-    private Set<Role> authorities = Set.of(Role.ROLE_ADMIN);
+    private Set<Role> authorities = Set.of(Role.ROLE_CUSTOMER);
 
     private CustomerType customerType = CustomerType.ROLE_INDIVIDUAL;
 }
