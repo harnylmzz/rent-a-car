@@ -8,6 +8,7 @@ import com.tobeto.rentacar.services.dtos.requests.category.DeleteCategoryRequest
 import com.tobeto.rentacar.services.dtos.requests.category.UpdateCategoryRequests;
 import com.tobeto.rentacar.services.dtos.responses.category.GetAllCategoryResponse;
 import com.tobeto.rentacar.services.dtos.responses.category.GetByIdCategoryResponse;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,7 +32,7 @@ public class CategoriesController {
     }
 
     @PostMapping("/add")
-    public Result add(@RequestBody CreateCategoryRequests createCategoryResponse) {
+    public Result add(@RequestBody @Valid CreateCategoryRequests createCategoryResponse) {
         return categoryService.add(createCategoryResponse);
     }
 
