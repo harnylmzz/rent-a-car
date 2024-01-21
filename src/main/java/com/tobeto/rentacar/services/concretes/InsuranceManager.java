@@ -14,17 +14,18 @@ import com.tobeto.rentacar.services.dtos.requests.insurance.UpdateInsuranceReque
 import com.tobeto.rentacar.services.dtos.responses.insurance.GetAllInsuranceResponses;
 import com.tobeto.rentacar.services.dtos.responses.insurance.GetByIdInsuranceResponses;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class InsuranceManager implements InsuranceService {
 
-    private InsuranceRepository insuranceRepository;
-    private ModelMapperService modelMapperService;
+    private final InsuranceRepository insuranceRepository;
+    private final ModelMapperService modelMapperService;
 
     @Override
     public DataResult<List<GetAllInsuranceResponses>> getAll() {

@@ -8,16 +8,17 @@ import com.tobeto.rentacar.services.dtos.requests.category.DeleteCategoryRequest
 import com.tobeto.rentacar.services.dtos.requests.category.UpdateCategoryRequests;
 import com.tobeto.rentacar.services.dtos.responses.category.GetAllCategoryResponse;
 import com.tobeto.rentacar.services.dtos.responses.category.GetByIdCategoryResponse;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@AllArgsConstructor
+@CrossOrigin
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/category")
 public class CategoriesController {
-    private CategoryService categoryService;
+    private final CategoryService categoryService;
 
     @GetMapping("/getAll")
     public DataResult<List<GetAllCategoryResponse>> getAll() {
@@ -40,7 +41,7 @@ public class CategoriesController {
     }
 
     @DeleteMapping("/delete")
-    public Result delete(DeleteCategoryRequests  deleteCategoryResponse) {
+    public Result delete(DeleteCategoryRequests deleteCategoryResponse) {
         return categoryService.delete(deleteCategoryResponse);
     }
 }

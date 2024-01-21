@@ -11,7 +11,7 @@ import com.tobeto.rentacar.services.dtos.responses.user.GetAllUserResponses;
 import com.tobeto.rentacar.services.dtos.responses.user.GetByIdUserResponses;
 import com.tobeto.rentacar.services.jwt.JwtService;
 import com.tobeto.rentacar.services.jwt.UserService;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -24,12 +24,12 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/users")
 @Slf4j
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class UsersController {
 
-    private UserService userService;
-    private JwtService jwtService;
-    private AuthenticationManager authenticationManager;
+    private final UserService userService;
+    private final JwtService jwtService;
+    private final AuthenticationManager authenticationManager;
 
     @GetMapping("/getUserById")
     public DataResult<GetByIdUserResponses> getUserById(int id) {

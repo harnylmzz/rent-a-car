@@ -15,16 +15,17 @@ import com.tobeto.rentacar.services.dtos.requests.review.UpdateReviewRequests;
 import com.tobeto.rentacar.services.dtos.responses.review.GetAllReviewResponses;
 import com.tobeto.rentacar.services.dtos.responses.review.GetByIdReviewResponses;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class ReviewManager  implements ReviewService {
-    private ReviewRepository reviewRepository;
-    private ModelMapperManager modelMapperService;
+    private final ReviewRepository reviewRepository;
+    private final ModelMapperManager modelMapperService;
 
     @Override
     public DataResult<List<GetAllReviewResponses>> getAll() {
@@ -38,9 +39,7 @@ public class ReviewManager  implements ReviewService {
     }
     @Override
     public DataResult<GetByIdReviewResponses> getById(int id){
-        Review review = reviewRepository.findById(id).orElseThrow(() -> new DataNotFoundException("Data not found."){
-
-        });
+        Review review = reviewRepository.findById(id).orElseThrow(() -> new DataNotFoundException("Data not found."));
         GetByIdReviewResponses getByIdReviewResponses = this.modelMapperService.forResponse()
                 .map(review, GetByIdReviewResponses.class);
         return new DataResult<>(getByIdReviewResponses, true,"Review listed");

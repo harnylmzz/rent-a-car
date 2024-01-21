@@ -39,9 +39,7 @@ public class InvoiceManager implements InvoiceService {
     @Override
     public DataResult<GetByIdInvoiceResponses> getById(int id) {
 
-        Invoice invoice = invoiceRepository.findById(id).orElseThrow(() -> new DataNotFoundException("Data not found.") {
-
-        });
+        Invoice invoice = invoiceRepository.findById(id).orElseThrow(() -> new DataNotFoundException("Data not found."));
 
         GetByIdInvoiceResponses getByIdInvoiceResponses = modelMapperService.forResponse()
                 .map(invoice, GetByIdInvoiceResponses.class);

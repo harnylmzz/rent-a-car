@@ -8,15 +8,15 @@ import com.tobeto.rentacar.services.dtos.requests.review.DeleteReviewRequests;
 import com.tobeto.rentacar.services.dtos.requests.review.UpdateReviewRequests;
 import com.tobeto.rentacar.services.dtos.responses.review.GetAllReviewResponses;
 import com.tobeto.rentacar.services.dtos.responses.review.GetByIdReviewResponses;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/review")
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class ReviewController {
-    private ReviewService reviewService;
+    private final ReviewService reviewService;
 
     @GetMapping("/getAll")
     public DataResult<List<GetAllReviewResponses>> getAll(){

@@ -9,17 +9,18 @@ import com.tobeto.rentacar.services.dtos.requests.individualCustomer.UpdateIndiv
 import com.tobeto.rentacar.services.dtos.responses.individualCustomer.GetAllIndividualCustomerResponses;
 import com.tobeto.rentacar.services.dtos.responses.individualCustomer.GetByIdIndividualCustomerResponses;
 import jakarta.validation.Valid;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@AllArgsConstructor
+@CrossOrigin
+@RequiredArgsConstructor
 @RequestMapping("/api/individualCustomers")
 @RestController
 public class IndividualCustomersController {
 
-    private IndividualCustomerService individualCustomerService;
+    private final IndividualCustomerService individualCustomerService;
 
     @GetMapping("/getAll")
     public DataResult<List<GetAllIndividualCustomerResponses>> getAll(){

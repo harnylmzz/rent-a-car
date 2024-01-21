@@ -15,17 +15,18 @@ import com.tobeto.rentacar.services.dtos.responses.car.GetAllCarResponses;
 import com.tobeto.rentacar.services.dtos.responses.car.GetByIdCarResponses;
 import com.tobeto.rentacar.services.rules.CarBusinessRules;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class CarManager implements CarService {
-    private CarRepository carRepository;
-    private ModelMapperService modelMapperService;
-    private CarBusinessRules carBusinessRules;
+    private final CarRepository carRepository;
+    private final ModelMapperService modelMapperService;
+    private final CarBusinessRules carBusinessRules;
 
     @Override
     public DataResult<List<GetAllCarResponses>> getAll() {

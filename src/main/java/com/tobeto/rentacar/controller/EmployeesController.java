@@ -9,15 +9,17 @@ import com.tobeto.rentacar.services.dtos.requests.employee.UpdateEmployeeRequest
 import com.tobeto.rentacar.services.dtos.responses.employee.GetAllEmployeeResponses;
 import com.tobeto.rentacar.services.dtos.responses.employee.GetByIdEmployeeResponses;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/employees")
-@AllArgsConstructor
+@RequiredArgsConstructor
+@CrossOrigin
 public class EmployeesController {
-    private EmployeeService employeeService;
+    private final EmployeeService employeeService;
 
     @GetMapping("/getAll")
     public DataResult<List<GetAllEmployeeResponses>> getAll() {

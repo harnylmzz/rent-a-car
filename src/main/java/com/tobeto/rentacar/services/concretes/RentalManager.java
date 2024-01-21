@@ -18,6 +18,7 @@ import com.tobeto.rentacar.services.dtos.responses.rental.GetAllRentalResponses;
 import com.tobeto.rentacar.services.dtos.responses.rental.GetByIdRentalResponses;
 import com.tobeto.rentacar.services.rules.RentalBusinessRules;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.sql.ClientInfoStatus;
@@ -27,14 +28,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class RentalManager implements RentalService {
-    private RentalRepository rentalRepository;
-    private ModelMapperService modelMapperService;
-    private CarRepository carRepository;
-    private RentalBusinessRules rentalBusinessRules;
-    private CustomerRepository customerRepository;
-    private EmployeeRepository employeeRepository;
+    private final RentalRepository rentalRepository;
+    private final ModelMapperService modelMapperService;
+    private final CarRepository carRepository;
+    private final RentalBusinessRules rentalBusinessRules;
+    private final CustomerRepository customerRepository;
+    private final EmployeeRepository employeeRepository;
 
     @Override
     public DataResult<List<GetAllRentalResponses>> getAll() {
@@ -48,8 +49,7 @@ public class RentalManager implements RentalService {
     @Override
     public DataResult<GetByIdRentalResponses> getById(int id) {
 
-        Rental rental = rentalRepository.findById(id).orElseThrow(() -> new DataNotFoundException("Data not found.") {
-        });
+        Rental rental = rentalRepository.findById(id).orElseThrow(() -> new DataNotFoundException("Data not found."));
         GetByIdRentalResponses getByIdRentalResponses = this.modelMapperService.forResponse()
                 .map(rental, GetByIdRentalResponses.class);
 

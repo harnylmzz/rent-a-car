@@ -14,17 +14,18 @@ import com.tobeto.rentacar.services.dtos.requests.corporateCustomer.UpdateCorpor
 import com.tobeto.rentacar.services.dtos.responses.corporateCustomer.GetAllCorporateCustomer;
 import com.tobeto.rentacar.services.dtos.responses.corporateCustomer.GetByIdCorporateCustomer;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class CorporateCustomerManager implements CorporateCustomerService {
 
-    private CorporateCustomerRepository corporateCustomerRepository;
-    private ModelMapperService modelMapperService;
+    private final CorporateCustomerRepository corporateCustomerRepository;
+    private final ModelMapperService modelMapperService;
 
     @Override
     public DataResult<List<GetAllCorporateCustomer>> getAll() {

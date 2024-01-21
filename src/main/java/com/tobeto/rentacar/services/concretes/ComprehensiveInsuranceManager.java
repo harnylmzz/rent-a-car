@@ -14,17 +14,18 @@ import com.tobeto.rentacar.services.dtos.requests.comprehensiveInsurance.UpdateC
 import com.tobeto.rentacar.services.dtos.responses.comprehensiveInsurance.GetAllComprehensiveInsurance;
 import com.tobeto.rentacar.services.dtos.responses.comprehensiveInsurance.GetByIdComprehensiveInsurance;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class ComprehensiveInsuranceManager implements ComprehensiveInsuranceService {
 
-    private ComprehensiveInsuranceRepository comprehensiveInsuranceRepository;
-    private ModelMapperService modelMapperService;
+    private final ComprehensiveInsuranceRepository comprehensiveInsuranceRepository;
+    private final ModelMapperService modelMapperService;
 
     @Override
     public DataResult<List<GetAllComprehensiveInsurance>> getAll() {

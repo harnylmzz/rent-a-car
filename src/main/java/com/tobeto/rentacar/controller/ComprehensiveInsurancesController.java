@@ -9,17 +9,17 @@ import com.tobeto.rentacar.services.dtos.requests.comprehensiveInsurance.UpdateC
 import com.tobeto.rentacar.services.dtos.responses.comprehensiveInsurance.GetAllComprehensiveInsurance;
 import com.tobeto.rentacar.services.dtos.responses.comprehensiveInsurance.GetByIdComprehensiveInsurance;
 import jakarta.validation.Valid;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@AllArgsConstructor
+@RequiredArgsConstructor
 @RequestMapping("/api/comprehensiveInsurances")
 @RestController
 public class ComprehensiveInsurancesController {
 
-    private ComprehensiveInsuranceService comprehensiveInsuranceService;
+    private final ComprehensiveInsuranceService comprehensiveInsuranceService;
 
     @GetMapping("/getAll")
     public DataResult<List<GetAllComprehensiveInsurance>> getAll() {

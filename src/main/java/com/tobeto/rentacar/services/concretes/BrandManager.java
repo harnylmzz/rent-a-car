@@ -17,18 +17,19 @@ import com.tobeto.rentacar.services.dtos.responses.brand.GetByIdBrandResponses;
 
 import com.tobeto.rentacar.services.rules.BrandBusinessRules;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class BrandManager implements BrandService {
-    private BrandRepository brandRepository;
-    private ModelMapperService modelMapperService;
-    private BrandBusinessRules brandBusinessRules;
+    private final BrandRepository brandRepository;
+    private final ModelMapperService modelMapperService;
+    private final BrandBusinessRules brandBusinessRules;
 
     @Override
     public DataResult<List<GetAllBrandResponses>> getAll() {
