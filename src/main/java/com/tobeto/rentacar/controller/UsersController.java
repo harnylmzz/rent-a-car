@@ -66,4 +66,5 @@ public class UsersController {
         log.info("invalid username " + authRequest.username());
         throw new UsernameNotFoundException("invalid username {} " + authRequest.username());
     }
+
 }
