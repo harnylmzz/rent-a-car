@@ -12,7 +12,7 @@
 
    + ##### ■ Spring Boot 3.1.5
    + ##### ■ Spring Web
-   + ##### ■ Sprin Boot Dev Tools
+   + ##### ■ Spring Boot Dev Tools
    + ##### ■ Spring Security
      
 + #### Payment
