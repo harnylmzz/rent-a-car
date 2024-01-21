@@ -46,6 +46,44 @@ public class SecurityConfig {
                                 "/api/v1/users/**",
                                 //review
                                 "/api/review/**",
+                                //brand
+                                "/api/v1/brands/**",
+                                //car
+                                "/api/v1/cars/**",
+                                //customer
+                                "/api/v1/customers/**",
+                                //employee
+                                "/api/v1/employees/**",
+                                //rental
+                                "/api/v1/rentals/**",
+                                //category
+                                "/api/v1/categories/**",
+                                //colors
+                                "/api/v1/colors/**",
+                                //fuel-type
+                                "/api/v1/fuelTypes/**",
+                                //comprehensive-insurance
+                                "/api/v1/comprehensiveInsurances/**",
+                                //corporate-customer
+                                "/api/v1/corporateCustomers/**",
+                                //individual-customer
+                                "/api/v1/individualCustomers/**",
+                                //insurance
+                                "/api/v1/insurances/**",
+                                //model
+                                "/api/v1/models/**",
+                                //images
+                                "/api/v1/images/**",
+                                //promotion
+                                "/api/v1/promotions/**",
+                                //stripe
+                                "/public/stripe/**",
+                                //reservation
+                                "/api/v1/reservations/**",
+                                //invoice
+                                "/api/v1/invoices/**",
+                                //traffic-insurance
+                                "/api/v1/trafficInsurances/**",
                                 //swagger
                                 "/swagger-ui/**",
                                 "/swagger-ui",
