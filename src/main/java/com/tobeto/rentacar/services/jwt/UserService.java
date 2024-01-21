@@ -50,7 +50,6 @@ public class UserService implements UserDetailsService {
 
         this.userBusinessRules.checkIfUserExists(createUserRequest.email(), createUserRequest.gsm());
 
-
         User user = User.builder()
                 .firstName(createUserRequest.firstName())
                 .lastName(createUserRequest.lastName())
