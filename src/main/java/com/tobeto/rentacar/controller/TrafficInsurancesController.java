@@ -14,6 +14,14 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * Controller class for managing traffic insurance-related endpoints in the Rent a Car system.
+ * Provides endpoints for retrieving, adding, updating, and deleting traffic insurances.
+ * Utilizes the TrafficInsuranceService for traffic insurance-related operations.
+ *
+ * @Author [Harun Yılmaz]
+ */
+
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/v1/traffic-insurances")

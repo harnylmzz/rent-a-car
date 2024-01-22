@@ -13,13 +13,20 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * Controller class for managing color-related endpoints in the Rent a Car system.
+ * Provides endpoints for retrieving, adding, updating, and deleting colors.
+ * Utilizes the ColorService for color-related operations.
+ *
+ * @author [Harun Yılmaz]
+ */
+
 @RestController
 @CrossOrigin
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/colors")
 public class ColorsController {
     private final ColorService colorService;
-
 
     @GetMapping("/getAll")
     public DataResult<List<GetAllColorResponses>> getAll() {
@@ -46,5 +53,4 @@ public class ColorsController {
     public Result delete(DeleteColorRequests deleteColorRequests) {
         return this.colorService.delete(deleteColorRequests);
     }
-
 }

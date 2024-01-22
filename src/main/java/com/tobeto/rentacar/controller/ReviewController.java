@@ -12,6 +12,14 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
+/**
+ * Controller class for managing review-related endpoints in the Rent a Car system.
+ * Provides endpoints for retrieving, adding, updating, and deleting reviews.
+ * Utilizes the ReviewService for review-related operations.
+ *
+ * @author [Harun Yılmaz]
+ */
+
 @RestController
 @RequestMapping("/api/v1/review")
 @RequiredArgsConstructor

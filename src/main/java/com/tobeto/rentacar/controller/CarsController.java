@@ -14,6 +14,15 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * Controller class for handling car-related endpoints in the Rent a Car system.
+ * Provides endpoints for retrieving, adding, updating, and deleting cars.
+ * Utilizes the CarService for car-related operations.
+ * Supports validation for request bodies.
+ *
+ * @author [Harun Yılmaz]
+ */
+
 @RestController
 @RequestMapping("/api/v1/cars")
 @RequiredArgsConstructor

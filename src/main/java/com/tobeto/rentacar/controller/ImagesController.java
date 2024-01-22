@@ -13,6 +13,14 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * Controller class for managing image-related endpoints in the Rent a Car system.
+ * Provides endpoints for retrieving, adding, updating, deleting, and finding images by URL.
+ * Utilizes the ImageService for image-related operations.
+ *
+ * @author [Harun Yılmaz]
+ */
+
 @RestController
 @RequestMapping("/api/v1/images")
 @RequiredArgsConstructor
@@ -45,8 +53,9 @@ public class ImagesController {
     public Result delete(DeleteImageRequests deleteImageRequests) {
         return this.imageService.delete(deleteImageRequests);
     }
+
     @GetMapping("/findbyurl")
-    public List<GetAllImageResponses> findByUrl(String url){
+    public List<GetAllImageResponses> findByUrl(String url) {
         return this.imageService.findByUrl(url);
     }
 

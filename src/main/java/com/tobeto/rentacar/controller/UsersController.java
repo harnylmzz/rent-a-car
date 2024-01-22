@@ -12,12 +12,21 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * Controller class for managing user-related endpoints in the Rent a Car system.
+ * Provides endpoints for retrieving, adding, updating, and deleting users.
+ * Utilizes the UserService for user-related operations.
+ *
+ * @author [Harun Yılmaz]
+ */
+
 @RestController
 @RequestMapping("/api/v1/users")
 @RequiredArgsConstructor
 public class UsersController {
 
     private final UserService userService;
+
     @GetMapping("/getUserById")
     public DataResult<GetByIdUserResponses> getUserById(int id) {
         return this.userService.getById(id);
@@ -35,7 +44,7 @@ public class UsersController {
 
     @DeleteMapping("/deleteUser")
     public Result deleteUser(@RequestBody DeleteUserRequests deleteUserRequests) {
-      return   this.userService.delete(deleteUserRequests);
+        return this.userService.delete(deleteUserRequests);
     }
 
 }

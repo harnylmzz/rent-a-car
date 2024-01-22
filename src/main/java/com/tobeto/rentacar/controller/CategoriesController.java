@@ -14,10 +14,19 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * Controller class for managing category-related endpoints in the Rent a Car system.
+ * Provides endpoints for retrieving, adding, updating, and deleting categories.
+ * Utilizes the CategoryService for category-related operations.
+ * Supports validation for request bodies.
+ *
+ * @author [Harun Yılmaz]
+ */
+
 @CrossOrigin
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/api/v1/category")
+@RequestMapping("/api/v1/categories")
 public class CategoriesController {
     private final CategoryService categoryService;
 

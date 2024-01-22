@@ -10,6 +10,17 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Set;
 
+/**
+ * This class represents a user in the Rent a Car system.
+ * Each user has a unique identifier, a first name, a last name, an email address, a GSM number,
+ * a username, and a password. Additionally, each user is associated with a set of roles.
+ * It implements the UserDetails interface, providing Spring Security integration.
+ *
+ * @author [Harun Yılmaz]
+ * @see com.tobeto.rentacar.entities.concretes.enums.Role
+ * @see org.springframework.security.core.userdetails.UserDetails
+ */
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

@@ -14,6 +14,14 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * Controller class for managing comprehensive insurance-related endpoints in the Rent a Car system.
+ * Provides endpoints for retrieving, adding, updating, and deleting comprehensive insurances.
+ * Utilizes the ComprehensiveInsuranceService for comprehensive insurance-related operations.
+ *
+ * @author [Harun Yılmaz]
+ */
+
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/comprehensiveInsurances")
 @RestController

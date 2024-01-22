@@ -16,6 +16,14 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 
+/**
+ * JwtAuthFilter is a custom filter for handling JWT-based authentication in the Rent a Car system.
+ * It extends the OncePerRequestFilter class and is responsible for extracting the JWT token from the
+ * Authorization header, validating the token, and setting the authentication details in the SecurityContextHolder.
+ *
+ * @author [Harun Yılmaz]
+ */
+
 @Component
 @Slf4j
 public class JwtAuthFilter extends OncePerRequestFilter {

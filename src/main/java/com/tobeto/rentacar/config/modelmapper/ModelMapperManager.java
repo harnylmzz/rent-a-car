@@ -5,6 +5,14 @@ import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.stereotype.Service;
 
+/**
+ * Service class managing ModelMapper instances for handling mappings in the Rent a Car system.
+ * Implements the ModelMapperService interface.
+ *
+ * @author [Harun Yılmaz]
+ * @see com.tobeto.rentacar.config.modelmapper.ModelMapperService
+ */
+
 @Service
 @AllArgsConstructor
 public class ModelMapperManager implements ModelMapperService {

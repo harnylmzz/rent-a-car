@@ -14,6 +14,14 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * Controller class for managing corporate customer-related endpoints in the Rent a Car system.
+ * Provides endpoints for retrieving, adding, updating, and deleting corporate customers.
+ * Utilizes the CorporateCustomerService for corporate customer-related operations.
+ *
+ * @Author [Harun Yılmaz]
+ */
+
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/v1/corporateCustomers")

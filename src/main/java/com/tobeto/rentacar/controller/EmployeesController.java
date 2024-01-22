@@ -14,6 +14,14 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * Controller class for managing employee-related endpoints in the Rent a Car system.
+ * Provides endpoints for retrieving, adding, updating, and deleting employees.
+ * Utilizes the EmployeeService for employee-related operations.
+ *
+ * @author [Harun Yılmaz]
+ */
+
 @RestController
 @RequestMapping("/api/v1/employees")
 @RequiredArgsConstructor
