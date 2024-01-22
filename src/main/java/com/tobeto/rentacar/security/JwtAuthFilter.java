@@ -1,7 +1,7 @@
 package com.tobeto.rentacar.security;
 
+import com.tobeto.rentacar.services.jwt.AuthService;
 import com.tobeto.rentacar.services.jwt.JwtService;
-import com.tobeto.rentacar.services.jwt.UserService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -20,11 +20,11 @@ import java.io.IOException;
 @Slf4j
 public class JwtAuthFilter extends OncePerRequestFilter {
     private final JwtService jwtService;
-    private final UserService userService;
+    private final AuthService authService;
 
-    public JwtAuthFilter(JwtService jwtService, UserService userService) {
+    public JwtAuthFilter(JwtService jwtService, AuthService authService) {
         this.jwtService = jwtService;
-        this.userService = userService;
+        this.authService = authService;
     }
 
     @Override
@@ -40,7 +40,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         }
 
         if (userName != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-            UserDetails user = userService.loadUserByUsername(userName);
+            UserDetails user = authService.loadUserByUsername(userName);
             log.info("user loaded " + user);
             if (jwtService.validateToken(token, user)) {
                 log.info("token validated " + token);

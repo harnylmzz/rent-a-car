@@ -1,6 +1,6 @@
 package com.tobeto.rentacar.security;
 
-import com.tobeto.rentacar.services.jwt.UserService;
+import com.tobeto.rentacar.services.jwt.AuthService;
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Contact;
@@ -32,7 +32,7 @@ public class SecurityConfig {
 
     private final JwtAuthFilter jwtAuthFilter;
 
-    private final UserService userService;
+    private final AuthService authService;
 
     private final PasswordEncoder passwordEncoder;
 
@@ -44,6 +44,8 @@ public class SecurityConfig {
                         x.requestMatchers(
                                 //user
                                 "/api/v1/users/**",
+                                //auth
+                                "/api/v1/auths/**",
                                 //review
                                 "/api/review/**",
                                 //brand
@@ -103,7 +105,7 @@ public class SecurityConfig {
     @Bean
     public AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
-        authenticationProvider.setUserDetailsService(userService);
+        authenticationProvider.setUserDetailsService(authService);
         authenticationProvider.setPasswordEncoder(passwordEncoder);
         return authenticationProvider;
     }

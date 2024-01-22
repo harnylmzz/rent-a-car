@@ -6,7 +6,6 @@ public enum Role implements GrantedAuthority {
 
     ROLE_ADMIN("ROLE_ADMIN"),
     ROLE_EMPLOYEE("ROLE_EMPLOYEE"),
-
     ROLE_CUSTOMER("ROLE_CUSTOMER");
 
     private String value;
