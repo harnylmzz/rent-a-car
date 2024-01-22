@@ -2,6 +2,7 @@ package com.tobeto.rentacar.controller;
 
 import com.tobeto.rentacar.core.result.DataResult;
 import com.tobeto.rentacar.core.result.Result;
+import com.tobeto.rentacar.services.abstracts.UserService;
 import com.tobeto.rentacar.services.dtos.requests.user.DeleteUserRequests;
 import com.tobeto.rentacar.services.dtos.requests.user.UpdateUserRequests;
 import com.tobeto.rentacar.services.dtos.responses.user.GetAllUserResponses;
@@ -29,12 +30,12 @@ public class UsersController {
 
     @PutMapping("/updateUser")
     public Result updateUser(@RequestBody UpdateUserRequests updateUserRequests) {
-        return this.userService.updateUser(updateUserRequests);
+        return this.userService.update(updateUserRequests);
     }
 
     @DeleteMapping("/deleteUser")
     public Result deleteUser(@RequestBody DeleteUserRequests deleteUserRequests) {
-      return   this.userService.deleteUser(deleteUserRequests);
+      return   this.userService.delete(deleteUserRequests);
     }
 
 }
