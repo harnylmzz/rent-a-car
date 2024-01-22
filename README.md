@@ -89,11 +89,10 @@ To start the Spring Boot application, follow these steps:
 If your application requires a PostgreSQL database, you can use Docker Compose to define both services. Create a `docker-compose.yml` file (see example above).
 
 Run the application and the database using:
-
-```bash
-docker-compose up
-
----
+```
+bash
+    docker-compose up
+```
 
 ##### ER DIAGRAM:
 
