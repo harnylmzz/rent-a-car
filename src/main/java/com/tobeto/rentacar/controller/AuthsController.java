@@ -16,6 +16,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * Controller class for handling authentication-related endpoints in the Rent a Car system.
+ * Provides endpoints for user registration and login.
+ * Uses the AuthService and JwtService for user registration and authentication, respectively.
+ * Utilizes the AuthenticationManager for handling user authentication.
+ *
+ * @author [Harun Yılmaz]
+ */
+
 @Slf4j
 @RestController
 @RequestMapping("/api/v1/auths")

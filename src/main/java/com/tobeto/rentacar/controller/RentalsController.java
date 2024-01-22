@@ -14,10 +14,19 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 import java.util.List;
 
+/**
+ * Controller class for managing rental-related endpoints in the Rent a Car system.
+ * Provides endpoints for retrieving, adding, updating, and deleting rentals.
+ * Utilizes the RentalService for rental-related operations.
+ *
+ * @author [Harun Yılmaz]
+ */
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/rentals")
 public class RentalsController {
+
     private final RentalService rentalService;
 
     @GetMapping("/getAll")
@@ -47,38 +56,38 @@ public class RentalsController {
     }
 
     @GetMapping("/findbystartdate")
-    public List<GetAllRentalResponses> findByStartDAte(@RequestParam LocalDate startDate){
+    public List<GetAllRentalResponses> findByStartDAte(@RequestParam LocalDate startDate) {
         return this.rentalService.findByStartDate(startDate);
     }
 
     @GetMapping("/findbyenddate")
-    public List<GetAllRentalResponses> findByEndDate(@RequestParam LocalDate endDate){
+    public List<GetAllRentalResponses> findByEndDate(@RequestParam LocalDate endDate) {
         return this.rentalService.findByEndDate(endDate);
     }
 
     @GetMapping("/findbyreturndate")
-    public List<GetAllRentalResponses> findByReturnDate(@RequestParam LocalDate returnDate){
+    public List<GetAllRentalResponses> findByReturnDate(@RequestParam LocalDate returnDate) {
         return this.rentalService.findByReturnDate(returnDate);
     }
 
     @GetMapping("/findbystartkilometer")
-    public List<GetAllRentalResponses> findByStartKilometer(@RequestParam int startKilometer){
+    public List<GetAllRentalResponses> findByStartKilometer(@RequestParam int startKilometer) {
         return this.rentalService.findByStartKilometer(startKilometer);
 
     }
 
     @GetMapping("/findbyendkilometer")
-    public List<GetAllRentalResponses> findByEndKilometer(@RequestParam int endKilometer){
+    public List<GetAllRentalResponses> findByEndKilometer(@RequestParam int endKilometer) {
         return this.rentalService.findByEndKilometer(endKilometer);
     }
 
     @GetMapping("/findbytotalprice")
-    public List<GetAllRentalResponses> findByTotalPrice(@RequestParam double totalPrice){
+    public List<GetAllRentalResponses> findByTotalPrice(@RequestParam double totalPrice) {
         return this.rentalService.findByTotalPrice(totalPrice);
     }
 
     @GetMapping("/findbydiscount")
-    public List<GetAllRentalResponses> findByDiscount(@RequestParam double discount){
+    public List<GetAllRentalResponses> findByDiscount(@RequestParam double discount) {
         return this.rentalService.findByDiscount(discount);
     }
 }

@@ -12,6 +12,14 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * Controller class for managing fuel type-related endpoints in the Rent a Car system.
+ * Provides endpoints for retrieving, adding, updating, and deleting fuel types.
+ * Utilizes the FuelTypeService for fuel type-related operations.
+ *
+ * @author [Harun Yılmaz]
+ */
+
 @RestController
 @RequestMapping("/api/v1/fuelTypes")
 @RequiredArgsConstructor

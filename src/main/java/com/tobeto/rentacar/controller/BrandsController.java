@@ -14,6 +14,15 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * Controller class for handling brand-related endpoints in the Rent a Car system.
+ * Provides endpoints for retrieving, adding, updating, and deleting brands.
+ * Utilizes the BrandService for brand-related operations.
+ * Supports validation for request bodies.
+ *
+ * @author [Harun Yılmaz]
+ */
+
 @RestController
 @RequestMapping("/api/v1/brands")
 @RequiredArgsConstructor
@@ -33,7 +42,7 @@ public class BrandsController {
 
     @PostMapping("/add")
     public Result add(@RequestBody @Valid CreateBrandRequests createBrandRequests) {
-       return this.brandService.add(createBrandRequests);
+        return this.brandService.add(createBrandRequests);
     }
 
     @PutMapping("/update")
@@ -43,7 +52,7 @@ public class BrandsController {
 
     @DeleteMapping("/delete")
     public Result delete(DeleteBrandRequests deleteBrandRequests) {
-        return  this.brandService.delete(deleteBrandRequests);
+        return this.brandService.delete(deleteBrandRequests);
     }
 
     @GetMapping("/findByName")
@@ -65,6 +74,4 @@ public class BrandsController {
     public List<GetAllBrandResponses> findByNameContaining(@RequestParam String name) {
         return this.brandService.findByNameContaining(name);
     }
-
-
 }

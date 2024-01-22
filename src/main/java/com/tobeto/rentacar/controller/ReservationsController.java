@@ -14,6 +14,14 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * Controller class for managing reservation-related endpoints in the Rent a Car system.
+ * Provides endpoints for retrieving, adding, updating, and deleting reservations.
+ * Utilizes the ReservationService for reservation-related operations.
+ *
+ * @author [Harun Yılmaz]
+ */
+
 @RestController
 @RequestMapping("/api/v1/reservations")
 @RequiredArgsConstructor

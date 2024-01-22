@@ -24,6 +24,13 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+/**
+ * Configuration class for handling security-related settings in the Rent a Car system.
+ * It includes configuration for JWT authentication, method-level security, and API documentation using Swagger.
+ *
+ * @author [Harun Yılmaz]
+ **/
+
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity

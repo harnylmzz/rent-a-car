@@ -14,6 +14,14 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * Controller class for managing individual customer-related endpoints in the Rent a Car system.
+ * Provides endpoints for retrieving, adding, updating, and deleting individual customers.
+ * Utilizes the IndividualCustomerService for individual customer-related operations.
+ *
+ * @author [Harun Yılmaz]
+ */
+
 @CrossOrigin
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/individualCustomers")
@@ -23,12 +31,12 @@ public class IndividualCustomersController {
     private final IndividualCustomerService individualCustomerService;
 
     @GetMapping("/getAll")
-    public DataResult<List<GetAllIndividualCustomerResponses>> getAll(){
+    public DataResult<List<GetAllIndividualCustomerResponses>> getAll() {
         return this.individualCustomerService.getAll();
     }
 
     @GetMapping("/getById")
-    public DataResult<GetByIdIndividualCustomerResponses> getById(int id){
+    public DataResult<GetByIdIndividualCustomerResponses> getById(int id) {
         return this.individualCustomerService.getById(id);
     }
 
