@@ -1,0 +1,45 @@
+services:
+  postgresdb:
+    image: 'postgres'
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=12345
+      - POSTGRES_DB=rentAcar
+    networks:
+      - shared-net
+    volumes:
+      - ./postgres-data:/backup
+
+  redis:
+    image: 'redis'
+    ports:
+      - '6379:6379'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+    networks:
+      - shared-net
+
+  app:
+    image: rent-a-car
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgresdb
+    environment:
+      - spring.datasource.url=jdbc:postgresql://localhost:5432/rentAcar
+      - SERVER_PORT=8080
+      - spring.redis.host=redis
+      - spring.redis.port=6379
+    restart: always
+    networks:
+      - shared-net
+
+networks:
+  shared-net:
+    driver: bridge
