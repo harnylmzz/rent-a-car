@@ -41,14 +41,14 @@ public class AuthsController {
     }
 
     @PostMapping("/login")
-    public String login(@RequestBody LoginRequest authRequest) {
+    public String login(@RequestBody LoginRequest loginRequest) {
         Authentication authentication = authenticationManager.authenticate
-                (new UsernamePasswordAuthenticationToken(authRequest.username(), authRequest.password()));
+                (new UsernamePasswordAuthenticationToken(loginRequest.username(), loginRequest.password()));
         if (authentication.isAuthenticated()) {
-            return jwtService.generateToken(authRequest.username());
+            return jwtService.generateToken(loginRequest.username());
         }
-        log.info("invalid username " + authRequest.username());
-        throw new UsernameNotFoundException("invalid username {} " + authRequest.username());
+        log.info("invalid username " + loginRequest.username());
+        throw new UsernameNotFoundException("invalid username {} " + loginRequest.username());
     }
 
 }
