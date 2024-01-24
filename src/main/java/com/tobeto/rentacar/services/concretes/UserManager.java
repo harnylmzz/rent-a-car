@@ -35,8 +35,7 @@ public class UserManager implements UserService {
     }
 
     public DataResult<GetByIdUserResponses> getById(int id) {
-        User user = userRepository.findById(id).orElseThrow(() -> new DataNotFoundException("Data not found.") {
-        });
+        User user = userRepository.findById(id).orElseThrow(() -> new DataNotFoundException("Data not found."));
 
         GetByIdUserResponses getByIdUserResponses = this.modelMapperService.forResponse()
                 .map(user, GetByIdUserResponses.class);
