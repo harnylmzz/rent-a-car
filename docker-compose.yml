@@ -13,15 +13,6 @@ services:
     volumes:
       - ./postgres-data:/backup
 
-  redis:
-    image: 'redis'
-    ports:
-      - '6379:6379'
-    environment:
-      - ALLOW_EMPTY_PASSWORD=yes
-    networks:
-      - shared-net
-
   app:
     image: rent-a-car
     build:
