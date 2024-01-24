@@ -32,21 +32,21 @@ public class BrandManager implements BrandService {
     private final BrandBusinessRules brandBusinessRules;
 
     @Override
-    public DataResult<List<GetAllBrandResponses>> getAll() {
-        List<Brand> brands = brandRepository.findAll();
-        List<GetAllBrandResponses> getAllBrandResponses = brands.stream()
-                .map(brand -> this.modelMapperService.forResponse()
-                        .map(brand, GetAllBrandResponses.class))
-                .collect(Collectors.toList());
+    public DataResult<List<GetAllBrandResponses>> getAll() {  //public bir metod, dönüş değeri DataResult, bütün kitapları getiriyor.
+        List<Brand> brands = brandRepository.findAll(); //bütün kitapları arıyor.
+        List<GetAllBrandResponses> getAllBrandResponses = brands.stream() //kitapları streamliyor.
+                .map(brand -> this.modelMapperService.forResponse() //kitapları modelmapper ile mapliyor.
+                        .map(brand, GetAllBrandResponses.class)) //kitapları GetAllBookResponses class'ına mapliyor.
+                .collect(Collectors.toList()); //kitapları listeye çeviriyor.
 
-        return new DataResult<>(getAllBrandResponses, true, "Brands listed.");
+        return new DataResult<>(getAllBrandResponses, true, "Brands listed."); //kitapları döndürüyor.
     }
 
     @Override
     public DataResult<GetByIdBrandResponses> getById(int id) {
         Brand brand = brandRepository.findById(id)
                 .orElseThrow(() -> new DataNotFoundException("Data not found.") {
-        });
+                });
         GetByIdBrandResponses getByIdBrandResponses = this.modelMapperService.forResponse()
                 .map(brand, GetByIdBrandResponses.class);
 
