@@ -15,6 +15,8 @@ public class UpdateCarRequests {
 
     private int year;
 
+    private String gearType;
+
     private double price;
 
     private String plate;

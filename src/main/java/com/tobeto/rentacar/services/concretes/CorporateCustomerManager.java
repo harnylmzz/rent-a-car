@@ -58,8 +58,10 @@ public class CorporateCustomerManager implements CorporateCustomerService {
 
         createCorporateCustomerRequests.setPassword(passwordEncoder.encode(createCorporateCustomerRequests.getPassword()));
 
-        this.corporateCustomerRepository.save(this.modelMapperService.forRequest()
-                .map(createCorporateCustomerRequests, CorporateCustomer.class));
+        CorporateCustomer corporateCustomer = this.modelMapperService.forRequest()
+                .map(createCorporateCustomerRequests, CorporateCustomer.class);
+
+        this.corporateCustomerRepository.save(corporateCustomer);
 
         return new SuccessResult("Corporate Customer added");
     }

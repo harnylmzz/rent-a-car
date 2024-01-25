@@ -3,6 +3,7 @@ package com.tobeto.rentacar.controller;
 import com.tobeto.rentacar.core.result.DataResult;
 import com.tobeto.rentacar.core.result.Result;
 import com.tobeto.rentacar.services.abstracts.UserService;
+import com.tobeto.rentacar.services.dtos.requests.user.CreateUserRequests;
 import com.tobeto.rentacar.services.dtos.requests.user.DeleteUserRequests;
 import com.tobeto.rentacar.services.dtos.requests.user.UpdateUserRequests;
 import com.tobeto.rentacar.services.dtos.responses.user.GetAllUserResponses;
@@ -27,22 +28,27 @@ public class UsersController {
 
     private final UserService userService;
 
-    @GetMapping("/getUserById")
+    @GetMapping("/get xById")
     public DataResult<GetByIdUserResponses> getUserById(int id) {
         return this.userService.getById(id);
     }
 
-    @GetMapping("/getAllUser")
+    @GetMapping("/getAll")
     public DataResult<List<GetAllUserResponses>> getAllUser() {
         return this.userService.getAll();
     }
 
-    @PutMapping("/updateUser")
+    @PostMapping("/add")
+    public Result addUser(@RequestBody CreateUserRequests createUserRequests) {
+        return this.userService.add(createUserRequests);
+    }
+
+    @PutMapping("/update")
     public Result updateUser(@RequestBody UpdateUserRequests updateUserRequests) {
         return this.userService.update(updateUserRequests);
     }
 
-    @DeleteMapping("/deleteUser")
+    @DeleteMapping("/delete")
     public Result deleteUser(@RequestBody DeleteUserRequests deleteUserRequests) {
         return this.userService.delete(deleteUserRequests);
     }

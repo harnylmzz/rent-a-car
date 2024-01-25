@@ -15,6 +15,8 @@ public class GetByIdCarResponses {
 
     private String plate;
 
+    private String gearType;
+
     private int kilometer;
 
     private int year;

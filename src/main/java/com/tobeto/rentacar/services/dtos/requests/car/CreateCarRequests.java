@@ -21,7 +21,9 @@ public class CreateCarRequests {
 
     @NotNull(message = "Price is required")
     private double price;
-    
+
+    private String gearType;
+
     @Pattern(regexp = "^[0-9]{2}\\s[A-Z]{1,3}\\s[0-9]{2,3}$", message = "Please enter a valid Turkish plate number")
     @NotNull(message = "Plate is required")
     @NotBlank(message = "Plate is required")
@@ -32,6 +34,7 @@ public class CreateCarRequests {
     private int colorId;
 
     private int fuelTypeId;
+
     private int categoryId;
 
 }
