@@ -11,4 +11,6 @@ public class GetByIdModelResponses {
 
     private String name;
 
+    private int brandId;
+
 }

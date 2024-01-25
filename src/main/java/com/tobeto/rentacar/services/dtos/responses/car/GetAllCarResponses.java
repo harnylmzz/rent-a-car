@@ -15,6 +15,8 @@ public class GetAllCarResponses {
 
     private String plate;
 
+    private String gearType;
+
     private int kilometer;
 
     private int year;
@@ -24,6 +26,7 @@ public class GetAllCarResponses {
     private String colorName;
 
     private String fuelType;
+
     private String categoryName;
 
 }
