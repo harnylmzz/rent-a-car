@@ -9,6 +9,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class GetByIdCustomerResponses {
 
-    private String nationalityId;
+    private String customerNumber;
 
 }

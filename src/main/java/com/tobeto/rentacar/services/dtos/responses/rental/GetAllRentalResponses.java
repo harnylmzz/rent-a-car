@@ -9,7 +9,7 @@ import java.time.LocalDate;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class    GetAllRentalResponses {
+public class GetAllRentalResponses {
 
     private int id;
 
@@ -33,15 +33,4 @@ public class    GetAllRentalResponses {
 
     private int customerId;
 
-    public GetAllRentalResponses(LocalDate startDate) {
-
-    }
-
-    public GetAllRentalResponses(int startKilometer) {
-
-    }
-
-    public GetAllRentalResponses(double totalPrice) {
-
-    }
 }

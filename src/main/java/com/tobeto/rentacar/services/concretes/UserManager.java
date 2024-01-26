@@ -25,6 +25,7 @@ public class UserManager implements UserService {
     private final UserRepository userRepository;
     private final ModelMapperService modelMapperService;
 
+
     public DataResult<List<GetAllUserResponses>> getAll() {
         List<User> users = userRepository.findAll();
         List<GetAllUserResponses> getAllUserResponses = users.stream()

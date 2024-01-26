@@ -13,7 +13,4 @@ public class GetAllColorResponses {
 
     private String name;
 
-    public GetAllColorResponses(String name) {
-        this.name=name;
-    }
 }
