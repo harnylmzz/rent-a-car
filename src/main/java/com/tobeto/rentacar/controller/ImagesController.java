@@ -32,8 +32,8 @@ public class ImagesController {
     private final ImageService imageService;
 
     @PostMapping(value = "/save", consumes = "multipart/form-data")
-    public DataResult<Object> save(@RequestParam("file") MultipartFile file) {
-        return this.imageService.save(file);
+    public DataResult<Object> save(@RequestParam("file") MultipartFile file, int carId) {
+        return this.imageService.save(file, carId);
     }
 
     @DeleteMapping("/delete")

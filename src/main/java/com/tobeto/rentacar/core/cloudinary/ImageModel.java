@@ -22,4 +22,6 @@ public class ImageModel {
     private String format;
 
     private int bytes;
+
+    private int carId;
 }
