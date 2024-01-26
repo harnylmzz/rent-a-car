@@ -1,13 +1,13 @@
-package com.tobeto.rentacar.services.dtos.responses.image;
+package com.tobeto.rentacar.core.cloudinary;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class GetByIdImageResponses {
+@Data
+@Builder
+@ToString
+public class ImageModel {
 
     private int id;
 
@@ -22,7 +22,4 @@ public class GetByIdImageResponses {
     private String format;
 
     private int bytes;
-
-    private int carId;
 }
-

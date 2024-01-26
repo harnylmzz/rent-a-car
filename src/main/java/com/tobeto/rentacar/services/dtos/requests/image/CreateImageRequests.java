@@ -15,5 +15,15 @@ public class CreateImageRequests {
     @NotBlank(message = "url is required")
     private String url;
 
+    private String publicId;
+
+    private int width;
+
+    private int height;
+
+    private String format;
+
+    private int bytes;
+
     private int carId;
 }

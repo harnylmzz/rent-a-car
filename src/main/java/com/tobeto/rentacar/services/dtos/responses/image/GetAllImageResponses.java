@@ -13,9 +13,15 @@ public class GetAllImageResponses {
 
     private String url;
 
+    private String publicId;
+
+    private int width;
+
+    private int height;
+
+    private String format;
+
+    private int bytes;
+
     private int carId;
-
-    public GetAllImageResponses(String url) {
-
-    }
 }
