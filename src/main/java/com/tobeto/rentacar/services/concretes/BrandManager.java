@@ -15,6 +15,7 @@ import com.tobeto.rentacar.services.dtos.requests.brand.UpdateBrandRequests;
 import com.tobeto.rentacar.services.dtos.responses.brand.GetAllBrandResponses;
 import com.tobeto.rentacar.services.dtos.responses.brand.GetByIdBrandResponses;
 
+import com.tobeto.rentacar.services.messages.brand.BrandMessages;
 import com.tobeto.rentacar.services.rules.BrandBusinessRules;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
@@ -32,25 +33,25 @@ public class BrandManager implements BrandService {
     private final BrandBusinessRules brandBusinessRules;
 
     @Override
-    public DataResult<List<GetAllBrandResponses>> getAll() {  //public bir metod, dönüş değeri DataResult, bütün kitapları getiriyor.
-        List<Brand> brands = brandRepository.findAll(); //bütün kitapları arıyor.
-        List<GetAllBrandResponses> getAllBrandResponses = brands.stream() //kitapları streamliyor.
-                .map(brand -> this.modelMapperService.forResponse() //kitapları modelmapper ile mapliyor.
-                        .map(brand, GetAllBrandResponses.class)) //kitapları GetAllBookResponses class'ına mapliyor.
-                .collect(Collectors.toList()); //kitapları listeye çeviriyor.
+    public DataResult<List<GetAllBrandResponses>> getAll() {
+        List<Brand> brands = brandRepository.findAll();
+        List<GetAllBrandResponses> getAllBrandResponses = brands.stream()
+                .map(brand -> this.modelMapperService.forResponse()
+                        .map(brand, GetAllBrandResponses.class))
+                .collect(Collectors.toList());
 
-        return new DataResult<>(getAllBrandResponses, true, "Brands listed."); //kitapları döndürüyor.
+        return new DataResult<>(getAllBrandResponses, true, BrandMessages.BRANDS_LISTED);
     }
 
     @Override
     public DataResult<GetByIdBrandResponses> getById(int id) {
         Brand brand = brandRepository.findById(id)
-                .orElseThrow(() -> new DataNotFoundException("Data not found.") {
+                .orElseThrow(() -> new DataNotFoundException(BrandMessages.BRAND_NOT_FOUND) {
                 });
         GetByIdBrandResponses getByIdBrandResponses = this.modelMapperService.forResponse()
                 .map(brand, GetByIdBrandResponses.class);
 
-        return new DataResult<>(getByIdBrandResponses, true, "Brand listed.");
+        return new DataResult<>(getByIdBrandResponses, true, BrandMessages.BRANDS_LISTED);
     }
 
     @Override
@@ -63,7 +64,7 @@ public class BrandManager implements BrandService {
                 .map(createBrandRequests, Brand.class);
         this.brandRepository.save(brand);
 
-        return new SuccessResult("Brand added.");
+        return new SuccessResult(BrandMessages.BRAND_ADDED);
     }
 
     @Override
@@ -75,7 +76,7 @@ public class BrandManager implements BrandService {
 
         this.brandRepository.save(brand);
 
-        return new SuccessResult("Brand updated.");
+        return new SuccessResult(BrandMessages.BRAND_UPDATED);
     }
 
     @Override
@@ -84,7 +85,7 @@ public class BrandManager implements BrandService {
                 .map(deleteBrandRequests, Brand.class);
         this.brandRepository.delete(brand);
 
-        return new SuccessResult("Brand deleted.");
+        return new SuccessResult(BrandMessages.BRAND_DELETED);
     }
 
     @Override

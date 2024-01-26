@@ -10,6 +10,7 @@ public class UserBusinessRules {
 
     private UserRepository userRepository;
 
+
     public void checkIfUserExists(String email, String gsm) {
         if (this.userRepository.existsByEmail(email)) {
             throw new RuntimeException("User already exists.");

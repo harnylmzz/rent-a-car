@@ -1,6 +1,4 @@
 package com.tobeto.rentacar.services.dtos.responses.review;
-
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
