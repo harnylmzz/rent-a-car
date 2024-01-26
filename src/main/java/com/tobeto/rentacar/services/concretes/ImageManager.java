@@ -71,15 +71,4 @@ public class ImageManager implements ImageService {
         }
         return new SuccessResult("Image deleted");
     }
-
-    @Override
-    public List<GetAllImageResponses> findByUrl(String url) {
-        List<Image> images = imageRepository.findByUrl(url);
-        List<GetAllImageResponses> findByUrlResponses = images.stream()
-                .map(image -> this.modelMapperService.forResponse()
-                        .map(image, GetAllImageResponses.class))
-                .collect(Collectors.toList());
-
-        return findByUrlResponses;
-    }
 }
