@@ -32,6 +32,7 @@
    + ##### ■ Lombok
    + ##### ■ Validation
    + ##### ■ Modelmapper
+   + ##### ■ Cloudinary
 
 + #### Language
    + ##### ■ Java 17
