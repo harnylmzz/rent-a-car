@@ -24,10 +24,7 @@ import java.util.List;
 
 public interface ImageService {
 
-    DataResult<Object> save(MultipartFile file);
+    DataResult<Object> save(MultipartFile file, int carId);
 
     Result delete(String url);
-
-    List<GetAllImageResponses> findByUrl(String url);
-
 }

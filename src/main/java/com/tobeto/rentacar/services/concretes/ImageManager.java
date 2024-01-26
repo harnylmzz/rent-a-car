@@ -36,7 +36,7 @@ public class ImageManager implements ImageService {
     private final Cloudinary cloudinary;
 
     @Override
-    public DataResult<Object> save(MultipartFile file) {
+    public DataResult<Object> save(MultipartFile file, int carId) {
         Map<?, ?> result;
 
         try {
@@ -45,14 +45,19 @@ public class ImageManager implements ImageService {
             return new ErrorDataResult<>(e.getMessage());
         }
 
-        ImageModel image = ImageModel.builder()
+        ImageModel imageModel = ImageModel.builder()
                 .publicId(String.valueOf(result.get("public_id")))
                 .url(String.valueOf(result.get("url")))
                 .width((Integer) result.get("width"))
                 .height((Integer) result.get("height"))
                 .format(String.valueOf(result.get("format")))
                 .bytes((Integer) result.get("bytes"))
+                .carId(carId)
                 .build();
+
+        Image image = modelMapperService.forRequest().map(imageModel, Image.class);
+        imageRepository.save(image);
+
         return new SuccessDataResult<>(image);
     }
 
@@ -65,16 +70,5 @@ public class ImageManager implements ImageService {
             return new ErrorResult(e.getMessage());
         }
         return new SuccessResult("Image deleted");
-    }
-
-    @Override
-    public List<GetAllImageResponses> findByUrl(String url) {
-        List<Image> images = imageRepository.findByUrl(url);
-        List<GetAllImageResponses> findByUrlResponses = images.stream()
-                .map(image -> this.modelMapperService.forResponse()
-                        .map(image, GetAllImageResponses.class))
-                .collect(Collectors.toList());
-
-        return findByUrlResponses;
     }
 }
