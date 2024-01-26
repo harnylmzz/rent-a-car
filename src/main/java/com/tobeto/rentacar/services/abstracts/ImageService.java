@@ -8,6 +8,7 @@ import com.tobeto.rentacar.services.dtos.requests.image.DeleteImageRequests;
 import com.tobeto.rentacar.services.dtos.requests.image.UpdateImageRequests;
 import com.tobeto.rentacar.services.dtos.responses.image.GetAllImageResponses;
 import com.tobeto.rentacar.services.dtos.responses.image.GetByIdImageResponses;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -23,15 +24,9 @@ import java.util.List;
 
 public interface ImageService {
 
-    DataResult<List<GetAllImageResponses>> getAll();
+    DataResult<Object> save(MultipartFile file);
 
-    DataResult<GetByIdImageResponses> getById(int id);
-
-    Result add(CreateImageRequests createImageRequests);
-
-    Result update(UpdateImageRequests updateImageRequests);
-
-    Result delete(DeleteImageRequests deleteImageRequests);
+    Result delete(String url);
 
     List<GetAllImageResponses> findByUrl(String url);
 

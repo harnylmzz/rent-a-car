@@ -9,7 +9,9 @@ import com.tobeto.rentacar.services.dtos.requests.image.UpdateImageRequests;
 import com.tobeto.rentacar.services.dtos.responses.image.GetAllImageResponses;
 import com.tobeto.rentacar.services.dtos.responses.image.GetByIdImageResponses;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -29,29 +31,14 @@ public class ImagesController {
 
     private final ImageService imageService;
 
-    @GetMapping("/getAll")
-    public DataResult<List<GetAllImageResponses>> getAll() {
-        return this.imageService.getAll();
-    }
-
-    @GetMapping("/getById")
-    public DataResult<GetByIdImageResponses> getById(int id) {
-        return imageService.getById(id);
-    }
-
-    @PostMapping("/add")
-    public Result add(CreateImageRequests createImageRequests) {
-        return this.imageService.add(createImageRequests);
-    }
-
-    @PutMapping("/update")
-    public Result update(UpdateImageRequests updateImageRequests) {
-        return this.imageService.update(updateImageRequests);
+    @PostMapping(value = "/save", consumes = "multipart/form-data")
+    public DataResult<Object> save(@RequestParam("file") MultipartFile file) {
+        return this.imageService.save(file);
     }
 
     @DeleteMapping("/delete")
-    public Result delete(DeleteImageRequests deleteImageRequests) {
-        return this.imageService.delete(deleteImageRequests);
+    public Result delete(@RequestParam String url) {
+        return this.imageService.delete(url);
     }
 
     @GetMapping("/findbyurl")

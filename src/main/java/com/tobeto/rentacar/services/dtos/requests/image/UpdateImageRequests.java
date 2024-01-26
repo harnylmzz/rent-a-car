@@ -10,5 +10,16 @@ import lombok.NoArgsConstructor;
 public class UpdateImageRequests {
 
     private int id;
+
     private String url;
+
+    private String publicId;
+
+    private int width;
+
+    private int height;
+
+    private String format;
+
+    private int bytes;
 }

@@ -1,10 +1,12 @@
 package com.tobeto.rentacar.services.concretes;
 
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import com.tobeto.rentacar.config.modelmapper.ModelMapperService;
+import com.tobeto.rentacar.core.cloudinary.CloudinaryImageHelper;
+import com.tobeto.rentacar.core.cloudinary.ImageModel;
 import com.tobeto.rentacar.core.exceptions.DataNotFoundException;
-import com.tobeto.rentacar.core.result.DataResult;
-import com.tobeto.rentacar.core.result.Result;
-import com.tobeto.rentacar.core.result.SuccessResult;
+import com.tobeto.rentacar.core.result.*;
 import com.tobeto.rentacar.entities.concretes.Image;
 import com.tobeto.rentacar.repository.ImageRepository;
 import com.tobeto.rentacar.services.abstracts.ImageService;
@@ -17,9 +19,12 @@ import com.tobeto.rentacar.services.dtos.responses.image.GetByIdImageResponses;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -28,57 +33,37 @@ public class ImageManager implements ImageService {
 
     private final ImageRepository imageRepository;
     private final ModelMapperService modelMapperService;
+    private final Cloudinary cloudinary;
 
     @Override
-    public DataResult<List<GetAllImageResponses>> getAll() {
+    public DataResult<Object> save(MultipartFile file) {
+        Map<?, ?> result;
 
-        List<Image> images = imageRepository.findAll();
-        List<GetAllImageResponses> getAllImageResponses = images.stream()
-                .map(image -> this.modelMapperService.forResponse()
-                        .map(image, GetAllImageResponses.class)).collect(Collectors.toList());
-        return new DataResult<>(getAllImageResponses, true, "Images listed");
+        try {
+            result = cloudinary.uploader().upload(file.getBytes(), ObjectUtils.emptyMap());
+        } catch (Exception e) {
+            return new ErrorDataResult<>(e.getMessage());
+        }
+
+        ImageModel image = ImageModel.builder()
+                .publicId(String.valueOf(result.get("public_id")))
+                .url(String.valueOf(result.get("url")))
+                .width((Integer) result.get("width"))
+                .height((Integer) result.get("height"))
+                .format(String.valueOf(result.get("format")))
+                .bytes((Integer) result.get("bytes"))
+                .build();
+        return new SuccessDataResult<>(image);
     }
 
     @Override
-    public DataResult<GetByIdImageResponses> getById(int id) {
+    public Result delete(String url) {
 
-        Image image = imageRepository.findById(id).orElseThrow(() -> new DataNotFoundException("Data not found."));
-        GetByIdImageResponses getByIdImageResponses = this.modelMapperService.forResponse()
-                .map(image, GetByIdImageResponses.class);
-
-        return new DataResult<>(getByIdImageResponses, true, "Image listed");
-    }
-
-    @Override
-    public Result add(CreateImageRequests createImageRequests) {
-
-        Image image = this.modelMapperService.forRequest()
-                .map(createImageRequests, Image.class);
-
-        this.imageRepository.save(image);
-
-        return new SuccessResult("Image added");
-    }
-
-    @Override
-    public Result update(UpdateImageRequests updateImageRequests) {
-
-        Image image = this.modelMapperService.forRequest()
-                .map(updateImageRequests, Image.class);
-
-        image.setUrl(updateImageRequests.getUrl());
-
-        this.imageRepository.save(image);
-        return new SuccessResult("Image updated");
-    }
-
-    @Override
-    public Result delete(DeleteImageRequests deleteImageRequests) {
-
-        Image image = this.modelMapperService.forRequest()
-                .map(deleteImageRequests, Image.class);
-
-        this.imageRepository.delete(image);
+        try {
+            cloudinary.uploader().destroy(CloudinaryImageHelper.getImagePublicIdFromUrl(url), ObjectUtils.emptyMap());
+        } catch (IOException e) {
+            return new ErrorResult(e.getMessage());
+        }
         return new SuccessResult("Image deleted");
     }
 
