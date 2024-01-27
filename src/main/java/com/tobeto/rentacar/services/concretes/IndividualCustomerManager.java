@@ -13,7 +13,8 @@ import com.tobeto.rentacar.services.dtos.requests.individualCustomer.DeleteIndiv
 import com.tobeto.rentacar.services.dtos.requests.individualCustomer.UpdateIndividualCustomerRequests;
 import com.tobeto.rentacar.services.dtos.responses.individualCustomer.GetAllIndividualCustomerResponses;
 import com.tobeto.rentacar.services.dtos.responses.individualCustomer.GetByIdIndividualCustomerResponses;
-import lombok.AllArgsConstructor;
+import com.tobeto.rentacar.services.messages.individualCustomer.IndividualCustomerMessages;
+import com.tobeto.rentacar.services.rules.IndividualCustomerBusinessRules;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -28,6 +29,7 @@ public class IndividualCustomerManager implements IndividualCustomerService {
     private final IndividualCustomerRepository individualCustomerRepository;
     private final ModelMapperService modelMapperService;
     private final PasswordEncoder passwordEncoder;
+    private final IndividualCustomerBusinessRules individualCustomerBusinessRules;
 
     @Override
     public DataResult<List<GetAllIndividualCustomerResponses>> getAll() {
@@ -38,7 +40,7 @@ public class IndividualCustomerManager implements IndividualCustomerService {
                         .map(individualCustomer, GetAllIndividualCustomerResponses.class))
                 .collect(Collectors.toList());
 
-        return new DataResult<>(getAllIndividualCustomerResponses, true, "Individual Customers listed");
+        return new DataResult<>(getAllIndividualCustomerResponses, true, IndividualCustomerMessages.INDIVIDUAL_CUSTOMERS_LISTED);
     }
 
     @Override
@@ -50,18 +52,20 @@ public class IndividualCustomerManager implements IndividualCustomerService {
         GetByIdIndividualCustomerResponses getByIdIndividualCustomerResponses = this.modelMapperService.forResponse()
                 .map(individualCustomer, GetByIdIndividualCustomerResponses.class);
 
-        return new DataResult<>(getByIdIndividualCustomerResponses, true, "Individual Customer listed");
+        return new DataResult<>(getByIdIndividualCustomerResponses, true, IndividualCustomerMessages.INDIVIDUAL_CUSTOMERS_LISTED);
     }
 
     @Override
     public Result add(CreateIndividualCustomerRequests createIndividualCustomerRequests) {
+
+        this.individualCustomerBusinessRules.checkIfNationalityIdExists(createIndividualCustomerRequests.getNationalityId());
 
         createIndividualCustomerRequests.setPassword(passwordEncoder.encode(createIndividualCustomerRequests.getPassword()));
 
         this.individualCustomerRepository.save(this.modelMapperService.forRequest()
                 .map(createIndividualCustomerRequests, IndividualCustomer.class));
 
-        return new SuccessResult("Individual Customer added");
+        return new SuccessResult(IndividualCustomerMessages.INDIVIDUAL_CUSTOMER_ADDED);
     }
 
     @Override
@@ -72,7 +76,7 @@ public class IndividualCustomerManager implements IndividualCustomerService {
 
         this.individualCustomerRepository.save(individualCustomer);
 
-        return new SuccessResult("Individual Customer updated");
+        return new SuccessResult(IndividualCustomerMessages.INDIVIDUAL_CUSTOMER_UPDATED);
     }
 
     @Override
@@ -83,6 +87,6 @@ public class IndividualCustomerManager implements IndividualCustomerService {
 
         this.individualCustomerRepository.delete(individualCustomer);
 
-        return new SuccessResult("Individual Customer deleted");
+        return new SuccessResult(IndividualCustomerMessages.INDIVIDUAL_CUSTOMER_DELETED);
     }
 }

@@ -8,8 +8,7 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 public class UserBusinessRules {
 
-    private UserRepository userRepository;
-
+    private final UserRepository userRepository;
 
     public void checkIfUserExists(String email, String gsm) {
         if (this.userRepository.existsByEmail(email)) {
