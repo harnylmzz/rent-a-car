@@ -8,6 +8,4 @@ import java.util.List;
 
 public interface CustomerRepository extends JpaRepository<Customer, Integer> {
 
-    boolean checkIfCustomerNumberExists(String customerNumber);
-
 }
