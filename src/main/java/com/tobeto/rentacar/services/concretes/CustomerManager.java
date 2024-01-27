@@ -15,6 +15,7 @@ import com.tobeto.rentacar.services.dtos.requests.customer.UpdateCustomerRequest
 import com.tobeto.rentacar.services.dtos.responses.brand.GetAllBrandResponses;
 import com.tobeto.rentacar.services.dtos.responses.customer.GetAllCustomerResponses;
 import com.tobeto.rentacar.services.dtos.responses.customer.GetByIdCustomerResponses;
+import com.tobeto.rentacar.services.messages.customer.CustomerMessages;
 import com.tobeto.rentacar.services.rules.CustomerBusinessRules;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
@@ -39,17 +40,17 @@ public class CustomerManager implements CustomerService {
                         .map(customer, GetAllCustomerResponses.class))
                 .collect(Collectors.toList());
 
-        return new DataResult<>(getAllCustomerResponses, true, "Customers listed");
+        return new DataResult<>(getAllCustomerResponses, true, CustomerMessages.CUSTOMERS_LISTED);
     }
 
     @Override
     public DataResult<GetByIdCustomerResponses> getById(int id) {
-        Customer customers = customerRepository.findById(id).orElseThrow(() -> new DataNotFoundException("Data not found.") {
+        Customer customers = customerRepository.findById(id).orElseThrow(() -> new DataNotFoundException(CustomerMessages.CUSTOMER_NOT_FOUND) {
         });
         GetByIdCustomerResponses getByIdCustomerResponses = this.modelMapperService.forResponse()
                 .map(customers, GetByIdCustomerResponses.class);
 
-        return new DataResult<>(getByIdCustomerResponses, true, "Customer listed");
+        return new DataResult<>(getByIdCustomerResponses, true, CustomerMessages.CUSTOMERS_LISTED);
     }
 
     @Override
@@ -62,7 +63,7 @@ public class CustomerManager implements CustomerService {
 
         this.customerRepository.save(customer);
 
-        return new SuccessResult("Customer added");
+        return new SuccessResult(CustomerMessages.CUSTOMER_ADDED);
     }
 
     @Override
@@ -73,7 +74,7 @@ public class CustomerManager implements CustomerService {
 
         this.customerRepository.save(customer);
 
-        return new Result(true, "Customer updated");
+        return new Result(true, CustomerMessages.CUSTOMER_UPDATED);
     }
 
     @Override
@@ -82,7 +83,6 @@ public class CustomerManager implements CustomerService {
                 .map(deleteCustomerRequests, Customer.class);
         this.customerRepository.delete(customer);
 
-        return new Result(true, "Customer deleted");
+        return new Result(true, CustomerMessages.CUSTOMER_DELETED);
     }
-
 }

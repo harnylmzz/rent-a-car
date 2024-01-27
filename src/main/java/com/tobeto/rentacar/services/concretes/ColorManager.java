@@ -13,12 +13,11 @@ import com.tobeto.rentacar.services.dtos.requests.color.DeleteColorRequests;
 import com.tobeto.rentacar.services.dtos.requests.color.UpdateColorRequests;
 import com.tobeto.rentacar.services.dtos.responses.color.GetAllColorResponses;
 import com.tobeto.rentacar.services.dtos.responses.color.GetByIdColorResponses;
+import com.tobeto.rentacar.services.messages.color.ColorMessages;
 import com.tobeto.rentacar.services.rules.ColorBusinessRules;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -36,17 +35,17 @@ public class ColorManager implements ColorService {
                 .map(color -> this.modelMapperService.forResponse()
                         .map(color, GetAllColorResponses.class))
                 .collect(Collectors.toList());
-        return new DataResult<>(getAllColorResponses, true, "Colors listed");
+        return new DataResult<>(getAllColorResponses, true, ColorMessages.COLORS_LISTED);
     }
 
     @Override
     public DataResult<GetByIdColorResponses> getById(int id) {
-        Color color = colorRepository.findById(id).orElseThrow(() -> new DataNotFoundException("Data not found.") {
+        Color color = colorRepository.findById(id).orElseThrow(() -> new DataNotFoundException(ColorMessages.COLOR_NOT_FOUND) {
         });
         GetByIdColorResponses getByIdColorResponses = this.modelMapperService.forResponse()
                 .map(color, GetByIdColorResponses.class);
 
-        return new DataResult<>(getByIdColorResponses, true, "Color listed");
+        return new DataResult<>(getByIdColorResponses, true, ColorMessages.COLORS_LISTED);
     }
 
     @Override
@@ -58,7 +57,7 @@ public class ColorManager implements ColorService {
                 .map(createColorRequests, Color.class);
         this.colorRepository.save(color);
 
-        return new SuccessResult("Color added");
+        return new SuccessResult(ColorMessages.COLOR_ADDED);
 
     }
 
@@ -71,7 +70,7 @@ public class ColorManager implements ColorService {
 
         this.colorRepository.save(color);
 
-        return new SuccessResult("Color updated");
+        return new SuccessResult(ColorMessages.COLOR_UPDATED);
     }
 
     @Override
@@ -80,6 +79,6 @@ public class ColorManager implements ColorService {
                 .map(deleteColorRequests, Color.class);
         this.colorRepository.delete(color);
 
-        return new SuccessResult("Color deleted");
+        return new SuccessResult(ColorMessages.COLOR_DELETED);
     }
 }

@@ -13,6 +13,7 @@ import com.tobeto.rentacar.services.dtos.requests.comprehensiveInsurance.DeleteC
 import com.tobeto.rentacar.services.dtos.requests.comprehensiveInsurance.UpdateComprehensiveInsuranceRequests;
 import com.tobeto.rentacar.services.dtos.responses.comprehensiveInsurance.GetAllComprehensiveInsurance;
 import com.tobeto.rentacar.services.dtos.responses.comprehensiveInsurance.GetByIdComprehensiveInsurance;
+import com.tobeto.rentacar.services.messages.comprehensiveInsurance.ComprehensiveInsuranceMessages;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -36,19 +37,19 @@ public class ComprehensiveInsuranceManager implements ComprehensiveInsuranceServ
                         .map(comprehensiveInsurance, GetAllComprehensiveInsurance.class))
                 .collect(Collectors.toList());
 
-        return new DataResult<>(getAllComprehensiveInsurances, true, "Comprehensive Insurances listed");
+        return new DataResult<>(getAllComprehensiveInsurances, true, ComprehensiveInsuranceMessages.COMPREHENSIVE_INSURANCES_LISTED);
     }
 
     @Override
     public DataResult<GetByIdComprehensiveInsurance> getById(int id) {
 
         ComprehensiveInsurance comprehensiveInsurance = comprehensiveInsuranceRepository.findById(id)
-                .orElseThrow(() -> new DataNotFoundException("Data not found."));
+                .orElseThrow(() -> new DataNotFoundException(ComprehensiveInsuranceMessages.COMPREHENSIVE_INSURANCE_NOT_FOUND));
 
         GetByIdComprehensiveInsurance getByIdComprehensiveInsurance = this.modelMapperService.forResponse()
                 .map(comprehensiveInsurance, GetByIdComprehensiveInsurance.class);
 
-        return new DataResult<>(getByIdComprehensiveInsurance, true, "Comprehensive Insurance listed");
+        return new DataResult<>(getByIdComprehensiveInsurance, true, ComprehensiveInsuranceMessages.COMPREHENSIVE_INSURANCES_LISTED);
     }
 
     @Override
@@ -58,7 +59,7 @@ public class ComprehensiveInsuranceManager implements ComprehensiveInsuranceServ
                 .map(createComprehensiveInsuranceRequests, ComprehensiveInsurance.class);
 
         this.comprehensiveInsuranceRepository.save(comprehensiveInsurance);
-        return new SuccessResult("Comprehensive Insurance added");
+        return new SuccessResult(ComprehensiveInsuranceMessages.COMPREHENSIVE_INSURANCE_ADDED);
     }
 
     @Override
@@ -71,7 +72,7 @@ public class ComprehensiveInsuranceManager implements ComprehensiveInsuranceServ
         comprehensiveInsurance.setDeductibleAmount(updateComprehensiveInsuranceRequests.getDeductibleAmount());
 
         this.comprehensiveInsuranceRepository.save(comprehensiveInsurance);
-        return new SuccessResult("Comprehensive Insurance updated");
+        return new SuccessResult(ComprehensiveInsuranceMessages.COMPREHENSIVE_INSURANCE_UPDATED);
     }
 
     @Override
@@ -81,6 +82,6 @@ public class ComprehensiveInsuranceManager implements ComprehensiveInsuranceServ
                 .map(deleteComprehensiveInsuranceRequests, ComprehensiveInsurance.class);
 
         this.comprehensiveInsuranceRepository.delete(comprehensiveInsurance);
-        return new SuccessResult("Comprehensive Insurance deleted");
+        return new SuccessResult(ComprehensiveInsuranceMessages.COMPREHENSIVE_INSURANCE_DELETED);
     }
 }

@@ -13,6 +13,8 @@ import com.tobeto.rentacar.services.dtos.requests.corporateCustomer.DeleteCorpor
 import com.tobeto.rentacar.services.dtos.requests.corporateCustomer.UpdateCorporateCustomerRequests;
 import com.tobeto.rentacar.services.dtos.responses.corporateCustomer.GetAllCorporateCustomer;
 import com.tobeto.rentacar.services.dtos.responses.corporateCustomer.GetByIdCorporateCustomer;
+import com.tobeto.rentacar.services.messages.corporateCustomer.CorporateCustomerMessages;
+import com.tobeto.rentacar.services.rules.CorporateCustomerBusinessRules;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -28,6 +30,7 @@ public class CorporateCustomerManager implements CorporateCustomerService {
     private final CorporateCustomerRepository corporateCustomerRepository;
     private final ModelMapperService modelMapperService;
     private final PasswordEncoder passwordEncoder;
+    private final CorporateCustomerBusinessRules corporateCustomerBusinessRules;
 
     @Override
     public DataResult<List<GetAllCorporateCustomer>> getAll() {
@@ -38,23 +41,26 @@ public class CorporateCustomerManager implements CorporateCustomerService {
                         .map(corporateCustomer, GetAllCorporateCustomer.class))
                 .collect(Collectors.toList());
 
-        return new DataResult<>(getAllCorporateCustomers, true, "Corporate Customers listed");
+        return new DataResult<>(getAllCorporateCustomers, true, CorporateCustomerMessages.CORPORATE_CUSTOMERS_LISTED);
     }
 
     @Override
     public DataResult<GetByIdCorporateCustomer> getById(int id) {
 
         CorporateCustomer corporateCustomer = corporateCustomerRepository.findById(id)
-                .orElseThrow(() -> new DataNotFoundException("Data not found."));
+                .orElseThrow(() -> new DataNotFoundException(CorporateCustomerMessages.CORPORATE_CUSTOMER_NOT_FOUND));
 
         GetByIdCorporateCustomer getByIdCorporateCustomer = this.modelMapperService.forResponse()
                 .map(corporateCustomer, GetByIdCorporateCustomer.class);
 
-        return new DataResult<>(getByIdCorporateCustomer, true, "Corporate Customer listed");
+        return new DataResult<>(getByIdCorporateCustomer, true, CorporateCustomerMessages.CORPORATE_CUSTOMERS_LISTED);
     }
 
     @Override
     public Result add(CreateCorporateCustomerRequests createCorporateCustomerRequests) {
+
+        this.corporateCustomerBusinessRules.checkIfTaxNumber(createCorporateCustomerRequests.getTaxNumber());
+        this.corporateCustomerBusinessRules.checkIfCompanyName(createCorporateCustomerRequests.getCompanyName());
 
         createCorporateCustomerRequests.setPassword(passwordEncoder.encode(createCorporateCustomerRequests.getPassword()));
 
@@ -63,7 +69,7 @@ public class CorporateCustomerManager implements CorporateCustomerService {
 
         this.corporateCustomerRepository.save(corporateCustomer);
 
-        return new SuccessResult("Corporate Customer added");
+        return new SuccessResult(CorporateCustomerMessages.CORPORATE_CUSTOMER_ADDED);
     }
 
     @Override
@@ -78,7 +84,7 @@ public class CorporateCustomerManager implements CorporateCustomerService {
 
         this.corporateCustomerRepository.save(corporateCustomer);
 
-        return new SuccessResult("Corporate Customer updated");
+        return new SuccessResult(CorporateCustomerMessages.CORPORATE_CUSTOMER_UPDATED);
     }
 
     @Override
@@ -89,6 +95,6 @@ public class CorporateCustomerManager implements CorporateCustomerService {
 
         this.corporateCustomerRepository.delete(corporateCustomer);
 
-        return new SuccessResult("Corporate Customer deleted");
+        return new SuccessResult(CorporateCustomerMessages.CORPORATE_CUSTOMER_DELETED);
     }
 }

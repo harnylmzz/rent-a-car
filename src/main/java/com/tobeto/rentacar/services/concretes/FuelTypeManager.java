@@ -23,6 +23,7 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class FuelTypeManager implements FuelTypeService {
+
     private final FuelTypeRepository fuelTypeRepository;
     private final ModelMapperService modelMapperService;
 

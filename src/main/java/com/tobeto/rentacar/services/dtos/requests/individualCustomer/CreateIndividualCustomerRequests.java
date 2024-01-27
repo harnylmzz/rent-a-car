@@ -18,6 +18,10 @@ import java.util.Set;
 @NoArgsConstructor
 public class CreateIndividualCustomerRequests {
 
+    @NotNull(message = "Natinolity id is required")
+    @NotBlank(message = "Natinolity id is required")
+    private String nationalityId;
+
     @NotNull(message = "First name is required")
     @NotBlank(message = "First name is required")
     private String firstName;

@@ -13,6 +13,7 @@ import com.tobeto.rentacar.services.dtos.requests.car.DeleteCarRequests;
 import com.tobeto.rentacar.services.dtos.requests.car.UpdateCarRequests;
 import com.tobeto.rentacar.services.dtos.responses.car.GetAllCarResponses;
 import com.tobeto.rentacar.services.dtos.responses.car.GetByIdCarResponses;
+import com.tobeto.rentacar.services.messages.car.CarMessages;
 import com.tobeto.rentacar.services.rules.CarBusinessRules;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
@@ -36,17 +37,17 @@ public class CarManager implements CarService {
                         .map(car, GetAllCarResponses.class))
                 .collect(Collectors.toList());
 
-        return new DataResult<>(getAllCarResponses, true, "Cars listed");
+        return new DataResult<>(getAllCarResponses, true, CarMessages.CARS_LISTED);
     }
 
     @Override
     public DataResult<GetByIdCarResponses> getById(int id) {
-        Car car = carRepository.findById(id).orElseThrow(() -> new DataNotFoundException("Data not found.") {
+        Car car = carRepository.findById(id).orElseThrow(() -> new DataNotFoundException(CarMessages.CAR_NOT_FOUND) {
         });
         GetByIdCarResponses getByIdCarResponses = this.modelMapperService.forResponse()
                 .map(car, GetByIdCarResponses.class);
 
-        return new DataResult<>(getByIdCarResponses, true, "Car listed");
+        return new DataResult<>(getByIdCarResponses, true, CarMessages.CARS_LISTED);
     }
 
     @Override
@@ -69,7 +70,7 @@ public class CarManager implements CarService {
 
         this.carRepository.save(car);
 
-        return new SuccessResult("Car added");
+        return new SuccessResult(CarMessages.CAR_ADDED);
     }
 
 
@@ -84,7 +85,7 @@ public class CarManager implements CarService {
         car.setPrice(updateCarRequests.getPrice());
         this.carRepository.save(car);
 
-        return new SuccessResult("Car updated");
+        return new SuccessResult(CarMessages.CAR_UPDATED);
 
     }
 
@@ -94,7 +95,7 @@ public class CarManager implements CarService {
                 .map(deleteCarRequests, Car.class);
         this.carRepository.delete(car);
 
-        return new SuccessResult("Car deleted");
+        return new SuccessResult(CarMessages.CAR_DELETED);
 
     }
 
