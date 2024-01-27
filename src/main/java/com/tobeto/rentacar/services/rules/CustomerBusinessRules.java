@@ -12,10 +12,5 @@ public class CustomerBusinessRules {
 
     private CustomerRepository customerRepository;
 
-    public void checkIfCustomerNumber(String customerNumber) {
-        if (this.customerRepository.checkIfCustomerNumberExists(customerNumber)) {
-            throw new BusinessException(CustomerMessages.CUSTOMER_NUMBER_ALREADY_EXISTS);
-        }
     }
 
-}

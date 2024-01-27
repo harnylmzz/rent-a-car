@@ -56,8 +56,6 @@ public class CustomerManager implements CustomerService {
     @Override
     public Result add(CreateCustomerRequests createCustomerRequests) {
 
-        this.customerBusinessRules.checkIfCustomerNumber(createCustomerRequests.getCustomerNumber());
-
         Customer customer = this.modelMapperService.forRequest()
                 .map(createCustomerRequests, Customer.class);
 
