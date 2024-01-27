@@ -46,8 +46,7 @@
      
 + #### APIs Interaction Platform
    + #### ■ Swagger-ui
-   + #### Docker (Optional)
-
+     
 ---
 
 ## Installation Steps
@@ -75,25 +74,6 @@ To start the Spring Boot application, follow these steps:
 1. **Using IDE (Integrated Development Environment):**
    
    Run the application from your IDE.
-
-2. **Using Docker (Optional):**
-
-    ```bash
-    docker build -t rent-a-car-app .
-    docker run -p 8080:8080 rent-a-car-app
-    ```
-
-    Access the application at http://localhost:8080 in your web browser.
-
-### Docker Compose (Optional):
-
-If your application requires a PostgreSQL database, you can use Docker Compose to define both services. Create a `docker-compose.yml` file (see example above).
-
-Run the application and the database using:
-```
-bash
-    docker-compose up
-```
 
 ##### ER DIAGRAM:
 
