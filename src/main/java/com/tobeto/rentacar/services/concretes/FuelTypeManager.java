@@ -14,7 +14,6 @@ import com.tobeto.rentacar.services.dtos.requests.fuelType.UpdateFuelTypeRequest
 import com.tobeto.rentacar.services.dtos.responses.fuelType.GetAllFuelTypeResponses;
 import com.tobeto.rentacar.services.dtos.responses.fuelType.GetByIdFuelTypeResponses;
 import com.tobeto.rentacar.services.messages.fuelType.FuelTypeMessages;
-import com.tobeto.rentacar.services.rules.fuelType.FuelTypeBusinessRules;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -28,7 +27,6 @@ public class FuelTypeManager implements FuelTypeService {
 
     private final FuelTypeRepository fuelTypeRepository;
     private final ModelMapperService modelMapperService;
-    private final FuelTypeBusinessRules fuelTypeBusinessRules;
 
     @Override
     public DataResult<List<GetAllFuelTypeResponses>> getAll() {
@@ -52,8 +50,6 @@ public class FuelTypeManager implements FuelTypeService {
 
     @Override
     public Result add(CreateFuelTypeRequests createFuelTypeRequests) {
-
-        this.fuelTypeBusinessRules.checkIfFuelTypeExists(createFuelTypeRequests.getType());
 
         FuelType fuelType = this.modelMapperService.forRequest()
                 .map(createFuelTypeRequests, FuelType.class);
