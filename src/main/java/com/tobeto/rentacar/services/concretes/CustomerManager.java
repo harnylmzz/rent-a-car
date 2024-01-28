@@ -25,7 +25,6 @@ import java.util.stream.Collectors;
 public class CustomerManager implements CustomerService {
     private final CustomerRepository customerRepository;
     private final ModelMapperService modelMapperService;
-    private final CustomerBusinessRules customerBusinessRules;
 
     @Override
     public DataResult<List<GetAllCustomerResponses>> getAll() {
