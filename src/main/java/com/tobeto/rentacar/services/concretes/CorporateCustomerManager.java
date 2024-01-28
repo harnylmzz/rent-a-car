@@ -14,8 +14,7 @@ import com.tobeto.rentacar.services.dtos.requests.corporateCustomer.UpdateCorpor
 import com.tobeto.rentacar.services.dtos.responses.corporateCustomer.GetAllCorporateCustomer;
 import com.tobeto.rentacar.services.dtos.responses.corporateCustomer.GetByIdCorporateCustomer;
 import com.tobeto.rentacar.services.messages.corporateCustomer.CorporateCustomerMessages;
-import com.tobeto.rentacar.services.rules.CorporateCustomerBusinessRules;
-import lombok.AllArgsConstructor;
+import com.tobeto.rentacar.services.rules.corporateCustomer.CorporateCustomerBusinessRules;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

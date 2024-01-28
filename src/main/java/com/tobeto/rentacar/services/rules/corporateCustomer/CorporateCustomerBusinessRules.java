@@ -1,4 +1,4 @@
-package com.tobeto.rentacar.services.rules;
+package com.tobeto.rentacar.services.rules.corporateCustomer;
 
 import com.tobeto.rentacar.core.exceptions.BusinessException;
 import com.tobeto.rentacar.repository.CorporateCustomerRepository;

@@ -14,8 +14,7 @@ import com.tobeto.rentacar.services.dtos.requests.car.UpdateCarRequests;
 import com.tobeto.rentacar.services.dtos.responses.car.GetAllCarResponses;
 import com.tobeto.rentacar.services.dtos.responses.car.GetByIdCarResponses;
 import com.tobeto.rentacar.services.messages.car.CarMessages;
-import com.tobeto.rentacar.services.rules.CarBusinessRules;
-import lombok.AllArgsConstructor;
+import com.tobeto.rentacar.services.rules.car.CarBusinessRules;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

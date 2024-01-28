@@ -13,6 +13,8 @@ import com.tobeto.rentacar.services.dtos.requests.invoice.DeleteInvoiceRequests;
 import com.tobeto.rentacar.services.dtos.requests.invoice.UpdateInvoiceRequests;
 import com.tobeto.rentacar.services.dtos.responses.invoice.GetAllInvoiceResponses;
 import com.tobeto.rentacar.services.dtos.responses.invoice.GetByIdInvoiceResponses;
+import com.tobeto.rentacar.services.messages.invoice.InvoiceMessages;
+import com.tobeto.rentacar.services.rules.invoice.InvoiceBusinessRules;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -22,8 +24,9 @@ import java.util.List;
 @AllArgsConstructor
 public class InvoiceManager implements InvoiceService {
 
-    private InvoiceRepository invoiceRepository;
-    private ModelMapperService modelMapperService;
+    private final InvoiceRepository invoiceRepository;
+    private final ModelMapperService modelMapperService;
+    private final InvoiceBusinessRules invoiceBusinessRules;
 
     @Override
     public DataResult<List<GetAllInvoiceResponses>> getAll() {
@@ -33,29 +36,31 @@ public class InvoiceManager implements InvoiceService {
                 .map(invoice1 -> modelMapperService.forResponse()
                         .map(invoice1, GetAllInvoiceResponses.class)).toList();
 
-        return new DataResult<>(getAllInvoiceResponses, true, "Invoices listed");
+        return new DataResult<>(getAllInvoiceResponses, true, InvoiceMessages.INVOICE_LISTED);
     }
 
     @Override
     public DataResult<GetByIdInvoiceResponses> getById(int id) {
 
-        Invoice invoice = invoiceRepository.findById(id).orElseThrow(() -> new DataNotFoundException("Data not found."));
+        Invoice invoice = invoiceRepository.findById(id).orElseThrow(() -> new DataNotFoundException(InvoiceMessages.INVOICE_NOT_FOUND));
 
         GetByIdInvoiceResponses getByIdInvoiceResponses = modelMapperService.forResponse()
                 .map(invoice, GetByIdInvoiceResponses.class);
 
-        return new DataResult<>(getByIdInvoiceResponses, true, "Invoice listed");
+        return new DataResult<>(getByIdInvoiceResponses, true, InvoiceMessages.INVOICE_LISTED);
     }
 
     @Override
     public Result add(CreateInvoiceRequests createInvoiceRequests) {
+
+        invoiceBusinessRules.checkIfNumber(createInvoiceRequests.getNumber());
 
         Invoice invoice = modelMapperService.forRequest()
                 .map(createInvoiceRequests, Invoice.class);
 
         invoiceRepository.save(invoice);
 
-        return new SuccessResult("Invoice added");
+        return new SuccessResult(InvoiceMessages.INVOICE_ADDED);
     }
 
     @Override
@@ -71,7 +76,7 @@ public class InvoiceManager implements InvoiceService {
 
         invoiceRepository.save(invoice);
 
-        return new SuccessResult("Invoice updated");
+        return new SuccessResult(InvoiceMessages.INVOICE_UPDATED);
     }
 
     @Override
@@ -82,6 +87,6 @@ public class InvoiceManager implements InvoiceService {
 
         invoiceRepository.delete(invoice);
 
-        return new SuccessResult("Invoice deleted");
+        return new SuccessResult(InvoiceMessages.INVOICE_DELETED);
     }
 }

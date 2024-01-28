@@ -1,8 +1,5 @@
 package com.tobeto.rentacar.services.messages.comprehensiveInsurance;
 
-import lombok.AllArgsConstructor;
-
-@AllArgsConstructor
 public class ComprehensiveInsuranceMessages {
 
     public static final String COMPREHENSIVE_INSURANCE_ADDED = "Comprehensive insurance added";

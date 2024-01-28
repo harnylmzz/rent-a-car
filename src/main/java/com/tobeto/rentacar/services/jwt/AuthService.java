@@ -5,7 +5,7 @@ import com.tobeto.rentacar.entities.concretes.User;
 import com.tobeto.rentacar.repository.UserRepository;
 import com.tobeto.rentacar.services.dtos.requests.user.CreateUserRequests;
 import com.tobeto.rentacar.services.dtos.responses.user.GetByIdUserResponses;
-import com.tobeto.rentacar.services.rules.UserBusinessRules;
+import com.tobeto.rentacar.services.rules.user.UserBusinessRules;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;

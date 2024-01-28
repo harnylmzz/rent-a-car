@@ -1,8 +1,5 @@
 package com.tobeto.rentacar.services.messages.individualCustomer;
 
-import lombok.AllArgsConstructor;
-
-@AllArgsConstructor
 public class IndividualCustomerMessages {
 
     public static final String INDIVIDUAL_CUSTOMER_ADDED = "Individual customer added";

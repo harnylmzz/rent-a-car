@@ -1,6 +1,7 @@
 package com.tobeto.rentacar.services.concretes;
 
 import com.tobeto.rentacar.config.modelmapper.ModelMapperService;
+import com.tobeto.rentacar.core.exceptions.DataNotFoundException;
 import com.tobeto.rentacar.core.result.DataResult;
 import com.tobeto.rentacar.core.result.Result;
 import com.tobeto.rentacar.core.result.SuccessResult;
@@ -12,7 +13,8 @@ import com.tobeto.rentacar.services.dtos.requests.fuelType.DeleteFuelTypeRequest
 import com.tobeto.rentacar.services.dtos.requests.fuelType.UpdateFuelTypeRequests;
 import com.tobeto.rentacar.services.dtos.responses.fuelType.GetAllFuelTypeResponses;
 import com.tobeto.rentacar.services.dtos.responses.fuelType.GetByIdFuelTypeResponses;
-import lombok.AllArgsConstructor;
+import com.tobeto.rentacar.services.messages.fuelType.FuelTypeMessages;
+import com.tobeto.rentacar.services.rules.fuelType.FuelTypeBusinessRules;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +28,7 @@ public class FuelTypeManager implements FuelTypeService {
 
     private final FuelTypeRepository fuelTypeRepository;
     private final ModelMapperService modelMapperService;
+    private final FuelTypeBusinessRules fuelTypeBusinessRules;
 
     @Override
     public DataResult<List<GetAllFuelTypeResponses>> getAll() {
@@ -35,25 +38,28 @@ public class FuelTypeManager implements FuelTypeService {
                         .map(fuelType, GetAllFuelTypeResponses.class))
                 .collect(Collectors.toList());
 
-        return new DataResult<>(getAllFuelTypeResponses, true, "Fuel types listed");
+        return new DataResult<>(getAllFuelTypeResponses, true, FuelTypeMessages.FUEL_TYPES_LISTED);
     }
 
     @Override
     public DataResult<GetByIdFuelTypeResponses> getById(int id) {
-        FuelType fuelType = fuelTypeRepository.findById(id).orElseThrow();
+        FuelType fuelType = fuelTypeRepository.findById(id).orElseThrow(() -> new DataNotFoundException(FuelTypeMessages.FUEL_TYPE_NOT_FOUND));
         GetByIdFuelTypeResponses getByIdFuelTypeResponses = this.modelMapperService.forResponse()
                 .map(fuelType, GetByIdFuelTypeResponses.class);
 
-        return new DataResult<>(getByIdFuelTypeResponses, true, "Fuel type listed");
+        return new DataResult<>(getByIdFuelTypeResponses, true, FuelTypeMessages.FUEL_TYPES_LISTED);
     }
 
     @Override
     public Result add(CreateFuelTypeRequests createFuelTypeRequests) {
+
+        this.fuelTypeBusinessRules.checkIfFuelTypeExists(createFuelTypeRequests.getType());
+
         FuelType fuelType = this.modelMapperService.forRequest()
                 .map(createFuelTypeRequests, FuelType.class);
         this.fuelTypeRepository.save(fuelType);
 
-        return new SuccessResult("Fuel type added");
+        return new SuccessResult(FuelTypeMessages.FUEL_TYPE_ADDED);
     }
 
     @Override
@@ -62,7 +68,7 @@ public class FuelTypeManager implements FuelTypeService {
                 .map(updateFuelTypeRequests, FuelType.class);
         this.fuelTypeRepository.save(fuelType);
 
-        return new SuccessResult("Fuel type updated");
+        return new SuccessResult(FuelTypeMessages.FUEL_TYPE_UPDATED);
 
     }
 
@@ -72,7 +78,7 @@ public class FuelTypeManager implements FuelTypeService {
                 .map(deleteFuelTypeRequests, FuelType.class);
         this.fuelTypeRepository.delete(fuelType);
 
-        return new SuccessResult("Fuel type deleted");
+        return new SuccessResult(FuelTypeMessages.FUEL_TYPE_DELETED);
 
     }
 }

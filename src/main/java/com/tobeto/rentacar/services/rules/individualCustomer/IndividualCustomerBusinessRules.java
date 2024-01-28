@@ -1,4 +1,4 @@
-package com.tobeto.rentacar.services.rules;
+package com.tobeto.rentacar.services.rules.individualCustomer;
 
 import com.tobeto.rentacar.repository.IndividualCustomerRepository;
 import com.tobeto.rentacar.services.messages.individualCustomer.IndividualCustomerMessages;
@@ -15,6 +15,4 @@ public class IndividualCustomerBusinessRules {
         if (this.individualCustomerRepository.existsByNationalityId(nationalityId))
             throw new RuntimeException(IndividualCustomerMessages.NATIONALITY_ID_ALREADY_EXISTS);
     }
-
-
 }
