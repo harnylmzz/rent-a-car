@@ -2,7 +2,6 @@ package com.tobeto.rentacar.services.messages.customer;
 
 import lombok.AllArgsConstructor;
 
-@AllArgsConstructor
 public class CustomerMessages {
 
     public static final String CUSTOMER_ADDED = "Customer added";

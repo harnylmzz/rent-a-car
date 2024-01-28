@@ -1,4 +1,4 @@
-package com.tobeto.rentacar.services.rules;
+package com.tobeto.rentacar.services.rules.user;
 
 import com.tobeto.rentacar.repository.UserRepository;
 import lombok.AllArgsConstructor;

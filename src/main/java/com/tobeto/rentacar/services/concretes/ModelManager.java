@@ -6,7 +6,6 @@ import com.tobeto.rentacar.core.result.DataResult;
 import com.tobeto.rentacar.core.result.Result;
 import com.tobeto.rentacar.core.result.SuccessResult;
 import com.tobeto.rentacar.entities.concretes.Model;
-import com.tobeto.rentacar.entities.concretes.Rental;
 import com.tobeto.rentacar.repository.ModelRepository;
 import com.tobeto.rentacar.services.abstracts.ModelService;
 import com.tobeto.rentacar.services.dtos.requests.model.CreateModelRequests;
@@ -14,11 +13,10 @@ import com.tobeto.rentacar.services.dtos.requests.model.DeleteModelRequests;
 import com.tobeto.rentacar.services.dtos.requests.model.UpdateModelRequests;
 import com.tobeto.rentacar.services.dtos.responses.model.GetAllModelResponses;
 import com.tobeto.rentacar.services.dtos.responses.model.GetByIdModelResponses;
-import com.tobeto.rentacar.services.rules.ModelBusinessRules;
+import com.tobeto.rentacar.services.rules.model.ModelBusinessRules;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 

@@ -1,7 +1,4 @@
 package com.tobeto.rentacar.services.messages.brand;
-
-import lombok.AllArgsConstructor;
-@AllArgsConstructor
 public class BrandMessages {
     public static final String BRAND_ALREADY_EXISTS = "Brand already exists";
     public static final String BRANDS_LISTED = "Brands listed";

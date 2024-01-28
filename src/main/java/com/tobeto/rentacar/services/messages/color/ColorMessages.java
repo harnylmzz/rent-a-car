@@ -1,8 +1,5 @@
 package com.tobeto.rentacar.services.messages.color;
 
-import lombok.AllArgsConstructor;
-
-@AllArgsConstructor
 public class ColorMessages {
 
     public static final String COLOR_ADDED = "Color added";

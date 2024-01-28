@@ -2,7 +2,7 @@ package com.tobeto.rentacar.services.concretes;
 
 import com.tobeto.rentacar.config.modelmapper.ModelMapperService;
 import com.tobeto.rentacar.repository.BrandRepository;
-import com.tobeto.rentacar.services.rules.BrandBusinessRules;
+import com.tobeto.rentacar.services.rules.brand.BrandBusinessRules;
 import org.junit.jupiter.api.*;
 import org.mockito.Mockito;
 

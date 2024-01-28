@@ -13,6 +13,8 @@ import com.tobeto.rentacar.services.dtos.requests.insurance.DeleteInsuranceReque
 import com.tobeto.rentacar.services.dtos.requests.insurance.UpdateInsuranceRequests;
 import com.tobeto.rentacar.services.dtos.responses.insurance.GetAllInsuranceResponses;
 import com.tobeto.rentacar.services.dtos.responses.insurance.GetByIdInsuranceResponses;
+import com.tobeto.rentacar.services.messages.insurance.InsuranceMessages;
+import com.tobeto.rentacar.services.rules.insurance.InsuranceBusinessRules;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -26,6 +28,7 @@ public class InsuranceManager implements InsuranceService {
 
     private final InsuranceRepository insuranceRepository;
     private final ModelMapperService modelMapperService;
+    private final InsuranceBusinessRules insuranceBusinessRules;
 
     @Override
     public DataResult<List<GetAllInsuranceResponses>> getAll() {
@@ -35,29 +38,31 @@ public class InsuranceManager implements InsuranceService {
                 .map(insurance -> modelMapperService.forResponse()
                         .map(insurance, GetAllInsuranceResponses.class))
                 .collect(Collectors.toList());
-        return new DataResult<>(getAllInsuranceResponses, true, "All insurances listed.");
+        return new DataResult<>(getAllInsuranceResponses, true, InsuranceMessages.INSURANCES_LISTED);
     }
 
     @Override
     public DataResult<GetByIdInsuranceResponses> getById(int id) {
 
         Insurance insurance = insuranceRepository.findById(id)
-                .orElseThrow(() -> new DataNotFoundException("Insurance not found."));
+                .orElseThrow(() -> new DataNotFoundException(InsuranceMessages.INSURANCE_NOT_FOUND));
 
         GetByIdInsuranceResponses getByIdInsuranceResponses = modelMapperService.forResponse()
                 .map(insurance, GetByIdInsuranceResponses.class);
 
-        return new DataResult<>(getByIdInsuranceResponses, true, "Insurance listed.");
+        return new DataResult<>(getByIdInsuranceResponses, true, InsuranceMessages.INSURANCES_LISTED);
     }
 
     @Override
     public Result add(CreateInsuranceRequests createInsuranceRequests) {
 
+        this.insuranceBusinessRules.checkIfPolicyNumber(createInsuranceRequests.getPolicyNumber());
+
         Insurance insurance = modelMapperService.forRequest()
                 .map(createInsuranceRequests, Insurance.class);
 
         insuranceRepository.save(insurance);
-        return new SuccessResult("Insurance added.");
+        return new SuccessResult(InsuranceMessages.INSURANCE_ADDED);
     }
 
     @Override
@@ -73,7 +78,7 @@ public class InsuranceManager implements InsuranceService {
 
         insuranceRepository.save(insurance);
 
-        return new SuccessResult("Insurance updated.");
+        return new SuccessResult(InsuranceMessages.INSURANCE_UPDATED);
     }
 
     @Override
@@ -84,6 +89,6 @@ public class InsuranceManager implements InsuranceService {
 
         insuranceRepository.delete(insurance);
 
-        return new SuccessResult("Insurance deleted.");
+        return new SuccessResult(InsuranceMessages.INSURANCE_DELETED);
     }
 }

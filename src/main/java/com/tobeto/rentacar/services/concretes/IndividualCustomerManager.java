@@ -14,7 +14,7 @@ import com.tobeto.rentacar.services.dtos.requests.individualCustomer.UpdateIndiv
 import com.tobeto.rentacar.services.dtos.responses.individualCustomer.GetAllIndividualCustomerResponses;
 import com.tobeto.rentacar.services.dtos.responses.individualCustomer.GetByIdIndividualCustomerResponses;
 import com.tobeto.rentacar.services.messages.individualCustomer.IndividualCustomerMessages;
-import com.tobeto.rentacar.services.rules.IndividualCustomerBusinessRules;
+import com.tobeto.rentacar.services.rules.individualCustomer.IndividualCustomerBusinessRules;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

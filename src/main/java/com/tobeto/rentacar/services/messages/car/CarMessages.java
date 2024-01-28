@@ -1,8 +1,5 @@
 package com.tobeto.rentacar.services.messages.car;
 
-import lombok.AllArgsConstructor;
-
-@AllArgsConstructor
 public class CarMessages {
 
     public static final String PLATE_ALREADY_EXISTS = "Plate already exists";
