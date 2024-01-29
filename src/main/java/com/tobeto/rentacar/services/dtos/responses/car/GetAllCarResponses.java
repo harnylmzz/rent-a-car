@@ -35,5 +35,7 @@ public class GetAllCarResponses {
 
     private String description;
 
+    private int number_of_seats;
+
 
 }

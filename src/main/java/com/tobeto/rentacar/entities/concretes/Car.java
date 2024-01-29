@@ -48,6 +48,9 @@ public class Car extends BaseEntity {
     @Column(name ="amount_of_fuel")
     private String amount_of_fuel;
 
+    @Column(name = "number_of_seats")
+    private int number_of_seats;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "model_id")
     private Model model;

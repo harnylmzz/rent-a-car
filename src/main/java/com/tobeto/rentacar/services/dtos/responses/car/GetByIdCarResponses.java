@@ -32,6 +32,9 @@ public class GetByIdCarResponses {
 
     private String amount_of_fuel ;
 
+    private int number_of_seats;
+
+
     private String description;
 
 }
