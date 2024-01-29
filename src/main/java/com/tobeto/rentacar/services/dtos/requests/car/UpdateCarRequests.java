@@ -23,7 +23,7 @@ public class UpdateCarRequests {
 
     private String description;
 
-    private String person_type;
+    private String amount_of_fuel;
 
 
 }

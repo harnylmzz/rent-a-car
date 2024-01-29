@@ -39,7 +39,7 @@ public class CreateCarRequests {
 
     private int brand_id;
 
-    private String person_type;
+    private String amount_of_fuel;
 
     private String description;
 
