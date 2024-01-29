@@ -13,7 +13,7 @@ import com.tobeto.rentacar.services.dtos.requests.fuelType.DeleteFuelTypeRequest
 import com.tobeto.rentacar.services.dtos.requests.fuelType.UpdateFuelTypeRequests;
 import com.tobeto.rentacar.services.dtos.responses.fuelType.GetAllFuelTypeResponses;
 import com.tobeto.rentacar.services.dtos.responses.fuelType.GetByIdFuelTypeResponses;
-import com.tobeto.rentacar.services.messages.fuelType.FuelTypeMessages;
+import com.tobeto.rentacar.services.constans.fuelType.FuelTypeMessages;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

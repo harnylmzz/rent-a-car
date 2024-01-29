@@ -1,4 +1,4 @@
-package com.tobeto.rentacar.services.messages.comprehensiveInsurance;
+package com.tobeto.rentacar.services.constans.comprehensiveInsurance;
 
 public class ComprehensiveInsuranceMessages {
 

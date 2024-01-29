@@ -1,4 +1,4 @@
-package com.tobeto.rentacar.services.messages.individualCustomer;
+package com.tobeto.rentacar.services.constans.individualCustomer;
 
 public class IndividualCustomerMessages {
 

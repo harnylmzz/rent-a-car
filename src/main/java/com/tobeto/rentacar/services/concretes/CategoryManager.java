@@ -13,7 +13,7 @@ import com.tobeto.rentacar.services.dtos.requests.category.DeleteCategoryRequest
 import com.tobeto.rentacar.services.dtos.requests.category.UpdateCategoryRequests;
 import com.tobeto.rentacar.services.dtos.responses.category.GetAllCategoryResponse;
 import com.tobeto.rentacar.services.dtos.responses.category.GetByIdCategoryResponse;
-import com.tobeto.rentacar.services.messages.category.CategoryMessages;
+import com.tobeto.rentacar.services.constans.category.CategoryMessages;
 import com.tobeto.rentacar.services.rules.category.CategoryBusinessRules;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

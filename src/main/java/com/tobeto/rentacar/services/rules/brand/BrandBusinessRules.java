@@ -2,7 +2,7 @@ package com.tobeto.rentacar.services.rules.brand;
 
 import com.tobeto.rentacar.core.exceptions.BusinessException;
 import com.tobeto.rentacar.repository.BrandRepository;
-import com.tobeto.rentacar.services.messages.brand.BrandMessages;
+import com.tobeto.rentacar.services.constans.brand.BrandMessages;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
