@@ -13,8 +13,7 @@ import com.tobeto.rentacar.services.dtos.requests.comprehensiveInsurance.DeleteC
 import com.tobeto.rentacar.services.dtos.requests.comprehensiveInsurance.UpdateComprehensiveInsuranceRequests;
 import com.tobeto.rentacar.services.dtos.responses.comprehensiveInsurance.GetAllComprehensiveInsurance;
 import com.tobeto.rentacar.services.dtos.responses.comprehensiveInsurance.GetByIdComprehensiveInsurance;
-import com.tobeto.rentacar.services.messages.comprehensiveInsurance.ComprehensiveInsuranceMessages;
-import lombok.AllArgsConstructor;
+import com.tobeto.rentacar.services.constans.comprehensiveInsurance.ComprehensiveInsuranceMessages;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

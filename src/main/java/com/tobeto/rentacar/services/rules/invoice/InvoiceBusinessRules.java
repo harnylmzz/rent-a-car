@@ -1,7 +1,7 @@
 package com.tobeto.rentacar.services.rules.invoice;
 
 import com.tobeto.rentacar.repository.InvoiceRepository;
-import com.tobeto.rentacar.services.messages.invoice.InvoiceMessages;
+import com.tobeto.rentacar.services.constans.invoice.InvoiceMessages;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

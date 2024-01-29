@@ -1,7 +1,7 @@
 package com.tobeto.rentacar.services.rules.insurance;
 
 import com.tobeto.rentacar.repository.InsuranceRepository;
-import com.tobeto.rentacar.services.messages.insurance.InsuranceMessages;
+import com.tobeto.rentacar.services.constans.insurance.InsuranceMessages;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

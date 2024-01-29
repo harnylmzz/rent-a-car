@@ -13,6 +13,7 @@ import com.tobeto.rentacar.services.dtos.requests.reservation.DeleteReservationR
 import com.tobeto.rentacar.services.dtos.requests.reservation.UpdateReservationRequests;
 import com.tobeto.rentacar.services.dtos.responses.reservation.GetAllReservationResponses;
 import com.tobeto.rentacar.services.dtos.responses.reservation.GetByIdResevervationResponses;
+import com.tobeto.rentacar.services.constans.reservation.ReservationMessages;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -35,19 +36,19 @@ public class ReservationManager implements ReservationService {
                         .map(reservation, GetAllReservationResponses.class))
                 .collect(Collectors.toList());
 
-        return new DataResult<>(getAllReservationResponses, true, "Reservations listed");
+        return new DataResult<>(getAllReservationResponses, true, ReservationMessages.RESERVATIONS_LISTED);
     }
 
     @Override
     public DataResult<GetByIdResevervationResponses> getById(int id) {
 
         Reservation reservation = this.reservationRepository.findById(id)
-                .orElseThrow(() -> new DataNotFoundException("Data not found."));
+                .orElseThrow(() -> new DataNotFoundException(ReservationMessages.RESERVATION_NOT_FOUND));
 
         GetByIdResevervationResponses getByIdResevervationResponses = this.modelMapperService.forResponse()
                 .map(reservation, GetByIdResevervationResponses.class);
 
-        return new DataResult<>(getByIdResevervationResponses, true, "Reservation listed");
+        return new DataResult<>(getByIdResevervationResponses, true, ReservationMessages.RESERVATIONS_LISTED);
     }
 
     @Override
@@ -58,7 +59,7 @@ public class ReservationManager implements ReservationService {
 
         this.reservationRepository.save(reservation);
 
-        return new SuccessResult("Reservation added");
+        return new SuccessResult(ReservationMessages.RESERVATION_ADDED);
     }
 
     @Override
@@ -74,7 +75,7 @@ public class ReservationManager implements ReservationService {
 
         this.reservationRepository.save(reservation);
 
-        return new SuccessResult("Reservation updated");
+        return new SuccessResult(ReservationMessages.RESERVATION_UPDATED);
     }
 
     @Override
@@ -85,6 +86,6 @@ public class ReservationManager implements ReservationService {
 
         this.reservationRepository.delete(reservation);
 
-        return new SuccessResult("Reservation deleted");
+        return new SuccessResult(ReservationMessages.RESERVATION_DELETED);
     }
 }

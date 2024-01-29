@@ -1,6 +1,4 @@
-package com.tobeto.rentacar.services.messages.customer;
-
-import lombok.AllArgsConstructor;
+package com.tobeto.rentacar.services.constans.customer;
 
 public class CustomerMessages {
 

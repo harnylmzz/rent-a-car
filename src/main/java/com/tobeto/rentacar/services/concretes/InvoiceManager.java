@@ -13,7 +13,7 @@ import com.tobeto.rentacar.services.dtos.requests.invoice.DeleteInvoiceRequests;
 import com.tobeto.rentacar.services.dtos.requests.invoice.UpdateInvoiceRequests;
 import com.tobeto.rentacar.services.dtos.responses.invoice.GetAllInvoiceResponses;
 import com.tobeto.rentacar.services.dtos.responses.invoice.GetByIdInvoiceResponses;
-import com.tobeto.rentacar.services.messages.invoice.InvoiceMessages;
+import com.tobeto.rentacar.services.constans.invoice.InvoiceMessages;
 import com.tobeto.rentacar.services.rules.invoice.InvoiceBusinessRules;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;

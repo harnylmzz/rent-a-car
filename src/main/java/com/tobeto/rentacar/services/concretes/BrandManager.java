@@ -15,7 +15,7 @@ import com.tobeto.rentacar.services.dtos.requests.brand.UpdateBrandRequests;
 import com.tobeto.rentacar.services.dtos.responses.brand.GetAllBrandResponses;
 import com.tobeto.rentacar.services.dtos.responses.brand.GetByIdBrandResponses;
 
-import com.tobeto.rentacar.services.messages.brand.BrandMessages;
+import com.tobeto.rentacar.services.constans.brand.BrandMessages;
 import com.tobeto.rentacar.services.rules.brand.BrandBusinessRules;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

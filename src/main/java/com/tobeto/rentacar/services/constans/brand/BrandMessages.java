@@ -1,4 +1,4 @@
-package com.tobeto.rentacar.services.messages.brand;
+package com.tobeto.rentacar.services.constans.brand;
 public class BrandMessages {
     public static final String BRAND_ALREADY_EXISTS = "Brand already exists";
     public static final String BRANDS_LISTED = "Brands listed";

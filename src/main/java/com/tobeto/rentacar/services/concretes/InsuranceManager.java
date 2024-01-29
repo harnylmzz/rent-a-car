@@ -13,9 +13,8 @@ import com.tobeto.rentacar.services.dtos.requests.insurance.DeleteInsuranceReque
 import com.tobeto.rentacar.services.dtos.requests.insurance.UpdateInsuranceRequests;
 import com.tobeto.rentacar.services.dtos.responses.insurance.GetAllInsuranceResponses;
 import com.tobeto.rentacar.services.dtos.responses.insurance.GetByIdInsuranceResponses;
-import com.tobeto.rentacar.services.messages.insurance.InsuranceMessages;
+import com.tobeto.rentacar.services.constans.insurance.InsuranceMessages;
 import com.tobeto.rentacar.services.rules.insurance.InsuranceBusinessRules;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

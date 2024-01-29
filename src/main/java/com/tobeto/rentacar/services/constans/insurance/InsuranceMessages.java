@@ -1,4 +1,4 @@
-package com.tobeto.rentacar.services.messages.insurance;
+package com.tobeto.rentacar.services.constans.insurance;
 
 public class InsuranceMessages {
 

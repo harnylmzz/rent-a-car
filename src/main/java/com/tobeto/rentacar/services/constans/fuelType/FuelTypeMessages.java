@@ -1,4 +1,4 @@
-package com.tobeto.rentacar.services.messages.fuelType;
+package com.tobeto.rentacar.services.constans.fuelType;
 
 public class FuelTypeMessages {
 

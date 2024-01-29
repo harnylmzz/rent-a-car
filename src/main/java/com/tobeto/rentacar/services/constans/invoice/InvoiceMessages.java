@@ -1,4 +1,4 @@
-package com.tobeto.rentacar.services.messages.invoice;
+package com.tobeto.rentacar.services.constans.invoice;
 
 public class InvoiceMessages {
 
