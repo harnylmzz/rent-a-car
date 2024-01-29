@@ -42,6 +42,12 @@ public class Car extends BaseEntity {
     @Column(name = "plate")
     private String plate;
 
+    @Column(name = "description")
+    private String description;
+
+    @Column(name ="person_type")
+    private String person_type;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "model_id")
     private Model model;
@@ -66,11 +72,17 @@ public class Car extends BaseEntity {
     @JoinColumn(name="fuel_types_id", referencedColumnName="id")
     private FuelType fuelType;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "brand_id" , referencedColumnName ="id")
+    private Brand brand;
+
     @OneToMany(mappedBy = "car")
     private List<Image> images;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="category_id", referencedColumnName="id")
     private Category category;
+
+
 
 }

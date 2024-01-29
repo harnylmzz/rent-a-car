@@ -21,5 +21,9 @@ public class UpdateCarRequests {
 
     private String plate;
 
+    private String description;
+
+    private String person_type;
+
 
 }

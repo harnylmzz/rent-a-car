@@ -29,4 +29,11 @@ public class GetAllCarResponses {
 
     private String categoryName;
 
+    private int brand_id;
+
+    private String person_type;
+
+    private String description;
+
+
 }

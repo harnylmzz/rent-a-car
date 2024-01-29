@@ -37,4 +37,10 @@ public class CreateCarRequests {
 
     private int categoryId;
 
+    private int brand_id;
+
+    private String person_type;
+
+    private String description;
+
 }
