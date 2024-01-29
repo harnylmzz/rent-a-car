@@ -2,7 +2,7 @@ package com.tobeto.rentacar.services.rules.color;
 
 import com.tobeto.rentacar.core.exceptions.BusinessException;
 import com.tobeto.rentacar.repository.ColorRepository;
-import com.tobeto.rentacar.services.messages.color.ColorMessages;
+import com.tobeto.rentacar.services.constans.color.ColorMessages;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

@@ -13,7 +13,8 @@ import com.tobeto.rentacar.services.dtos.requests.promotion.DeletePromotionReque
 import com.tobeto.rentacar.services.dtos.requests.promotion.UpdatePromotionRequests;
 import com.tobeto.rentacar.services.dtos.responses.promotion.GetAllPromotionResponses;
 import com.tobeto.rentacar.services.dtos.responses.promotion.GetByIdPromotionResponses;
-import lombok.AllArgsConstructor;
+import com.tobeto.rentacar.services.constans.promotion.PromotionMessages;
+import com.tobeto.rentacar.services.rules.promotion.PromotionBusinessRules;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +26,7 @@ public class PromotionManager implements PromotionService {
 
     private final PromotionRepository promotionRepository;
     private final ModelMapperService modelMapperService;
+    private final PromotionBusinessRules promotionBusinessRules;
 
     @Override
     public DataResult<List<GetAllPromotionResponses>> getAll() {
@@ -35,28 +37,30 @@ public class PromotionManager implements PromotionService {
                         .map(promotion, GetAllPromotionResponses.class))
                 .collect(java.util.stream.Collectors.toList());
 
-        return new DataResult<>(getAllPromotionResponses, true, "Promotion listed");
+        return new DataResult<>(getAllPromotionResponses, true, PromotionMessages.PROMOTIONS_LISTED);
     }
 
     @Override
     public DataResult<GetByIdPromotionResponses> getById(int id) {
 
-        Promotion promotion = promotionRepository.findById(id).orElseThrow(() -> new DataNotFoundException("Data not found."));
+        Promotion promotion = promotionRepository.findById(id).orElseThrow(() -> new DataNotFoundException(PromotionMessages.PROMOTION_NOT_FOUND));
 
         GetByIdPromotionResponses getByIdPromotionResponses = this.modelMapperService.forResponse()
                 .map(promotion, GetByIdPromotionResponses.class);
-        return new DataResult<>(getByIdPromotionResponses, true, "Promotion listed");
+        return new DataResult<>(getByIdPromotionResponses, true, PromotionMessages.PROMOTIONS_LISTED);
     }
 
     @Override
     public Result add(CreatePromotionRequests createPromotionRequests) {
+
+        this.promotionBusinessRules.checkIfPromotionCode(createPromotionRequests.getCode());
 
         Promotion promotion = this.modelMapperService.forRequest()
                 .map(createPromotionRequests, Promotion.class);
 
         this.promotionRepository.save(promotion);
 
-        return new SuccessResult("Promotion added");
+        return new SuccessResult(PromotionMessages.PROMOTION_ADDED);
     }
 
     @Override
@@ -70,7 +74,7 @@ public class PromotionManager implements PromotionService {
         promotion.setCode(updatePromotionRequests.getCode());
         promotion.setType(updatePromotionRequests.getType());
 
-        return new SuccessResult("Promotion updated");
+        return new SuccessResult(PromotionMessages.PROMOTION_UPDATED);
     }
 
     @Override
@@ -81,6 +85,6 @@ public class PromotionManager implements PromotionService {
 
         this.promotionRepository.delete(promotion);
 
-        return new SuccessResult("Promotion deleted");
+        return new SuccessResult(PromotionMessages.PROMOTION_DELETED);
     }
 }

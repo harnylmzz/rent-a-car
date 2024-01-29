@@ -1,4 +1,4 @@
-package com.tobeto.rentacar.services.messages.color;
+package com.tobeto.rentacar.services.constans.color;
 
 public class ColorMessages {
 

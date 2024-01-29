@@ -1,4 +1,4 @@
-package com.tobeto.rentacar.services.messages.category;
+package com.tobeto.rentacar.services.constans.category;
 public class CategoryMessages {
 
     public static final String CATEGORY_ALREADY_EXISTS = "Category already exists";
