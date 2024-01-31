@@ -33,6 +33,7 @@
    + ##### ■ Validation
    + ##### ■ Modelmapper
    + ##### ■ Cloudinary
+   + ##### ■ Websocket
 
 + #### Language
    + ##### ■ Java 17
