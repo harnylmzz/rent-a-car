@@ -14,7 +14,6 @@ import com.tobeto.rentacar.services.dtos.requests.promotion.UpdatePromotionReque
 import com.tobeto.rentacar.services.dtos.responses.promotion.GetAllPromotionResponses;
 import com.tobeto.rentacar.services.dtos.responses.promotion.GetByIdPromotionResponses;
 import com.tobeto.rentacar.services.constans.promotion.PromotionMessages;
-import com.tobeto.rentacar.services.rules.promotion.PromotionBusinessRules;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -26,7 +25,6 @@ public class PromotionManager implements PromotionService {
 
     private final PromotionRepository promotionRepository;
     private final ModelMapperService modelMapperService;
-    private final PromotionBusinessRules promotionBusinessRules;
 
     @Override
     public DataResult<List<GetAllPromotionResponses>> getAll() {
@@ -52,8 +50,6 @@ public class PromotionManager implements PromotionService {
 
     @Override
     public Result add(CreatePromotionRequests createPromotionRequests) {
-
-        this.promotionBusinessRules.checkIfPromotionCode(createPromotionRequests.getCode());
 
         Promotion promotion = this.modelMapperService.forRequest()
                 .map(createPromotionRequests, Promotion.class);
