@@ -8,6 +8,7 @@ import com.tobeto.rentacar.core.result.SuccessResult;
 import com.tobeto.rentacar.entities.concretes.Model;
 import com.tobeto.rentacar.repository.ModelRepository;
 import com.tobeto.rentacar.services.abstracts.ModelService;
+import com.tobeto.rentacar.services.constans.model.ModelMessages;
 import com.tobeto.rentacar.services.dtos.requests.model.CreateModelRequests;
 import com.tobeto.rentacar.services.dtos.requests.model.DeleteModelRequests;
 import com.tobeto.rentacar.services.dtos.requests.model.UpdateModelRequests;
@@ -34,7 +35,7 @@ public class ModelManager implements ModelService {
                 .map(model -> this.modelMapperService.forResponse()
                         .map(model, GetAllModelResponses.class))
                 .collect(Collectors.toList());
-        return new DataResult<>(getAllModelResponses, true, "Models listed");
+        return new DataResult<>(getAllModelResponses, true, ModelMessages.MODEL_LISTED);
     }
 
     @Override
@@ -42,7 +43,7 @@ public class ModelManager implements ModelService {
         Model model = modelRepository.findById(id).orElseThrow(() -> new DataNotFoundException("Data not found."));
         GetByIdModelResponses getByIdModelResponses = this.modelMapperService.forResponse()
                 .map(model, GetByIdModelResponses.class);
-        return new DataResult<>(getByIdModelResponses, true, "Model listed");
+        return new DataResult<>(getByIdModelResponses, true, ModelMessages.MODEL_LISTED);
     }
 
     @Override
@@ -54,7 +55,7 @@ public class ModelManager implements ModelService {
                 .map(createModelRequests, Model.class);
         this.modelRepository.save(model);
 
-        return new SuccessResult("Model added");
+        return new SuccessResult(ModelMessages.MODEL_ADDED);
     }
 
     @Override
@@ -65,7 +66,7 @@ public class ModelManager implements ModelService {
         model.setName(updateModelRequests.getName());
         this.modelRepository.save(model);
 
-        return new SuccessResult("Model updated");
+        return new SuccessResult(ModelMessages.MODEL_UPDATED);
     }
 
     @Override
@@ -74,7 +75,7 @@ public class ModelManager implements ModelService {
                 .map(deleteModelRequests, Model.class);
         this.modelRepository.delete(model);
 
-        return new SuccessResult("Model deleted");
+        return new SuccessResult(ModelMessages.MODEL_DELETED);
 
     }
 

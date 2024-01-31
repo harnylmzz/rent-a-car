@@ -11,6 +11,7 @@ import com.tobeto.rentacar.entities.concretes.*;
 import com.tobeto.rentacar.repository.*;
 
 import com.tobeto.rentacar.services.abstracts.RentalService;
+import com.tobeto.rentacar.services.constans.rental.RentalMessages;
 import com.tobeto.rentacar.services.dtos.requests.rental.CreateRentalRequests;
 import com.tobeto.rentacar.services.dtos.requests.rental.DeleteRentalRequests;
 import com.tobeto.rentacar.services.dtos.requests.rental.UpdateRentalRequests;
@@ -40,17 +41,17 @@ public class RentalManager implements RentalService {
         List<GetAllRentalResponses> getAllRentalResponses = rentals.stream()
                 .map(rental -> this.modelMapperService.forResponse()
                         .map(rental, GetAllRentalResponses.class)).collect(Collectors.toList());
-        return new DataResult<>(getAllRentalResponses, true, "Rentals listed");
+        return new DataResult<>(getAllRentalResponses, true, RentalMessages.RENTALS_LISTED);
     }
 
     @Override
     public DataResult<GetByIdRentalResponses> getById(int id) {
 
-        Rental rental = rentalRepository.findById(id).orElseThrow(() -> new DataNotFoundException("Data not found."));
+        Rental rental = rentalRepository.findById(id).orElseThrow(() -> new DataNotFoundException(RentalMessages.DATA_NOT_FOUND));
         GetByIdRentalResponses getByIdRentalResponses = this.modelMapperService.forResponse()
                 .map(rental, GetByIdRentalResponses.class);
 
-        return new DataResult<>(getByIdRentalResponses, true, "Rental listed");
+        return new DataResult<>(getByIdRentalResponses, true, RentalMessages.RENTALS_LISTED);
     }
 
     @Override
@@ -79,7 +80,7 @@ public class RentalManager implements RentalService {
 
         this.rentalRepository.save(rental);
 
-        return new SuccessResult("Rental added");
+        return new SuccessResult(RentalMessages.RENTAL_ADDED);
     }
 
     @Override
@@ -96,7 +97,7 @@ public class RentalManager implements RentalService {
 
         this.rentalRepository.save(rental);
 
-        return new SuccessResult("Rental updated");
+        return new SuccessResult(RentalMessages.RENTAL_UPDATED);
     }
 
     @Override
@@ -104,7 +105,7 @@ public class RentalManager implements RentalService {
         Rental rental = this.modelMapperService.forRequest().map(deleteRentalRequests, Rental.class);
         this.rentalRepository.delete(rental);
 
-        return new SuccessResult("Rental deleted");
+        return new SuccessResult(RentalMessages.RENTAL_DELETED);
     }
 
     @Override

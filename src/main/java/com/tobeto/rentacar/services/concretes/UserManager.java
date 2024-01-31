@@ -8,6 +8,7 @@ import com.tobeto.rentacar.core.result.SuccessResult;
 import com.tobeto.rentacar.entities.concretes.User;
 import com.tobeto.rentacar.repository.UserRepository;
 import com.tobeto.rentacar.services.abstracts.UserService;
+import com.tobeto.rentacar.services.constans.user.UserMessages;
 import com.tobeto.rentacar.services.dtos.requests.user.CreateUserRequests;
 import com.tobeto.rentacar.services.dtos.requests.user.DeleteUserRequests;
 import com.tobeto.rentacar.services.dtos.requests.user.UpdateUserRequests;
@@ -33,16 +34,16 @@ public class UserManager implements UserService {
                         .map(user, GetAllUserResponses.class))
                 .toList();
 
-        return new DataResult<>(getAllUserResponses, true, "Users listed.");
+        return new DataResult<>(getAllUserResponses, true, UserMessages.USERS_LISTED);
     }
 
     public DataResult<GetByIdUserResponses> getById(int id) {
-        User user = userRepository.findById(id).orElseThrow(() -> new DataNotFoundException("Data not found."));
+        User user = userRepository.findById(id).orElseThrow(() -> new DataNotFoundException(UserMessages.DATA_NOT_FOUND));
 
         GetByIdUserResponses getByIdUserResponses = this.modelMapperService.forResponse()
                 .map(user, GetByIdUserResponses.class);
 
-        return new DataResult<>(getByIdUserResponses, true, "User listed.");
+        return new DataResult<>(getByIdUserResponses, true, UserMessages.USERS_LISTED);
     }
 
     @Override
@@ -51,7 +52,7 @@ public class UserManager implements UserService {
         userRepository.save(this.modelMapperService.forRequest()
                 .map(createUserRequests, User.class));
 
-        return new SuccessResult("User added.");
+        return new SuccessResult(UserMessages.USERS_ADDED);
     }
 
     public Result update(UpdateUserRequests updateUserRequests) {
@@ -61,7 +62,7 @@ public class UserManager implements UserService {
 
         userRepository.save(user);
 
-        return new SuccessResult("User updated.");
+        return new SuccessResult(UserMessages.USERS_UPDATED);
     }
 
     public Result delete(DeleteUserRequests deleteUserRequests) {
@@ -71,6 +72,6 @@ public class UserManager implements UserService {
 
         userRepository.delete(user);
 
-        return new SuccessResult("User deleted.");
+        return new SuccessResult(UserMessages.USERS_DELETED);
     }
 }
