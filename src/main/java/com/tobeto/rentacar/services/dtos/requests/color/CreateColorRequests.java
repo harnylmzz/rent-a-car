@@ -1,5 +1,6 @@
 package com.tobeto.rentacar.services.dtos.requests.color;
 
+import com.tobeto.rentacar.services.constans.color.ColorMessages;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -12,9 +13,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CreateColorRequests {
 
-    @NotNull(message = "Name is mandatory")
-    @NotBlank(message = "Name is mandatory")
-    @Size(min = 2, max = 20, message = "Color name must be between 2 and 20 characters")
+    @NotNull(message = ColorMessages.NAME_IS_MANDATORY)
+    @NotBlank(message = ColorMessages.NAME_IS_MANDATORY)
+    @Size(min = 2, max = 20, message = ColorMessages.COLOR_NAME_MUST_BE_BETWEEN_2_AND_2O_CHARACTERS)
     private String name;
 
 }

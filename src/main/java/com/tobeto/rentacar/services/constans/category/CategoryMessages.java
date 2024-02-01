@@ -7,4 +7,6 @@ public class CategoryMessages {
     public static final String CATEGORY_UPDATED = "Category updated";
     public static final String CATEGORY_DELETED = "Category deleted";
     public static final String CATEGORY_NOT_FOUND = "Category not found";
+
+    public static final String CATEGORY_NAME_IS_REQUIRED = "Category name is required";
 }
