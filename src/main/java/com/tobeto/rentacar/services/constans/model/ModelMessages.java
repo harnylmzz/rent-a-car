@@ -16,6 +16,10 @@ public class ModelMessages {
 
     public static final String MODEL_DELETED = "Model deleted";
 
+    public static final String NAME_IS_MANDATORY = "Name is mandatory";
+
+    public static final String NAME_MUST_BE_BETWEEN_2_AND_20_CHARACTERS = "Name must be between 2 and 20 characters";
+
 
 }
 
