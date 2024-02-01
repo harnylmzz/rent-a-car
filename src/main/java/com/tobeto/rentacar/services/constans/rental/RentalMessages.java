@@ -23,4 +23,16 @@ public class RentalMessages {
     public static final String RENTAL_UPDATED = "Rental updated";
 
     public static final String RENTAL_DELETED = "Rental deleted";
+
+    public static final String START_DATE_IS_MANDATORY = "Start date is mandatory";
+
+    public static final String END_DATE_IS_MANDATORY = "End date is mandatory";
+
+    public static final String START_KILOMETER_IS_MANDATORY = "Start kilometer is mandatory";
+
+    public static final String TOTAL_PRICE_IS_MANDATORY = "Total price is mandatory";
+
+    public static final String DISCOUNT_MUST_BE_GREATER_THAN_0 = "Discount must be greater than 0";
+
+    public static final String DISCOUNT_IS_MANDATORY = "Discount is mandatory";
 }
