@@ -1,5 +1,6 @@
 package com.tobeto.rentacar.services.dtos.requests.rental;
 
+import com.tobeto.rentacar.services.constans.rental.RentalMessages;
 import jakarta.annotation.Nullable;
 import jakarta.validation.constraints.AssertTrue;
 import jakarta.validation.constraints.Min;
@@ -17,27 +18,27 @@ import java.time.LocalDate;
 public class CreateRentalRequests {
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @NotNull(message = "Start date is mandatory")
+@NotNull(message = RentalMessages.START_DATE_IS_MANDATORY)
     private LocalDate startDate;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @NotNull(message = "End date is mandatory")
+    @NotNull(message = RentalMessages.END_DATE_IS_MANDATORY)
     private LocalDate endDate;
 
     @Nullable
     private LocalDate returnDate = null;
 
-    @NotNull(message = "Start kilometer is mandatory")
+    @NotNull(message = RentalMessages.START_KILOMETER_IS_MANDATORY)
     private int startKilometer;
 
     @Nullable
     private Integer endKilometer = null;
 
-    @NotNull(message = "Total price is mandatory")
+    @NotNull(message = RentalMessages.TOTAL_PRICE_IS_MANDATORY)
     private Double totalPrice;
 
-    @Min(value = 0, message = "Discount must be greater than 0")
-    @NotNull(message = "Discount is mandatory")
+    @Min(value = 0, message = RentalMessages.DISCOUNT_MUST_BE_GREATER_THAN_0)
+    @NotNull(message = RentalMessages.DISCOUNT_IS_MANDATORY)
     private double discount;
 
     private int carId;
