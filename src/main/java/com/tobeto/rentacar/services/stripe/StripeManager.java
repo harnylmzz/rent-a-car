@@ -28,15 +28,18 @@ public class StripeManager {
     /**
      * The secret key for authenticating with the Stripe API.
      */
-    @Value("${api.stripe.secret-key}")
+    @Value("${api.stripe.key}")
     private String stripeApiKey;
+
+    @Value("${api.stripe.secret-key}")
+    private String stripeSecretKey;
 
     /**
      * Initializes the Stripe API key during bean creation.
      */
     @PostConstruct
     public void init() {
-        Stripe.apiKey = stripeApiKey;
+        Stripe.apiKey = stripeSecretKey;
     }
 
     /**
