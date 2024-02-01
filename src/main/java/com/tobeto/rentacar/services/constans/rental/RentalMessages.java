@@ -26,7 +26,7 @@ public class RentalMessages {
 
     public static final String START_DATE_IS_MANDATORY = "Start date is mandatory";
 
-    public static final String END_DATE_IS_MANDATORY = "End date is mandatory";
+    public static final String END_DATE_IS_MANDATORY = "End date is mandatory ";
 
     public static final String START_KILOMETER_IS_MANDATORY = "Start kilometer is mandatory";
 
