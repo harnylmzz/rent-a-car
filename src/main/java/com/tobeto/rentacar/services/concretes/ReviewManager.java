@@ -9,6 +9,8 @@ import com.tobeto.rentacar.core.result.SuccessResult;
 import com.tobeto.rentacar.entities.concretes.Review;
 import com.tobeto.rentacar.repository.ReviewRepository;
 import com.tobeto.rentacar.services.abstracts.ReviewService;
+
+import com.tobeto.rentacar.services.constans.review.ReviewMessages;
 import com.tobeto.rentacar.services.dtos.requests.review.CreateReviewRequests;
 import com.tobeto.rentacar.services.dtos.requests.review.DeleteReviewRequests;
 import com.tobeto.rentacar.services.dtos.requests.review.UpdateReviewRequests;
@@ -35,14 +37,14 @@ public class ReviewManager  implements ReviewService {
                         .map(review, GetAllReviewResponses.class))
                 .collect(Collectors.toList());
 
-        return new DataResult<>(getAllReviewResponses, true, "Review listed");
+        return new DataResult<>(getAllReviewResponses, true, ReviewMessages.REVIEW_LISTED);
     }
     @Override
     public DataResult<GetByIdReviewResponses> getById(int id){
         Review review = reviewRepository.findById(id).orElseThrow(() -> new DataNotFoundException("Data not found."));
         GetByIdReviewResponses getByIdReviewResponses = this.modelMapperService.forResponse()
                 .map(review, GetByIdReviewResponses.class);
-        return new DataResult<>(getByIdReviewResponses, true,"Review listed");
+        return new DataResult<>(getByIdReviewResponses, true,ReviewMessages.REVIEW_LISTED);
     }
 
     @Override
@@ -51,7 +53,7 @@ public class ReviewManager  implements ReviewService {
                 .map(createReviewRequests, Review.class);
         this.reviewRepository.save(review);
 
-        return new SuccessResult("Review added");
+        return new SuccessResult(ReviewMessages.REVIEW_ADDED);
 
     }
     @Override
@@ -63,7 +65,7 @@ public class ReviewManager  implements ReviewService {
         review.setComment(updateReviewRequests.getComment());
         this.reviewRepository.save(review);
 
-        return new SuccessResult("Review update");
+        return new SuccessResult(ReviewMessages.REVIEW_UPDATE);
     }
 
     public Result delete(DeleteReviewRequests deleteReviewRequests) {
@@ -71,7 +73,7 @@ public class ReviewManager  implements ReviewService {
                 .map(deleteReviewRequests, Review.class);
         this.reviewRepository.delete(review);
 
-        return new SuccessResult("Review deleted");
+        return new SuccessResult(ReviewMessages.REVIEW_DELETED);
     }
 
 

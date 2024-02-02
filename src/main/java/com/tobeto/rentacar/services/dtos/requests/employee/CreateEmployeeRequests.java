@@ -1,5 +1,6 @@
 package com.tobeto.rentacar.services.dtos.requests.employee;
 
+import com.tobeto.rentacar.services.constans.employee.EmployeeMessages;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -11,8 +12,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CreateEmployeeRequests {
 
-    @NotNull(message = "Name is mandatory")
-    @NotBlank(message = "Name is mandatory")
+    @NotNull(message = EmployeeMessages.NAME_IS_MANDATORY)
+    @NotBlank(message = EmployeeMessages.NAME_IS_MANDATORY)
     private double salary;
 
     private String firstName;
