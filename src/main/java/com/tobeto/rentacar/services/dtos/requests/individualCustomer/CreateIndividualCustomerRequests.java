@@ -3,6 +3,7 @@ package com.tobeto.rentacar.services.dtos.requests.individualCustomer;
 import com.tobeto.rentacar.entities.concretes.enums.CustomerType;
 import com.tobeto.rentacar.entities.concretes.enums.EmployeeType;
 import com.tobeto.rentacar.entities.concretes.enums.Role;
+import com.tobeto.rentacar.services.constans.individualCustomer.IndividualCustomerMessages;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -18,38 +19,38 @@ import java.util.Set;
 @NoArgsConstructor
 public class CreateIndividualCustomerRequests {
 
-    @NotNull(message = "Natinolity id is required")
-    @NotBlank(message = "Natinolity id is required")
+    @NotNull(message = IndividualCustomerMessages.NATINOLITY_ID_IS_REQUIRED)
+    @NotBlank(message = IndividualCustomerMessages.NATINOLITY_ID_IS_REQUIRED)
     private String nationalityId;
 
-    @NotNull(message = "First name is required")
-    @NotBlank(message = "First name is required")
+    @NotNull(message = IndividualCustomerMessages.FIRST_NAME_IS_REQUIRED)
+    @NotBlank(message = IndividualCustomerMessages.FIRST_NAME_IS_REQUIRED)
     private String firstName;
 
-    @NotNull(message = "Last name is required")
-    @NotBlank(message = "Last name is required")
+    @NotNull(message = IndividualCustomerMessages.LAST_NAME_IS_REQUIRED)
+    @NotBlank(message = IndividualCustomerMessages.LAST_NAME_IS_REQUIRED)
     private String lastName;
 
-    @Email(message = "Email should be valid")
-    @NotBlank(message = "Email is required")
-    @NotNull(message = "Email is required")
+    @Email(message = IndividualCustomerMessages.EMAIL_SHOULD_BE_VALID)
+    @NotBlank(message = IndividualCustomerMessages.EMAIL_IS_REQUIRED)
+    @NotNull(message = IndividualCustomerMessages.EMAIL_IS_REQUIRED)
     private String email;
 
-    @NotBlank(message = "Phone number is required")
-    @NotNull(message = "Phone number is required")
+    @NotBlank(message = IndividualCustomerMessages.PHONE_NUMBER_IS_REQUIRED)
+    @NotNull(message = IndividualCustomerMessages.PHONE_NUMBER_IS_REQUIRED)
     private String gsm;
 
-    @NotBlank(message = "Username is required")
-    @NotNull(message = "Username is required")
+    @NotBlank(message = IndividualCustomerMessages.USERNAME_IS_REQUIRED)
+    @NotNull(message = IndividualCustomerMessages.USERNAME_IS_REQUIRED)
     private String username;
 
-    @NotBlank(message = "Password is required")
-    @NotNull(message = "Password is required")
-    @Size(min = 8, message = "Password should be at least 8 characters")
+    @NotBlank(message = IndividualCustomerMessages.PASSWORD_IS_REQUIRED)
+    @NotNull(message = IndividualCustomerMessages.PASSWORD_IS_REQUIRED)
+    @Size(min = 8, message = IndividualCustomerMessages.PASSWORD_SHOULD_BE_AT_LEAST_8_CHARACTERS)
     private String password;
 
-    @NotBlank(message = "Customer number is required")
-    @NotNull(message = "Customer number is required")
+    @NotBlank(message = IndividualCustomerMessages.CUSTOMER_NUMBER_IS_REQUIRED)
+    @NotNull(message = IndividualCustomerMessages.CUSTOMER_NUMBER_IS_REQUIRED)
     private String customerNumber;
 
     private Set<Role> authorities = Set.of(Role.ROLE_CUSTOMER);

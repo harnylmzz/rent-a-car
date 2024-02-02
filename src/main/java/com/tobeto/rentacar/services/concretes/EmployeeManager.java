@@ -8,6 +8,7 @@ import com.tobeto.rentacar.core.result.SuccessResult;
 import com.tobeto.rentacar.entities.concretes.Employee;
 import com.tobeto.rentacar.repository.EmployeeRepository;
 import com.tobeto.rentacar.services.abstracts.EmployeeService;
+import com.tobeto.rentacar.services.constans.employee.EmployeeMessages;
 import com.tobeto.rentacar.services.dtos.requests.employee.CreateEmployeeRequests;
 import com.tobeto.rentacar.services.dtos.requests.employee.DeleteEmployeeRequests;
 import com.tobeto.rentacar.services.dtos.requests.employee.UpdateEmployeeRequests;
@@ -34,7 +35,7 @@ public class EmployeeManager implements EmployeeService {
                         .map(employee, GetAllEmployeeResponses.class))
                 .collect(Collectors.toList());
 
-        return new DataResult<>(getAllEmployeeResponses, true, "Employees listed");
+        return new DataResult<>(getAllEmployeeResponses, true, EmployeeMessages.EMPLOYEES_LISTED);
     }
 
     @Override
@@ -44,7 +45,7 @@ public class EmployeeManager implements EmployeeService {
         GetByIdEmployeeResponses getByIdEmployeeResponses = this.modelMapperService.forResponse()
                 .map(employee, GetByIdEmployeeResponses.class);
 
-        return new DataResult<>(getByIdEmployeeResponses, true, "Employee listed");
+        return new DataResult<>(getByIdEmployeeResponses, true,EmployeeMessages.EMPLOYEES_LISTED );
     }
 
     @Override
@@ -56,7 +57,7 @@ public class EmployeeManager implements EmployeeService {
         this.employeeRepository.save(employee);
 
 
-        return new SuccessResult("Employee added");
+        return new SuccessResult(EmployeeMessages.EMPLOYEE_ADDED);
     }
 
     @Override
@@ -68,7 +69,7 @@ public class EmployeeManager implements EmployeeService {
 
         this.employeeRepository.save(employee);
 
-        return new SuccessResult("Employee updated");
+        return new SuccessResult(EmployeeMessages.EMPLOYEE_UPDATED);
     }
 
     @Override
@@ -77,7 +78,7 @@ public class EmployeeManager implements EmployeeService {
                 .map(deleteEmployeeRequests, Employee.class);
         this.employeeRepository.delete(employee);
 
-        return new SuccessResult("Employee deleted");
+        return new SuccessResult(EmployeeMessages.EMPLOYEE_DELETED);
     }
 
 }
