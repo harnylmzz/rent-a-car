@@ -1,9 +1,6 @@
 package com.tobeto.rentacar.entities.abstracts;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDate;
@@ -26,14 +23,22 @@ public abstract class BaseEntity {
     @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
     private int id;
 
+
+    @Column(name="created_date")
     private LocalDate createdDate;
 
+
+
+    @Column(name="updated_date")
     private LocalDate updatedDate;
 
+
+    @PrePersist
     private void beforeAdd() {
         this.createdDate = LocalDate.now();
     }
 
+    @PreUpdate
     private void beforeUpdate() {
         this.updatedDate = LocalDate.now();
     }
