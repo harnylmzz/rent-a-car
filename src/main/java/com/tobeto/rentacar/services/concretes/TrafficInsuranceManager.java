@@ -8,6 +8,7 @@ import com.tobeto.rentacar.core.result.SuccessResult;
 import com.tobeto.rentacar.entities.concretes.TrafficInsurance;
 import com.tobeto.rentacar.repository.TrafficInsuranceRepository;
 import com.tobeto.rentacar.services.abstracts.TrafficInsuranceService;
+import com.tobeto.rentacar.services.constans.trafficInsurance.TrafficInsuranceMessages;
 import com.tobeto.rentacar.services.dtos.requests.trafficInsurance.CreateTrafficInsuranceRequests;
 import com.tobeto.rentacar.services.dtos.requests.trafficInsurance.DeleteTrafficInsuranceRequests;
 import com.tobeto.rentacar.services.dtos.requests.trafficInsurance.UpdateTrafficInsuranceRequests;
@@ -35,7 +36,7 @@ public class TrafficInsuranceManager implements TrafficInsuranceService {
                         .map(trafficInsurance, GetAllTrafficInsuranceResponses.class))
                 .collect(Collectors.toList());
 
-        return new DataResult<>(getAllTrafficInsuranceResponses, true, "Traffic insurances listed.");
+        return new DataResult<>(getAllTrafficInsuranceResponses, true, TrafficInsuranceMessages.TRAFFIC_INSURANCES_LISTED);
     }
 
     @Override
@@ -47,7 +48,7 @@ public class TrafficInsuranceManager implements TrafficInsuranceService {
         GetByIdTrafficInsuranceResponses getByIdTrafficInsuranceResponses = this.modelMapperService.forResponse()
                 .map(trafficInsurance, GetByIdTrafficInsuranceResponses.class);
 
-        return new DataResult<>(getByIdTrafficInsuranceResponses, true, "Traffic insurance listed.");
+        return new DataResult<>(getByIdTrafficInsuranceResponses, true, new TrafficInsuranceMessages.TRAFFIC_INSURANCES_LISTED);
     }
 
     @Override
@@ -58,7 +59,7 @@ public class TrafficInsuranceManager implements TrafficInsuranceService {
 
         this.trafficInsuranceRepository.save(trafficInsurance);
 
-        return new SuccessResult("Traffic insurance added.");
+        return new SuccessResult(TrafficInsuranceMessages.TRAFFIC_INSURANCE_ADDED);
     }
 
     @Override
@@ -72,7 +73,7 @@ public class TrafficInsuranceManager implements TrafficInsuranceService {
 
         this.trafficInsuranceRepository.save(trafficInsurance);
 
-        return new SuccessResult("Traffic insurance updated.");
+        return new SuccessResult(TrafficInsuranceMessages.TRAFFIC_INSURANCE_UPDATED);
     }
 
     @Override
@@ -83,6 +84,6 @@ public class TrafficInsuranceManager implements TrafficInsuranceService {
 
         this.trafficInsuranceRepository.delete(trafficInsurance);
 
-        return new SuccessResult("Traffic insurance deleted.");
+        return new SuccessResult(TrafficInsuranceMessages.TRAFFIC_INSURANCE_DELETED);
     }
 }
