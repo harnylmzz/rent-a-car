@@ -48,7 +48,7 @@ public class TrafficInsuranceManager implements TrafficInsuranceService {
         GetByIdTrafficInsuranceResponses getByIdTrafficInsuranceResponses = this.modelMapperService.forResponse()
                 .map(trafficInsurance, GetByIdTrafficInsuranceResponses.class);
 
-        return new DataResult<>(getByIdTrafficInsuranceResponses, true, new TrafficInsuranceMessages.TRAFFIC_INSURANCES_LISTED);
+        return new DataResult<>(getByIdTrafficInsuranceResponses, true, TrafficInsuranceMessages.TRAFFIC_INSURANCES_LISTED);
     }
 
     @Override
