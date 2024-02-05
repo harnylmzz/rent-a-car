@@ -1,8 +1,11 @@
 package com.tobeto.rentacar.services.dtos.responses.car;
 
+import com.tobeto.rentacar.core.cloudinary.ImageModel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -37,5 +40,6 @@ public class GetAllCarResponses {
 
     private int number_of_seats;
 
+    private List<ImageModel> images;
 
 }
