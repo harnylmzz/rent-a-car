@@ -28,7 +28,7 @@ public class UsersController {
 
     private final UserService userService;
 
-    @GetMapping("/get xById")
+    @GetMapping("/getById")
     public DataResult<GetByIdUserResponses> getUserById(int id) {
         return this.userService.getById(id);
     }
@@ -36,11 +36,6 @@ public class UsersController {
     @GetMapping("/getAll")
     public DataResult<List<GetAllUserResponses>> getAllUser() {
         return this.userService.getAll();
-    }
-
-    @PostMapping("/add")
-    public Result addUser(@RequestBody CreateUserRequests createUserRequests) {
-        return this.userService.add(createUserRequests);
     }
 
     @PutMapping("/update")
