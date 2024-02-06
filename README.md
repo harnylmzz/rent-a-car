@@ -80,7 +80,7 @@ To start the Spring Boot application, follow these steps:
 
 ##### ER DIAGRAM:
 
-![ER DIAGRAM](https://cdn.discordapp.com/attachments/1165330779291787405/1186289701838143508/Untitled.png?ex=6592b561&is=65804061&hm=14686633571106ef70fc0b658fc24b0af5e0b1d70ae6877ed05e9de4e47eb385&)
+![ER DIAGRAM](Untitled%20(1).png)
 
 
 ## MIT License 
