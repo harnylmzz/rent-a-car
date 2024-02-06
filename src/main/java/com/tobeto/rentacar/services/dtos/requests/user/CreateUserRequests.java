@@ -14,5 +14,5 @@ public record CreateUserRequests (
         String username,
         String password,
         Set<Role> authorities
-        ) {
+) {
 }
