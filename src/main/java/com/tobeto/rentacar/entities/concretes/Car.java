@@ -46,10 +46,10 @@ public class Car extends BaseEntity {
     private String description;
 
     @Column(name ="amount_of_fuel")
-    private String amount_of_fuel;
+    private String amountOfFuel;
 
     @Column(name = "number_of_seats")
-    private int number_of_seats;
+    private int numberOfSeats;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "model_id")
