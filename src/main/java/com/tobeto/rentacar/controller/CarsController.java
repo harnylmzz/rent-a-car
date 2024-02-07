@@ -32,38 +32,44 @@ public class CarsController {
     private final CarService carService;
 
     @GetMapping("/getAll")
-
+    @CrossOrigin(origins = "http://localhost:5173")
     public DataResult<List<GetAllCarResponses>> getAll() {
 
         return this.carService.getAll();
     }
 
     @GetMapping("/getById")
+    @CrossOrigin(origins = "http://localhost:5173")
     public DataResult<GetByIdCarResponses> getById(int id) {
         return carService.getById(id);
     }
 
     @PostMapping("/add")
+    @CrossOrigin(origins = "http://localhost:5173")
     public Result add(@RequestBody @Valid CreateCarRequests createCarRequests) {
         return this.carService.add(createCarRequests);
     }
 
     @PutMapping("/update")
+    @CrossOrigin(origins = "http://localhost:5173")
     public Result update(@RequestBody UpdateCarRequests updateCarRequest) {
         return this.carService.update(updateCarRequest);
     }
 
     @DeleteMapping("/delete")
+    @CrossOrigin(origins = "http://localhost:5173")
     public Result delete(DeleteCarRequests deleteCarRequests) {
         return this.carService.delete(deleteCarRequests);
     }
 
     @GetMapping("/findByYear")
+    @CrossOrigin(origins = "http://localhost:5173")
     public List<GetAllCarResponses> findByYear(int year) {
         return this.carService.findByYear(year);
     }
 
     @GetMapping("/findByPlate")
+    @CrossOrigin(origins = "http://localhost:5173")
     public List<GetAllCarResponses> findByPlate(String plate) {
         return this.carService.findByPlate(plate);
     }
