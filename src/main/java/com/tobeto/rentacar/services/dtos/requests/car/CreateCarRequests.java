@@ -37,12 +37,12 @@ public class CreateCarRequests {
 
     private int categoryId;
 
-    private int brand_id;
+    private int brandId;
 
-    private String amount_of_fuel;
+    private String amountOfFuel;
 
     private String description;
 
-    private int number_of_seats;
+    private int numberOfSeats;
 
 }

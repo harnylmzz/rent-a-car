@@ -34,11 +34,13 @@ public class AuthsController {
     private final AuthenticationManager authenticationManager;
 
     @PostMapping("/register")
+
     public User register(@RequestBody CreateUserRequests createUserRequest) {
         return this.authService.register(createUserRequest);
     }
 
     @PostMapping("/login")
+
     public String login(@RequestBody LoginRequest loginRequest) {
         Authentication authentication = authenticationManager.authenticate
                 (new UsernamePasswordAuthenticationToken(loginRequest.username(), loginRequest.password()));
