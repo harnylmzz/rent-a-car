@@ -7,6 +7,7 @@ import com.tobeto.rentacar.services.dtos.requests.brand.DeleteBrandRequests;
 import com.tobeto.rentacar.services.dtos.requests.brand.UpdateBrandRequests;
 import com.tobeto.rentacar.services.dtos.responses.brand.GetAllBrandResponses;
 import com.tobeto.rentacar.services.dtos.responses.brand.GetByIdBrandResponses;
+import org.springframework.cache.annotation.CacheEvict;
 
 import java.util.List;
 
