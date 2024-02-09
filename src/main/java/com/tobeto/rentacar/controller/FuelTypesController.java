@@ -7,6 +7,7 @@ import com.tobeto.rentacar.services.dtos.requests.fuelType.DeleteFuelTypeRequest
 import com.tobeto.rentacar.services.dtos.requests.fuelType.UpdateFuelTypeRequests;
 import com.tobeto.rentacar.services.dtos.responses.fuelType.GetAllFuelTypeResponses;
 import com.tobeto.rentacar.services.dtos.responses.fuelType.GetByIdFuelTypeResponses;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -38,12 +39,12 @@ public class FuelTypesController {
     }
 
     @PostMapping("/add")
-    public void add(CreateFuelTypeRequests createFuelTypeRequests) {
+    public void add(@RequestBody @Valid CreateFuelTypeRequests createFuelTypeRequests) {
         this.fuelTypeService.add(createFuelTypeRequests);
     }
 
     @PutMapping("/update")
-    public void update(UpdateFuelTypeRequests updateFuelTypeRequests) {
+    public void update(@RequestBody UpdateFuelTypeRequests updateFuelTypeRequests) {
         this.fuelTypeService.update(updateFuelTypeRequests);
     }
 

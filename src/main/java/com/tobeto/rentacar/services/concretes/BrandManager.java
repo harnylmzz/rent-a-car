@@ -20,8 +20,8 @@ import com.tobeto.rentacar.services.dtos.responses.brand.GetByIdBrandResponses;
 import com.tobeto.rentacar.services.constans.brand.BrandMessages;
 import com.tobeto.rentacar.services.rules.brand.BrandBusinessRules;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -38,13 +38,13 @@ public class BrandManager implements BrandService {
     public DataResult<List<GetAllBrandResponses>> getAll() {
 
         List<GetAllBrandResponses> getAllBrandResponses = (List<GetAllBrandResponses>) redisCacheManager
-                .getCachedData("brandCache", "getBrandsAndCache");
+                .getCachedData("brandListCache", "getBrandsAndCache");
         if (getAllBrandResponses == null) {
             getAllBrandResponses = getBrandsAndCache();
-            redisCacheManager.cacheData("brandCache", "getBrandsAndCache", getAllBrandResponses);
+            redisCacheManager.cacheData("brandListCache", "getBrandsAndCache", getAllBrandResponses);
         }
 
-        return new SuccessDataResult<>(getAllBrandResponses, BrandMessages.BRANDS_LISTED);
+        return new SuccessDataResult<>(getAllBrandResponses, "Brands Listed.");
     }
 
     public List<GetAllBrandResponses> getBrandsAndCache() {
@@ -73,7 +73,9 @@ public class BrandManager implements BrandService {
 
         Brand brand = this.modelMapperService.forRequest().map(createBrandRequests, Brand.class);
         this.brandRepository.save(brand);
-        this.redisCacheManager.cacheData("brandListCache", "getBrandsAndCache", null);
+
+        redisCacheManager.cacheData("brandListCache", "getBrandsAndCache", null);
+
         return new SuccessResult(BrandMessages.BRAND_ADDED);
     }
 

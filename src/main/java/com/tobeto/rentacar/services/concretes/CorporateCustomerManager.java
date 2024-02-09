@@ -37,18 +37,22 @@ public class CorporateCustomerManager implements CorporateCustomerService {
 
         List<GetAllCorporateCustomer> getAllCorporateCustomers = (List<GetAllCorporateCustomer>) redisCacheManager
                 .getCachedData("corporateCustomerCache", "getCorporateCustomersAndCache");
+
         if (getAllCorporateCustomers == null) {
             getAllCorporateCustomers = getCorporateCustomersAndCache();
             redisCacheManager.cacheData("corporateCustomerCache", "getCorporateCustomersAndCache", getAllCorporateCustomers);
         }
+
         return new DataResult<>(getAllCorporateCustomers, true, CorporateCustomerMessages.CORPORATE_CUSTOMERS_LISTED);
     }
-
     public List<GetAllCorporateCustomer> getCorporateCustomersAndCache() {
+
         List<CorporateCustomer> corporateCustomers = corporateCustomerRepository.findAll();
+
         List<GetAllCorporateCustomer> getAllCorporateCustomers = corporateCustomers.stream()
                 .map(corporateCustomer -> modelMapperService.forResponse().map(corporateCustomer, GetAllCorporateCustomer.class))
                 .collect(Collectors.toList());
+
         return getAllCorporateCustomers;
     }
 
