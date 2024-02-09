@@ -5,6 +5,7 @@ import com.tobeto.rentacar.config.redis.RedisCacheManager;
 import com.tobeto.rentacar.core.exceptions.DataNotFoundException;
 import com.tobeto.rentacar.core.result.DataResult;
 import com.tobeto.rentacar.core.result.Result;
+import com.tobeto.rentacar.core.result.SuccessDataResult;
 import com.tobeto.rentacar.core.result.SuccessResult;
 import com.tobeto.rentacar.entities.concretes.*;
 import com.tobeto.rentacar.repository.CarRepository;
@@ -34,13 +35,13 @@ public class CarManager implements CarService {
     public DataResult<List<GetAllCarResponses>> getAll() {
 
         List<GetAllCarResponses> getAllCarResponses = (List<GetAllCarResponses>) redisCacheManager
-                .getCachedData("carCache", "getCarsAndCache");
+                .getCachedData("carListCache", "getCarsAndCache");
         if (getAllCarResponses == null) {
             getAllCarResponses = getCarsAndCache();
-            redisCacheManager.cacheData("carCache", "getCarsAndCache", getAllCarResponses);
+            redisCacheManager.cacheData("carListCache", "getCarsAndCache", getAllCarResponses);
         }
 
-        return new DataResult<>(getAllCarResponses, true, CarMessages.CARS_LISTED);
+        return new SuccessDataResult<>(getAllCarResponses, CarMessages.CARS_LISTED);
     }
 
     public List<GetAllCarResponses> getCarsAndCache() {

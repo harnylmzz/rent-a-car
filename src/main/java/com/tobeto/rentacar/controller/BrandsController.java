@@ -56,22 +56,22 @@ public class BrandsController {
     }
 
     @GetMapping("/findByName")
-    public List<GetAllBrandResponses> findByName(@RequestParam String name) {
+    public List<GetAllBrandResponses> findByName(String name) {
         return this.brandService.findByName(name);
     }
 
     @GetMapping("/findByNameStartingWith")
-    public List<GetAllBrandResponses> findByNameStartingWith(@RequestParam String name) {
+    public List<GetAllBrandResponses> findByNameStartingWith(String name) {
         return this.brandService.findByNameStartingWith(name);
     }
 
     @GetMapping("/findByNameEndingWith")
-    public List<GetAllBrandResponses> findByNameEndingWith(@RequestParam String name) {
+    public List<GetAllBrandResponses> findByNameEndingWith(String name) {
         return this.brandService.findByNameEndingWith(name);
     }
 
     @GetMapping("/findByNameContaining")
-    public List<GetAllBrandResponses> findByNameContaining(@RequestParam String name) {
+    public List<GetAllBrandResponses> findByNameContaining(String name) {
         return this.brandService.findByNameContaining(name);
     }
 }
