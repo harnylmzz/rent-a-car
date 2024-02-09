@@ -1,6 +1,7 @@
 package com.tobeto.rentacar.services.concretes;
 
 import com.tobeto.rentacar.config.modelmapper.ModelMapperService;
+import com.tobeto.rentacar.config.redis.RedisCacheManager;
 import com.tobeto.rentacar.core.exceptions.DataNotFoundException;
 import com.tobeto.rentacar.core.result.DataResult;
 import com.tobeto.rentacar.core.result.Result;
@@ -27,22 +28,32 @@ public class CarManager implements CarService {
     private final CarRepository carRepository;
     private final ModelMapperService modelMapperService;
     private final CarBusinessRules carBusinessRules;
+    private final RedisCacheManager redisCacheManager;
 
     @Override
     public DataResult<List<GetAllCarResponses>> getAll() {
-        List<Car> cars = carRepository.findAll();
-        List<GetAllCarResponses> getAllCarResponses = cars.stream()
-                .map(car -> this.modelMapperService.forResponse()
-                        .map(car, GetAllCarResponses.class))
-                .collect(Collectors.toList());
+
+        List<GetAllCarResponses> getAllCarResponses = (List<GetAllCarResponses>) redisCacheManager
+                .getCachedData("carCache", "getCarsAndCache");
+        if (getAllCarResponses == null) {
+            getAllCarResponses = getCarsAndCache();
+            redisCacheManager.cacheData("carCache", "getCarsAndCache", getAllCarResponses);
+        }
 
         return new DataResult<>(getAllCarResponses, true, CarMessages.CARS_LISTED);
     }
 
+    public List<GetAllCarResponses> getCarsAndCache() {
+        List<Car> cars = carRepository.findAll();
+        List<GetAllCarResponses> getAllCarResponses = cars.stream()
+                .map(car -> modelMapperService.forResponse().map(car, GetAllCarResponses.class))
+                .collect(Collectors.toList());
+        return getAllCarResponses;
+    }
+
     @Override
     public DataResult<GetByIdCarResponses> getById(int id) {
-        Car car = carRepository.findById(id).orElseThrow(() -> new DataNotFoundException(CarMessages.CAR_NOT_FOUND) {
-        });
+        Car car = carRepository.findById(id).orElseThrow(() -> new DataNotFoundException(CarMessages.CAR_NOT_FOUND));
         GetByIdCarResponses getByIdCarResponses = this.modelMapperService.forResponse()
                 .map(car, GetByIdCarResponses.class);
 
@@ -68,6 +79,7 @@ public class CarManager implements CarService {
         car.setPlate(plate);
 
         this.carRepository.save(car);
+        redisCacheManager.cacheData("carListCache", "getCarsAndCache", null);
 
         return new SuccessResult(CarMessages.CAR_ADDED);
     }
@@ -83,6 +95,7 @@ public class CarManager implements CarService {
         car.setPlate(updateCarRequests.getPlate());
         car.setPrice(updateCarRequests.getPrice());
         this.carRepository.save(car);
+        redisCacheManager.cacheData("carListCache", "getCarsAndCache", null);
 
         return new SuccessResult(CarMessages.CAR_UPDATED);
 
@@ -93,6 +106,7 @@ public class CarManager implements CarService {
         Car car = this.modelMapperService.forRequest()
                 .map(deleteCarRequests, Car.class);
         this.carRepository.delete(car);
+        redisCacheManager.cacheData("carListCache", "getCarsAndCache", null);
 
         return new SuccessResult(CarMessages.CAR_DELETED);
 

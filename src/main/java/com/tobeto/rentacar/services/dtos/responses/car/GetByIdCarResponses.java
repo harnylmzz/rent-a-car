@@ -5,12 +5,13 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class GetByIdCarResponses {
+public class GetByIdCarResponses implements Serializable {
 
     private int id;
 
@@ -34,7 +35,7 @@ public class GetByIdCarResponses {
 
     private int brand_id;
 
-    private String amount_of_fuel ;
+    private String amount_of_fuel;
 
     private int number_of_seats;
 
