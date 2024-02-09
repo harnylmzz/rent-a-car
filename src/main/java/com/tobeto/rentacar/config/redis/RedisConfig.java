@@ -26,7 +26,10 @@ public class RedisConfig {
         poolConfig.setMaxIdle(5);
         poolConfig.setMinIdle(1);
 
-        JedisClientConfiguration jedisClientConfiguration = JedisClientConfiguration.builder().usePooling().poolConfig(poolConfig).build();
+        JedisClientConfiguration jedisClientConfiguration = JedisClientConfiguration.builder()
+                .usePooling()
+                .poolConfig(poolConfig)
+                .build();
 
         return new JedisConnectionFactory(configuration, jedisClientConfiguration);
     }

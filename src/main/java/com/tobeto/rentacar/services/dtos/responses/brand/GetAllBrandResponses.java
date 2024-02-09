@@ -3,6 +3,7 @@ package com.tobeto.rentacar.services.dtos.responses.brand;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.redis.core.RedisHash;
 
 import java.io.Serializable;
 

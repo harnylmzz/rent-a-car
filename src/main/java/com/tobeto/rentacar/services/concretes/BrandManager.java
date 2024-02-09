@@ -5,6 +5,7 @@ import com.tobeto.rentacar.config.redis.RedisCacheManager;
 import com.tobeto.rentacar.core.exceptions.DataNotFoundException;
 import com.tobeto.rentacar.core.result.DataResult;
 import com.tobeto.rentacar.core.result.Result;
+import com.tobeto.rentacar.core.result.SuccessDataResult;
 import com.tobeto.rentacar.core.result.SuccessResult;
 import com.tobeto.rentacar.entities.concretes.Brand;
 
@@ -19,7 +20,6 @@ import com.tobeto.rentacar.services.dtos.responses.brand.GetByIdBrandResponses;
 import com.tobeto.rentacar.services.constans.brand.BrandMessages;
 import com.tobeto.rentacar.services.rules.brand.BrandBusinessRules;
 import lombok.RequiredArgsConstructor;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 
@@ -35,23 +35,32 @@ public class BrandManager implements BrandService {
     private final RedisCacheManager redisCacheManager;
 
     @Override
-    @Cacheable(value = "brands", key = "'getAll'")
     public DataResult<List<GetAllBrandResponses>> getAll() {
 
-        List<GetAllBrandResponses> brandResponsesList = (List<GetAllBrandResponses>) redisCacheManager.getCachedData("brands", "getAll");
-        if (brandResponsesList == null) {
-            List<Brand> brands = brandRepository.findAll();
-            brandResponsesList = brands.stream().map(brand -> this.modelMapperService.forResponse().map(brand, GetAllBrandResponses.class)).collect(Collectors.toList());
-            redisCacheManager.cacheData("brands", "getAll", brandResponsesList);
+        List<GetAllBrandResponses> getAllBrandResponses = (List<GetAllBrandResponses>) redisCacheManager
+                .getCachedData("brandCache", "getBrandsAndCache");
+        if (getAllBrandResponses == null) {
+            getAllBrandResponses = getBrandsAndCache();
+            redisCacheManager.cacheData("brandCache", "getBrandsAndCache", getAllBrandResponses);
         }
-        return new DataResult<>(brandResponsesList, true, BrandMessages.BRANDS_LISTED);
+
+        return new SuccessDataResult<>(getAllBrandResponses, BrandMessages.BRANDS_LISTED);
+    }
+
+    public List<GetAllBrandResponses> getBrandsAndCache() {
+        List<Brand> brands = brandRepository.findAll();
+        List<GetAllBrandResponses> getAllBrandResponses = brands.stream()
+                .map(brand -> modelMapperService.forResponse().map(brand, GetAllBrandResponses.class))
+                .collect(Collectors.toList());
+        return getAllBrandResponses;
     }
 
     @Override
     public DataResult<GetByIdBrandResponses> getById(int id) {
         Brand brand = brandRepository.findById(id).orElseThrow(() -> new DataNotFoundException(BrandMessages.BRAND_NOT_FOUND) {
         });
-        GetByIdBrandResponses getByIdBrandResponses = this.modelMapperService.forResponse().map(brand, GetByIdBrandResponses.class);
+        GetByIdBrandResponses getByIdBrandResponses = this.modelMapperService.forResponse()
+                .map(brand, GetByIdBrandResponses.class);
 
         return new DataResult<>(getByIdBrandResponses, true, BrandMessages.BRANDS_LISTED);
     }
@@ -64,7 +73,7 @@ public class BrandManager implements BrandService {
 
         Brand brand = this.modelMapperService.forRequest().map(createBrandRequests, Brand.class);
         this.brandRepository.save(brand);
-
+        redisCacheManager.cacheData("brandListCache", "getBrandsAndCache", null);
         return new SuccessResult(BrandMessages.BRAND_ADDED);
     }
 
