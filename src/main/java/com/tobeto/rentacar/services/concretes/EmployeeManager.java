@@ -1,6 +1,7 @@
 package com.tobeto.rentacar.services.concretes;
 
 import com.tobeto.rentacar.config.modelmapper.ModelMapperService;
+import com.tobeto.rentacar.config.redis.RedisCacheManager;
 import com.tobeto.rentacar.core.exceptions.DataNotFoundException;
 import com.tobeto.rentacar.core.result.DataResult;
 import com.tobeto.rentacar.core.result.Result;
@@ -26,16 +27,27 @@ import java.util.stream.Collectors;
 public class EmployeeManager implements EmployeeService {
     private final EmployeeRepository employeeRepository;
     private final ModelMapperService modelMapperService;
+    private final RedisCacheManager redisCacheManager;
 
     @Override
     public DataResult<List<GetAllEmployeeResponses>> getAll() {
+
+        List<GetAllEmployeeResponses> getAllEmployeeResponses = (List<GetAllEmployeeResponses>) redisCacheManager
+                .getCachedData("employeeCache", "getEmployeesAndCache");
+
+        if (getAllEmployeeResponses == null) {
+            getAllEmployeeResponses = getEmployeesAndCache();
+            redisCacheManager.cacheData("employeeCache", "getEmployeesAndCache", getAllEmployeeResponses);
+        }
+        return new DataResult<>(getAllEmployeeResponses, true, EmployeeMessages.EMPLOYEES_LISTED);
+    }
+
+    public List<GetAllEmployeeResponses> getEmployeesAndCache() {
         List<Employee> employees = employeeRepository.findAll();
         List<GetAllEmployeeResponses> getAllEmployeeResponses = employees.stream()
-                .map(employee -> this.modelMapperService.forResponse()
-                        .map(employee, GetAllEmployeeResponses.class))
+                .map(employee -> modelMapperService.forResponse().map(employee, GetAllEmployeeResponses.class))
                 .collect(Collectors.toList());
-
-        return new DataResult<>(getAllEmployeeResponses, true, EmployeeMessages.EMPLOYEES_LISTED);
+        return getAllEmployeeResponses;
     }
 
     @Override
@@ -55,7 +67,7 @@ public class EmployeeManager implements EmployeeService {
                 .map(createEmployeeRequests, Employee.class);
 
         this.employeeRepository.save(employee);
-
+        this.redisCacheManager.cacheData("employeeCache", "getEmployeesAndCache", null);
 
         return new SuccessResult(EmployeeMessages.EMPLOYEE_ADDED);
     }
@@ -68,6 +80,7 @@ public class EmployeeManager implements EmployeeService {
         employee.setSalary(updateEmployeeRequests.getSalary());
 
         this.employeeRepository.save(employee);
+        this.redisCacheManager.cacheData("employeeCache", "getEmployeesAndCache", null);
 
         return new SuccessResult(EmployeeMessages.EMPLOYEE_UPDATED);
     }
@@ -77,6 +90,7 @@ public class EmployeeManager implements EmployeeService {
         Employee employee = this.modelMapperService.forRequest()
                 .map(deleteEmployeeRequests, Employee.class);
         this.employeeRepository.delete(employee);
+        this.redisCacheManager.cacheData("employeeCache", "getEmployeesAndCache", null);
 
         return new SuccessResult(EmployeeMessages.EMPLOYEE_DELETED);
     }
