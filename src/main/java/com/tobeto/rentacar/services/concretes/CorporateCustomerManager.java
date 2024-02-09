@@ -32,6 +32,7 @@ public class CorporateCustomerManager implements CorporateCustomerService {
     private final PasswordEncoder passwordEncoder;
     private final CorporateCustomerBusinessRules corporateCustomerBusinessRules;
     private final RedisCacheManager redisCacheManager;
+
     @Override
     public DataResult<List<GetAllCorporateCustomer>> getAll() {
 

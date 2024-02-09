@@ -1,6 +1,7 @@
 package com.tobeto.rentacar.services.concretes;
 
 import com.tobeto.rentacar.config.modelmapper.ModelMapperService;
+import com.tobeto.rentacar.config.redis.RedisCacheManager;
 import com.tobeto.rentacar.core.exceptions.DataNotFoundException;
 import com.tobeto.rentacar.core.result.DataResult;
 import com.tobeto.rentacar.core.result.Result;
@@ -25,16 +26,27 @@ import java.util.stream.Collectors;
 public class CustomerManager implements CustomerService {
     private final CustomerRepository customerRepository;
     private final ModelMapperService modelMapperService;
+    private final RedisCacheManager redisCacheManager;
 
     @Override
     public DataResult<List<GetAllCustomerResponses>> getAll() {
+
+        List<GetAllCustomerResponses> getAllCustomerResponses = (List<GetAllCustomerResponses>) redisCacheManager
+                .getCachedData("customerCache", "getCustomersAndCache");
+
+        if (getAllCustomerResponses == null) {
+            getAllCustomerResponses = getCustomersAndCache();
+            redisCacheManager.cacheData("customerCache", "getCustomersAndCache", getAllCustomerResponses);
+        }
+        return new DataResult<>(getAllCustomerResponses, true, CustomerMessages.CUSTOMERS_LISTED);
+    }
+
+    public List<GetAllCustomerResponses> getCustomersAndCache() {
         List<Customer> customers = customerRepository.findAll();
         List<GetAllCustomerResponses> getAllCustomerResponses = customers.stream()
-                .map(customer -> this.modelMapperService.forResponse()
-                        .map(customer, GetAllCustomerResponses.class))
+                .map(customer -> modelMapperService.forResponse().map(customer, GetAllCustomerResponses.class))
                 .collect(Collectors.toList());
-
-        return new DataResult<>(getAllCustomerResponses, true, CustomerMessages.CUSTOMERS_LISTED);
+        return getAllCustomerResponses;
     }
 
     @Override
@@ -54,6 +66,7 @@ public class CustomerManager implements CustomerService {
                 .map(createCustomerRequests, Customer.class);
 
         this.customerRepository.save(customer);
+        this.redisCacheManager.cacheData("customerCache", "getCustomersAndCache", null);
 
         return new SuccessResult(CustomerMessages.CUSTOMER_ADDED);
     }
@@ -65,6 +78,7 @@ public class CustomerManager implements CustomerService {
                 .map(updateCustomerRequests, Customer.class);
 
         this.customerRepository.save(customer);
+        this.redisCacheManager.cacheData("customerCache", "getCustomersAndCache", null);
 
         return new Result(true, CustomerMessages.CUSTOMER_UPDATED);
     }
@@ -74,6 +88,7 @@ public class CustomerManager implements CustomerService {
         Customer customer = this.modelMapperService.forRequest()
                 .map(deleteCustomerRequests, Customer.class);
         this.customerRepository.delete(customer);
+        this.redisCacheManager.cacheData("customerCache", "getCustomersAndCache", null);
 
         return new Result(true, CustomerMessages.CUSTOMER_DELETED);
     }
