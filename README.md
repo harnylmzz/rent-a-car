@@ -36,6 +36,7 @@ Frontend: https://github.com/harnylmzz/rentacarFrontend
    + ##### ■ Modelmapper
    + ##### ■ Cloudinary
    + ##### ■ Websocket
+   + ##### ■ Redis
 
 + #### Language
    + ##### ■ Java 17
