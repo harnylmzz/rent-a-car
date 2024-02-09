@@ -1,6 +1,7 @@
 package com.tobeto.rentacar.services.concretes;
 
 import com.tobeto.rentacar.config.modelmapper.ModelMapperService;
+import com.tobeto.rentacar.config.redis.RedisCacheManager;
 import com.tobeto.rentacar.core.exceptions.DataNotFoundException;
 import com.tobeto.rentacar.core.result.DataResult;
 import com.tobeto.rentacar.core.result.Result;
@@ -27,16 +28,27 @@ public class CategoryManager implements CategoryService {
     private final CategoryRepository categoryRepository;
     private final ModelMapperService modelMapperService;
     private final CategoryBusinessRules categoryBusinessRules;
+    private final RedisCacheManager redisCacheManager;
 
     @Override
     public DataResult<List<GetAllCategoryResponse>> getAll() {
-        List<Category> categories = categoryRepository.findAll();
-        List<GetAllCategoryResponse> getAllCategoryResponses = categories.stream()
-                .map(category -> this.modelMapperService.forResponse()
-                        .map(category, GetAllCategoryResponse.class))
-                .collect(Collectors.toList());
+
+        List<GetAllCategoryResponse> getAllCategoryResponses = (List<GetAllCategoryResponse>) redisCacheManager
+                .getCachedData("categoryCache", "getCategoriesAndCache");
+        if (getAllCategoryResponses == null) {
+            getAllCategoryResponses = getCategoriesAndCache();
+            redisCacheManager.cacheData("categoryCache", "getCategoriesAndCache", getAllCategoryResponses);
+        }
 
         return new DataResult<>(getAllCategoryResponses, true, CategoryMessages.CATEGORIES_LISTED);
+    }
+
+    public List<GetAllCategoryResponse> getCategoriesAndCache() {
+        List<Category> categories = categoryRepository.findAll();
+        List<GetAllCategoryResponse> getAllCategoryResponses = categories.stream()
+                .map(category -> modelMapperService.forResponse().map(category, GetAllCategoryResponse.class))
+                .collect(Collectors.toList());
+        return getAllCategoryResponses;
     }
 
     @Override
@@ -56,6 +68,7 @@ public class CategoryManager implements CategoryService {
         Category category = this.modelMapperService.forRequest()
                 .map(createCategoryRequests, Category.class);
         this.categoryRepository.save(category);
+        redisCacheManager.cacheData("categoryCache", "getCategoriesAndCache", null);
 
         return new SuccessResult(CategoryMessages.CATEGORY_ADDED);
     }
@@ -67,6 +80,7 @@ public class CategoryManager implements CategoryService {
         category.setId(updateCategoryRequests.getId());
         category.setName(updateCategoryRequests.getName());
         this.categoryRepository.save(category);
+        redisCacheManager.cacheData("categoryCache", "getCategoriesAndCache", null);
 
         return new SuccessResult(CategoryMessages.CATEGORY_UPDATED);
     }
@@ -76,6 +90,7 @@ public class CategoryManager implements CategoryService {
         Category category = this.modelMapperService.forRequest()
                 .map(deleteCategoryRequests, Category.class);
         this.categoryRepository.delete(category);
+        redisCacheManager.cacheData("categoryCache", "getCategoriesAndCache", null);
 
         return new SuccessResult(CategoryMessages.CATEGORY_DELETED);
     }
