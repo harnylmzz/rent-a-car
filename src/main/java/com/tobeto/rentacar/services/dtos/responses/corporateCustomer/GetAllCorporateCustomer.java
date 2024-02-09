@@ -6,12 +6,13 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
 import java.util.Set;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class GetAllCorporateCustomer {
+public class GetAllCorporateCustomer implements Serializable {
 
     private int id;
 

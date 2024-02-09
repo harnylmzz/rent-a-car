@@ -1,6 +1,7 @@
 package com.tobeto.rentacar.services.concretes;
 
 import com.tobeto.rentacar.config.modelmapper.ModelMapperService;
+import com.tobeto.rentacar.config.redis.RedisCacheManager;
 import com.tobeto.rentacar.core.exceptions.DataNotFoundException;
 import com.tobeto.rentacar.core.result.DataResult;
 import com.tobeto.rentacar.core.result.Result;
@@ -26,17 +27,27 @@ public class ComprehensiveInsuranceManager implements ComprehensiveInsuranceServ
 
     private final ComprehensiveInsuranceRepository comprehensiveInsuranceRepository;
     private final ModelMapperService modelMapperService;
+    private final RedisCacheManager redisCacheManager;
 
     @Override
     public DataResult<List<GetAllComprehensiveInsurance>> getAll() {
 
-        List<ComprehensiveInsurance> comprehensiveInsurances = comprehensiveInsuranceRepository.findAll();
-        List<GetAllComprehensiveInsurance> getAllComprehensiveInsurances = comprehensiveInsurances.stream()
-                .map(comprehensiveInsurance -> this.modelMapperService.forResponse()
-                        .map(comprehensiveInsurance, GetAllComprehensiveInsurance.class))
-                .collect(Collectors.toList());
+        List<GetAllComprehensiveInsurance> getAllComprehensiveInsurances = (List<GetAllComprehensiveInsurance>) redisCacheManager
+                .getCachedData("comprehensiveInsuranceCache", "getComprehensiveInsurancesAndCache");
+        if (getAllComprehensiveInsurances == null) {
+            getAllComprehensiveInsurances = getComprehensiveInsurancesAndCache();
+            redisCacheManager.cacheData("comprehensiveInsuranceCache", "getComprehensiveInsurancesAndCache", getAllComprehensiveInsurances);
+        }
 
         return new DataResult<>(getAllComprehensiveInsurances, true, ComprehensiveInsuranceMessages.COMPREHENSIVE_INSURANCES_LISTED);
+    }
+
+    public List<GetAllComprehensiveInsurance> getComprehensiveInsurancesAndCache() {
+        List<ComprehensiveInsurance> comprehensiveInsurances = comprehensiveInsuranceRepository.findAll();
+        List<GetAllComprehensiveInsurance> getAllComprehensiveInsurances = comprehensiveInsurances.stream()
+                .map(comprehensiveInsurance -> modelMapperService.forResponse().map(comprehensiveInsurance, GetAllComprehensiveInsurance.class))
+                .collect(Collectors.toList());
+        return getAllComprehensiveInsurances;
     }
 
     @Override
@@ -58,6 +69,7 @@ public class ComprehensiveInsuranceManager implements ComprehensiveInsuranceServ
                 .map(createComprehensiveInsuranceRequests, ComprehensiveInsurance.class);
 
         this.comprehensiveInsuranceRepository.save(comprehensiveInsurance);
+        this.redisCacheManager.cacheData("comprehensiveInsuranceCache", "getComprehensiveInsurancesAndCache", null);
         return new SuccessResult(ComprehensiveInsuranceMessages.COMPREHENSIVE_INSURANCE_ADDED);
     }
 
@@ -71,6 +83,7 @@ public class ComprehensiveInsuranceManager implements ComprehensiveInsuranceServ
         comprehensiveInsurance.setDeductibleAmount(updateComprehensiveInsuranceRequests.getDeductibleAmount());
 
         this.comprehensiveInsuranceRepository.save(comprehensiveInsurance);
+        this.redisCacheManager.cacheData("comprehensiveInsuranceCache", "getComprehensiveInsurancesAndCache", null);
         return new SuccessResult(ComprehensiveInsuranceMessages.COMPREHENSIVE_INSURANCE_UPDATED);
     }
 
@@ -81,6 +94,7 @@ public class ComprehensiveInsuranceManager implements ComprehensiveInsuranceServ
                 .map(deleteComprehensiveInsuranceRequests, ComprehensiveInsurance.class);
 
         this.comprehensiveInsuranceRepository.delete(comprehensiveInsurance);
+        this.redisCacheManager.cacheData("comprehensiveInsuranceCache", "getComprehensiveInsurancesAndCache", null);
         return new SuccessResult(ComprehensiveInsuranceMessages.COMPREHENSIVE_INSURANCE_DELETED);
     }
 }

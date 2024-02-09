@@ -1,6 +1,7 @@
 package com.tobeto.rentacar.services.concretes;
 
 import com.tobeto.rentacar.config.modelmapper.ModelMapperService;
+import com.tobeto.rentacar.config.redis.RedisCacheManager;
 import com.tobeto.rentacar.core.exceptions.DataNotFoundException;
 import com.tobeto.rentacar.core.result.DataResult;
 import com.tobeto.rentacar.core.result.Result;
@@ -30,17 +31,25 @@ public class CorporateCustomerManager implements CorporateCustomerService {
     private final ModelMapperService modelMapperService;
     private final PasswordEncoder passwordEncoder;
     private final CorporateCustomerBusinessRules corporateCustomerBusinessRules;
-
+    private final RedisCacheManager redisCacheManager;
     @Override
     public DataResult<List<GetAllCorporateCustomer>> getAll() {
 
+        List<GetAllCorporateCustomer> getAllCorporateCustomers = (List<GetAllCorporateCustomer>) redisCacheManager
+                .getCachedData("corporateCustomerCache", "getCorporateCustomersAndCache");
+        if (getAllCorporateCustomers == null) {
+            getAllCorporateCustomers = getCorporateCustomersAndCache();
+            redisCacheManager.cacheData("corporateCustomerCache", "getCorporateCustomersAndCache", getAllCorporateCustomers);
+        }
+        return new DataResult<>(getAllCorporateCustomers, true, CorporateCustomerMessages.CORPORATE_CUSTOMERS_LISTED);
+    }
+
+    public List<GetAllCorporateCustomer> getCorporateCustomersAndCache() {
         List<CorporateCustomer> corporateCustomers = corporateCustomerRepository.findAll();
         List<GetAllCorporateCustomer> getAllCorporateCustomers = corporateCustomers.stream()
-                .map(corporateCustomer -> this.modelMapperService.forResponse()
-                        .map(corporateCustomer, GetAllCorporateCustomer.class))
+                .map(corporateCustomer -> modelMapperService.forResponse().map(corporateCustomer, GetAllCorporateCustomer.class))
                 .collect(Collectors.toList());
-
-        return new DataResult<>(getAllCorporateCustomers, true, CorporateCustomerMessages.CORPORATE_CUSTOMERS_LISTED);
+        return getAllCorporateCustomers;
     }
 
     @Override
@@ -67,6 +76,7 @@ public class CorporateCustomerManager implements CorporateCustomerService {
                 .map(createCorporateCustomerRequests, CorporateCustomer.class);
 
         this.corporateCustomerRepository.save(corporateCustomer);
+        this.redisCacheManager.cacheData("corporateCustomerCache", "getCorporateCustomersAndCache", null);
 
         return new SuccessResult(CorporateCustomerMessages.CORPORATE_CUSTOMER_ADDED);
     }
@@ -82,6 +92,7 @@ public class CorporateCustomerManager implements CorporateCustomerService {
         corporateCustomer.setTaxNumber(updateCorporateCustomerRequests.getTaxNumber());
 
         this.corporateCustomerRepository.save(corporateCustomer);
+        this.redisCacheManager.cacheData("corporateCustomerCache", "getCorporateCustomersAndCache", null);
 
         return new SuccessResult(CorporateCustomerMessages.CORPORATE_CUSTOMER_UPDATED);
     }
@@ -93,6 +104,7 @@ public class CorporateCustomerManager implements CorporateCustomerService {
                 .map(deleteCorporateCustomerRequests, CorporateCustomer.class);
 
         this.corporateCustomerRepository.delete(corporateCustomer);
+        this.redisCacheManager.cacheData("corporateCustomerCache", "getCorporateCustomersAndCache", null);
 
         return new SuccessResult(CorporateCustomerMessages.CORPORATE_CUSTOMER_DELETED);
     }

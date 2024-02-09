@@ -1,6 +1,7 @@
 package com.tobeto.rentacar.services.concretes;
 
 import com.tobeto.rentacar.config.modelmapper.ModelMapperService;
+import com.tobeto.rentacar.config.redis.RedisCacheManager;
 import com.tobeto.rentacar.core.exceptions.DataNotFoundException;
 import com.tobeto.rentacar.core.result.DataResult;
 import com.tobeto.rentacar.core.result.Result;
@@ -27,15 +28,26 @@ public class ColorManager implements ColorService {
     private final ColorRepository colorRepository;
     private final ModelMapperService modelMapperService;
     private final ColorBusinessRules colorBusinessRules;
+    private final RedisCacheManager redisCacheManager;
 
     @Override
     public DataResult<List<GetAllColorResponses>> getAll() {
+
+        List<GetAllColorResponses> getAllColorResponses = (List<GetAllColorResponses>) redisCacheManager
+                .getCachedData("colorCache", "getColorsAndCache");
+        if (getAllColorResponses == null) {
+            getAllColorResponses = getColorsAndCache();
+            redisCacheManager.cacheData("colorCache", "getColorsAndCache", getAllColorResponses);
+        }
+        return new DataResult<>(getAllColorResponses, true, ColorMessages.COLORS_LISTED);
+    }
+
+    public List<GetAllColorResponses> getColorsAndCache() {
         List<Color> colors = colorRepository.findAll();
         List<GetAllColorResponses> getAllColorResponses = colors.stream()
-                .map(color -> this.modelMapperService.forResponse()
-                        .map(color, GetAllColorResponses.class))
+                .map(color -> modelMapperService.forResponse().map(color, GetAllColorResponses.class))
                 .collect(Collectors.toList());
-        return new DataResult<>(getAllColorResponses, true, ColorMessages.COLORS_LISTED);
+        return getAllColorResponses;
     }
 
     @Override
@@ -56,6 +68,7 @@ public class ColorManager implements ColorService {
         Color color = this.modelMapperService.forRequest()
                 .map(createColorRequests, Color.class);
         this.colorRepository.save(color);
+        this.redisCacheManager.cacheData("colorCache", "getColorsAndCache", null);
 
         return new SuccessResult(ColorMessages.COLOR_ADDED);
 
@@ -69,6 +82,7 @@ public class ColorManager implements ColorService {
         color.setName(updateColorRequests.getName());
 
         this.colorRepository.save(color);
+        this.redisCacheManager.cacheData("colorCache", "getColorsAndCache", null);
 
         return new SuccessResult(ColorMessages.COLOR_UPDATED);
     }
@@ -78,6 +92,7 @@ public class ColorManager implements ColorService {
         Color color = this.modelMapperService.forRequest()
                 .map(deleteColorRequests, Color.class);
         this.colorRepository.delete(color);
+        this.redisCacheManager.cacheData("colorCache", "getColorsAndCache", null);
 
         return new SuccessResult(ColorMessages.COLOR_DELETED);
     }

@@ -20,18 +20,14 @@ public abstract class BaseEntity {
 
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
 
     @Column(name="created_date")
     private LocalDate createdDate;
 
-
-
     @Column(name="updated_date")
     private LocalDate updatedDate;
-
 
     @PrePersist
     private void beforeAdd() {
@@ -42,5 +38,4 @@ public abstract class BaseEntity {
     private void beforeUpdate() {
         this.updatedDate = LocalDate.now();
     }
-
 }

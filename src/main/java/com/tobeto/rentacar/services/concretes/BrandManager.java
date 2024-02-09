@@ -73,7 +73,7 @@ public class BrandManager implements BrandService {
 
         Brand brand = this.modelMapperService.forRequest().map(createBrandRequests, Brand.class);
         this.brandRepository.save(brand);
-        redisCacheManager.cacheData("brandListCache", "getBrandsAndCache", null);
+        this.redisCacheManager.cacheData("brandListCache", "getBrandsAndCache", null);
         return new SuccessResult(BrandMessages.BRAND_ADDED);
     }
 
@@ -84,7 +84,7 @@ public class BrandManager implements BrandService {
         brand.setName(updateBrandRequests.getName());
 
         this.brandRepository.save(brand);
-        redisCacheManager.cacheData("brandListCache", "getBrandsAndCache", null);
+        this.redisCacheManager.cacheData("brandListCache", "getBrandsAndCache", null);
 
         return new SuccessResult(BrandMessages.BRAND_UPDATED);
     }
@@ -93,7 +93,7 @@ public class BrandManager implements BrandService {
     public Result delete(DeleteBrandRequests deleteBrandRequests) {
         Brand brand = this.modelMapperService.forRequest().map(deleteBrandRequests, Brand.class);
         this.brandRepository.delete(brand);
-        redisCacheManager.cacheData("brandListCache", "getBrandsAndCache", null);
+        this.redisCacheManager.cacheData("brandListCache", "getBrandsAndCache", null);
 
         return new SuccessResult(BrandMessages.BRAND_DELETED);
     }
