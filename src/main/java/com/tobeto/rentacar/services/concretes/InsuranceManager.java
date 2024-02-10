@@ -1,9 +1,11 @@
 package com.tobeto.rentacar.services.concretes;
 
 import com.tobeto.rentacar.config.modelmapper.ModelMapperService;
+import com.tobeto.rentacar.config.redis.RedisCacheManager;
 import com.tobeto.rentacar.core.exceptions.DataNotFoundException;
 import com.tobeto.rentacar.core.result.DataResult;
 import com.tobeto.rentacar.core.result.Result;
+import com.tobeto.rentacar.core.result.SuccessDataResult;
 import com.tobeto.rentacar.core.result.SuccessResult;
 import com.tobeto.rentacar.entities.concretes.Insurance;
 import com.tobeto.rentacar.repository.InsuranceRepository;
@@ -28,16 +30,28 @@ public class InsuranceManager implements InsuranceService {
     private final InsuranceRepository insuranceRepository;
     private final ModelMapperService modelMapperService;
     private final InsuranceBusinessRules insuranceBusinessRules;
+    private final RedisCacheManager redisCacheManager;
 
     @Override
-    public DataResult<List<GetAllInsuranceResponses>> getAll() {
+    public DataResult<List<GetAllInsuranceResponses>> getAll(){
+        List<GetAllInsuranceResponses> getAllInsuranceResponses = (List<GetAllInsuranceResponses>) redisCacheManager
+                .getCachedData("insuranceListCache", "getInsuranceAndCache");
+        if(getAllInsuranceResponses== null){
+            getAllInsuranceResponses = getInsuranceAndCache();
+            redisCacheManager.cacheData("insuranceListCache" , "getInsuranceAndCache", getAllInsuranceResponses);
+        }
+        return new SuccessDataResult<>(getAllInsuranceResponses, InsuranceMessages.INSURANCES_LISTED);
+    }
+
+
+    public List<GetAllInsuranceResponses> getInsuranceAndCache() {
 
         List<Insurance> insurances = insuranceRepository.findAll();
         List<GetAllInsuranceResponses> getAllInsuranceResponses = insurances.stream()
                 .map(insurance -> modelMapperService.forResponse()
                         .map(insurance, GetAllInsuranceResponses.class))
                 .collect(Collectors.toList());
-        return new DataResult<>(getAllInsuranceResponses, true, InsuranceMessages.INSURANCES_LISTED);
+        return getAllInsuranceResponses;
     }
 
     @Override
