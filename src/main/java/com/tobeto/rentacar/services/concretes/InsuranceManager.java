@@ -33,25 +33,14 @@ public class InsuranceManager implements InsuranceService {
     private final RedisCacheManager redisCacheManager;
 
     @Override
-    public DataResult<List<GetAllInsuranceResponses>> getAll(){
-        List<GetAllInsuranceResponses> getAllInsuranceResponses = (List<GetAllInsuranceResponses>) redisCacheManager
-                .getCachedData("insuranceListCache", "getInsuranceAndCache");
-        if(getAllInsuranceResponses== null){
-            getAllInsuranceResponses = getInsuranceAndCache();
-            redisCacheManager.cacheData("insuranceListCache" , "getInsuranceAndCache", getAllInsuranceResponses);
-        }
-        return new SuccessDataResult<>(getAllInsuranceResponses, InsuranceMessages.INSURANCES_LISTED);
-    }
-
-
-    public List<GetAllInsuranceResponses> getInsuranceAndCache() {
+    public DataResult<List<GetAllInsuranceResponses>> getAll() {
 
         List<Insurance> insurances = insuranceRepository.findAll();
         List<GetAllInsuranceResponses> getAllInsuranceResponses = insurances.stream()
                 .map(insurance -> modelMapperService.forResponse()
                         .map(insurance, GetAllInsuranceResponses.class))
                 .collect(Collectors.toList());
-        return getAllInsuranceResponses;
+        return new DataResult<>(getAllInsuranceResponses, true ,InsuranceMessages.INSURANCES_LISTED);
     }
 
     @Override

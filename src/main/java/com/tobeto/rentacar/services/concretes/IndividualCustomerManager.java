@@ -32,20 +32,10 @@ public class IndividualCustomerManager implements IndividualCustomerService {
     private final ModelMapperService modelMapperService;
     private final PasswordEncoder passwordEncoder;
     private final IndividualCustomerBusinessRules individualCustomerBusinessRules;
-    private final RedisCacheManager redisCacheManager;
+
 
     @Override
-    public DataResult<List<GetAllIndividualCustomerResponses>> getAll(){
-        List<GetAllIndividualCustomerResponses> getAllIndividualCustomerResponses = (List<GetAllIndividualCustomerResponses>) redisCacheManager
-                .getCachedData("individualCustomerCache" , "getIndividualCustomerAndCache");
-        if(getAllIndividualCustomerResponses == null){
-            getAllIndividualCustomerResponses = getIndividualCustomerAndCache();
-            redisCacheManager.cacheData("individualCustomerCache" , "getIndividualCustomerAndCache", getAllIndividualCustomerResponses);
-        }
-        return new SuccessDataResult<>(getAllIndividualCustomerResponses, IndividualCustomerMessages.INDIVIDUAL_CUSTOMERS_LISTED);
-    }
-
-    public List<GetAllIndividualCustomerResponses> getIndividualCustomerAndCache() {
+    public DataResult<List<GetAllIndividualCustomerResponses>> getAll() {
 
         List<IndividualCustomer> individualCustomers = individualCustomerRepository.findAll();
         List<GetAllIndividualCustomerResponses> getAllIndividualCustomerResponses = individualCustomers.stream()
@@ -53,7 +43,7 @@ public class IndividualCustomerManager implements IndividualCustomerService {
                         .map(individualCustomer, GetAllIndividualCustomerResponses.class))
                 .collect(Collectors.toList());
 
-        return getAllIndividualCustomerResponses;
+        return new DataResult<>(getAllIndividualCustomerResponses,true, IndividualCustomerMessages.INDIVIDUAL_CUSTOMERS_LISTED);
     }
 
     @Override

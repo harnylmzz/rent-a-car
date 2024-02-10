@@ -33,25 +33,14 @@ public class FuelTypeManager implements FuelTypeService {
 
 
     @Override
-    public DataResult<List<GetAllFuelTypeResponses>> getAll(){
-        List<GetAllFuelTypeResponses> getAllFuelTypeResponses = (List<GetAllFuelTypeResponses>) redisCacheManager
-                .getCachedData("fuelTypeListCache", "getFuelTypeAndCache");
-        if(getAllFuelTypeResponses == null){
-            getAllFuelTypeResponses = getFuelTypeAndCache();
-            redisCacheManager.cacheData("fuelTypeListCache", "getFuelTypeAndCache",getAllFuelTypeResponses);
-        }
-        return new SuccessDataResult<>(getAllFuelTypeResponses, FuelTypeMessages.FUEL_TYPES_LISTED);
-    }
-
-
-    public List<GetAllFuelTypeResponses> getFuelTypeAndCache() {
+    public DataResult<List<GetAllFuelTypeResponses>> getAll() {
         List<FuelType> fuelTypes = fuelTypeRepository.findAll();
         List<GetAllFuelTypeResponses> getAllFuelTypeResponses = fuelTypes.stream()
                 .map(fuelType -> this.modelMapperService.forResponse()
                         .map(fuelType, GetAllFuelTypeResponses.class))
                 .collect(Collectors.toList());
 
-        return getAllFuelTypeResponses;
+        return new DataResult<>(getAllFuelTypeResponses,true,FuelTypeMessages.FUEL_TYPES_LISTED);
     }
 
     @Override
