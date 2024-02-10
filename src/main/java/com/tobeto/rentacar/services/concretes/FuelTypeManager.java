@@ -1,9 +1,11 @@
 package com.tobeto.rentacar.services.concretes;
 
 import com.tobeto.rentacar.config.modelmapper.ModelMapperService;
+import com.tobeto.rentacar.config.redis.RedisCacheManager;
 import com.tobeto.rentacar.core.exceptions.DataNotFoundException;
 import com.tobeto.rentacar.core.result.DataResult;
 import com.tobeto.rentacar.core.result.Result;
+import com.tobeto.rentacar.core.result.SuccessDataResult;
 import com.tobeto.rentacar.core.result.SuccessResult;
 import com.tobeto.rentacar.entities.concretes.FuelType;
 import com.tobeto.rentacar.repository.FuelTypeRepository;
@@ -14,6 +16,7 @@ import com.tobeto.rentacar.services.dtos.requests.fuelType.UpdateFuelTypeRequest
 import com.tobeto.rentacar.services.dtos.responses.fuelType.GetAllFuelTypeResponses;
 import com.tobeto.rentacar.services.dtos.responses.fuelType.GetByIdFuelTypeResponses;
 import com.tobeto.rentacar.services.constans.fuelType.FuelTypeMessages;
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -26,16 +29,29 @@ public class FuelTypeManager implements FuelTypeService {
 
     private final FuelTypeRepository fuelTypeRepository;
     private final ModelMapperService modelMapperService;
+    private final RedisCacheManager redisCacheManager;
+
 
     @Override
-    public DataResult<List<GetAllFuelTypeResponses>> getAll() {
+    public DataResult<List<GetAllFuelTypeResponses>> getAll(){
+        List<GetAllFuelTypeResponses> getAllFuelTypeResponses = (List<GetAllFuelTypeResponses>) redisCacheManager
+                .getCachedData("fuelTypeListCache", "getFuelTypeAndCache");
+        if(getAllFuelTypeResponses == null){
+            getAllFuelTypeResponses = getFuelTypeAndCache();
+            redisCacheManager.cacheData("fuelTypeListCache", "getFuelTypeAndCache",getAllFuelTypeResponses);
+        }
+        return new SuccessDataResult<>(getAllFuelTypeResponses, FuelTypeMessages.FUEL_TYPES_LISTED);
+    }
+
+
+    public List<GetAllFuelTypeResponses> getFuelTypeAndCache() {
         List<FuelType> fuelTypes = fuelTypeRepository.findAll();
         List<GetAllFuelTypeResponses> getAllFuelTypeResponses = fuelTypes.stream()
                 .map(fuelType -> this.modelMapperService.forResponse()
                         .map(fuelType, GetAllFuelTypeResponses.class))
                 .collect(Collectors.toList());
 
-        return new DataResult<>(getAllFuelTypeResponses, true, FuelTypeMessages.FUEL_TYPES_LISTED);
+        return getAllFuelTypeResponses;
     }
 
     @Override

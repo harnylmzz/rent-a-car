@@ -1,9 +1,11 @@
 package com.tobeto.rentacar.services.concretes;
 
 import com.tobeto.rentacar.config.modelmapper.ModelMapperService;
+import com.tobeto.rentacar.config.redis.RedisCacheManager;
 import com.tobeto.rentacar.core.exceptions.DataNotFoundException;
 import com.tobeto.rentacar.core.result.DataResult;
 import com.tobeto.rentacar.core.result.Result;
+import com.tobeto.rentacar.core.result.SuccessDataResult;
 import com.tobeto.rentacar.core.result.SuccessResult;
 import com.tobeto.rentacar.entities.concretes.IndividualCustomer;
 import com.tobeto.rentacar.repository.IndividualCustomerRepository;
@@ -30,9 +32,20 @@ public class IndividualCustomerManager implements IndividualCustomerService {
     private final ModelMapperService modelMapperService;
     private final PasswordEncoder passwordEncoder;
     private final IndividualCustomerBusinessRules individualCustomerBusinessRules;
+    private final RedisCacheManager redisCacheManager;
 
     @Override
-    public DataResult<List<GetAllIndividualCustomerResponses>> getAll() {
+    public DataResult<List<GetAllIndividualCustomerResponses>> getAll(){
+        List<GetAllIndividualCustomerResponses> getAllIndividualCustomerResponses = (List<GetAllIndividualCustomerResponses>) redisCacheManager
+                .getCachedData("individualCustomerCache" , "getIndividualCustomerAndCache");
+        if(getAllIndividualCustomerResponses == null){
+            getAllIndividualCustomerResponses = getIndividualCustomerAndCache();
+            redisCacheManager.cacheData("individualCustomerCache" , "getIndividualCustomerAndCache", getAllIndividualCustomerResponses);
+        }
+        return new SuccessDataResult<>(getAllIndividualCustomerResponses, IndividualCustomerMessages.INDIVIDUAL_CUSTOMERS_LISTED);
+    }
+
+    public List<GetAllIndividualCustomerResponses> getIndividualCustomerAndCache() {
 
         List<IndividualCustomer> individualCustomers = individualCustomerRepository.findAll();
         List<GetAllIndividualCustomerResponses> getAllIndividualCustomerResponses = individualCustomers.stream()
@@ -40,7 +53,7 @@ public class IndividualCustomerManager implements IndividualCustomerService {
                         .map(individualCustomer, GetAllIndividualCustomerResponses.class))
                 .collect(Collectors.toList());
 
-        return new DataResult<>(getAllIndividualCustomerResponses, true, IndividualCustomerMessages.INDIVIDUAL_CUSTOMERS_LISTED);
+        return getAllIndividualCustomerResponses;
     }
 
     @Override

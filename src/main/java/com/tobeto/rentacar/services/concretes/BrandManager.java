@@ -44,7 +44,7 @@ public class BrandManager implements BrandService {
             redisCacheManager.cacheData("brandListCache", "getBrandsAndCache", getAllBrandResponses);
         }
 
-        return new SuccessDataResult<>(getAllBrandResponses, "Brands Listed.");
+        return new SuccessDataResult<>(getAllBrandResponses, BrandMessages.BRANDS_LISTED);
     }
 
     public List<GetAllBrandResponses> getBrandsAndCache() {
