@@ -77,7 +77,7 @@
         <dependency>
             <groupId>com.stripe</groupId>
             <artifactId>stripe-java</artifactId>
-            <version>24.10.0</version>
+            <version>24.15.0</version>
         </dependency>
         <!-- jjwt -->
         <dependency>
