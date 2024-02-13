@@ -27,5 +27,7 @@ public class UpdateCarRequests {
 
     private int number_of_seats;
 
+    private boolean is_available;
+
 
 }

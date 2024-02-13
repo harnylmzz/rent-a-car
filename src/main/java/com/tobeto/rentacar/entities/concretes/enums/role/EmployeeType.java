@@ -1,11 +1,11 @@
-package com.tobeto.rentacar.entities.concretes.enums;
+package com.tobeto.rentacar.entities.concretes.enums.role;
 
 /**
  * Enum representing employee types in the Rent a Car system.
  * It is used for defining the type of employees in the system.
  *
  * @author [Harun Yılmaz]
- * @see com.tobeto.rentacar.entities.concretes.enums.Role
+ * @see Role
  */
 
 public enum EmployeeType {

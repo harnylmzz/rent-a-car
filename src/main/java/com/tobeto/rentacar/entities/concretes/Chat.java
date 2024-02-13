@@ -1,6 +1,6 @@
 package com.tobeto.rentacar.entities.concretes;
 
-import com.tobeto.rentacar.entities.concretes.enums.MessageType;
+import com.tobeto.rentacar.entities.concretes.enums.chat.MessageType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

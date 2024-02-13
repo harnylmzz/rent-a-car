@@ -1,8 +1,7 @@
 package com.tobeto.rentacar.services.dtos.requests.individualCustomer;
 
-import com.tobeto.rentacar.entities.concretes.enums.CustomerType;
-import com.tobeto.rentacar.entities.concretes.enums.EmployeeType;
-import com.tobeto.rentacar.entities.concretes.enums.Role;
+import com.tobeto.rentacar.entities.concretes.enums.role.CustomerType;
+import com.tobeto.rentacar.entities.concretes.enums.role.Role;
 import com.tobeto.rentacar.services.constans.individualCustomer.IndividualCustomerMessages;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

@@ -1,12 +1,9 @@
 package com.tobeto.rentacar.entities.concretes;
 
-import com.tobeto.rentacar.entities.abstracts.BaseEntity;
-import com.tobeto.rentacar.entities.concretes.enums.CustomerType;
-import com.tobeto.rentacar.entities.concretes.enums.EmployeeType;
+import com.tobeto.rentacar.entities.concretes.enums.role.EmployeeType;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.List;
 import java.util.Set;
 
 /**

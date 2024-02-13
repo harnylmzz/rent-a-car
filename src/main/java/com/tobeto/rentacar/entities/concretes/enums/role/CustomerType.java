@@ -1,4 +1,4 @@
-package com.tobeto.rentacar.entities.concretes.enums;
+package com.tobeto.rentacar.entities.concretes.enums.role;
 
 /**
  * Enum representing customer types in the Rent a Car system.
@@ -6,7 +6,7 @@ package com.tobeto.rentacar.entities.concretes.enums;
  * Used for defining the type of customers in the system.
  *
  * @author [Harun Yılmaz]
- * @see com.tobeto.rentacar.entities.concretes.enums.Role
+ * @see Role
  */
 
 public enum CustomerType {

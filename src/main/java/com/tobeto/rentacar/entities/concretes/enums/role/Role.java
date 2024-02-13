@@ -1,4 +1,4 @@
-package com.tobeto.rentacar.entities.concretes.enums;
+package com.tobeto.rentacar.entities.concretes.enums.role;
 
 import org.springframework.security.core.GrantedAuthority;
 

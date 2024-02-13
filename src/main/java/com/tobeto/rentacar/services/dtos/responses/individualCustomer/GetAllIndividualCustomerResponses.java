@@ -1,7 +1,7 @@
 package com.tobeto.rentacar.services.dtos.responses.individualCustomer;
 
-import com.tobeto.rentacar.entities.concretes.enums.CustomerType;
-import com.tobeto.rentacar.entities.concretes.enums.Role;
+import com.tobeto.rentacar.entities.concretes.enums.role.CustomerType;
+import com.tobeto.rentacar.entities.concretes.enums.role.Role;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

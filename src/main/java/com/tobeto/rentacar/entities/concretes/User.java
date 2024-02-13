@@ -1,6 +1,6 @@
 package com.tobeto.rentacar.entities.concretes;
 
-import com.tobeto.rentacar.entities.concretes.enums.Role;
+import com.tobeto.rentacar.entities.concretes.enums.role.Role;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,7 +17,7 @@ import java.util.Set;
  * It implements the UserDetails interface, providing Spring Security integration.
  *
  * @author [Harun Yılmaz]
- * @see com.tobeto.rentacar.entities.concretes.enums.Role
+ * @see Role
  * @see org.springframework.security.core.userdetails.UserDetails
  */
 

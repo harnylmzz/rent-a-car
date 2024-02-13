@@ -1,7 +1,7 @@
 package com.tobeto.rentacar.config.webSocket;
 
 import com.tobeto.rentacar.entities.concretes.Chat;
-import com.tobeto.rentacar.entities.concretes.enums.MessageType;
+import com.tobeto.rentacar.entities.concretes.enums.chat.MessageType;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.event.EventListener;
