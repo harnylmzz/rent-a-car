@@ -51,6 +51,9 @@ public class Car extends BaseEntity {
     @Column(name = "number_of_seats")
     private int numberOfSeats;
 
+    @Column(name = "is_available")
+    private boolean isAvailable;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "model_id")
     private Model model;
@@ -85,4 +88,6 @@ public class Car extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="category_id", referencedColumnName="id")
     private Category category;
+
+
 }
