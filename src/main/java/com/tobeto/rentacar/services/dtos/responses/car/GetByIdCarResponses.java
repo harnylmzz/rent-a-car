@@ -33,13 +33,15 @@ public class GetByIdCarResponses implements Serializable {
 
     private String categoryName;
 
-    private int brand_id;
+    private int brandId;
 
-    private String amount_of_fuel;
+    private String brandName;
 
-    private int number_of_seats;
+    private String amountOfFuel;
 
     private String description;
+
+    private int numberOfSeats;
 
     private List<ImageModel> images;
 

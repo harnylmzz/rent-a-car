@@ -35,6 +35,8 @@ public class GetAllCarResponses implements Serializable {
 
     private int brandId;
 
+    private String brandName;
+
     private String amountOfFuel;
 
     private String description;
