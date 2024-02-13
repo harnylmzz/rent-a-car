@@ -6,12 +6,14 @@ import com.tobeto.rentacar.core.exceptions.DataNotFoundException;
 import com.tobeto.rentacar.core.result.DataResult;
 import com.tobeto.rentacar.core.result.Result;
 import com.tobeto.rentacar.core.result.SuccessResult;
+import com.tobeto.rentacar.entities.concretes.Brand;
 import com.tobeto.rentacar.entities.concretes.Category;
 import com.tobeto.rentacar.repository.CategoryRepository;
 import com.tobeto.rentacar.services.abstracts.CategoryService;
 import com.tobeto.rentacar.services.dtos.requests.category.CreateCategoryRequests;
 import com.tobeto.rentacar.services.dtos.requests.category.DeleteCategoryRequests;
 import com.tobeto.rentacar.services.dtos.requests.category.UpdateCategoryRequests;
+import com.tobeto.rentacar.services.dtos.responses.brand.GetAllBrandResponses;
 import com.tobeto.rentacar.services.dtos.responses.category.GetAllCategoryResponse;
 import com.tobeto.rentacar.services.dtos.responses.category.GetByIdCategoryResponse;
 import com.tobeto.rentacar.services.constans.category.CategoryMessages;
@@ -93,5 +95,39 @@ public class CategoryManager implements CategoryService {
         redisCacheManager.cacheData("categoryCache", "getCategoriesAndCache", null);
 
         return new SuccessResult(CategoryMessages.CATEGORY_DELETED);
+    }
+
+    @Override
+    public List<GetAllCategoryResponse> findByName(String name) {
+        List<Category> categories = categoryRepository.findByName(name);
+        List<GetAllCategoryResponse> findByNameResponses = categories.stream().map(category -> this.modelMapperService.forResponse().map(category, GetAllCategoryResponse.class)).collect(Collectors.toList());
+
+        return findByNameResponses;
+    }
+
+    @Override
+    public List<GetAllCategoryResponse> findByNameStartingWith(String name) {
+        List<Category> categories = categoryRepository.findByNameStartingWith(name);
+        List<GetAllCategoryResponse> findByNameStartingWithResponses = categories.stream().map(category -> this.modelMapperService.forResponse().map(category, GetAllCategoryResponse.class)).collect(Collectors.toList());
+
+        return findByNameStartingWithResponses;
+    }
+
+    @Override
+    public List<GetAllCategoryResponse> findByNameEndingWith(String name) {
+        List<Category> categories = categoryRepository.findByNameEndingWith(name);
+        List<GetAllCategoryResponse> findByNameEndingWithResponses = categories.stream().map(category -> this.modelMapperService.forResponse().map(category, GetAllCategoryResponse.class)).collect(Collectors.toList());
+
+        return findByNameEndingWithResponses;
+    }
+
+    @Override
+    public List<GetAllCategoryResponse> findByNameContaining(String name) {
+        List<Category> categories = categoryRepository.findByNameContaining(name);
+        List<GetAllCategoryResponse> findByNameContainingResponses = categories.stream()
+                .map(category -> this.modelMapperService.forResponse()
+                        .map(category, GetAllCategoryResponse.class)).collect(Collectors.toList());
+
+        return findByNameContainingResponses;
     }
 }

@@ -37,4 +37,10 @@ public interface CarService {
 
     List<GetAllCarResponses> findByPlate(String plate);
 
+    List<GetAllCarResponses> findByGearType(String gearType);
+
+    List<GetAllCarResponses> findByKilometer(int kilometer);
+
+    List<GetAllCarResponses> findByPrice(double price);
+
 }

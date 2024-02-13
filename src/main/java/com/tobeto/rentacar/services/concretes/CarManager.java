@@ -136,4 +136,34 @@ public class CarManager implements CarService {
 
         return findByPlateCarResponses;
     }
+
+    @Override
+    public List<GetAllCarResponses> findByGearType(String gearType){
+        List<Car> cars = carRepository.findByGearType(gearType);
+        List<GetAllCarResponses> findByGearTypeCarResponses = cars.stream()
+                .map(car -> this.modelMapperService.forResponse()
+                        .map(car, GetAllCarResponses.class))
+                .collect(Collectors.toList());
+        return findByGearTypeCarResponses;
+    }
+
+    @Override
+    public List<GetAllCarResponses> findByKilometer(int kilometer){
+        List<Car> cars = carRepository.findByKilometer(kilometer);
+        List<GetAllCarResponses> findByKilometerCarResponses = cars.stream()
+                .map(car -> this.modelMapperService.forResponse()
+                        .map(car, GetAllCarResponses.class))
+                .collect(Collectors.toList());
+        return findByKilometerCarResponses;
+    }
+
+    @Override
+    public List<GetAllCarResponses> findByPrice(double price){
+        List<Car> cars = carRepository.findByPrice(price);
+        List<GetAllCarResponses> findByPriceCarResponses = cars.stream()
+                .map(car -> this.modelMapperService.forResponse()
+                        .map(car, GetAllCarResponses.class))
+                .collect(Collectors.toList());
+        return findByPriceCarResponses;
+    }
 }

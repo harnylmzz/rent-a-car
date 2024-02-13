@@ -6,6 +6,7 @@ import com.tobeto.rentacar.services.abstracts.ColorService;
 import com.tobeto.rentacar.services.dtos.requests.color.CreateColorRequests;
 import com.tobeto.rentacar.services.dtos.requests.color.DeleteColorRequests;
 import com.tobeto.rentacar.services.dtos.requests.color.UpdateColorRequests;
+import com.tobeto.rentacar.services.dtos.responses.category.GetAllCategoryResponse;
 import com.tobeto.rentacar.services.dtos.responses.color.GetAllColorResponses;
 import com.tobeto.rentacar.services.dtos.responses.color.GetByIdColorResponses;
 import lombok.RequiredArgsConstructor;
@@ -53,4 +54,24 @@ public class ColorsController {
     public Result delete(DeleteColorRequests deleteColorRequests) {
         return this.colorService.delete(deleteColorRequests);
     }
+
+    @GetMapping("/findByName")
+    public List<GetAllColorResponses> findByName(String name){
+        return this.colorService.findByName(name);
+    }
+    @GetMapping("/findByNameStartingWith")
+    public List<GetAllColorResponses> findByNameStartingWith(String name) {
+        return this.colorService.findByNameStartingWith(name);
+    }
+
+    @GetMapping("/findByNameEndingWith")
+    public List<GetAllColorResponses> findByNameEndingWith(String name) {
+        return this.colorService.findByNameEndingWith(name);
+    }
+
+    @GetMapping("/findByNameContaining")
+    public List<GetAllColorResponses> findByNameContaining(String name) {
+        return this.colorService.findByNameContaining(name);
+    }
+
 }

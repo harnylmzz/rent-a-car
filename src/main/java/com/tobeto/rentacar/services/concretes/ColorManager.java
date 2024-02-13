@@ -6,12 +6,14 @@ import com.tobeto.rentacar.core.exceptions.DataNotFoundException;
 import com.tobeto.rentacar.core.result.DataResult;
 import com.tobeto.rentacar.core.result.Result;
 import com.tobeto.rentacar.core.result.SuccessResult;
+import com.tobeto.rentacar.entities.concretes.Category;
 import com.tobeto.rentacar.entities.concretes.Color;
 import com.tobeto.rentacar.repository.ColorRepository;
 import com.tobeto.rentacar.services.abstracts.ColorService;
 import com.tobeto.rentacar.services.dtos.requests.color.CreateColorRequests;
 import com.tobeto.rentacar.services.dtos.requests.color.DeleteColorRequests;
 import com.tobeto.rentacar.services.dtos.requests.color.UpdateColorRequests;
+import com.tobeto.rentacar.services.dtos.responses.category.GetAllCategoryResponse;
 import com.tobeto.rentacar.services.dtos.responses.color.GetAllColorResponses;
 import com.tobeto.rentacar.services.dtos.responses.color.GetByIdColorResponses;
 import com.tobeto.rentacar.services.constans.color.ColorMessages;
@@ -95,5 +97,42 @@ public class ColorManager implements ColorService {
         this.redisCacheManager.cacheData("colorCache", "getColorsAndCache", null);
 
         return new SuccessResult(ColorMessages.COLOR_DELETED);
+    }
+
+    @Override
+    public List<GetAllColorResponses> findByName(String name) {
+        List<Color> colors = colorRepository.findByName(name);
+        List<GetAllColorResponses> findByNameResponses = colors.stream()
+                .map(color -> this.modelMapperService.forResponse()
+                        .map(color , GetAllColorResponses.class))
+                .collect(Collectors.toList());
+
+        return findByNameResponses;
+    }
+
+    @Override
+    public List<GetAllColorResponses> findByNameStartingWith(String name) {
+        List<Color> colors = colorRepository.findByNameStartingWith(name);
+        List<GetAllColorResponses> findByNameStartingWithResponses = colors.stream().map(color -> this.modelMapperService.forResponse().map(color, GetAllColorResponses.class)).collect(Collectors.toList());
+
+        return findByNameStartingWithResponses;
+    }
+
+    @Override
+    public List<GetAllColorResponses> findByNameEndingWith(String name) {
+        List<Color> colors = colorRepository.findByNameEndingWith(name);
+        List<GetAllColorResponses> findByNameEndingWithResponses = colors.stream().map(color -> this.modelMapperService.forResponse().map(color, GetAllColorResponses.class)).collect(Collectors.toList());
+
+        return findByNameEndingWithResponses;
+    }
+
+    @Override
+    public List<GetAllColorResponses> findByNameContaining(String name) {
+        List<Color> colors = colorRepository.findByNameContaining(name);
+        List<GetAllColorResponses> findByNameContainingResponses = colors.stream()
+                .map(color -> this.modelMapperService.forResponse()
+                        .map(color, GetAllColorResponses.class)).collect(Collectors.toList());
+
+        return findByNameContainingResponses;
     }
 }

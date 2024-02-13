@@ -1,5 +1,6 @@
 package com.tobeto.rentacar.controller;
 
+import com.stripe.model.tax.Registration;
 import com.tobeto.rentacar.core.result.DataResult;
 import com.tobeto.rentacar.core.result.Result;
 import com.tobeto.rentacar.services.abstracts.CarService;
@@ -73,4 +74,20 @@ public class CarsController {
     public List<GetAllCarResponses> findByPlate(String plate) {
         return this.carService.findByPlate(plate);
     }
+
+    @GetMapping("/findByGearType")
+    public List<GetAllCarResponses> findByGearType(String gearType){
+        return this.carService.findByGearType(gearType);
+    }
+
+    @GetMapping("/findByKilometer")
+    public List<GetAllCarResponses> findByKilometer(int kilometer){
+        return this.carService.findByKilometer(kilometer);
+    }
+
+    @GetMapping("/findByPrice")
+    public List<GetAllCarResponses> findByPrice(double price){
+        return this.carService.findByPrice(price);
+    }
 }
+

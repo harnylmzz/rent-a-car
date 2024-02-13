@@ -6,6 +6,7 @@ import com.tobeto.rentacar.services.abstracts.CategoryService;
 import com.tobeto.rentacar.services.dtos.requests.category.CreateCategoryRequests;
 import com.tobeto.rentacar.services.dtos.requests.category.DeleteCategoryRequests;
 import com.tobeto.rentacar.services.dtos.requests.category.UpdateCategoryRequests;
+import com.tobeto.rentacar.services.dtos.responses.brand.GetAllBrandResponses;
 import com.tobeto.rentacar.services.dtos.responses.category.GetAllCategoryResponse;
 import com.tobeto.rentacar.services.dtos.responses.category.GetByIdCategoryResponse;
 import jakarta.validation.Valid;
@@ -53,5 +54,25 @@ public class CategoriesController {
     @DeleteMapping("/delete")
     public Result delete(DeleteCategoryRequests deleteCategoryResponse) {
         return categoryService.delete(deleteCategoryResponse);
+    }
+
+    @GetMapping("/findByName")
+    public List<GetAllCategoryResponse> findByName(String name) {
+        return this.categoryService.findByName(name);
+    }
+
+    @GetMapping("/findByNameStartingWith")
+    public List<GetAllCategoryResponse> findByNameStartingWith(String name) {
+        return this.categoryService.findByNameStartingWith(name);
+    }
+
+    @GetMapping("/findByNameEndingWith")
+    public List<GetAllCategoryResponse> findByNameEndingWith(String name) {
+        return this.categoryService.findByNameEndingWith(name);
+    }
+
+    @GetMapping("/findByNameContaining")
+    public List<GetAllCategoryResponse> findByNameContaining(String name) {
+        return this.categoryService.findByNameContaining(name);
     }
 }

@@ -8,6 +8,7 @@ import com.tobeto.rentacar.services.dtos.requests.car.UpdateCarRequests;
 import com.tobeto.rentacar.services.dtos.requests.category.CreateCategoryRequests;
 import com.tobeto.rentacar.services.dtos.requests.category.DeleteCategoryRequests;
 import com.tobeto.rentacar.services.dtos.requests.category.UpdateCategoryRequests;
+import com.tobeto.rentacar.services.dtos.responses.brand.GetAllBrandResponses;
 import com.tobeto.rentacar.services.dtos.responses.car.GetAllCarResponses;
 import com.tobeto.rentacar.services.dtos.responses.car.GetByIdCarResponses;
 import com.tobeto.rentacar.services.dtos.responses.category.GetAllCategoryResponse;
@@ -35,4 +36,12 @@ public interface CategoryService {
     Result update(UpdateCategoryRequests updateCategoryRequests);
 
     Result delete(DeleteCategoryRequests deleteCategoryRequests);
+
+    List<GetAllCategoryResponse> findByName(String name);
+
+    List<GetAllCategoryResponse> findByNameStartingWith(String name);
+
+    List<GetAllCategoryResponse> findByNameEndingWith(String name);
+
+    List<GetAllCategoryResponse> findByNameContaining(String name);
 }
