@@ -52,7 +52,7 @@ public class Car extends BaseEntity {
     private int numberOfSeats;
 
     @Column(name = "is_available")
-    private boolean isAvailable;
+    private Boolean isAvailable;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "model_id")
