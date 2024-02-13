@@ -1,4 +1,4 @@
-package com.tobeto.rentacar.services.stripe;
+package com.tobeto.rentacar.services.payment;
 
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;

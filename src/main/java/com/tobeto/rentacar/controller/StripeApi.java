@@ -1,6 +1,6 @@
 package com.tobeto.rentacar.controller;
 
-import com.tobeto.rentacar.services.stripe.StripeManager;
+import com.tobeto.rentacar.services.payment.StripeManager;
 import com.tobeto.rentacar.services.dtos.stripe.StripeChargeDto;
 import com.tobeto.rentacar.services.dtos.stripe.StripeTokenDto;
 import lombok.RequiredArgsConstructor;
@@ -25,7 +25,6 @@ public class StripeApi {
     @PostMapping("/card/token")
     @ResponseBody
     public StripeTokenDto createCardToken(@RequestBody StripeTokenDto stripeTokenDto) {
-
 
         return stripeManager.createCardToken(stripeTokenDto);
     }

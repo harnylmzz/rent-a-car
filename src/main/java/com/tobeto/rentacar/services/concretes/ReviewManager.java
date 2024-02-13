@@ -1,6 +1,5 @@
 package com.tobeto.rentacar.services.concretes;
 
-
 import com.tobeto.rentacar.config.modelmapper.ModelMapperManager;
 import com.tobeto.rentacar.core.exceptions.DataNotFoundException;
 import com.tobeto.rentacar.core.result.DataResult;
@@ -26,6 +25,7 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class ReviewManager  implements ReviewService {
+
     private final ReviewRepository reviewRepository;
     private final ModelMapperManager modelMapperService;
 
