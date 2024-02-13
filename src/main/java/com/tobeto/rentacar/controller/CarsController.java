@@ -45,6 +45,12 @@ public class CarsController {
         return carService.getById(id);
     }
 
+    @GetMapping("/getByCategoryId")
+    @CrossOrigin(origins = "http://localhost:5173")
+    public DataResult<List<GetAllCarResponses>> getByCategoryId(int categoryId) {
+        return carService.getByCategoryId(categoryId);
+    }
+
     @PostMapping("/add")
     @CrossOrigin(origins = "http://localhost:5173")
     public Result add(@RequestBody @Valid CreateCarRequests createCarRequests) {
@@ -76,17 +82,17 @@ public class CarsController {
     }
 
     @GetMapping("/findByGearType")
-    public List<GetAllCarResponses> findByGearType(String gearType){
+    public List<GetAllCarResponses> findByGearType(String gearType) {
         return this.carService.findByGearType(gearType);
     }
 
     @GetMapping("/findByKilometer")
-    public List<GetAllCarResponses> findByKilometer(int kilometer){
+    public List<GetAllCarResponses> findByKilometer(int kilometer) {
         return this.carService.findByKilometer(kilometer);
     }
 
     @GetMapping("/findByPrice")
-    public List<GetAllCarResponses> findByPrice(double price){
+    public List<GetAllCarResponses> findByPrice(double price) {
         return this.carService.findByPrice(price);
     }
 }

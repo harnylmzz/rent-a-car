@@ -62,6 +62,17 @@ public class CarManager implements CarService {
     }
 
     @Override
+    public DataResult<List<GetAllCarResponses>> getByCategoryId(int categoryId) {
+        List<Car> cars = carRepository.findByCategoryId(categoryId);
+        List<GetAllCarResponses> getByCategoryIdCarResponses = cars.stream()
+                .map(car -> this.modelMapperService.forResponse()
+                        .map(car, GetAllCarResponses.class))
+                .collect(Collectors.toList());
+
+        return new SuccessDataResult<>(getByCategoryIdCarResponses, CarMessages.CARS_LISTED);
+    }
+
+    @Override
     public Result add(CreateCarRequests createCarRequests) {
 
         String plate = createCarRequests.getPlate().replace(" ", "");

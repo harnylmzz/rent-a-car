@@ -31,6 +31,8 @@ public class GetAllCarResponses implements Serializable {
 
     private String fuelType;
 
+    private int categoryId;
+
     private String categoryName;
 
     private int brandId;
@@ -40,6 +42,8 @@ public class GetAllCarResponses implements Serializable {
     private String amountOfFuel;
 
     private String description;
+
+    private Boolean isAvailable;
 
     private int numberOfSeats;
 
