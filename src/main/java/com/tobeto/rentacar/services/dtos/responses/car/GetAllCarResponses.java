@@ -11,7 +11,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class GetAllCarResponses implements Serializable {
+public class GetAllCarResponses  {
 
     private int id;
 
@@ -26,6 +26,8 @@ public class GetAllCarResponses implements Serializable {
     private int year;
 
     private String modelName;
+
+    private int colorId;
 
     private String colorName;
 

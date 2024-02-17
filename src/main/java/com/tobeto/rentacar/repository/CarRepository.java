@@ -21,4 +21,6 @@ public interface CarRepository extends JpaRepository<Car, Integer> {
 
     List<Car> findByCategoryId(int categoryId);
 
+    List<Car> findByColorId(int colorId);
+
 }
