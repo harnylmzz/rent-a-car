@@ -27,6 +27,8 @@ public class GetByIdCarResponses implements Serializable {
 
     private String modelName;
 
+    private int colorId;
+
     private String colorName;
 
     private String fuelType;

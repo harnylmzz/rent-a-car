@@ -34,22 +34,13 @@ public class CarManager implements CarService {
     @Override
     public DataResult<List<GetAllCarResponses>> getAll() {
 
-        List<GetAllCarResponses> getAllCarResponses = (List<GetAllCarResponses>) redisCacheManager
-                .getCachedData("carListCache", "getCarsAndCache");
-        if (getAllCarResponses == null) {
-            getAllCarResponses = getCarsAndCache();
-            redisCacheManager.cacheData("carListCache", "getCarsAndCache", getAllCarResponses);
-        }
-
-        return new SuccessDataResult<>(getAllCarResponses, CarMessages.CARS_LISTED);
-    }
-
-    public List<GetAllCarResponses> getCarsAndCache() {
         List<Car> cars = carRepository.findAll();
         List<GetAllCarResponses> getAllCarResponses = cars.stream()
-                .map(car -> modelMapperService.forResponse().map(car, GetAllCarResponses.class))
+                .map(car -> this.modelMapperService.forResponse()
+                        .map(car, GetAllCarResponses.class))
                 .collect(Collectors.toList());
-        return getAllCarResponses;
+
+        return new SuccessDataResult<>(getAllCarResponses, CarMessages.CARS_LISTED);
     }
 
     @Override
@@ -73,6 +64,16 @@ public class CarManager implements CarService {
     }
 
     @Override
+    public DataResult<List<GetAllCarResponses>> getByColorId(int colorId) {
+        List<Car> cars = carRepository.findByColorId(colorId);
+        List<GetAllCarResponses> getByColorIdCarResponses = cars.stream()
+                .map(car -> this.modelMapperService.forResponse()
+                        .map(car, GetAllCarResponses.class))
+                .collect(Collectors.toList());
+        return new SuccessDataResult<>(getByColorIdCarResponses, CarMessages.CARS_LISTED);
+    }
+
+    @Override
     public Result add(CreateCarRequests createCarRequests) {
 
         String plate = createCarRequests.getPlate().replace(" ", "");
@@ -91,7 +92,6 @@ public class CarManager implements CarService {
         car.setPlate(plate);
 
         this.carRepository.save(car);
-        redisCacheManager.cacheData("carListCache", "getCarsAndCache", null);
 
         return new SuccessResult(CarMessages.CAR_ADDED);
     }
@@ -107,7 +107,6 @@ public class CarManager implements CarService {
         car.setPlate(updateCarRequests.getPlate());
         car.setPrice(updateCarRequests.getPrice());
         this.carRepository.save(car);
-        redisCacheManager.cacheData("carListCache", "getCarsAndCache", null);
 
         return new SuccessResult(CarMessages.CAR_UPDATED);
 
@@ -118,7 +117,6 @@ public class CarManager implements CarService {
         Car car = this.modelMapperService.forRequest()
                 .map(deleteCarRequests, Car.class);
         this.carRepository.delete(car);
-        redisCacheManager.cacheData("carListCache", "getCarsAndCache", null);
 
         return new SuccessResult(CarMessages.CAR_DELETED);
 
@@ -177,4 +175,5 @@ public class CarManager implements CarService {
                 .collect(Collectors.toList());
         return findByPriceCarResponses;
     }
+
 }

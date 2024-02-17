@@ -29,6 +29,8 @@ public interface CarService {
 
     DataResult<List<GetAllCarResponses>> getByCategoryId(int categoryId);
 
+    DataResult<List<GetAllCarResponses>> getByColorId(int colorId);
+
     Result add(CreateCarRequests createCarRequests);
 
     Result update(UpdateCarRequests updateCarRequests);

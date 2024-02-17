@@ -28,6 +28,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @CrossOrigin
 public class BrandsController {
+
     private final BrandService brandService;
 
     @GetMapping("/getAll")
