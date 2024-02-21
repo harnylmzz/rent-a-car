@@ -30,7 +30,6 @@ public class Image extends BaseEntity {
     @Column(name = "width")
     private int width;
 
-    @Column(name = "height")
     private int height;
 
     @Column(name = "bytes")

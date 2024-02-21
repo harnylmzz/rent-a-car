@@ -31,6 +31,8 @@ public interface CarService {
 
     DataResult<List<GetAllCarResponses>> getByColorId(int colorId);
 
+    DataResult<List<GetAllCarResponses>> getByFuelTypeId(int fuelTypeId);
+
     Result add(CreateCarRequests createCarRequests);
 
     Result update(UpdateCarRequests updateCarRequests);

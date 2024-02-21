@@ -43,7 +43,7 @@ public class IndividualCustomerManager implements IndividualCustomerService {
                         .map(individualCustomer, GetAllIndividualCustomerResponses.class))
                 .collect(Collectors.toList());
 
-        return new DataResult<>(getAllIndividualCustomerResponses,true, IndividualCustomerMessages.INDIVIDUAL_CUSTOMERS_LISTED);
+        return new DataResult<>(getAllIndividualCustomerResponses, true, IndividualCustomerMessages.INDIVIDUAL_CUSTOMERS_LISTED);
     }
 
     @Override
@@ -61,12 +61,24 @@ public class IndividualCustomerManager implements IndividualCustomerService {
     @Override
     public Result add(CreateIndividualCustomerRequests createIndividualCustomerRequests) {
 
+
+
         this.individualCustomerBusinessRules.checkIfNationalityIdExists(createIndividualCustomerRequests.getNationalityId());
 
         createIndividualCustomerRequests.setPassword(passwordEncoder.encode(createIndividualCustomerRequests.getPassword()));
 
-        this.individualCustomerRepository.save(this.modelMapperService.forRequest()
-                .map(createIndividualCustomerRequests, IndividualCustomer.class));
+        IndividualCustomer individualCustomer = new IndividualCustomer();
+        individualCustomer.setNationalityId(createIndividualCustomerRequests.getNationalityId());
+        individualCustomer.setFirstName(createIndividualCustomerRequests.getFirstName());
+        individualCustomer.setLastName(createIndividualCustomerRequests.getLastName());
+        individualCustomer.setEmail(createIndividualCustomerRequests.getEmail());
+        individualCustomer.setGsm(createIndividualCustomerRequests.getGsm());
+        individualCustomer.setUsername(createIndividualCustomerRequests.getUsername());
+        individualCustomer.setPassword(createIndividualCustomerRequests.getPassword());
+        individualCustomer.setAuthorities(createIndividualCustomerRequests.getAuthorities());
+        individualCustomer.setCustomerType(createIndividualCustomerRequests.getCustomerType());
+
+        this.individualCustomerRepository.save(individualCustomer);
 
         return new SuccessResult(IndividualCustomerMessages.INDIVIDUAL_CUSTOMER_ADDED);
     }

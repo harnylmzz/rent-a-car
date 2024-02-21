@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 public class IndividualCustomerBusinessRules {
 
     private final IndividualCustomerRepository individualCustomerRepository;
-
     public void checkIfNationalityIdExists(String nationalityId) {
         if (this.individualCustomerRepository.existsByNationalityId(nationalityId))
             throw new RuntimeException(IndividualCustomerMessages.NATIONALITY_ID_ALREADY_EXISTS);
