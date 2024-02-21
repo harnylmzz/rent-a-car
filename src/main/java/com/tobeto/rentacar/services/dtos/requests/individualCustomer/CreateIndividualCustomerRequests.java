@@ -10,6 +10,7 @@ import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.web.bind.annotation.Mapping;
 
 import java.util.Set;
 
@@ -47,10 +48,6 @@ public class CreateIndividualCustomerRequests {
     @NotNull(message = IndividualCustomerMessages.PASSWORD_IS_REQUIRED)
     @Size(min = 8, message = IndividualCustomerMessages.PASSWORD_SHOULD_BE_AT_LEAST_8_CHARACTERS)
     private String password;
-
-    @NotBlank(message = IndividualCustomerMessages.CUSTOMER_NUMBER_IS_REQUIRED)
-    @NotNull(message = IndividualCustomerMessages.CUSTOMER_NUMBER_IS_REQUIRED)
-    private String customerNumber;
 
     private Set<Role> authorities = Set.of(Role.ROLE_CUSTOMER);
 

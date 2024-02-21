@@ -57,6 +57,12 @@ public class CarsController {
         return carService.getByColorId(colorId);
     }
 
+    @GetMapping("/getByFuelTypeId")
+    @CrossOrigin(origins = "http://localhost:5173")
+    public DataResult<List<GetAllCarResponses>> getByFuelTypeId(int fuelTypeId) {
+        return carService.getByFuelTypeId(fuelTypeId);
+    }
+
     @PostMapping("/add")
     @CrossOrigin(origins = "http://localhost:5173")
     public Result add(@RequestBody @Valid CreateCarRequests createCarRequests) {

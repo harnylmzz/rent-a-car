@@ -74,6 +74,17 @@ public class CarManager implements CarService {
     }
 
     @Override
+    public DataResult<List<GetAllCarResponses>> getByFuelTypeId(int fuelTypeId) {
+
+        List<Car> cars = carRepository.findByFuelTypeId(fuelTypeId);
+        List<GetAllCarResponses> getByFuelTypeIdCarResponses = cars.stream()
+                .map(car -> this.modelMapperService.forResponse()
+                        .map(car, GetAllCarResponses.class))
+                .collect(Collectors.toList());
+        return new SuccessDataResult<>(getByFuelTypeIdCarResponses, CarMessages.CARS_LISTED);
+    }
+
+    @Override
     public Result add(CreateCarRequests createCarRequests) {
 
         String plate = createCarRequests.getPlate().replace(" ", "");
@@ -147,7 +158,7 @@ public class CarManager implements CarService {
     }
 
     @Override
-    public List<GetAllCarResponses> findByGearType(String gearType){
+    public List<GetAllCarResponses> findByGearType(String gearType) {
         List<Car> cars = carRepository.findByGearType(gearType);
         List<GetAllCarResponses> findByGearTypeCarResponses = cars.stream()
                 .map(car -> this.modelMapperService.forResponse()
@@ -157,7 +168,7 @@ public class CarManager implements CarService {
     }
 
     @Override
-    public List<GetAllCarResponses> findByKilometer(int kilometer){
+    public List<GetAllCarResponses> findByKilometer(int kilometer) {
         List<Car> cars = carRepository.findByKilometer(kilometer);
         List<GetAllCarResponses> findByKilometerCarResponses = cars.stream()
                 .map(car -> this.modelMapperService.forResponse()
@@ -167,7 +178,7 @@ public class CarManager implements CarService {
     }
 
     @Override
-    public List<GetAllCarResponses> findByPrice(double price){
+    public List<GetAllCarResponses> findByPrice(double price) {
         List<Car> cars = carRepository.findByPrice(price);
         List<GetAllCarResponses> findByPriceCarResponses = cars.stream()
                 .map(car -> this.modelMapperService.forResponse()

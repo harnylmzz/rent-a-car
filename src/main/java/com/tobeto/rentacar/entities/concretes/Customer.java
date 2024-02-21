@@ -24,6 +24,7 @@ import java.util.List;
 @Table(name = "customers")
 public class Customer extends User {
 
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "customer_number")
     private String customerNumber;
 
