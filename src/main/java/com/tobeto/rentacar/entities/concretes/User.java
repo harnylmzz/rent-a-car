@@ -60,7 +60,6 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Set<Role> authorities = new HashSet<>();
 
-
     @Override
     public boolean isAccountNonExpired() {
         return true;

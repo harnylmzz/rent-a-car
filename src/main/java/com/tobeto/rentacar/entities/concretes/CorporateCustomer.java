@@ -1,9 +1,11 @@
 package com.tobeto.rentacar.entities.concretes;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import com.tobeto.rentacar.entities.concretes.enums.role.Role;
+import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * This class represents a corporate customer in the Rent a Car system.
@@ -28,5 +30,11 @@ public class CorporateCustomer extends Customer {
 
     @Column(name = "tax_number")
     private String taxNumber;
+
+    @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
+    @JoinTable(name = "authorities", joinColumns = @JoinColumn(name = "user_id"))
+    @Column(name = "role")
+    @Enumerated(EnumType.STRING)
+    private Set<Role> authorities = new HashSet<>();
 
 }

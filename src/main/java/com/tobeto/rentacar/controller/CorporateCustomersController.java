@@ -22,6 +22,7 @@ import java.util.List;
  * @Author [Harun Yılmaz]
  */
 
+@CrossOrigin
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/v1/corporateCustomers")

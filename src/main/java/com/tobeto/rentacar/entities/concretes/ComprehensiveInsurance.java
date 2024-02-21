@@ -29,10 +29,4 @@ public class ComprehensiveInsurance extends Insurance {
 
     @Column(name = "deductible_amount")
     private int deductibleAmount;
-
-    @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
-    @JoinTable(name = "authorities", joinColumns = @JoinColumn(name = "user_id"))
-    @Column(name = "role")
-    @Enumerated(EnumType.STRING)
-    private Set<Role> authorities = new HashSet<>();
 }
