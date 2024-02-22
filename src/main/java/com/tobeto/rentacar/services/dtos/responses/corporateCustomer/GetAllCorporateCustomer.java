@@ -24,8 +24,6 @@ public class GetAllCorporateCustomer implements Serializable {
 
     private String password;
 
-    private String customerNumber;
-
     private String companyName;
 
     private String taxNumber;

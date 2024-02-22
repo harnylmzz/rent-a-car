@@ -1,9 +1,6 @@
 package com.tobeto.rentacar.services.rules.rental;
 
 import com.tobeto.rentacar.core.exceptions.BusinessException;
-import com.tobeto.rentacar.core.exceptions.DataNotFoundException;
-import com.tobeto.rentacar.entities.concretes.Customer;
-import com.tobeto.rentacar.entities.concretes.Employee;
 import com.tobeto.rentacar.repository.CustomerRepository;
 import com.tobeto.rentacar.repository.EmployeeRepository;
 import com.tobeto.rentacar.services.abstracts.CarService;

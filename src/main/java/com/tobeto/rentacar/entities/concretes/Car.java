@@ -45,9 +45,6 @@ public class Car extends BaseEntity {
     @Column(name = "description")
     private String description;
 
-    @Column(name ="amount_of_fuel")
-    private String amountOfFuel;
-
     @Column(name = "number_of_seats")
     private int numberOfSeats;
 

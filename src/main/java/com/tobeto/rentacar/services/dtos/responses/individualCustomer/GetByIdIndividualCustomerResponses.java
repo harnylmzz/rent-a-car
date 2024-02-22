@@ -28,8 +28,6 @@ public class GetByIdIndividualCustomerResponses implements Serializable {
 
     private String password;
 
-    private String customerNumber;
-
     private Set<Role> authorities = Set.of(Role.ROLE_CUSTOMER);
 
     private CustomerType customerType = CustomerType.ROLE_INDIVIDUAL;

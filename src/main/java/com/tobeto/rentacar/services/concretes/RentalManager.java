@@ -6,6 +6,7 @@ import com.tobeto.rentacar.core.result.DataResult;
 import com.tobeto.rentacar.core.result.Result;
 import com.tobeto.rentacar.core.result.SuccessResult;
 
+import com.tobeto.rentacar.entities.concretes.Customer;
 import com.tobeto.rentacar.entities.concretes.*;
 
 import com.tobeto.rentacar.repository.*;

@@ -36,8 +36,6 @@ public class CreateCorporateCustomerRequests {
     @Size(min = 8, message = CorporateCustomerMessages.PASSWORD_SHOULD_BE_AT_LEAST_8_CHARACTERS)
     private String password;
 
-    private String customerNumber;
-
     @NotBlank(message = CorporateCustomerMessages.COMPANY_NAME_IS_REQUIRED)
     @NotNull(message = CorporateCustomerMessages.COMPANY_NAME_IS_REQUIRED)
     private String companyName;

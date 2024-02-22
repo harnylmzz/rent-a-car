@@ -29,8 +29,6 @@ public class CreateCarRequests {
     @NotBlank(message = CarMessages.PLATE_IS_REQUIRED)
     private String plate;
 
-    private String amountOfFuel;
-
     private String description;
 
     private int numberOfSeats;

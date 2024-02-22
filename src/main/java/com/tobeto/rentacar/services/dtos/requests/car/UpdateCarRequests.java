@@ -23,8 +23,6 @@ public class UpdateCarRequests {
 
     private String description;
 
-    private String amount_of_fuel;
-
     private int number_of_seats;
 
     private boolean is_available;
