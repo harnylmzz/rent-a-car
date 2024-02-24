@@ -18,7 +18,7 @@ import java.util.Map;
 public class StripeChargeDto {
     private String stripeToken;
     private String username;
-    private Double amount;
+   // private Double amount;
     private Boolean success;
     private String message;
     private String chargeId;

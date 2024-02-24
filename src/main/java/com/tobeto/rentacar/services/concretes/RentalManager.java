@@ -18,6 +18,7 @@ import com.tobeto.rentacar.services.dtos.requests.rental.DeleteRentalRequests;
 import com.tobeto.rentacar.services.dtos.requests.rental.UpdateRentalRequests;
 import com.tobeto.rentacar.services.dtos.responses.rental.GetAllRentalResponses;
 import com.tobeto.rentacar.services.dtos.responses.rental.GetByIdRentalResponses;
+import com.tobeto.rentacar.services.dtos.stripe.StripeChargeDto;
 import com.tobeto.rentacar.services.rules.rental.RentalBusinessRules;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

@@ -20,5 +20,6 @@ public class StripeTokenDto {
     private String cvc;
     private String token;
     private String username;
+    private Double amount;
     private boolean success;
 }
