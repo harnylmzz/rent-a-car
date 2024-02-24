@@ -41,8 +41,6 @@ public class GetByIdCarResponses implements Serializable {
 
     private String brandName;
 
-    private String amountOfFuel;
-
     private String description;
 
     private Boolean isAvailable;

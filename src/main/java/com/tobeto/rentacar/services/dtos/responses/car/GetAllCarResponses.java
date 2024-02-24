@@ -11,7 +11,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class GetAllCarResponses  {
+public class GetAllCarResponses {
 
     private int id;
 
@@ -40,8 +40,6 @@ public class GetAllCarResponses  {
     private int brandId;
 
     private String brandName;
-
-    private String amountOfFuel;
 
     private String description;
 
