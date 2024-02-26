@@ -45,7 +45,6 @@ public class StripeManager {
             card.put("exp_month", Integer.parseInt(stripeTokenDto.getExpMonth()));
             card.put("exp_year", Integer.parseInt(stripeTokenDto.getExpYear()));
             card.put("cvc", stripeTokenDto.getCvc());
-            card.put("amount", (int) (stripeTokenDto.getAmount() * 100));
             Map<String, Object> params = new HashMap<>();
             params.put("card", card);
             Token token = Token.create(params);
@@ -70,7 +69,7 @@ public class StripeManager {
         try {
             chargeRequest.setSuccess(false);
             Map<String, Object> chargeParams = new HashMap<>();
-           // chargeParams.put("amount", (int) (chargeRequest.getAmount() * 100));
+           chargeParams.put("amount", (int) (chargeRequest.getAmount() * 100));
             chargeParams.put("currency", "USD");
             chargeParams.put("description", "Payment for id " + chargeRequest.getAdditionalInfo()
                     .getOrDefault("ID_TAG", ""));
