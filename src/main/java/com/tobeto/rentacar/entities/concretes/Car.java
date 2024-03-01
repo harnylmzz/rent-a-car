@@ -79,12 +79,11 @@ public class Car extends BaseEntity {
     @JoinColumn(name = "brand_id" , referencedColumnName ="id")
     private Brand brand;
 
-    @OneToMany(mappedBy = "car")
+    @OneToMany(mappedBy = "car", cascade = CascadeType.ALL)
     private List<Image> images;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="category_id", referencedColumnName="id")
     private Category category;
-
 
 }
