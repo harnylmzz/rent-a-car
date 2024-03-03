@@ -30,6 +30,7 @@ public class PromotionsController {
     private final PromotionService promotionService;
 
     @GetMapping("/getAll")
+    @CrossOrigin(origins = "http://localhost:5173")
     public DataResult<List<GetAllPromotionResponses>> getAll() {
         return this.promotionService.getAll();
     }

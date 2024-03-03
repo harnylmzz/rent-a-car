@@ -24,6 +24,7 @@ public class StripeApi {
 
     @PostMapping("/card/token")
     @ResponseBody
+    @CrossOrigin(origins = "http://localhost:5173")
     public StripeTokenDto createCardToken(@RequestBody StripeTokenDto stripeTokenDto) {
 
         return stripeManager.createCardToken(stripeTokenDto);
@@ -31,6 +32,7 @@ public class StripeApi {
 
     @PostMapping("/charge")
     @ResponseBody
+    @CrossOrigin(origins = "http://localhost:5173")
     public StripeChargeDto charge(@RequestBody StripeChargeDto stripeChargeDto) {
 
         return stripeManager.charge(stripeChargeDto);
