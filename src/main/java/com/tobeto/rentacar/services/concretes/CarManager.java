@@ -113,11 +113,15 @@ public class CarManager implements CarService {
         Car car = this.modelMapperService.forRequest()
                 .map(updateCarRequests, Car.class);
         car.setId(updateCarRequests.getId());
-        car.setKilometer(updateCarRequests.getKilometer());
-        car.setYear(updateCarRequests.getYear());
-        car.setPlate(updateCarRequests.getPlate());
         car.setPrice(updateCarRequests.getPrice());
-        this.carRepository.save(car);
+        car.setYear(updateCarRequests.getYear());
+        car.setKilometer(updateCarRequests.getKilometer());
+        car.setGearType(updateCarRequests.getGearType());
+        car.setPlate(updateCarRequests.getPlate());
+        car.setDescription(updateCarRequests.getDescription());
+        car.setNumberOfSeats(updateCarRequests.getNumberOfSeats());
+
+    this.carRepository.save(car);
 
         return new SuccessResult(CarMessages.CAR_UPDATED);
 

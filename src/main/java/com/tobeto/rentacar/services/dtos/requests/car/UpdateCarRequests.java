@@ -1,5 +1,9 @@
 package com.tobeto.rentacar.services.dtos.requests.car;
 
+import com.tobeto.rentacar.services.constans.car.CarMessages;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,17 +19,26 @@ public class UpdateCarRequests {
 
     private int year;
 
-    private String gearType;
-
     private double price;
+
+    private String gearType;
 
     private String plate;
 
     private String description;
 
-    private int number_of_seats;
+    private int numberOfSeats;
 
-    private boolean is_available;
+    private boolean isAvailable;
 
+    private int modelId;
+
+    private int colorId;
+
+    private int fuelTypeId;
+
+    private int categoryId;
+
+    private int brandId;
 
 }
